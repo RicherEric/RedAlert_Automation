@@ -12,7 +12,7 @@ Optimization Problem*（CCC 2019, IEEE），最後用紅色警戒 2 賣關子。
 | 檔案 | 用途 |
 | --- | --- |
 | `thesis/build_midterm.js` | 產生投影片的程式（pptxgenjs），**改投影片就改這個檔**，不要直接改 pptx |
-| `thesis/期中報告_5分鐘.pptx` | 產出的投影片（15 頁，第 14 頁內嵌影片） |
+| `thesis/最佳化方法_期中報告_M1527488.pptx` | 產出的投影片（15 頁，第 14 頁內嵌影片） |
 | `thesis/期中報告講稿_5分鐘.md` | 講稿：整場主線、時間表、5 分鐘版刪減、逐頁講稿、可能被問的問題、名詞小抄 |
 | `thesis/script_md.py` | 講稿 md 的生成規則：每頁粗體重點句 `KEY`、標題 `TITLES`、5 分鐘版 `FIVE_MIN` |
 | `thesis/update_script.py` | 從 pptx 的備忘稿重建講稿 md 的「使用方式」和「逐頁講稿」兩段 |
@@ -25,7 +25,7 @@ Optimization Problem*（CCC 2019, IEEE），最後用紅色警戒 2 賣關子。
 
 ```powershell
 cd thesis; npm install                       # 第一次：裝 pptxgenjs 3.12.0
-node build_midterm.js 期中報告_5分鐘.pptx       # 重建投影片（PowerPoint 要先關掉，不然檔案被鎖）
+node build_midterm.js 最佳化方法_期中報告_M1527488.pptx       # 重建投影片（PowerPoint 要先關掉，不然檔案被鎖）
 cd ..; .venv\Scripts\python.exe thesis\update_script.py   # 備忘稿改了就重建講稿 md
 ```
 

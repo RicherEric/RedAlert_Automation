@@ -1,7 +1,7 @@
 {
   "name": "ra2-midterm-deck",
   "private": true,
-  "description": "Builds 期中報告_5分鐘.pptx (node build_midterm.js 期中報告_5分鐘.pptx)",
+  "description": "Builds 最佳化方法_期中報告_M1527488.pptx (node build_midterm.js 最佳化方法_期中報告_M1527488.pptx)",
   "dependencies": {
     "pptxgenjs": "3.12.0"
   }

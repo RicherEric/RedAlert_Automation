@@ -13,7 +13,7 @@ from pathlib import Path
 from pptx import Presentation
 
 HERE = Path(__file__).parent
-DECK = HERE / "期中報告_5分鐘.pptx"
+DECK = HERE / "最佳化方法_期中報告_M1527488.pptx"
 MD = HERE / "期中報告講稿_5分鐘.md"
 
 notes = [[i + 1, "", s.notes_slide.notes_text_frame.text] for i, s in enumerate(Presentation(DECK).slides)]
