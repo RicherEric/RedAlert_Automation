@@ -1,0 +1,7 @@
+# For now only the thesis folder is versioned; everything else at the root stays local.
+/*
+!/.gitignore
+!/thesis/
+
+# The IEEE paper is licensed to the university and must not be redistributed.
+/thesis/A_Data-driven_Approach_to_Solve_a_Production_Constrained_Build-order_Optimization_Problem.pdf

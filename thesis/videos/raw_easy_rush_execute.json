@@ -1,0 +1,1556 @@
+{
+ "country": "Russians",
+ "targets": {
+  "E2": 20,
+  "SHK": 2
+ },
+ "weights": {
+  "frames": 1.0,
+  "spent": 0.0
+ },
+ "deploy_frame": 108,
+ "predicted": [
+  [
+   27,
+   "start",
+   "NAPOWR"
+  ],
+  [
+   357,
+   "done",
+   "NAPOWR"
+  ],
+  [
+   372,
+   "start",
+   "NAHAND"
+  ],
+  [
+   642,
+   "done",
+   "NAHAND"
+  ],
+  [
+   642,
+   "start",
+   "E2"
+  ],
+  [
+   657,
+   "start",
+   "NAHAND"
+  ],
+  [
+   687,
+   "done",
+   "E2"
+  ],
+  [
+   702,
+   "start",
+   "E2"
+  ],
+  [
+   747,
+   "done",
+   "E2"
+  ],
+  [
+   762,
+   "start",
+   "E2"
+  ],
+  [
+   807,
+   "done",
+   "E2"
+  ],
+  [
+   822,
+   "start",
+   "E2"
+  ],
+  [
+   867,
+   "done",
+   "E2"
+  ],
+  [
+   882,
+   "start",
+   "E2"
+  ],
+  [
+   927,
+   "done",
+   "NAHAND"
+  ],
+  [
+   927,
+   "done",
+   "E2"
+  ],
+  [
+   942,
+   "start",
+   "NAHAND"
+  ],
+  [
+   942,
+   "start",
+   "E2"
+  ],
+  [
+   987,
+   "done",
+   "E2"
+  ],
+  [
+   1002,
+   "start",
+   "E2"
+  ],
+  [
+   1047,
+   "done",
+   "E2"
+  ],
+  [
+   1062,
+   "start",
+   "E2"
+  ],
+  [
+   1107,
+   "done",
+   "E2"
+  ],
+  [
+   1122,
+   "start",
+   "E2"
+  ],
+  [
+   1167,
+   "done",
+   "E2"
+  ],
+  [
+   1182,
+   "start",
+   "E2"
+  ],
+  [
+   1212,
+   "done",
+   "NAHAND"
+  ],
+  [
+   1227,
+   "start",
+   "NAHAND"
+  ],
+  [
+   1227,
+   "done",
+   "E2"
+  ],
+  [
+   1242,
+   "start",
+   "E2"
+  ],
+  [
+   1287,
+   "done",
+   "E2"
+  ],
+  [
+   1302,
+   "start",
+   "E2"
+  ],
+  [
+   1347,
+   "done",
+   "E2"
+  ],
+  [
+   1362,
+   "start",
+   "E2"
+  ],
+  [
+   1407,
+   "done",
+   "E2"
+  ],
+  [
+   1422,
+   "start",
+   "E2"
+  ],
+  [
+   1467,
+   "done",
+   "E2"
+  ],
+  [
+   1482,
+   "start",
+   "E2"
+  ],
+  [
+   1497,
+   "done",
+   "NAHAND"
+  ],
+  [
+   1512,
+   "start",
+   "NAHAND"
+  ],
+  [
+   1527,
+   "done",
+   "E2"
+  ],
+  [
+   1542,
+   "start",
+   "E2"
+  ],
+  [
+   1587,
+   "done",
+   "E2"
+  ],
+  [
+   1602,
+   "start",
+   "E2"
+  ],
+  [
+   1647,
+   "done",
+   "E2"
+  ],
+  [
+   1662,
+   "start",
+   "E2"
+  ],
+  [
+   1707,
+   "done",
+   "E2"
+  ],
+  [
+   1722,
+   "start",
+   "E2"
+  ],
+  [
+   1767,
+   "done",
+   "E2"
+  ],
+  [
+   1782,
+   "done",
+   "NAHAND"
+  ],
+  [
+   1782,
+   "start",
+   "E2"
+  ],
+  [
+   1797,
+   "start",
+   "NAHAND"
+  ],
+  [
+   1827,
+   "done",
+   "E2"
+  ],
+  [
+   1842,
+   "start",
+   "SHK"
+  ],
+  [
+   1947,
+   "done",
+   "SHK"
+  ],
+  [
+   1962,
+   "start",
+   "SHK"
+  ],
+  [
+   2067,
+   "done",
+   "NAHAND"
+  ],
+  [
+   2067,
+   "done",
+   "SHK"
+  ]
+ ],
+ "pred_finish": 2067.0,
+ "actual": [
+  [
+   108,
+   "deploy",
+   "SMCV"
+  ],
+  [
+   135,
+   "start",
+   "NAPOWR"
+  ],
+  [
+   463,
+   "done",
+   "NAPOWR"
+  ],
+  [
+   463,
+   "start",
+   "NAHAND"
+  ],
+  [
+   737,
+   "done",
+   "NAHAND"
+  ],
+  [
+   737,
+   "start",
+   "NAHAND"
+  ],
+  [
+   737,
+   "start",
+   "E2"
+  ],
+  [
+   796,
+   "done",
+   "E2"
+  ],
+  [
+   796,
+   "start",
+   "E2"
+  ],
+  [
+   852,
+   "done",
+   "E2"
+  ],
+  [
+   852,
+   "start",
+   "E2"
+  ],
+  [
+   910,
+   "done",
+   "E2"
+  ],
+  [
+   910,
+   "start",
+   "E2"
+  ],
+  [
+   966,
+   "done",
+   "E2"
+  ],
+  [
+   966,
+   "start",
+   "E2"
+  ],
+  [
+   1012,
+   "done",
+   "NAHAND"
+  ],
+  [
+   1012,
+   "start",
+   "NAHAND"
+  ],
+  [
+   1023,
+   "done",
+   "E2"
+  ],
+  [
+   1023,
+   "start",
+   "E2"
+  ],
+  [
+   1079,
+   "done",
+   "E2"
+  ],
+  [
+   1079,
+   "start",
+   "E2"
+  ],
+  [
+   1135,
+   "done",
+   "E2"
+  ],
+  [
+   1135,
+   "start",
+   "E2"
+  ],
+  [
+   1193,
+   "done",
+   "E2"
+  ],
+  [
+   1193,
+   "start",
+   "E2"
+  ],
+  [
+   1250,
+   "done",
+   "E2"
+  ],
+  [
+   1250,
+   "start",
+   "E2"
+  ],
+  [
+   1287,
+   "done",
+   "NAHAND"
+  ],
+  [
+   1287,
+   "start",
+   "NAHAND"
+  ],
+  [
+   1307,
+   "done",
+   "E2"
+  ],
+  [
+   1307,
+   "start",
+   "E2"
+  ],
+  [
+   1362,
+   "done",
+   "E2"
+  ],
+  [
+   1362,
+   "start",
+   "E2"
+  ],
+  [
+   1419,
+   "done",
+   "E2"
+  ],
+  [
+   1419,
+   "start",
+   "E2"
+  ],
+  [
+   1475,
+   "done",
+   "E2"
+  ],
+  [
+   1475,
+   "start",
+   "E2"
+  ],
+  [
+   1531,
+   "done",
+   "E2"
+  ],
+  [
+   1531,
+   "start",
+   "E2"
+  ],
+  [
+   1561,
+   "done",
+   "NAHAND"
+  ],
+  [
+   1561,
+   "start",
+   "NAHAND"
+  ],
+  [
+   1588,
+   "done",
+   "E2"
+  ],
+  [
+   1588,
+   "start",
+   "E2"
+  ],
+  [
+   1644,
+   "done",
+   "E2"
+  ],
+  [
+   1644,
+   "start",
+   "E2"
+  ],
+  [
+   1700,
+   "done",
+   "E2"
+  ],
+  [
+   1700,
+   "start",
+   "E2"
+  ],
+  [
+   1756,
+   "done",
+   "E2"
+  ],
+  [
+   1756,
+   "start",
+   "E2"
+  ],
+  [
+   1812,
+   "done",
+   "E2"
+  ],
+  [
+   1812,
+   "start",
+   "E2"
+  ],
+  [
+   1836,
+   "done",
+   "NAHAND"
+  ],
+  [
+   1836,
+   "start",
+   "NAHAND"
+  ],
+  [
+   1870,
+   "done",
+   "E2"
+  ],
+  [
+   1870,
+   "start",
+   "SHK"
+  ],
+  [
+   1981,
+   "done",
+   "SHK"
+  ],
+  [
+   1981,
+   "start",
+   "SHK"
+  ],
+  [
+   2092,
+   "done",
+   "SHK"
+  ]
+ ],
+ "decisions": [
+  {
+   "frame": 135,
+   "queue": "building",
+   "choice": "NAPOWR",
+   "ms": 0.6736000068485737,
+   "money": 10000.0,
+   "owned": {
+    "NACNST": 1
+   },
+   "jobs": {},
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 463,
+   "queue": "building",
+   "choice": "NAHAND",
+   "ms": 0.6547999801114202,
+   "money": 9400.0,
+   "owned": {
+    "NACNST": 1,
+    "NAPOWR": 1
+   },
+   "jobs": {},
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 737,
+   "queue": "building",
+   "choice": "NAHAND",
+   "ms": 0.7061000214889646,
+   "money": 8900.0,
+   "owned": {
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 1
+   },
+   "jobs": {},
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 737,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.8456999203190207,
+   "money": 8900.0,
+   "owned": {
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 1
+   },
+   "jobs": {},
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 796,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.8671000832691789,
+   "money": 8701.0,
+   "owned": {
+    "E2": 1,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 1
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.204
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 852,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.5933999782428145,
+   "money": 8502.0,
+   "owned": {
+    "E2": 2,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 1
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.407
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 910,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.8608000352978706,
+   "money": 8290.0,
+   "owned": {
+    "E2": 3,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 1
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.63
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 966,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.6559999892488122,
+   "money": 8080.0,
+   "owned": {
+    "E2": 4,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 1
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.833
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1012,
+   "queue": "building",
+   "choice": "NAHAND",
+   "ms": 0.8479999378323555,
+   "money": 7916.0,
+   "owned": {
+    "E2": 4,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 2
+   },
+   "jobs": {
+    "infantry": [
+     "E2",
+     0.833
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1023,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.7940999930724502,
+   "money": 7882.0,
+   "owned": {
+    "E2": 5,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 2
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.037
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1079,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.6207000697031617,
+   "money": 7683.0,
+   "owned": {
+    "E2": 6,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 2
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.241
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1135,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.5952999927103519,
+   "money": 7484.0,
+   "owned": {
+    "E2": 7,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 2
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.444
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1193,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.7214000215753913,
+   "money": 7270.0,
+   "owned": {
+    "E2": 8,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 2
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.667
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1250,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.6292000180110335,
+   "money": 7060.0,
+   "owned": {
+    "E2": 9,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 2
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.87
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1287,
+   "queue": "building",
+   "choice": "NAHAND",
+   "ms": 0.721000018529594,
+   "money": 6934.0,
+   "owned": {
+    "E2": 9,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 3
+   },
+   "jobs": {
+    "infantry": [
+     "E2",
+     0.667
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1307,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.5759999621659517,
+   "money": 6873.0,
+   "owned": {
+    "E2": 10,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 3
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.056
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1362,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.6259999936446548,
+   "money": 6674.0,
+   "owned": {
+    "E2": 11,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 3
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.278
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1419,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.6251001032069325,
+   "money": 6466.0,
+   "owned": {
+    "E2": 12,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 3
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.481
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1475,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.6651999428868294,
+   "money": 6260.0,
+   "owned": {
+    "E2": 13,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 3
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.685
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1531,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.7515000179409981,
+   "money": 6050.0,
+   "owned": {
+    "E2": 14,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 3
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.889
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1561,
+   "queue": "building",
+   "choice": "NAHAND",
+   "ms": 0.5963000003248453,
+   "money": 5948.0,
+   "owned": {
+    "E2": 14,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 4
+   },
+   "jobs": {
+    "infantry": [
+     "E2",
+     0.537
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1588,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.5949999904260039,
+   "money": 5855.0,
+   "owned": {
+    "E2": 15,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 4
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.093
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1644,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.6148999091237783,
+   "money": 5656.0,
+   "owned": {
+    "E2": 16,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 4
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.296
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1700,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.5657000001519918,
+   "money": 5457.0,
+   "owned": {
+    "E2": 17,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 4
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.5
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1756,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.6031999364495277,
+   "money": 5250.0,
+   "owned": {
+    "E2": 18,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 4
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.704
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1812,
+   "queue": "infantry",
+   "choice": "E2",
+   "ms": 0.6981999613344669,
+   "money": 5030.0,
+   "owned": {
+    "E2": 19,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 4
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.926
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1836,
+   "queue": "building",
+   "choice": "NAHAND",
+   "ms": 0.7094000466167927,
+   "money": 4960.0,
+   "owned": {
+    "E2": 19,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 5
+   },
+   "jobs": {
+    "infantry": [
+     "E2",
+     0.426
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1870,
+   "queue": "infantry",
+   "choice": "SHK",
+   "ms": 0.5928000900894403,
+   "money": 4846.0,
+   "owned": {
+    "E2": 20,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 5
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.111
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  },
+  {
+   "frame": 1981,
+   "queue": "infantry",
+   "choice": "SHK",
+   "ms": 0.6299000233411789,
+   "money": 4148.0,
+   "owned": {
+    "E2": 20,
+    "SHK": 1,
+    "NACNST": 1,
+    "NAPOWR": 1,
+    "NAHAND": 5
+   },
+   "jobs": {
+    "building": [
+     "NAHAND",
+     0.519
+    ]
+   },
+   "harvesters": 0,
+   "docks": 0
+  }
+ ],
+ "rows": [
+  {
+   "type": "NAPOWR",
+   "n": 1,
+   "pred_start": 27,
+   "pred_done": 357,
+   "start": 27,
+   "done": 355,
+   "diff": -2
+  },
+  {
+   "type": "NAHAND",
+   "n": 1,
+   "pred_start": 372,
+   "pred_done": 642,
+   "start": 355,
+   "done": 629,
+   "diff": -13
+  },
+  {
+   "type": "E2",
+   "n": 1,
+   "pred_start": 642,
+   "pred_done": 687,
+   "start": 629,
+   "done": 688,
+   "diff": 1
+  },
+  {
+   "type": "E2",
+   "n": 2,
+   "pred_start": 702,
+   "pred_done": 747,
+   "start": 688,
+   "done": 744,
+   "diff": -3
+  },
+  {
+   "type": "E2",
+   "n": 3,
+   "pred_start": 762,
+   "pred_done": 807,
+   "start": 744,
+   "done": 802,
+   "diff": -5
+  },
+  {
+   "type": "E2",
+   "n": 4,
+   "pred_start": 822,
+   "pred_done": 867,
+   "start": 802,
+   "done": 858,
+   "diff": -9
+  },
+  {
+   "type": "NAHAND",
+   "n": 2,
+   "pred_start": 657,
+   "pred_done": 927,
+   "start": 629,
+   "done": 904,
+   "diff": -23
+  },
+  {
+   "type": "E2",
+   "n": 5,
+   "pred_start": 882,
+   "pred_done": 927,
+   "start": 858,
+   "done": 915,
+   "diff": -12
+  },
+  {
+   "type": "E2",
+   "n": 6,
+   "pred_start": 942,
+   "pred_done": 987,
+   "start": 915,
+   "done": 971,
+   "diff": -16
+  },
+  {
+   "type": "E2",
+   "n": 7,
+   "pred_start": 1002,
+   "pred_done": 1047,
+   "start": 971,
+   "done": 1027,
+   "diff": -20
+  },
+  {
+   "type": "E2",
+   "n": 8,
+   "pred_start": 1062,
+   "pred_done": 1107,
+   "start": 1027,
+   "done": 1085,
+   "diff": -22
+  },
+  {
+   "type": "E2",
+   "n": 9,
+   "pred_start": 1122,
+   "pred_done": 1167,
+   "start": 1085,
+   "done": 1142,
+   "diff": -25
+  },
+  {
+   "type": "NAHAND",
+   "n": 3,
+   "pred_start": 942,
+   "pred_done": 1212,
+   "start": 904,
+   "done": 1179,
+   "diff": -33
+  },
+  {
+   "type": "E2",
+   "n": 10,
+   "pred_start": 1182,
+   "pred_done": 1227,
+   "start": 1142,
+   "done": 1199,
+   "diff": -28
+  },
+  {
+   "type": "E2",
+   "n": 11,
+   "pred_start": 1242,
+   "pred_done": 1287,
+   "start": 1199,
+   "done": 1254,
+   "diff": -33
+  },
+  {
+   "type": "E2",
+   "n": 12,
+   "pred_start": 1302,
+   "pred_done": 1347,
+   "start": 1254,
+   "done": 1311,
+   "diff": -36
+  },
+  {
+   "type": "E2",
+   "n": 13,
+   "pred_start": 1362,
+   "pred_done": 1407,
+   "start": 1311,
+   "done": 1367,
+   "diff": -40
+  },
+  {
+   "type": "E2",
+   "n": 14,
+   "pred_start": 1422,
+   "pred_done": 1467,
+   "start": 1367,
+   "done": 1423,
+   "diff": -44
+  },
+  {
+   "type": "NAHAND",
+   "n": 4,
+   "pred_start": 1227,
+   "pred_done": 1497,
+   "start": 1179,
+   "done": 1453,
+   "diff": -44
+  },
+  {
+   "type": "E2",
+   "n": 15,
+   "pred_start": 1482,
+   "pred_done": 1527,
+   "start": 1423,
+   "done": 1480,
+   "diff": -47
+  },
+  {
+   "type": "E2",
+   "n": 16,
+   "pred_start": 1542,
+   "pred_done": 1587,
+   "start": 1480,
+   "done": 1536,
+   "diff": -51
+  },
+  {
+   "type": "E2",
+   "n": 17,
+   "pred_start": 1602,
+   "pred_done": 1647,
+   "start": 1536,
+   "done": 1592,
+   "diff": -55
+  },
+  {
+   "type": "E2",
+   "n": 18,
+   "pred_start": 1662,
+   "pred_done": 1707,
+   "start": 1592,
+   "done": 1648,
+   "diff": -59
+  },
+  {
+   "type": "E2",
+   "n": 19,
+   "pred_start": 1722,
+   "pred_done": 1767,
+   "start": 1648,
+   "done": 1704,
+   "diff": -63
+  },
+  {
+   "type": "NAHAND",
+   "n": 5,
+   "pred_start": 1512,
+   "pred_done": 1782,
+   "start": 1453,
+   "done": 1728,
+   "diff": -54
+  },
+  {
+   "type": "E2",
+   "n": 20,
+   "pred_start": 1782,
+   "pred_done": 1827,
+   "start": 1704,
+   "done": 1762,
+   "diff": -65
+  },
+  {
+   "type": "SHK",
+   "n": 1,
+   "pred_start": 1842,
+   "pred_done": 1947,
+   "start": 1762,
+   "done": 1873,
+   "diff": -74
+  },
+  {
+   "type": "NAHAND",
+   "n": 6,
+   "pred_start": 1797,
+   "pred_done": 2067,
+   "start": 1728,
+   "done": null,
+   "diff": null
+  },
+  {
+   "type": "SHK",
+   "n": 2,
+   "pred_start": 1962,
+   "pred_done": 2067,
+   "start": 1873,
+   "done": 1984,
+   "diff": -83
+  }
+ ],
+ "finished": true,
+ "spent": 6600.0,
+ "victory_predicted": {
+  "ready": 2067.0,
+  "depart": 2067.0,
+  "arrive": 4839.465578649883,
+  "battle": 1510,
+  "victory": 6349.465578649883,
+  "army": {
+   "E2": 32,
+   "SHK": 2,
+   "HTNK": 4
+  },
+  "enemy": {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3,
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  "a_left": 0.4642190456850251,
+  "b_left": 0.0,
+  "start_army": {
+   "HTNK": 4,
+   "E2": 12
+  },
+  "guard": {},
+  "base_lost": null
+ },
+ "attack": {
+  "start": 2094,
+  "army": {
+   "HTNK": 4,
+   "E2": 32,
+   "SHK": 2
+  },
+  "timeline": [
+   [
+    2094,
+    4,
+    38
+   ],
+   [
+    3332,
+    5,
+    38
+   ],
+   [
+    3586,
+    6,
+    38
+   ],
+   [
+    4782,
+    7,
+    38
+   ],
+   [
+    5294,
+    8,
+    31
+   ],
+   [
+    5297,
+    7,
+    31
+   ],
+   [
+    5577,
+    6,
+    28
+   ],
+   [
+    5857,
+    5,
+    28
+   ],
+   [
+    6033,
+    4,
+    28
+   ],
+   [
+    6176,
+    3,
+    28
+   ],
+   [
+    6519,
+    2,
+    28
+   ],
+   [
+    6691,
+    1,
+    28
+   ]
+  ],
+  "gathered": 4240,
+  "victory": 6832,
+  "survivors": {
+   "HTNK": 4,
+   "E2": 23,
+   "SHK": 1
+  },
+  "orders": 1316
+ }
+}
