@@ -15,8 +15,9 @@ __pycache__/
 /tools/third_party/
 /tools/ra2bridge/out/
 
-# The IEEE paper is licensed to the university and must not be redistributed.
+# The IEEE paper is licensed to the university and must not be redistributed (either location).
 /thesis/A_Data-driven_Approach_to_Solve_a_Production_Constrained_Build-order_Optimization_Problem.pdf
 
 # npm install output for the deck generator
 /thesis/node_modules/
+/docs/A_Data-driven_Approach_to_Solve_a_Production_Constrained_Build-order_Optimization_Problem.pdf
