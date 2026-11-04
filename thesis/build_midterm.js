@@ -1,13 +1,31 @@
 // 期中報告（5 分鐘）：照原本論文導讀的順序講 IEEE 論文（原文圖表照搬），最後才講怎麼用到紅色警戒 2，
 // 附 1 分鐘示範影片。版面刻意簡單。
-// node build_midterm.js 期中報告_5分鐘.pptx   （pptxgenjs 在 scratchpad/deck/node_modules，用 NODE_PATH 指過去）
+// cd thesis && npm install && node build_midterm.js 期中報告_5分鐘.pptx
+// 主題色靠 Claude Code pptx skill 的 apply_theme.js：設 APPLY_THEME 指到它，或讓下面自動在 ~/.claude/skills 裡找。
 const pptxgen = require("pptxgenjs");
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
-const { applyTheme } = require("C:/Users/ycker/.claude/skills/synced/84829876-5bcd-4ab2-8d53-55a7427dd88c_445b74f3-7a38-430c-8857-bbde22bf7bfa/pptx/scripts/apply_theme.js");
+
+const findApplyTheme = () => {
+  if (process.env.APPLY_THEME) return process.env.APPLY_THEME;
+  const stack = [path.join(os.homedir(), ".claude", "skills")];
+  while (stack.length) {
+    const dir = stack.pop();
+    let entries = [];
+    try { entries = fs.readdirSync(dir, { withFileTypes: true }); } catch { continue; }
+    for (const e of entries) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) stack.push(p);
+      else if (e.name === "apply_theme.js" && p.includes(path.join("pptx", "scripts"))) return p;
+    }
+  }
+  throw new Error("找不到 pptx skill 的 apply_theme.js；請設環境變數 APPLY_THEME 指到它");
+};
+const { applyTheme } = require(findApplyTheme());
 
 const OUT = process.argv[2] || "midterm.pptx";
-const ROOT = "D:/RedAlert_Automation";
+const ROOT = path.resolve(__dirname, "..");
 const IMG = (n) => path.join(ROOT, "thesis/images", n);
 const V = path.join(ROOT, "thesis/videos") + "/";
 

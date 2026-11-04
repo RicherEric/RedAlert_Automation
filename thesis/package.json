@@ -1,0 +1,8 @@
+{
+  "name": "ra2-midterm-deck",
+  "private": true,
+  "description": "Builds 期中報告_5分鐘.pptx (node build_midterm.js 期中報告_5分鐘.pptx)",
+  "dependencies": {
+    "pptxgenjs": "3.12.0"
+  }
+}
