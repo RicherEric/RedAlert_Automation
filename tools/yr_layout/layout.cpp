@@ -1,0 +1,10 @@
+#include <HouseClass.h>
+#include <HouseTypeClass.h>
+#include <TechnoClass.h>
+#include <FootClass.h>
+#include <UnitClass.h>
+#include <InfantryClass.h>
+#include <BuildingClass.h>
+#include <AircraftClass.h>
+#include <TechnoTypeClass.h>
+#include <FactoryClass.h>

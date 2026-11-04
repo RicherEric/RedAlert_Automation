@@ -1,0 +1,532 @@
+{
+  "army": {
+    "army": {
+      "SCHP": 2,
+      "ZEP": 1
+    },
+    "feasible": true,
+    "violations": {},
+    "info": {
+      "scores": {
+        "灰熊海": 1.0,
+        "灰熊+IFV+大兵": 0.95,
+        "入侵者空襲": 1.0
+      },
+      "cost": 4200,
+      "units": 3,
+      "anti_air": 2,
+      "finish_frame": 8325
+    },
+    "history": [
+      {
+        "generation": 0,
+        "best_objective": -0.8443055555555555,
+        "best_violation": 0,
+        "feasible_share": 0.075
+      },
+      {
+        "generation": 1,
+        "best_objective": -0.8443055555555555,
+        "best_violation": 0,
+        "feasible_share": 0.225
+      },
+      {
+        "generation": 2,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.25
+      },
+      {
+        "generation": 3,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.2
+      },
+      {
+        "generation": 4,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.2
+      },
+      {
+        "generation": 5,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.25
+      },
+      {
+        "generation": 6,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.45
+      },
+      {
+        "generation": 7,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.45
+      },
+      {
+        "generation": 8,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.575
+      },
+      {
+        "generation": 9,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.475
+      },
+      {
+        "generation": 10,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.575
+      },
+      {
+        "generation": 11,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.55
+      },
+      {
+        "generation": 12,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.6
+      },
+      {
+        "generation": 13,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.5
+      },
+      {
+        "generation": 14,
+        "best_objective": -0.8718220082050449,
+        "best_violation": 0,
+        "feasible_share": 0.575
+      },
+      {
+        "generation": 15,
+        "best_objective": -0.946750645994832,
+        "best_violation": 0,
+        "feasible_share": 0.575
+      },
+      {
+        "generation": 16,
+        "best_objective": -0.946750645994832,
+        "best_violation": 0,
+        "feasible_share": 0.45
+      },
+      {
+        "generation": 17,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.425
+      },
+      {
+        "generation": 18,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.55
+      },
+      {
+        "generation": 19,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.475
+      },
+      {
+        "generation": 20,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.425
+      },
+      {
+        "generation": 21,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.575
+      },
+      {
+        "generation": 22,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.625
+      },
+      {
+        "generation": 23,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.625
+      },
+      {
+        "generation": 24,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.525
+      },
+      {
+        "generation": 25,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.625
+      },
+      {
+        "generation": 26,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.7
+      },
+      {
+        "generation": 27,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.55
+      },
+      {
+        "generation": 28,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.725
+      },
+      {
+        "generation": 29,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.55
+      },
+      {
+        "generation": 30,
+        "best_objective": -0.9641666666666667,
+        "best_violation": 0,
+        "feasible_share": 0.775
+      }
+    ]
+  },
+  "build": {
+    "targets": {
+      "SCHP": 2,
+      "ZEP": 1
+    },
+    "sequence": [
+      "NAPOWR",
+      "NAREFN",
+      "NAHAND",
+      "NAWEAP",
+      "NARADR",
+      "NAPOWR",
+      "NATECH",
+      "ZEP",
+      "NAWEAP",
+      "SCHP",
+      "SCHP"
+    ],
+    "feasible": true,
+    "violations": {},
+    "finish_frame": 8040,
+    "spent": 14899.999999999838,
+    "events": [
+      [
+        75,
+        "start",
+        "NAPOWR"
+      ],
+      [
+        465,
+        "done",
+        "NAPOWR"
+      ],
+      [
+        480,
+        "start",
+        "NAREFN"
+      ],
+      [
+        1740,
+        "done",
+        "NAREFN"
+      ],
+      [
+        1755,
+        "start",
+        "NAHAND"
+      ],
+      [
+        2070,
+        "done",
+        "NAHAND"
+      ],
+      [
+        2085,
+        "start",
+        "NAWEAP"
+      ],
+      [
+        3345,
+        "done",
+        "NAWEAP"
+      ],
+      [
+        3360,
+        "start",
+        "NARADR"
+      ],
+      [
+        3990,
+        "done",
+        "NARADR"
+      ],
+      [
+        4005,
+        "start",
+        "NAPOWR"
+      ],
+      [
+        4395,
+        "done",
+        "NAPOWR"
+      ],
+      [
+        4410,
+        "start",
+        "NATECH"
+      ],
+      [
+        5670,
+        "done",
+        "NATECH"
+      ],
+      [
+        5670,
+        "start",
+        "ZEP"
+      ],
+      [
+        5685,
+        "start",
+        "NAWEAP"
+      ],
+      [
+        6915,
+        "done",
+        "ZEP"
+      ],
+      [
+        6930,
+        "start",
+        "SCHP"
+      ],
+      [
+        6945,
+        "done",
+        "NAWEAP"
+      ],
+      [
+        7485,
+        "done",
+        "SCHP"
+      ],
+      [
+        7500,
+        "start",
+        "SCHP"
+      ],
+      [
+        8040,
+        "done",
+        "SCHP"
+      ]
+    ],
+    "history": [
+      {
+        "generation": 0,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.725
+      },
+      {
+        "generation": 1,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.55
+      },
+      {
+        "generation": 2,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.575
+      },
+      {
+        "generation": 3,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.875
+      },
+      {
+        "generation": 4,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.875
+      },
+      {
+        "generation": 5,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.825
+      },
+      {
+        "generation": 6,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.85
+      },
+      {
+        "generation": 7,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.875
+      },
+      {
+        "generation": 8,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.825
+      },
+      {
+        "generation": 9,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.7
+      },
+      {
+        "generation": 10,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.775
+      },
+      {
+        "generation": 11,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.8
+      },
+      {
+        "generation": 12,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.9
+      },
+      {
+        "generation": 13,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.8
+      },
+      {
+        "generation": 14,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.8
+      },
+      {
+        "generation": 15,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.85
+      },
+      {
+        "generation": 16,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.825
+      },
+      {
+        "generation": 17,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.825
+      },
+      {
+        "generation": 18,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.825
+      },
+      {
+        "generation": 19,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.875
+      },
+      {
+        "generation": 20,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.95
+      },
+      {
+        "generation": 21,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.875
+      },
+      {
+        "generation": 22,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.975
+      },
+      {
+        "generation": 23,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.825
+      },
+      {
+        "generation": 24,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.85
+      },
+      {
+        "generation": 25,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.875
+      },
+      {
+        "generation": 26,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.7
+      },
+      {
+        "generation": 27,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.7
+      },
+      {
+        "generation": 28,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.775
+      },
+      {
+        "generation": 29,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 0.925
+      },
+      {
+        "generation": 30,
+        "best_objective": 8054.9,
+        "best_violation": 0,
+        "feasible_share": 1.0
+      }
+    ]
+  }
+}

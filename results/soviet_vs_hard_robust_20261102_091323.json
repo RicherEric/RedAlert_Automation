@@ -1,0 +1,2107 @@
+{
+ "games": [
+  "ai_hard",
+  "observe_hard_1",
+  "observe_hard_2",
+  "observe_hard_3",
+  "observe_hard_4",
+  "observe_hard_5",
+  "observe_hard_6",
+  "observe_hard_7",
+  "observe_hard_8",
+  "challenge_hard_q"
+ ],
+ "preference": {
+  "win_rate": 1.0,
+  "frames": 0.4,
+  "spent": 0.2,
+  "survive": 0.2
+ },
+ "front": [
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 5,
+    "ZEP": 4
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.9,
+   "mean_frame": 32924.0590207849,
+   "spent": 36499.9999999998,
+   "survive": 0.36221784560170395,
+   "ready": 24599,
+   "feasible": true,
+   "games": {
+    "ai_hard": 28561.465578649884,
+    "observe_hard_1": 28231.465578649884,
+    "observe_hard_2": 28341.465578649884,
+    "observe_hard_3": 28696.465578649884,
+    "observe_hard_4": 28301.465578649884,
+    "observe_hard_5": 28236.465578649884,
+    "observe_hard_6": 28486.465578649884,
+    "observe_hard_7": 28301.465578649884,
+    "observe_hard_8": 28336.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 9,
+    "SHK": 1,
+    "TTNK": 1,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.9,
+   "mean_frame": 33326.5590207849,
+   "spent": 37499.99999999984,
+   "survive": 0.37433853491281055,
+   "ready": 24959,
+   "feasible": true,
+   "games": {
+    "ai_hard": 28991.465578649884,
+    "observe_hard_1": 28736.465578649884,
+    "observe_hard_2": 28891.465578649884,
+    "observe_hard_3": 29116.465578649884,
+    "observe_hard_4": 28791.465578649884,
+    "observe_hard_5": 28561.465578649884,
+    "observe_hard_6": 29116.465578649884,
+    "observe_hard_7": 28626.465578649884,
+    "observe_hard_8": 28686.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 8,
+    "TTNK": 1,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.8,
+   "mean_frame": 34670.163545170995,
+   "spent": 37199.99999999977,
+   "survive": 0.372661739063423,
+   "ready": 24989,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 28621.465578649884,
+    "observe_hard_2": 28856.465578649884,
+    "observe_hard_3": 29146.465578649884,
+    "observe_hard_4": 28901.465578649884,
+    "observe_hard_5": 28626.465578649884,
+    "observe_hard_6": 29081.465578649884,
+    "observe_hard_7": 28876.465578649884,
+    "observe_hard_8": 28771.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 3,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 5
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 4,
+    "HTK": 3
+   },
+   "win_rate": 0.8,
+   "mean_frame": 35777.09246291991,
+   "spent": 33350.0,
+   "survive": 0.21149590876461755,
+   "ready": 22499,
+   "feasible": true,
+   "games": {
+    "ai_hard": 26456.465578649884,
+    "observe_hard_1": 26666.465578649884,
+    "observe_hard_2": 26831.465578649884,
+    "observe_hard_3": 27726.465578649884,
+    "observe_hard_4": 27641.465578649884,
+    "observe_hard_5": 26116.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 26156.465578649884,
+    "observe_hard_8": 26266.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 8,
+    "TTNK": 1,
+    "ZEP": 4
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.8,
+   "mean_frame": 35857.146640135106,
+   "spent": 39199.9999999998,
+   "survive": 0.38279478637947967,
+   "ready": 26414,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 30051.465578649884,
+    "observe_hard_2": 30191.465578649884,
+    "observe_hard_3": 30841.465578649884,
+    "observe_hard_4": 30011.465578649884,
+    "observe_hard_5": 29951.465578649884,
+    "observe_hard_6": 30576.465578649884,
+    "observe_hard_7": 30341.465578649884,
+    "observe_hard_8": 30121.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 10,
+    "SHK": 1,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.8,
+   "mean_frame": 36903.99246291991,
+   "spent": 36499.99999999977,
+   "survive": 0.37824663210710074,
+   "ready": 24419,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 28051.465578649884,
+    "observe_hard_2": 28331.465578649884,
+    "observe_hard_3": 28456.465578649884,
+    "observe_hard_4": 28331.465578649884,
+    "observe_hard_5": 28061.465578649884,
+    "observe_hard_6": 28401.465578649884,
+    "observe_hard_7": 28131.465578649884,
+    "observe_hard_8": 28376.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 4,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.7,
+   "mean_frame": 36154.5151849417,
+   "spent": 34499.99999999974,
+   "survive": 0.31705918958983614,
+   "ready": 23399,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 27196.465578649884,
+    "observe_hard_2": 27351.465578649884,
+    "observe_hard_3": 27886.465578649884,
+    "observe_hard_4": 27196.465578649884,
+    "observe_hard_5": 27041.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 27071.465578649884,
+    "observe_hard_8": 27251.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 8,
+    "ZEP": 2
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 2,
+    "HTK": 3
+   },
+   "win_rate": 0.7,
+   "mean_frame": 36763.896371958,
+   "spent": 34099.99999999969,
+   "survive": 0.3361229341453138,
+   "ready": 22964,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 26716.465578649884,
+    "observe_hard_2": 26926.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 26876.465578649884,
+    "observe_hard_5": 26731.465578649884,
+    "observe_hard_6": 27176.465578649884,
+    "observe_hard_7": 26756.465578649884,
+    "observe_hard_8": 26836.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 8,
+    "SHK": 1,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.7,
+   "mean_frame": 37181.48133486321,
+   "spent": 35499.99999999978,
+   "survive": 0.35232163846835485,
+   "ready": 23654,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 27326.465578649884,
+    "observe_hard_2": 27541.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 27486.465578649884,
+    "observe_hard_5": 27266.465578649884,
+    "observe_hard_6": 27636.465578649884,
+    "observe_hard_7": 27366.465578649884,
+    "observe_hard_8": 27431.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 8,
+    "ZEP": 2
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.7,
+   "mean_frame": 37200.60272771502,
+   "spent": 32999.99999999974,
+   "survive": 0.3011098090254668,
+   "ready": 21959,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25751.465578649884,
+    "observe_hard_2": 26051.465578649884,
+    "observe_hard_3": 26381.465578649884,
+    "observe_hard_4": 26021.465578649884,
+    "observe_hard_5": 25816.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 25756.465578649884,
+    "observe_hard_8": 26066.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 3,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 4
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 4,
+    "HTK": 3
+   },
+   "win_rate": 0.7,
+   "mean_frame": 37782.68340505492,
+   "spent": 31349.99999999996,
+   "survive": 0.20088128705709604,
+   "ready": 21104,
+   "feasible": true,
+   "games": {
+    "ai_hard": 25226.465578649884,
+    "observe_hard_1": 25271.465578649884,
+    "observe_hard_2": 25956.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 26011.465578649884,
+    "observe_hard_5": 24766.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 24831.465578649884,
+    "observe_hard_8": 25031.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 9,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 3,
+    "FLAKT": 1
+   },
+   "win_rate": 0.7,
+   "mean_frame": 38235.63757172159,
+   "spent": 32799.99999999966,
+   "survive": 0.2729379374212163,
+   "ready": 22004,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25941.465578649884,
+    "observe_hard_2": 26336.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 26076.465578649884,
+    "observe_hard_5": 26146.465578649884,
+    "observe_hard_6": 26651.465578649884,
+    "observe_hard_7": 25911.465578649884,
+    "observe_hard_8": 26181.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 5,
+    "BORIS": 1,
+    "HTK": 8,
+    "SHK": 1,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 2,
+    "HTK": 5
+   },
+   "win_rate": 0.7,
+   "mean_frame": 38436.575524620144,
+   "spent": 31849.99999999965,
+   "survive": 0.22368961729517522,
+   "ready": 21869,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25896.465578649884,
+    "observe_hard_2": 26751.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 26166.465578649884,
+    "observe_hard_5": 26001.465578649884,
+    "observe_hard_6": 26881.465578649884,
+    "observe_hard_7": 25881.465578649884,
+    "observe_hard_8": 26266.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 8,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.7,
+   "mean_frame": 38882.15457852431,
+   "spent": 35299.999999999774,
+   "survive": 0.3384510792541176,
+   "ready": 23534,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 27201.465578649884,
+    "observe_hard_2": 27421.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 27576.465578649884,
+    "observe_hard_5": 27191.465578649884,
+    "observe_hard_6": 27516.465578649884,
+    "observe_hard_7": 27201.465578649884,
+    "observe_hard_8": 27366.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 8,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.7,
+   "mean_frame": 38916.88429981988,
+   "spent": 36299.99999999973,
+   "survive": 0.3524149934550588,
+   "ready": 24479,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 28111.465578649884,
+    "observe_hard_2": 28401.465578649884,
+    "observe_hard_3": 28751.465578649884,
+    "observe_hard_4": 28186.465578649884,
+    "observe_hard_5": 28116.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 28121.465578649884,
+    "observe_hard_8": 28306.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "FLAKT": 2,
+    "HTK": 8,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.7,
+   "mean_frame": 39295.9538982522,
+   "spent": 36499.99999999973,
+   "survive": 0.35998599291776845,
+   "ready": 24599,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 28281.465578649884,
+    "observe_hard_2": 28461.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 28281.465578649884,
+    "observe_hard_5": 28296.465578649884,
+    "observe_hard_6": 28761.465578649884,
+    "observe_hard_7": 28306.465578649884,
+    "observe_hard_8": 28461.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 8,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.7,
+   "mean_frame": 39320.6520275039,
+   "spent": 36199.99999999973,
+   "survive": 0.3629343833069868,
+   "ready": 24419,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 28111.465578649884,
+    "observe_hard_2": 28281.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 28251.465578649884,
+    "observe_hard_5": 28061.465578649884,
+    "observe_hard_6": 28401.465578649884,
+    "observe_hard_7": 28111.465578649884,
+    "observe_hard_8": 28201.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 7,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.7,
+   "mean_frame": 39334.779238388255,
+   "spent": 35499.999999999745,
+   "survive": 0.34971597374552443,
+   "ready": 23894,
+   "feasible": true,
+   "games": {
+    "ai_hard": 27731.465578649884,
+    "observe_hard_1": 27541.465578649884,
+    "observe_hard_2": 27786.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 27731.465578649884,
+    "observe_hard_5": 27506.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 27656.465578649884,
+    "observe_hard_8": 27651.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 2,
+    "BORIS": 1,
+    "FLAKT": 2,
+    "HTK": 8,
+    "SHK": 1,
+    "ZEP": 4
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.6,
+   "mean_frame": 38136.56541350075,
+   "spent": 31100.000000000036,
+   "survive": 0.16892905187542026,
+   "ready": 20774,
+   "feasible": true,
+   "games": {
+    "ai_hard": 24896.465578649884,
+    "observe_hard_1": 24556.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": 24771.465578649884,
+    "observe_hard_5": 24546.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 25401.465578649884,
+    "observe_hard_8": 25331.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 4,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 9,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.6,
+   "mean_frame": 38531.499885107194,
+   "spent": 32299.99999999989,
+   "survive": 0.2772772619053524,
+   "ready": 21524,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25191.465578649884,
+    "observe_hard_2": 25536.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 25401.465578649884,
+    "observe_hard_5": 25271.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 25261.465578649884,
+    "observe_hard_8": 25516.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 2,
+    "BORIS": 1,
+    "HTK": 9,
+    "SHK": 1,
+    "TTNK": 1,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.6,
+   "mean_frame": 38890.38511260939,
+   "spent": 30199.99999999994,
+   "survive": 0.15314716312056736,
+   "ready": 20204,
+   "feasible": true,
+   "games": {
+    "ai_hard": 25261.465578649884,
+    "observe_hard_1": 24081.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": 24626.465578649884,
+    "observe_hard_5": 24166.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 24686.465578649884,
+    "observe_hard_8": 24296.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 4,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 8,
+    "HTNK": 1,
+    "ZEP": 3
+   },
+   "early": {
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.6,
+   "mean_frame": 39738.15118737356,
+   "spent": 32799.99999999987,
+   "survive": 0.28425444445718684,
+   "ready": 21674,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25526.465578649884,
+    "observe_hard_2": 25586.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 25511.465578649884,
+    "observe_hard_5": 25546.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 25431.465578649884,
+    "observe_hard_8": 25521.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 10,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.6,
+   "mean_frame": 39995.728629156874,
+   "spent": 31999.99999999968,
+   "survive": 0.25477564969171157,
+   "ready": 21329,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25266.465578649884,
+    "observe_hard_2": 25821.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 25401.465578649884,
+    "observe_hard_5": 25606.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 25271.465578649884,
+    "observe_hard_8": 25486.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 4,
+    "BORIS": 1,
+    "FLAKT": 3,
+    "HTK": 8,
+    "ZEP": 2
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.6,
+   "mean_frame": 40649.18684718993,
+   "spent": 30399.999999999836,
+   "survive": 0.22238283314746377,
+   "ready": 20339,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 24056.465578649884,
+    "observe_hard_2": 24983.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 24481.465578649884,
+    "observe_hard_5": 24171.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 24246.465578649884,
+    "observe_hard_8": 24451.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 3,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 8,
+    "HTNK": 1,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.6,
+   "mean_frame": 40913.7372425981,
+   "spent": 31949.99999999992,
+   "survive": 0.23080066461437515,
+   "ready": 21479,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25386.465578649884,
+    "observe_hard_2": 26131.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 25736.465578649884,
+    "observe_hard_5": 25311.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 25276.465578649884,
+    "observe_hard_8": 25521.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 5,
+    "HTNK": 1,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 5
+   },
+   "win_rate": 0.6,
+   "mean_frame": 40947.232068015204,
+   "spent": 32299.999999999643,
+   "survive": 0.2680142390041831,
+   "ready": 22304,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 26221.465578649884,
+    "observe_hard_2": 26466.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 26376.465578649884,
+    "observe_hard_5": 26201.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 26296.465578649884,
+    "observe_hard_8": 26416.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 5,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 5
+   },
+   "win_rate": 0.6,
+   "mean_frame": 41160.21070387862,
+   "spent": 31399.999999999625,
+   "survive": 0.2628655626774044,
+   "ready": 21584,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25526.465578649884,
+    "observe_hard_2": 25886.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 25721.465578649884,
+    "observe_hard_5": 25526.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 25691.465578649884,
+    "observe_hard_8": 25796.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 3,
+    "BORIS": 1,
+    "HTK": 4,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 5
+   },
+   "win_rate": 0.6,
+   "mean_frame": 41661.33189821034,
+   "spent": 29649.999999999898,
+   "survive": 0.2102922383774311,
+   "ready": 20504,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 24316.465578649884,
+    "observe_hard_2": 24893.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 24521.465578649884,
+    "observe_hard_5": 24476.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 24931.465578649884,
+    "observe_hard_8": 24566.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 4,
+    "HTNK": 1,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.6,
+   "mean_frame": 42346.19275298703,
+   "spent": 31299.99999999966,
+   "survive": 0.24259550990179773,
+   "ready": 21254,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25186.465578649884,
+    "observe_hard_2": 25696.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 25326.465578649884,
+    "observe_hard_5": 25291.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 25286.465578649884,
+    "observe_hard_8": 25376.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 5,
+    "BORIS": 1,
+    "HTK": 8,
+    "ZEP": 2
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.5,
+   "mean_frame": 39089.03526821721,
+   "spent": 31249.999999999793,
+   "survive": 0.18579591589172387,
+   "ready": 20864,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 24836.465578649884,
+    "observe_hard_2": 24931.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 24941.465578649884,
+    "observe_hard_5": 24826.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 24886.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 3,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 10,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.5,
+   "mean_frame": 42774.93783006504,
+   "spent": 31049.999999999935,
+   "survive": 0.23775844642307442,
+   "ready": 20744,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 24456.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": 24796.465578649884,
+    "observe_hard_5": 24551.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 24521.465578649884,
+    "observe_hard_8": 24811.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 5,
+    "BORIS": 1,
+    "HTK": 4,
+    "SHK": 1,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 5
+   },
+   "win_rate": 0.5,
+   "mean_frame": 44687.63508922364,
+   "spent": 29649.999999999673,
+   "survive": 0.15857692958477881,
+   "ready": 20459,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 24566.465578649884,
+    "observe_hard_2": 25088.465578649884,
+    "observe_hard_3": null,
+    "observe_hard_4": 26066.465578649884,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 24671.465578649884,
+    "observe_hard_8": 24781.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "BORIS": 1,
+    "FLAKT": 2,
+    "HTK": 9,
+    "ZEP": 4
+   },
+   "early": {
+    "HTNK": 2,
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.5,
+   "mean_frame": 45407.73477626811,
+   "spent": 29500.00000000009,
+   "survive": 0.16159200593182396,
+   "ready": 20579,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 25111.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": 25191.465578649884,
+    "observe_hard_5": 24351.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 24751.465578649884,
+    "observe_hard_8": 24641.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 3,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.4,
+   "mean_frame": 44006.42172511089,
+   "spent": 29449.999999999905,
+   "survive": 0.1526241591254557,
+   "ready": 20114,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 23926.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": 24066.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 24516.465578649884,
+    "observe_hard_8": 24206.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "E2": 1,
+    "HTK": 5
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 5
+   },
+   "win_rate": 0.4,
+   "mean_frame": 44688.97352787809,
+   "spent": 29499.99999999959,
+   "survive": 0.18548519736842106,
+   "ready": 20414,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 24416.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": 24776.465578649884,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 24666.465578649884,
+    "observe_hard_8": 24671.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 1,
+    "BORIS": 1,
+    "HTK": 11,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.4,
+   "mean_frame": 45877.77260081029,
+   "spent": 28749.999999999996,
+   "survive": 0.12027966742252456,
+   "ready": 19304,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 23576.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": 23101.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 24096.465578649884,
+    "observe_hard_8": 23863.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 5,
+    "BORIS": 1,
+    "HTK": 4,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 2,
+    "HTK": 5
+   },
+   "win_rate": 0.4,
+   "mean_frame": 46201.71741268218,
+   "spent": 29349.999999999694,
+   "survive": 0.15235325729238006,
+   "ready": 20324,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 24436.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": 24876.465578649884,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 24311.465578649884,
+    "observe_hard_8": 26006.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 4,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "SHK": 1,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 2,
+    "HTK": 5
+   },
+   "win_rate": 0.4,
+   "mean_frame": 47091.7154819515,
+   "spent": 29099.999999999753,
+   "survive": 0.12049210387666424,
+   "ready": 20549,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 24896.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": 24991.465578649884,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 24916.465578649884,
+    "observe_hard_8": 25071.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 9
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 2,
+    "HTK": 1
+   },
+   "win_rate": 0.3,
+   "mean_frame": 45991.77291862694,
+   "spent": 29599.99999999964,
+   "survive": 0.18822850324491905,
+   "ready": 19679,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 23746.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 23756.465578649884,
+    "observe_hard_8": 23991.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "E2": 2,
+    "FLAKT": 1,
+    "HTK": 4
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.3,
+   "mean_frame": 47542.482180398445,
+   "spent": 28999.999999999593,
+   "survive": 0.16630044843049327,
+   "ready": 19679,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 23686.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 23996.465578649884,
+    "observe_hard_8": 24126.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 5,
+    "BORIS": 1,
+    "HTK": 4,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.3,
+   "mean_frame": 48588.89462052584,
+   "spent": 28649.999999999713,
+   "survive": 0.12349746031599382,
+   "ready": 19469,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 23526.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 23956.465578649884,
+    "observe_hard_8": 24016.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 1,
+    "BORIS": 1,
+    "HTK": 9,
+    "ZEP": 4
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 2,
+    "HTK": 1
+   },
+   "win_rate": 0.3,
+   "mean_frame": 49177.62132569116,
+   "spent": 28850.00000000009,
+   "survive": 0.12728053674441936,
+   "ready": 19229,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 23596.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": 22911.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 23031.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4
+   },
+   "early": {
+    "E2": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.3,
+   "mean_frame": 49245.29721009467,
+   "spent": 27899.999999999596,
+   "survive": 0.16046552034230271,
+   "ready": 18749,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 22866.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 23011.465578649884,
+    "observe_hard_8": 23743.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 4
+   },
+   "early": {
+    "E2": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.3,
+   "mean_frame": 49304.192971868964,
+   "spent": 27599.999999999596,
+   "survive": 0.14408890075494907,
+   "ready": 18554,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 22791.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 23046.465578649884,
+    "observe_hard_8": 23608.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 1,
+    "BORIS": 1,
+    "HTK": 10,
+    "SHK": 1,
+    "ZEP": 3
+   },
+   "early": {
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.3,
+   "mean_frame": 50392.138619296915,
+   "spent": 26850.00000000006,
+   "survive": 0.03398573200992556,
+   "ready": 17354,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 21481.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": 21411.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 21531.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 4,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "SHK": 1,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.3,
+   "mean_frame": 50562.50783364037,
+   "spent": 27299.999999999774,
+   "survive": 0.07083459299600081,
+   "ready": 18449,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 22781.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": 29577.465578649884,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 22931.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 1,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 3
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.3,
+   "mean_frame": 54189.927952137274,
+   "spent": 26050.00000000001,
+   "survive": 0.06977713178294573,
+   "ready": 17864,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 22166.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": 21766.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": 22126.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "E2": 3,
+    "FLAKT": 1,
+    "HTK": 4
+   },
+   "early": {
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.3,
+   "mean_frame": 57069.50165383553,
+   "spent": 26699.99999999959,
+   "survive": 0.1108625,
+   "ready": 17219,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 21381.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": 25078.465578649884,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 21891.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 4,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.2,
+   "mean_frame": 51309.268942375726,
+   "spent": 27199.99999999976,
+   "survive": 0.07182233161711635,
+   "ready": 18569,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 23081.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 23321.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 2,
+    "BORIS": 1,
+    "HTK": 4,
+    "ZEP": 2
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.2,
+   "mean_frame": 52525.55251620508,
+   "spent": 25499.999999999913,
+   "survive": 0.05375868108748847,
+   "ready": 17354,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 21311.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 21866.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 3,
+    "BORIS": 1,
+    "HTK": 4,
+    "ZEP": 2
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.2,
+   "mean_frame": 53419.03718959504,
+   "spent": 27149.999999999873,
+   "survive": 0.0577922077922078,
+   "ready": 18539,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": null,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 23326.465578649884,
+    "observe_hard_8": 23693.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 4,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "HTK": 3
+   },
+   "win_rate": 0.2,
+   "mean_frame": 53518.05833799335,
+   "spent": 26699.999999999785,
+   "survive": 0.07579911901595746,
+   "ready": 17984,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 22406.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 22451.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 2,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 2
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.2,
+   "mean_frame": 53768.029109379546,
+   "spent": 25799.99999999991,
+   "survive": 0.06764725130890052,
+   "ready": 17549,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 21456.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 21726.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 4,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 4,
+    "HTK": 3
+   },
+   "win_rate": 0.2,
+   "mean_frame": 55083.81505019672,
+   "spent": 27099.99999999977,
+   "survive": 0.10464315654389186,
+   "ready": 18329,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": null,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 22546.465578649884,
+    "observe_hard_8": 23508.465578649884,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 1,
+    "BORIS": 1,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 2
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.2,
+   "mean_frame": 56901.8797408738,
+   "spent": 24049.999999999967,
+   "survive": 0.04229106628242075,
+   "ready": 16469,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 20611.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": 20821.465578649884,
+    "observe_hard_6": null,
+    "observe_hard_7": null,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "FLAKT": 3,
+    "HTK": 2
+   },
+   "early": {
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.2,
+   "mean_frame": 58582.12676877466,
+   "spent": 25999.99999999959,
+   "survive": 0.07045336787564767,
+   "ready": 16784,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": 20946.465578649884,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 21361.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 4,
+    "BORIS": 1,
+    "E2": 3,
+    "HTK": 8
+   },
+   "early": {
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.1,
+   "mean_frame": 56297.76213042071,
+   "spent": 24899.99999999976,
+   "survive": 0.0644924673543332,
+   "ready": 15989,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": null,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 20756.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 3,
+    "FLAKT": 1,
+    "HTK": 4,
+    "ZEP": 1
+   },
+   "early": {
+    "HTNK": 1,
+    "E2": 1,
+    "HTK": 4
+   },
+   "win_rate": 0.1,
+   "mean_frame": 61798.57854092603,
+   "spent": 21249.999999999865,
+   "survive": 0.027874639769452446,
+   "ready": 26459,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": null,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 31041.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "HTK": 2
+   },
+   "early": {
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.1,
+   "mean_frame": 63697.034491538456,
+   "spent": 25099.999999999593,
+   "survive": 0.06647300335529883,
+   "ready": 16304,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": null,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 20601.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  },
+  {
+   "army": {
+    "APOC": 6,
+    "BORIS": 1,
+    "E2": 3,
+    "HTK": 2
+   },
+   "early": {
+    "E2": 1,
+    "HTK": 1
+   },
+   "win_rate": 0.1,
+   "mean_frame": 63859.48681989248,
+   "spent": 25399.999999999596,
+   "survive": 0.09024631856305983,
+   "ready": 16469,
+   "feasible": true,
+   "games": {
+    "ai_hard": null,
+    "observe_hard_1": null,
+    "observe_hard_2": null,
+    "observe_hard_3": null,
+    "observe_hard_4": null,
+    "observe_hard_5": null,
+    "observe_hard_6": null,
+    "observe_hard_7": 20821.465578649884,
+    "observe_hard_8": null,
+    "challenge_hard_q": null
+   }
+  }
+ ],
+ "chosen": 3,
+ "history": [
+  {
+   "generation": 0,
+   "front_size": 11,
+   "feasible_share": 0.26666666666666666
+  },
+  {
+   "generation": 1,
+   "front_size": 14,
+   "feasible_share": 0.43333333333333335
+  },
+  {
+   "generation": 2,
+   "front_size": 19,
+   "feasible_share": 0.8666666666666667
+  },
+  {
+   "generation": 3,
+   "front_size": 25,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 4,
+   "front_size": 28,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 5,
+   "front_size": 30,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 6,
+   "front_size": 32,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 7,
+   "front_size": 36,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 8,
+   "front_size": 36,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 9,
+   "front_size": 47,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 10,
+   "front_size": 50,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 11,
+   "front_size": 56,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 12,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 13,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 14,
+   "front_size": 59,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 15,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 16,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 17,
+   "front_size": 59,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 18,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 19,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 20,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 21,
+   "front_size": 58,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 22,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 23,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 24,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 25,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 26,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 27,
+   "front_size": 53,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 28,
+   "front_size": 58,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 29,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 30,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 31,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 32,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 33,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 34,
+   "front_size": 57,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 35,
+   "front_size": 58,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 36,
+   "front_size": 55,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 37,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 38,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 39,
+   "front_size": 60,
+   "feasible_share": 1.0
+  },
+  {
+   "generation": 40,
+   "front_size": 60,
+   "feasible_share": 1.0
+  }
+ ]
+}

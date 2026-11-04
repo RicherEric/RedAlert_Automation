@@ -1,0 +1,554 @@
+﻿id,kind,name,owner,techlevel,cost,strength,armor,speed,sight,prerequisite,build_time_mult,power,primary,secondary,damage,rof,burst,range,warhead,dmg_per_100f,buildable
+E1,infantry,美國大兵,"British,French,Germans,Americans,Alliance",1,200,125,none,4,5,GAPILE,1.0,0,M60,Para,15.0,20.0,1.0,4.0,SA,75.0,True
+E2,infantry,動員兵,"Russians,Confederation,Africans,Arabs",1,100,125,flak,4,5,NAHAND,1.0,0,M1Carbine,,15.0,25.0,1.0,4.0,SA,60.0,True
+SHK,infantry,磁爆步兵,"Russians,Confederation,Africans,Arabs",5,500,130,plate,4,6,NAHAND,1.0,0,ElectricBolt,AssaultBolt,50.0,60.0,1.0,3.0,Shock,83.33333333333333,True
+ENGINEER,infantry,工程師,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",1,500,75,none,4,4,Barracks,1.0,0,DefuseKit,VirtualScanner,1.0,20.0,1.0,1.5,BombDisarm,5.0,True
+JUMPJET,infantry,火箭飛行兵,"British,French,Germans,Americans,Alliance",3,600,125,none,9,8,"GAPILE,RADAR",1.0,0,20mm,,25.0,30.0,1.0,5.0,SSA,83.33333333333333,True
+GHOST,infantry,海豹部隊,"British,French,Germans,Americans,Alliance",9,1000,125,flak,5,8,"GAPILE,RADAR",1.0,0,MP5,Sapper,125.0,10.0,1.0,6.0,HollowPoint,1250.0,True
+YURI,infantry,尤里複製人,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",10,800,100,none,4,12,"YABRCK,NAPSIS",1.0,0,MindControl,PsiWave,1.0,200.0,1.0,7.0,Controller,0.5,True
+IVAN,infantry,瘋狂伊文,"Russians,Confederation,Africans,Arabs",5,600,125,none,4,6,"NAHAND,NARADR",1.0,0,IvanBomber,,400.0,50.0,1.0,1.5,IvanBomb,800.0,True
+DESO,infantry,輻射工兵,"Russians,Confederation,Africans,Arabs",8,600,150,plate,4,6,"NAHAND,RADAR",1.0,0,RadBeamWeapon,RadEruptionWeapon,125.0,50.0,1.0,6.0,RadBeamWarhead,250.0,True
+DOG,infantry,警犬,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",2,200,100,none,8,9,Barracks,1.0,0,BadTeeth,VirtualScanner,30.0,30.0,1.0,1.5,ParasiteDog,100.0,True
+CIV1,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+CIV2,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+CIV3,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+CTECH,infantry,技師,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,Pistola,,2.0,20.0,1.0,3.0,SA,10.0,False
+WEEDGUY,infantry,化學兵,"British,French,Germans,Americans,Alliance",-1,300,130,none,6,4,BARRACKS,1.0,0,NukeCarrier,V3Cluster,0.0,1.0,1.0,0.0,NukeMaker,0.0,False
+CLEG,infantry,超時空軍團兵,"British,French,Germans,Americans,Alliance",10,1500,125,none,5,8,"GAPILE,TECH",1.0,0,NeutronRifle,,8.0,120.0,1.0,5.0,ChronoBeam,6.666666666666667,True
+SPY,infantry,間諜,"British,French,Germans,Americans,Alliance",5,1000,100,flak,4,9,"GAPILE,GATECH",1.0,0,MakeupKit,,1.0,100.0,1.0,-2.0,Snapshot,1.0,True
+CCOMAND,infantry,超時空突擊隊,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",9,2000,100,none,5,8,BARRACKS,1.0,0,ChronoMP5,FakeC4,125.0,10.0,1.0,6.0,HollowPointNoBuilding,1250.0,True
+PTROOP,infantry,心靈突擊隊,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",9,1000,100,none,5,8,BARRACKS,1.0,0,MindControl,,1.0,200.0,1.0,7.0,Controller,0.5,True
+CIVAN,infantry,超時空伊文,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",9,1750,100,none,6,8,BARRACKS,1.0,0,IvanBomber,,400.0,50.0,1.0,1.5,IvanBomb,800.0,True
+YURIPR,infantry,尤里X,YuriCountry,10,1500,150,flak,6,9,"YABRCK,YATECH",1.0,0,SuperMindControl,SuperPsiWave,1.0,200.0,1.0,7.0,ControllerBuilding,0.5,True
+SNIPE,infantry,狙擊手,"British,French,Germans,Americans,Alliance",1,600,125,none,4,8,"GAPILE,RADAR",1.0,0,AWP,,125.0,150.0,1.0,14.0,HollowPoint,83.33333333333333,True
+COW,infantry,乳牛,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,150,none,4,4,,1.0,0,,,,,,,,,False
+ALL,infantry,鱷魚,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,200,none,4,2,,1.0,0,AlligatorBite,VirtualScanner,30.0,30.0,1.0,1.5,HollowPoint,100.0,False
+TANY,infantry,譚雅,"British,French,Germans,Americans,Alliance",9,1500,200,flak,6,8,"GAPILE,GATECH",1.0,0,DoublePistols,Sapper,125.0,5.0,1.0,6.0,HollowPoint2,2500.0,True
+FLAKT,infantry,防空步兵,"Russians,Confederation,Africans,Arabs,YuriCountry",1,300,100,none,4,5,"NAHAND,NARADR",1.0,0,FlakGuyGun,FlakGuyAAGun,20.0,20.0,1.0,5.0,FlakTWH,100.0,True
+TERROR,infantry,恐怖份子,"Russians,Confederation,Africans,Arabs",5,200,75,flak,6,9,"NAHAND,RADAR",1.0,0,TerrorBomb,,225.0,10.0,1.0,1.5,TerrorBombWH,2250.0,True
+SENGINEER,infantry,工程師,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",1,500,75,none,4,4,Barracks,1.0,0,DefuseKit,VirtualScanner,1.0,20.0,1.0,1.5,BombDisarm,5.0,True
+ADOG,infantry,警犬,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",2,200,100,none,8,9,Barracks,1.0,0,GoodTeeth,VirtualScanner,30.0,30.0,1.0,1.5,ParasiteDog,100.0,True
+VLADIMIR,infantry,平民,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,Pistola,,2.0,20.0,1.0,3.0,SA,10.0,False
+PENTGEN,infantry,平民,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,Pistola,,2.0,20.0,1.0,3.0,SA,10.0,False
+PRES,infantry,總統,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+SSRV,infantry,終極保鏢,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,Pistola,,2.0,20.0,1.0,3.0,SA,10.0,False
+CIVA,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,Pistola,,2.0,20.0,1.0,3.0,SA,10.0,False
+CIVB,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,Pistola,,2.0,20.0,1.0,3.0,SA,10.0,False
+CIVC,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,Pistola,,2.0,20.0,1.0,3.0,SA,10.0,False
+CIVBBP,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+CIVBFM,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+CIVBF,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+CIVBTM,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+CIVSFM,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+CIVSF,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+CIVSTM,infantry,平民,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+POLARB,infantry,北極熊,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,200,none,4,2,,1.0,0,BearBite,VirtualScanner,30.0,30.0,1.0,1.5,HollowPoint,100.0,False
+JOSH,infantry,猴子,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,200,none,6,2,,1.0,0,ChimpBite,VirtualScanner,30.0,30.0,1.0,1.5,HollowPoint,100.0,False
+YENGINEER,infantry,工程師,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",1,500,75,none,4,4,Barracks,1.0,0,DefuseKit,VirtualScanner,1.0,20.0,1.0,1.5,BombDisarm,5.0,True
+GGI,infantry,重裝大兵,"British,French,Germans,Americans,Alliance",2,400,100,none,3,6,GAPILE,1.0,0,M60,MissileLauncher,15.0,20.0,1.0,4.0,SA,75.0,True
+INIT,infantry,尤里新兵,YuriCountry,1,200,100,none,4,9,YABRCK,1.0,0,PsychicJab,,25.0,15.0,1.0,4.5,SAFlame,166.66666666666666,True
+BORIS,infantry,菁英戰鬥兵,"Russians,Confederation,Africans,Arabs",9,1500,200,flak,5,9,"NAHAND,NATECH",1.0,0,AKM,Flare,65.0,20.0,1.0,7.0,BORISWH,325.0,True
+BRUTE,infantry,狂獸人,YuriCountry,5,500,200,plate,6,8,YABRCK,1.0,0,Punch,Smash,100.0,60.0,1.0,1.4,Battering,166.66666666666666,True
+VIRUS,infantry,病毒狙擊手,YuriCountry,1,700,100,none,4,9,"YABRCK,RADAR",1.0,0,Virusgun,,125.0,100.0,1.0,10.0,Virus,125.0,True
+CLNT,infantry,牛仔,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,200,plate,6,2,,1.0,0,CLINTGUN,,125.0,10.0,1.0,6.0,HollowPoint,1250.0,False
+ARND,infantry,英雄,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,200,plate,6,2,,1.0,0,TERMIGUN,,125.0,5.0,1.0,6.0,HollowPoint,2500.0,False
+STLN,infantry,健美先生,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,200,plate,6,2,,1.0,0,STALGUN,STALGREN,125.0,10.0,1.0,6.0,HollowPoint4,1250.0,False
+CAML,infantry,駱駝,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,200,none,6,2,,1.0,0,,,,,,,,,False
+EINS,infantry,愛因斯坦,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+MUMY,infantry,木乃伊,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,100,400,plate,3,6,,1.0,0,Mummypunch,Mummysmash,100.0,60.0,1.0,1.4,Battering,166.66666666666666,False
+RMNV,infantry,洛馬諾夫總理,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+LUNR,infantry,登月火箭員,"Russians,Confederation,Africans,Arabs",11,600,125,none,9,8,"NAPILE,RADAR",1.0,0,Lunarlaser,,25.0,20.0,1.0,7.0,LUNARWH,125.0,False
+DNOA,infantry,暴龍,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,2700,300,plate,8,5,,1.0,0,TRexInfBite,TRexBite,200.0,30.0,1.0,1.5,TRexInfWH,666.6666666666666,False
+DNOB,infantry,腕龍,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,1000,200,light,8,5,,1.0,0,ChimpBite,VirtualScanner,30.0,30.0,1.0,1.5,HollowPoint,100.0,False
+SLAV,infantry,奴隸,YuriCountry,-1,10,125,none,3,5,,1.0,0,SHOVEL,,30.0,30.0,1.0,1.5,SA,100.0,False
+WWLF,infantry,木乃伊,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,10,50,none,4,2,,1.0,0,,,,,,,,,False
+YDOG,infantry,警犬,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",2,200,100,none,8,9,NAHAND,1.0,0,BadTeeth,VirtualScanner,30.0,30.0,1.0,1.5,ParasiteDog,100.0,True
+YADOG,infantry,警犬,"Russians,Confederation,Africans,Arabs,YuriCountry,British,French,Germans,Americans,Alliance",2,200,100,none,8,9,GAPILE,1.0,0,GoodTeeth,VirtualScanner,30.0,30.0,1.0,1.5,ParasiteDog,100.0,True
+AMCV,vehicle,盟軍機動基地車,"British,French,Germans,Americans,Alliance",10,3000,1000,heavy,4,6,"GAWEAP,GADEPT",1.0,0,,,,,,,,,True
+HARV,vehicle,武裝採礦車,"Russians,Confederation,Africans,Arabs",1,1400,1000,medium,4,4,"NAWEAP,PROC",1.0,0,20mmRapid,,30.0,20.0,1.0,5.5,HARVWH,150.0,True
+APOC,vehicle,天啟坦克,"Russians,Confederation,Africans,Arabs",7,1750,800,heavy,4,6,"NAWEAP,NATECH",1.0,0,120mmx,MammothTusk,100.0,80.0,2.0,5.75,ApocAP,250.0,True
+HTNK,vehicle,犀牛坦克,"Russians,Confederation,Africans,Arabs",2,900,400,heavy,6,8,NAWEAP,1.3,0,120mm,,90.0,65.0,1.0,5.75,AP,138.46153846153845,True
+SAPC,vehicle,裝甲運兵船,"Russians,Confederation,Africans,Arabs",2,900,300,heavy,6,6,NAYARD,1.0,0,,,,,,,,,True
+CAR,vehicle,汽車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+BUS,vehicle,校車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+WINI,vehicle,休旅車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+PICK,vehicle,小貨車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+MTNK,vehicle,灰熊坦克,"British,French,Germans,Americans,Alliance",2,700,300,heavy,7,8,GAWEAP,1.5,0,105mm,,65.0,60.0,1.0,5.0,AP,108.33333333333333,True
+HORV,vehicle,武裝採礦車,"Russians,Confederation,Africans,Arabs",-1,1400,1000,medium,4,4,,1.0,0,,,,,,,,,False
+TRUCKA,vehicle,卡車,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,200,light,4,5,,1.0,0,,none,,,,,,,False
+TRUCKB,vehicle,卡車（載貨）,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,200,light,4,5,,1.0,0,,none,,,,,,,False
+CARRIER,vehicle,航空母艦,"British,French,Germans,Americans,Alliance",7,2000,800,heavy,4,7,"GAYARD,TECH",1.0,0,HornetLauncher,,1.0,150.0,1.0,25.0,Special,0.6666666666666666,True
+V3,vehicle,V3 火箭發射車,"Russians,Confederation,Africans,Arabs",3,800,150,light,4,7,"NAWEAP,NARADR",1.0,0,V3Launcher,,1.0,150.0,1.0,18.0,Special,0.6666666666666666,True
+ZEP,vehicle,基洛夫空艇,"Russians,Confederation,Africans,Arabs",10,2000,2000,medium,5,8,"NAWEAP,NATECH",1.0,0,BlimpBomb,,250.0,50.0,1.0,1.5,BlimpHE,500.0,True
+DRON,vehicle,恐怖機器人,"Russians,Confederation,Africans,Arabs",4,500,100,special_1,10,4,NAWEAP,1.0,0,DroneJump,VirtualScanner,50.0,60.0,1.0,1.83,Parasite,83.33333333333333,True
+HTK,vehicle,防空履帶車,"Russians,Confederation,Africans,Arabs",3,500,180,heavy,8,8,NAWEAP,1.0,0,FlakTrackGun,FlakTrackAAGun,25.0,25.0,1.0,5.0,FlakTWH,100.0,True
+DEST,vehicle,驅逐艦,"British,French,Germans,Americans,Alliance",4,1000,600,heavy,6,7,GAYARD,1.0,0,155mm,ASWLauncher,60.0,110.0,1.0,8.0,ARTYHE,54.54545454545455,True
+SUB,vehicle,颱風級攻擊潛艇,"Russians,Confederation,Africans,Arabs",2,1000,600,heavy,4,4,NAYARD,1.0,0,SubTorpedo,,100.0,120.0,1.0,7.0,APSplash,83.33333333333333,True
+AEGIS,vehicle,神盾巡洋艦,"British,French,Germans,Americans,Alliance",7,1200,800,light,4,8,"GAYARD,RADAR",1.0,0,Medusa,,100.0,15.0,1.0,12.0,SAMWH,666.6666666666666,True
+LCRF,vehicle,兩棲運輸艇,"British,French,Germans,Americans,Alliance",4,900,300,light,6,6,GAYARD,1.0,0,,,,,,,,,True
+DRED,vehicle,無畏級戰艦,"Russians,Confederation,Africans,Arabs",6,2000,800,heavy,4,7,"NAYARD,NATECH",1.0,0,DredLauncher,,50.0,50.0,2.0,25.0,Special,200.0,True
+SHAD,vehicle,夜鷹直昇機,"British,French,Germans,Americans,Alliance",7,1000,175,light,14,7,GAWEAP,1.0,0,BlackHawkCannon,,35.0,40.0,1.0,6.0,SA,87.5,True
+SQD,vehicle,巨型烏賊,"Russians,Confederation,Africans,Arabs",9,1000,200,light,8,5,"NAYARD,NATECH",1.0,0,SquidGrab,SquidPunch,15.0,99.0,1.0,1.5,ParasitePlus,15.151515151515152,True
+DLPH,vehicle,海豚,"British,French,Germans,Americans,Alliance",5,500,200,light,8,4,"GAYARD,GATECH",1.0,0,SonicZap,,4.0,120.0,1.0,6.0,SonicWarhead,3.3333333333333335,True
+SMCV,vehicle,蘇聯機動基地車,"Russians,Confederation,Africans,Arabs",10,3000,1000,heavy,4,6,"NAWEAP,NADEPT",1.0,0,,,,,,,,,True
+TNKD,vehicle,坦克殺手,"British,French,Germans,Americans,Alliance",2,900,400,heavy,5,8,"GAWEAP,RADAR",1.0,0,SABOT,,150.0,70.0,1.0,5.0,UltraAP,214.28571428571428,True
+HOWI,vehicle,榴彈砲,"British,French,Germans,Americans,Alliance",-1,750,200,light,5,8,GAWEAP,1.0,0,HowitzerGun,,75.0,100.0,1.0,12.0,HowitzerWH,75.0,False
+TTNK,vehicle,磁能坦克,"Russians,Confederation,Africans,Arabs",10,1200,300,heavy,6,8,"NAWEAP,NARADR",1.2,0,TankBolt,,135.0,75.0,1.0,4.0,Electric,180.0,True
+HIND,vehicle,雌鹿運輸直昇機,"Russians,Confederation,Africans,Arabs",-1,1000,300,light,15,7,NAWEAP,1.0,0,BlackHawkCannon,,35.0,40.0,1.0,6.0,SA,87.5,False
+LTNK,vehicle,狂風坦克,YuriCountry,2,700,300,heavy,7,8,YAWEAP,1.5,0,ATGUN,,65.0,60.0,1.0,5.0,AP,108.33333333333333,True
+CMON,vehicle,超時空採礦車,"British,French,Germans,Americans,Alliance",-1,1400,1000,medium,4,4,,1.0,0,,,,,,,,,False
+CMIN,vehicle,超時空採礦車,"British,French,Germans,Americans,Alliance",1,1400,1000,medium,4,4,"GAWEAP,PROC",1.0,0,,,,,,,,,True
+SREF,vehicle,光稜坦克,"British,French,Germans,Americans,Alliance",8,1200,150,light,4,8,"GAWEAP,GATECH",1.0,0,,,,,,,,,True
+XCOMET,vehicle,位置標定器,"British,French,Germans,Americans,Alliance",-1,2000,300,heavy,4,8,"GAWEAP,GATECH",1.0,0,CometFragment,TeslaFragment,30.0,120.0,1.0,3.0,CometWH,25.0,False
+HYD,vehicle,海蠍,"Russians,Confederation,Africans,Arabs",6,600,400,heavy,8,8,"NAYARD,NARADR",1.0,0,FlakTrackGun,FlakWeapon,25.0,25.0,1.0,5.0,FlakTWH,100.0,True
+MGTK,vehicle,幻影坦克,"British,French,Germans,Americans,Alliance",9,1000,200,light,7,9,"GAWEAP,GATECH",1.0,0,MirageGun,,100.0,70.0,1.0,7.0,MirageWH,142.85714285714286,True
+FV,vehicle,多功能步兵戰鬥車,"British,French,Germans,Americans,Alliance",3,600,200,light,10,8,GAWEAP,1.0,0,HoverMissile,,25.0,50.0,2.0,6.0,HE,100.0,True
+DeathDummy,vehicle,DeathDummy,,-1,0,0,none,0,0,,1.0,0,DefaultDeathWeapon,,0.0,1.0,1.0,0.0,DeathWH,0.0,False
+VLAD,vehicle,維拉迪摩指揮艦,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,2500,1500,heavy,8,8,"NAYARD,NATECH",1.0,0,DredLauncher,,50.0,50.0,2.0,25.0,Special,200.0,False
+DTRUCK,vehicle,自爆卡車,"Russians,Confederation,Africans,Arabs",10,1500,150,light,5,5,"NAWEAP,RADAR",1.0,0,Demobomb,none,300.0,80.0,1.0,1.0,DemobombWH,375.0,True
+PROPA,vehicle,宣傳車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+CONA,vehicle,挖土機,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+COP,vehicle,警車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+EUROC,vehicle,汽車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+LIMO,vehicle,豪華轎車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+STANG,vehicle,汽車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+SUVB,vehicle,汽車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+SUVW,vehicle,汽車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+TAXI,vehicle,計程車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+PTRUCK,vehicle,小貨車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+CRUISE,vehicle,遊輪,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,300,light,4,8,NAWEAP,1.0,0,,,,,,,,,False
+TUG,vehicle,拖船,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,200,light,4,8,NAWEAP,1.0,0,,,,,,,,,False
+CDEST,vehicle,海岸巡防艇,"British,French,Germans,Americans,Alliance",-1,1000,600,light,6,7,,1.0,0,155mm,ASWLauncher,60.0,110.0,1.0,8.0,ARTYHE,54.54545454545455,False
+YHVR,vehicle,裝甲運兵船,YuriCountry,2,900,300,heavy,6,6,YAYARD,1.0,0,,,,,,,,,True
+PCV,vehicle,尤里機動基地車,YuriCountry,10,3000,1000,heavy,4,8,"YAWEAP,YAGRND",1.0,0,,,,,,,,,True
+SMIN,vehicle,奴隸礦場,YuriCountry,1,1750,2000,medium,3,4,YAWEAP,0.8,0,20mmRapid,,30.0,20.0,1.0,5.5,HARVWH,150.0,True
+SMON,vehicle,超時空採礦車（未裝載）,YuriCountry,-1,1400,1000,medium,4,4,,1.0,0,,,,,,,,,False
+YCAB,vehicle,黃色計程車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+YTNK,vehicle,蓋特機砲坦克,YuriCountry,4,600,210,light,6,10,YAWEAP,1.0,0,AGGattling,AAGattling,25.0,16.0,2.0,6.0,GattWH,312.5,True
+BFRT,vehicle,戰鬥要塞,"British,French,Germans,Americans,Alliance",10,2000,600,heavy,4,6,"GAWEAP,GATECH",1.0,0,20mmRapid,,30.0,20.0,1.0,5.5,HARVWH,150.0,True
+TELE,vehicle,磁電坦克,YuriCountry,2,1000,150,light,5,10,"YAWEAP,NAPSIS",1.0,0,MagneticBeam,MagneShake,5000.0,20.0,1.0,12.0,LocomotorBeam,25000.0,True
+CAOS,vehicle,神經突擊車,YuriCountry,4,1000,130,light,8,6,YAWEAP,1.1,0,ChaosAttack,VirtualScanner,600.0,45.0,1.0,3.0,PsychGasCreate,1333.3333333333333,True
+DDBX,vehicle,巴士,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+BCAB,vehicle,黑色計程車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+BSUB,vehicle,雷鳴攻擊潛艦,YuriCountry,2,2000,1200,heavy,5,8,"YAYARD,RADAR",1.0,0,BoomerTorpedo,CruiseLauncher,60.0,120.0,2.0,7.0,APSplash2,100.0,True
+SCHP,vehicle,武裝直升機,"Russians,Confederation,Africans,Arabs",7,1100,300,light,12,7,"NAWEAP,TECH",1.0,0,BlackHawkCannon,160mm,35.0,40.0,1.0,6.0,SA,87.5,True
+JEEP,vehicle,卡車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+MIND,vehicle,精神控制車,YuriCountry,2,1750,500,heavy,4,9,"YAWEAP,YATECH",1.0,0,MultipleMindControlTank,,3.0,10.0,1.0,6.0,Controller,30.0,True
+DISK,vehicle,雷射幽浮,YuriCountry,2,1750,600,light,15,9,"YAWEAP,YATECH",1.0,0,DiskLaser,DiskDrain,90.0,80.0,1.0,7.0,DiskWH,112.5,True
+UTNK,vehicle,ZZZ Not Used,"Russians,Confederation,Africans,Arabs",-1,1000,400,heavy,6,8,NAWEAP,1.0,0,Comet,,100.0,100.0,1.0,10.0,CometWH,100.0,False
+ROBO,vehicle,遙控坦克,"British,French,Germans,Americans,Alliance",2,600,180,heavy,10,6,"GAWEAP,GAROBO",1.3,0,Robogun,,65.0,60.0,1.0,5.0,AP,108.33333333333333,True
+SCHD,vehicle,武裝直升機,"Russians,Confederation,Africans,Arabs",-1,1000,200,light,12,7,NAWEAP,1.0,0,BlackHawkCannon,,35.0,40.0,1.0,6.0,SA,87.5,False
+DOLY,vehicle,攝影車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+CBLC,vehicle,電車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+FTRK,vehicle,救火車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+AMBU,vehicle,救護車,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+CIVP,vehicle,民航機,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,100,light,8,8,NAWEAP,1.0,0,,,,,,,,,False
+ORCA,aircraft,入侵者戰機,"British,French,Germans,Americans",3,1200,150,light,14,8,RADAR,1.0,0,Maverick,,150.0,10.0,1.0,6.0,ORCAAP,1500.0,True
+HORNET,aircraft,黃蜂,"British,French,Germans,Americans,Alliance",-1,50,75,light,12,2,,1.0,0,HornetBomb,HornetCollision,40.0,3.0,1.0,5.0,ORCAAP,1333.3333333333333,False
+V3ROCKET,aircraft,V3 火箭,"Russians,Confederation,Africans,Arabs",-1,50,50,special_2,15,1,,1.0,0,,,,,,,,,False
+ASW,aircraft,鶚式運輸機,"British,French,Germans,Americans,Alliance",-1,50,30,light,12,2,,1.0,0,ASWBomb,ASWCollision,50.0,3.0,1.0,3.0,APSplash,1666.6666666666667,False
+DMISL,aircraft,飛彈,"Russians,Confederation,Africans,Arabs",-1,50,50,special_2,18,0,,1.0,0,,,,,,,,,False
+PDPLANE,aircraft,運輸機,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,400,light,15,0,,1.0,0,ParaDropWeapon,,60.0,130.0,1.0,4.0,MaverickHE,46.15384615384615,False
+BEAG,aircraft,黑鷹戰機,"British,French,Germans,Americans,Alliance",3,1200,200,light,14,8,RADAR,1.0,0,Maverick2,,200.0,10.0,1.0,6.0,ORCAAP,2000.0,True
+CARGOPLANE,aircraft,運輸機,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,400,light,15,0,,1.0,0,,,,,,,,,False
+BPLN,aircraft,米格戰機,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,200,light,16,0,,1.0,0,Maverick3,,750.0,10.0,2.0,4.0,MIGWH,15000.0,False
+SPYP,aircraft,偵察機,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,0,600,light,15,0,,1.0,0,SpyCameraWeapon,,6.0,1.0,1.0,20.0,DummyWarhead,600.0,False
+CMISL,aircraft,飛彈,YuriCountry,-1,50,50,special_2,20,0,,1.0,0,,,,,,,,,False
+GAPOWR,building,發電廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,800,750,wood,0,4,GACNST,1.0,200,,,,,,,,,True
+GAREFN,building,盟軍礦石精鍊廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,2000,1000,wood,0,6,"POWER,GACNST",1.0,-50,,,,,,,,,True
+GACNST,building,盟軍建造場,"British,French,Germans,Americans,Alliance",-1,3000,1000,concrete,0,8,,1.0,0,,,,,,,,,False
+GAPILE,building,盟軍兵營,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",2,500,500,steel,0,5,"POWER,GACNST",1.0,-10,,,,,,,,,True
+GASAND,building,沙袋,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,25,100,wood,0,0,BARRACKS,1.0,0,,,,,,,,,False
+GADEPT,building,盟軍維修廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",6,800,1200,wood,0,5,"GAWEAP,GACNST",1.0,-25,,,,,,,,,True
+GATECH,building,盟軍作戰實驗室,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",8,2000,500,wood,0,6,"GAWEAP,RADAR,GACNST",1.0,-100,,,,,,,,,True
+GAWEAP,building,盟軍戰車工廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",2,2000,1000,wood,0,4,"PROC,GAPILE,GACNST",1.0,-25,,,,,,,,,True
+CALAB,building,愛因斯坦實驗室,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+NAPOWR,building,磁能反應爐,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,600,750,wood,0,4,NACNST,1.0,150,,,,,,,,,True
+NATECH,building,蘇聯作戰實驗室,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",7,2000,500,wood,0,6,"NAWEAP,RADAR,NACNST",1.0,-100,,,,,,,,,True
+NAHAND,building,蘇聯兵營,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",2,500,500,steel,0,6,"POWER,NACNST",1.0,-10,,,,,,,,,True
+GAWALL,building,盟軍圍牆,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,100,300,concrete,0,1,GAPILE,1.0,0,,,,,,,,,True
+NARADR,building,雷達,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",3,1000,1000,wood,0,10,"NAREFN,NACNST",1.0,-50,,,,,,,,,True
+NAWEAP,building,蘇聯戰車工廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",2,2000,1000,wood,0,4,"PROC,NAHAND,NACNST",1.0,-25,,,,,,,,,True
+NAREFN,building,蘇聯礦石精鍊廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,2000,1000,wood,0,6,"POWER,NACNST",1.0,-50,,,,,,,,,True
+NAWALL,building,蘇聯圍牆,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,100,300,concrete,0,1,NAHAND,1.0,0,,,,,,,,,True
+CAHSE07,building,房屋,,-1,0,600,wood,0,6,,1.0,0,,,,,,,,,False
+NAPSIS,building,心靈感應器,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",3,1000,750,wood,0,10,"YACNST,PROC",1.0,-50,,,,,,,,,True
+NALASR,building,哨戒砲,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,500,400,steel,0,7,"BARRACKS,NACNST",1.0,0,Vulcan,,50.0,26.0,1.0,5.5,SA,192.30769230769232,True
+NASAM,building,愛國者飛彈,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",4,1000,900,steel,0,10,"BARRACKS,GACNST",1.0,-50,RedEye2,,75.0,55.0,1.0,12.0,SAMWH,136.36363636363637,True
+CASYDN02,building,麥克魯漢堡,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+GAYARD,building,盟軍造船廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",4,1000,1500,concrete,0,10,"PROC,POWER,GACNST",1.0,-25,,,,,,,,,True
+NAIRON,building,鐵幕裝置,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",10,2500,750,concrete,0,4,"NATECH,NACNST",1.0,-200,,,,,,,,,True
+NACNST,building,蘇聯建造場,"Russians,Confederation,Africans,Arabs",-1,3000,1000,concrete,0,8,,1.0,0,,,,,,,,,False
+NADEPT,building,蘇聯維修工廠　,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",6,800,1200,wood,0,5,"NAWEAP,NACNST",1.0,-20,,,,,,,,,True
+GACSPH,building,超時空傳送儀,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",10,2500,750,concrete,0,5,"GATECH,GACNST",1.0,-200,,,,,,,,,True
+GADUMY,building,超時空傳送儀,"British,French,Germans,Americans,Alliance",-1,2800,1000,wood,0,5,GATECH,1.0,-150,,,,,,,,,False
+GAWEAT,building,天氣控制機,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",10,5000,1000,concrete,0,5,"GATECH,GACNST",1.0,-200,,,,,,,,,True
+CABHUT,building,橋樑維修小屋,,-1,0,2000,none,0,0,,1.0,0,,,,,,,,,False
+GALITE,building,Light Post,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,200,600,wood,0,0,,1.0,0,,,,,,,,,False
+REDLAMP,building,Red Light Post,,-1,0,600,wood,0,0,,1.0,0,,,,,,,,,False
+GRENLAMP,building,Green Light Post,,-1,0,600,wood,0,0,,1.0,0,,,,,,,,,False
+BLUELAMP,building,Blue Light Post,,-1,0,600,wood,0,0,,1.0,0,,,,,,,,,False
+YELWLAMP,building,Yellow Light Post,,-1,0,600,wood,0,0,,1.0,0,,,,,,,,,False
+PURPLAMP,building,Purple Light Post,,-1,0,600,wood,0,0,,1.0,0,,,,,,,,,False
+INORANLAMP,building,Orange Light Post,,-1,0,600,wood,0,0,,1.0,0,,,,,,,,,False
+INGRNLMP,building,Invisible Green Light Post,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+INREDLMP,building,Invisible Red Light Post,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+INBLULMP,building,Invisible Blue Light Post,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+CITY01,building,法院部門,,-1,0,1000,wood,0,0,,1.0,0,,,,,,,,,False
+CITY02,building,萊特納豪華傢俱,,-1,0,1000,steel,0,0,,1.0,0,,,,,,,,,False
+CITY03,building,辦公大樓,,-1,0,1000,steel,0,0,,1.0,0,,,,,,,,,False
+CITY04,building,Westwood 股市交易所,,-1,0,1000,steel,0,0,,1.0,0,,,,,,,,,False
+CITY05,building,太陽日報,,-1,0,1000,steel,0,0,,1.0,0,,,,,,,,,False
+CITY06,building,優卡可樂公司,,-1,0,1000,steel,0,0,,1.0,0,,,,,,,,,False
+CAHOSP,building,市民醫院,,-1,0,800,concrete,0,6,,1.0,0,,,,,,,,,False
+INGALITE,building,Invisible Light Post,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+INYELWLAMP,building,Invisible Yellow Light Post,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+INPURPLAMP,building,Invisible Purple Light Post,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+NEGLAMP,building,Negative Light Post,,-1,0,1000,wood,0,0,,1.0,0,,,,,,,,,False
+NEGRED,building,Negative Red Light,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+TESLA,building,磁爆線圈,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",5,1500,600,steel,0,8,"POWER,RADAR,NACNST",1.0,-75,CoilBolt,OPCoilBolt,200.0,80.0,1.0,7.0,Electric,250.0,True
+NAMISL,building,核彈發射井,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",10,5000,1000,concrete,0,4,"NATECH,NACNST",1.0,-200,,,,,,,,,True
+ATESLA,building,光稜塔,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",6,1500,600,steel,0,8,"POWER,RADAR,GACNST",1.0,-75,PrismShot,PrismSupport,120.0,45.0,1.0,8.0,PrismWarhead,266.6666666666667,True
+CAMACH,building,科技機器商店,,-1,0,800,concrete,0,6,,1.0,0,,,,,,,,,False
+TSTLAMP,building,AlphaLightPost,,-1,0,600,wood,0,0,,1.0,0,,,,,,,,,False
+CASYDN03,building,雪梨歌劇院,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+AMMOCRAT,building,彈藥箱,,-1,0,1,wood,0,0,,1.0,0,,,,,,,,,False
+GAGREEN,building,環保建築,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,100,150,wood,0,0,GAPILE,1.0,0,,,,,,,,,False
+NAYARD,building,蘇聯船塢,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",2,1000,1500,concrete,0,10,"PROC,POWER,NACNST",1.0,-20,,,,,,,,,True
+GASPYSAT,building,間諜衛星,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",9,1500,1000,wood,0,5,"GATECH,GACNST",1.0,-100,,,,,,,,,True
+GAGAP,building,裂縫產生器,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",7,1000,600,wood,0,5,"GATECH,GACNST",1.0,-100,,,,,,,,,True
+GTGCAN,building,巨砲,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",7,2000,900,steel,0,10,"RADAR,GACNST",1.0,-100,GrandCannonWeapon,,150.0,120.0,1.0,15.0,GrandCannonWH,125.0,True
+NANRCT,building,核子反應爐,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",9,1000,1000,concrete,0,5,"NATECH,NACNST",1.0,2000,,,,,,,,,True
+GAPILL,building,機槍碉堡,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,500,400,steel,0,7,"BARRACKS,GACNST",1.0,0,Vulcan2,,50.0,26.0,1.0,5.5,SA,192.30769230769232,True
+NAFLAK,building,防空砲,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",4,1000,900,steel,0,5,"BARRACKS,NACNST",1.0,-50,FlakWeapon,,40.0,20.0,1.0,12.0,FlakWH,200.0,True
+CAOUTP,building,科技前哨站,,-1,0,2000,concrete,0,6,,1.0,0,HoverMissile,,25.0,50.0,2.0,6.0,HE,100.0,False
+CATHOSP,building,市民醫院,,-1,0,800,concrete,0,6,,1.0,0,,,,,,,,,False
+CAAIRP,building,科技機場,,-1,0,800,concrete,0,6,,1.0,0,,,,,,,,,False
+CAOILD,building,科技鑽油井,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+NACLON,building,複製中心,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",9,2500,1000,wood,0,5,"YATECH,YACNST",1.0,-200,,,,,,,,,True
+GAOREP,building,礦石精鍊器,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",10,2500,900,wood,0,5,"GATECH,PROC,GACNST",1.0,-200,,,,,,,,,True
+CACITY01,building,建築物,,-1,0,1000,steel,0,4,,1.0,0,,,,,,,,,False
+CACITY02,building,建築物,,-1,0,1000,steel,0,4,,1.0,0,,,,,,,,,False
+CACITY03,building,建築物,,-1,0,1000,steel,0,4,,1.0,0,,,,,,,,,False
+CACITY04,building,建築物,,-1,0,1000,steel,0,4,,1.0,0,,,,,,,,,False
+CANEWY01,building,建築物,,-1,0,1000,steel,0,4,,1.0,0,,,,,,,,,False
+CANEWY04,building,自由女神像,,-1,0,1000,concrete,0,4,,1.0,0,,,,,,,,,False
+CANEWY05,building,世界貿易中心,,-1,0,1000,concrete,0,4,,1.0,0,,,,,,,,,False
+CASWST01,building,建築物,,-1,0,1000,steel,0,4,,1.0,0,,,,,,,,,False
+CATECH01,building,通訊中心,,-1,0,400,steel,0,4,,1.0,0,,,,,,,,,False
+CATEXS01,building,建築物,,-1,0,1000,steel,0,4,,1.0,0,,,,,,,,,False
+CATEXS02,building,白楊木屋,,-1,0,2000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAWASH01,building,白宮,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAFARM01,building,農莊,,-1,0,400,wood,0,4,,1.0,0,,,,,,,,,False
+CAFARM02,building,農莊貯槽,,-1,0,400,wood,0,0,,1.0,0,,,,,,,,,False
+CALIT01E,building,照明設施,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CALIT01N,building,照明設施,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CALIT01S,building,照明設施,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CALIT01W,building,照明設施,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CAMISC01,building,油桶,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CAMISC02,building,油桶,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CAMISC03,building,子母垃圾車,,-1,0,100,concrete,0,0,,1.0,0,,,,,,,,,False
+CAMISC04,building,郵筒,,-1,0,10,concrete,0,0,,1.0,0,,,,,,,,,False
+CAPOL01E,building,電話線杆,,-1,0,20,concrete,0,0,,1.0,0,,,,,,,,,False
+CAPOL01N,building,電話線杆,,-1,0,20,concrete,0,0,,1.0,0,,,,,,,,,False
+CAPOL01S,building,電話線杆,,-1,0,20,concrete,0,0,,1.0,0,,,,,,,,,False
+CAPOL01W,building,電話線杆,,-1,0,20,concrete,0,0,,1.0,0,,,,,,,,,False
+CASIN01E,building,Stop Sign,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CASIN01N,building,Stop Sign,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CASIN01S,building,Stop Sign,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CASIN01W,building,Stop Sign,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CAPARS01,building,艾菲爾鐵塔,,-1,0,3000,steel,0,0,,1.0,-100,EiffelBolt,,2000.0,20.0,1.0,20.0,Electric,10000.0,False
+GAAIRC,building,空指部,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",3,1000,600,steel,0,5,"GAREFN,GACNST",1.0,-50,,,,,,,,,True
+CAFRMA,building,農舍,,-1,0,400,wood,0,4,,1.0,0,,,,,,,,,False
+CAFRMB,building,移動式廁所,,-1,0,50,wood,0,4,,1.0,0,,,,,,,,,False
+CAWASH05,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAWASH04,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAWASH03,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAWASH07,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAWASH11,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAWSH12,building,華盛頓紀念碑,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAWASH14,building,傑佛遜紀念館,,-1,0,1000,concrete,0,0,,1.0,0,,,,,,,,,False
+CAWASH09,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAWASH10,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAWASH13,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAARMY01,building,軍隊營帳,,-1,0,200,wood,0,6,,1.0,0,,,,,,,,,False
+CAUSFGL,building,美國國旗,,-1,0,20,steel,0,6,,1.0,0,,,,,,,,,False
+CAWASH08,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CALIT03E,building,Light3E,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CALIT03N,building,Light3N,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CALIT03S,building,Light3S,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CALIT03W,building,Light3W,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CALIT02L,building,Light2L,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CALIT02R,building,Light2R,,-1,0,50,steel,0,0,,1.0,0,,,,,,,,,False
+CAHSE01,building,房屋,,-1,0,600,wood,0,6,,1.0,0,,,,,,,,,False
+CAWT01,building,水塔,,-1,0,400,steel,0,6,,1.0,0,,,,,,,,,False
+CATS01,building,穀倉,,-1,0,300,steel,0,6,,1.0,0,,,,,,,,,False
+CABARN02,building,穀倉,,-1,0,500,wood,0,6,,1.0,0,,,,,,,,,False
+CAWA2A,building,五角大廈,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CAWA2B,building,五角大廈,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CAWA2C,building,五角大廈,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CAWA2D,building,五角大廈,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+AMRADR,building,空指部,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",3,1000,600,steel,0,5,"GAREFN,GACNST",1.0,-50,,,,,,,,,True
+CAPRS03,building,世界驚奇博物館,,-1,0,500,concrete,0,6,,1.0,0,,,,,,,,,False
+CAGARD01,building,警衛哨,,-1,0,100,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS01,building,聖巴索大教堂,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAMIAM01,building,飯店,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CATRAN01,building,地窖,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAMIAM02,building,飯店,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANWY05,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+MAYAN,building,馬雅金字塔,,-1,0,2000,concrete,0,6,,1.0,0,MayanPrism,,1000.0,20.0,1.0,12.0,PrismWarhead,5000.0,False
+CAEUR1,building,小屋,,-1,0,300,wood,0,6,,1.0,0,,,,,,,,,False
+CAEUR2,building,小屋,,-1,0,300,wood,0,6,,1.0,0,,,,,,,,,False
+CAEUR04,building,建築物,,-1,0,400,steel,0,6,,1.0,0,,,,,,,,,False
+CAMEX01,building,馬雅金字塔,,-1,0,2000,concrete,0,12,,1.0,0,MayanPrism,,1000.0,20.0,1.0,12.0,PrismWarhead,5000.0,False
+CARUS02A,building,Russain Kremlin Wall LTower,,-1,0,800,steel,0,0,,1.0,0,,,,,,,,,False
+CARUS02B,building,Russain Kremlin Wall STower,,-1,0,500,steel,0,0,,1.0,0,,,,,,,,,False
+CARUS02C,building,Russain Kremlin Wall North,,-1,0,1000,concrete,0,0,,1.0,0,,,,,,,,,False
+CARUS02D,building,Russain Kremlin Wall East,,-1,0,1000,concrete,0,0,,1.0,0,,,,,,,,,False
+CARUS02E,building,Russain Kremlin Wall South,,-1,0,1000,concrete,0,0,,1.0,0,,,,,,,,,False
+CARUS02F,building,Russain Kremlin Wall West,,-1,0,1000,concrete,0,0,,1.0,0,,,,,,,,,False
+CANEWY06,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY07,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY08,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAPARS02,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAPARS08,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAPARS09,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS03,building,克里姆林宮　,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CANEWY10,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY11,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY12,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY13,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY14,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY15,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY16,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY17,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY18,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAPARS04,building,建築物　,,-1,0,500,steel,0,6,,1.0,0,,,,,,,,,False
+CAPARS05,building,建築物　,,-1,0,500,steel,0,6,,1.0,0,,,,,,,,,False
+CAPARS06,building,建築物　,,-1,0,500,steel,0,6,,1.0,0,,,,,,,,,False
+CAPARS07,building,電話亭,,-1,0,100,wood,0,6,,1.0,0,,,,,,,,,False
+CAWASH15,building,林肯紀念館,,-1,0,1000,concrete,0,0,,1.0,0,,,,,,,,,False
+CAPARS10,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAPARS13,building,建築物,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAPARS14,building,建築物,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAGAS01,building,加油站,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAPARS11,building,巴黎凱旋門,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAPARS12,building,大教堂,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAFARM06,building,燈塔,,-1,0,500,steel,0,6,,1.0,0,,,,,,,,,False
+CAMIAM04,building,救生員休息亭,,-1,0,200,wood,0,6,,1.0,0,,,,,,,,,False
+NAPSYB,building,心靈信標,"Russians,Confederation,Africans,Arabs,YuriCountry",-1,1000,750,wood,0,10,NATECH,1.0,-100,,,,,,,,,False
+NAPSYA,building,心靈控制增幅器,,-1,0,1000,concrete,0,6,,1.0,-100,,,,,,,,,False
+CAIND01,building,工廠,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CACOLO01,building,空軍學院禮拜堂,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CANWY09,building,建築物,,-1,0,400,steel,0,6,,1.0,0,,,,,,,,,False
+CANWY22,building,建築物　,,-1,0,400,steel,0,6,,1.0,0,,,,,,,,,False
+CANWY23,building,建築物　,,-1,0,400,steel,0,6,,1.0,0,,,,,,,,,False
+CANWY24,building,建築物　,,-1,0,400,steel,0,6,,1.0,0,,,,,,,,,False
+CANWY25,building,建築物　,,-1,0,400,steel,0,6,,1.0,0,,,,,,,,,False
+CANWY26,building,建築物　,,-1,0,400,steel,0,6,,1.0,0,,,,,,,,,False
+CATEXS03,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CATEXS04,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CATEXS05,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS02G,building,Russain Kremlin Wall Clock Tower,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CACHIG04,building,芝加哥協會大樓,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAMIAM03,building,飯店,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS07,building,紅場,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CATEXS06,building,辦公大樓,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CATEXS07,building,辦公大樓　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CATEXS08,building,辦公大樓　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CACHIG01,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CACHIG02,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CACHIG03,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAWASH16,building,史密索尼安城堡,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAWASH17,building,自然歷史博物館,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CACHIG05,building,席爾斯大樓,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAWASH19,building,勝利紀念碑,,-1,0,500,concrete,0,6,,1.0,0,,,,,,,,,False
+CARUS08,building,Russain Gum Corner,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS09,building,Russian Gum Middle,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS10,building,Russian Gum Wall N_S,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS11,building,Russian Gum Wall E_W,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY20,building,倉庫,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CANEWY21,building,倉庫,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS04,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS05,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CARUS06,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAMSC01,building,美又美熱狗攤！　,,-1,0,400,wood,0,6,,1.0,0,,,,,,,,,False
+CAMSC02,building,遮陽傘,,-1,0,50,wood,0,6,,1.0,0,,,,,,,,,False
+CAMSC03,building,遮陽傘,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CAMSC04,building,海灘毛巾,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CAMSC05,building,海灘毛巾,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CAMSC06,building,營火,,-1,0,10,wood,0,6,,1.0,0,,,,,,,,,False
+CAMSC07,building,小屋,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CAWASH18,building,噴水池,,-1,0,200,concrete,0,6,,1.0,0,,,,,,,,,False
+CAEURO05,building,雕像,,-1,0,400,concrete,0,6,,1.0,0,,,,,,,,,False
+CAPARK01,building,公園長椅,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CAPARK02,building,鞦韆,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CAPARK03,building,旋轉盤,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CAHSE02,building,房屋,,-1,0,400,wood,0,6,,1.0,0,,,,,,,,,False
+CAHSE03,building,房屋　,,-1,0,400,wood,0,6,,1.0,0,,,,,,,,,False
+CAHSE04,building,房屋,,-1,0,400,wood,0,6,,1.0,0,,,,,,,,,False
+CASTRT01,building,Traffic Light,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CASTRT02,building,Traffic Light,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CASTL01,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CASTL02,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CASTL03,building,建築物,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CASTL04,building,拱門　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAHSE05,building,貨櫃屋,,-1,0,300,wood,0,6,,1.0,0,,,,,,,,,False
+CAHSE06,building,貨櫃屋,,-1,0,300,wood,0,6,,1.0,0,,,,,,,,,False
+CAMIAM05,building,飯店,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAMIAM06,building,飯店,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAMIAM07,building,飯店,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAFNCB,building,Fence Black,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,25,100,wood,0,0,BARRACKS,1.0,0,,,,,,,,,False
+CAFNCW,building,Fence White,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,25,100,wood,0,0,BARRACKS,1.0,0,,,,,,,,,False
+CAMEX02,building,馬雅遺跡,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAMEX03,building,馬雅遺跡,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAMEX04,building,馬雅神殿,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAMEX05,building,馬雅遺跡,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CACHIG06,building,水塔,,-1,0,1000,steel,0,0,,1.0,0,,,,,,,,,False
+CAMSC08,building,小屋,,-1,0,200,wood,0,6,,1.0,0,,,,,,,,,False
+CAMSC09,building,小屋,,-1,0,200,wood,0,6,,1.0,0,,,,,,,,,False
+CAARMY02,building,軍隊營帳,,-1,0,200,wood,0,6,,1.0,0,,,,,,,,,False
+CAARMY03,building,軍隊營帳,,-1,0,200,wood,0,6,,1.0,0,,,,,,,,,False
+CAARMY04,building,軍隊營帳,,-1,0,200,wood,0,6,,1.0,0,,,,,,,,,False
+TEMMORLAMP,building,InvisibleTemperateMorningLamp,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+TEMDAYLAMP,building,InvisibleTemperateDayLamp,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+TEMDUSLAMP,building,InvisibleTemperateDuskLamp,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+TEMNITLAMP,building,InvisibleTemperateNightLamp,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+SNOMORLAMP,building,InvisibleSnowMorningLamp,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+SNODAYLAMP,building,InvisibleSnowDayLamp,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+SNODUSLAMP,building,InvisibleSnowDuskLamp,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+SNONITLAMP,building,InvisibleSnowNightLamp,,-1,0,6000,wood,0,0,,1.0,0,,,,,,,,,False
+CAKRMW,building,Kremlen Walls,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,25,300,wood,0,0,BARRACKS,1.0,0,,,,,,,,,False
+CARUFGL,building,俄國國旗,,-1,0,20,steel,0,6,,1.0,0,,,,,,,,,False
+CAFRFGL,building,法國國旗,,-1,0,20,steel,0,6,,1.0,0,,,,,,,,,False
+CATRAN02,building,地窖,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CACUFGL,building,古巴國旗,,-1,0,20,steel,0,6,,1.0,0,,,,,,,,,False
+CASKFGL,building,韓國國旗,,-1,0,20,steel,0,6,,1.0,0,,,,,,,,,False
+CALBFGL,building,利比亞國旗,,-1,0,20,steel,0,6,,1.0,0,,,,,,,,,False
+CAMIAM08,building,亞歷桑那紀念館,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAMISC05,building,水管,,-1,0,10,concrete,0,0,,1.0,0,,,,,,,,,False
+CAMISC06,building,V3 飛彈,,-1,0,10,concrete,0,0,,1.0,0,,none,,,,,,,False
+CASTL05A,building,體育館,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CASTL05B,building,體育館,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CASTL05C,building,體育館,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CASTL05D,building,體育館,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CASTL05E,building,體育館,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CASTL05F,building,體育館,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CASTL05G,building,體育館,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CASTL05H,building,體育館,,-1,0,600,concrete,0,6,,1.0,0,,,,,,,,,False
+CAMSC10,building,牛肉堡王,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAGEFGL,building,德國國旗,,-1,0,20,steel,0,6,,1.0,0,,,,,,,,,False
+CAUKFGL,building,英國國旗,,-1,0,20,steel,0,6,,1.0,0,,,,,,,,,False
+CAWASH06,building,建築物　,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CAMSC11,building,輪胎,,-1,0,10,concrete,0,0,,1.0,0,,none,,,,,,,False
+CAMSC12,building,練習靶,,-1,0,100,wood,0,0,,1.0,0,,none,,,,,,,False
+CAMSC13,building,廢棄坦克,,-1,0,800,concrete,0,0,,1.0,0,,none,,,,,,,False
+CAPOFGL,building,波蘭國旗,,-1,0,20,steel,0,6,,1.0,0,,,,,,,,,False
+CAMSC12A,building,練習靶,,-1,600,100,wood,0,0,,1.0,0,,none,,,,,,,False
+CAMOV01,building,廣告看板,,-1,0,500,steel,0,6,,1.0,0,,,,,,,,,False
+CAMOV02,building,停車場商店,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CABUNK01,building,燃料庫,,-1,0,2000,steel,0,6,,1.0,0,,,,,,,,,False
+CABUNK02,building,燃料庫,,-1,0,2000,steel,0,6,,1.0,0,,,,,,,,,False
+CAFNCP,building,Fence Prison Camp,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,25,100,wood,0,0,BARRACKS,1.0,0,,,,,,,,,False
+CASTRT03,building,Traffic Light,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CASTRT04,building,Traffic Light,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CASTRT05,building,公車站,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+YACNST,building,尤里建造場,YuriCountry,-1,3000,1000,concrete,0,10,,1.0,0,,,,,,,,,False
+YAPOWR,building,生化反應爐,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,600,700,wood,0,4,YACNST,1.0,150,,,,,,,,,True
+YABRCK,building,尤里兵營,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",2,500,500,steel,0,5,"POWER,YACNST",1.0,-10,,,,,,,,,True
+YAWEAP,building,尤里戰車工廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",2,2000,1000,wood,0,4,"PROC,YABRCK,YACNST",1.0,-25,,,,,,,,,True
+YAYARD,building,尤里海軍船塢,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",4,1000,1500,concrete,0,10,"YACNST,POWER,PROC",1.0,-25,,,,,,,,,True
+YADEPT,building,盟軍維修廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",15,800,1200,wood,0,5,"YAWEAP,YACNST",1.0,-25,,,,,,,,,False
+YATECH,building,尤里作戰實驗室,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",8,2000,500,wood,0,6,"YAWEAP,YACNST,RADAR",1.0,-100,,,,,,,,,True
+GAFWLL,building,護城牆,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",2,100,300,concrete,0,1,YABRCK,1.0,0,,,,,,,,,True
+YAGGUN,building,蓋特機砲,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",4,1000,810,steel,0,10,"BARRACKS,YACNST",1.0,-50,,,,,,,,,True
+YAPSYT,building,心靈控制塔,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",7,1500,455,steel,0,5,"NAPSIS,YACNST",1.0,-100,MultipleMindControlTower,,3.0,100.0,1.0,7.0,Controller,3.0,True
+NAINDP,building,工業工廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",10,2500,1000,wood,0,4,"NATECH,PROC,NACNST",1.0,-200,,,,,,,,,True
+YAGRND,building,部隊回收廠,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",9,600,900,wood,0,6,"YAWEAP,YACNST",1.0,-50,,,,,,,,,True
+YAGNTC,building,基因突變器,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",10,2500,1000,concrete,0,5,"YATECH,YACNST",1.0,-200,,,,,,,,,True
+CASLAB,building,秘密科技實驗室,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+YAPPET,building,心靈控制器,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",10,5000,1000,concrete,0,5,"YATECH,YACNST",1.0,-200,,,,,,,,,True
+CALOND04,building,英國國會,,-1,0,1000,wood,0,8,,1.0,0,,,,,,,,,False
+CALOND05,building,大笨鐘,,-1,0,1000,wood,0,10,,1.0,0,,,,,,,,,False
+CALOND06,building,倫敦塔,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAMOON01,building,ZZZ LAUNCH PAD,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CATRAN03,building,尤里要塞,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAEAST01,building,復活島石像,,-1,0,3000,steel,0,0,,1.0,-100,PrismShot,,120.0,45.0,1.0,8.0,PrismWarhead,266.6666666666667,False
+CAEGYP01,building,金字塔,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAEGYP02,building,金字塔,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAEGYP03,building,人面獅身像,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALA01,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALA03,building,好萊塢標誌,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALA04,building,好萊塢劇場,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALA05,building,洛杉磯,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALOND01,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALOND03,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAMORR01,building,建築物,,-1,0,1000,wood,0,8,,1.0,0,,,,,,,,,False
+CAMORR02,building,建築物,,-1,0,1000,wood,0,8,,1.0,0,,,,,,,,,False
+CAMORR03,building,建築物,,-1,0,1000,wood,0,8,,1.0,0,,,,,,,,,False
+CASANF01,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF02,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF03,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF04,building,金門大橋,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF05,building,惡魔島,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASEAT01,building,西雅圖太空針塔,,-1,0,1000,wood,0,8,,1.0,0,,,,,,,,,False
+NATBNK,building,坦克碉堡,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",3,400,1000,steel,0,6,YACNST,1.0,0,,,,,,,,,True
+GAGATE_A,building,閘門,"British,French,Germans,Americans,Alliance",-1,250,100,wood,0,0,GAPILE,1.0,0,,,,,,,,,False
+CASANF09,building,金門大橋,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF10,building,金門大橋,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF11,building,金門大橋,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF12,building,金門大橋,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF13,building,金門大橋,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF14,building,金門大橋,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF06,building,建築物,,-1,0,1000,wood,0,8,,1.0,0,,,,,,,,,False
+CASANF07,building,建築物,,-1,0,1000,wood,0,8,,1.0,0,,,,,,,,,False
+CASANF08,building,建築物,,-1,0,1000,wood,0,8,,1.0,0,,,,,,,,,False
+CASEAT02,building,巨軟園區,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+YACOMD,building,尤里指揮中心,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,3000,1000,concrete,0,8,,1.0,0,,,,,,,,,False
+YAPPPT,building,心靈控制器,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+GAROBO,building,控制中心,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",10,600,600,wood,0,6,"GAWEAP,GACNST",1.0,-100,,,,,,,,,True
+YAREFN,building,奴隸礦場,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,1750,2000,medium,0,6,"POWER,YACNST",1.15,0,20mmRapid,,30.0,20.0,1.0,5.5,HARVWH,150.0,True
+YAROCK,building,不明建築物,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",-1,600,700,wood,0,6,,1.0,0,,,,,,,,,False
+NABNKR,building,戰鬥碉堡,"British,French,Germans,Americans,Alliance,Russians,Confederation,Africans,Arabs,YuriCountry",1,500,600,steel,0,6,NACNST,1.0,0,,,,,,,,,True
+CASANF15,building,惡魔島水塔,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF16,building,燈塔,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF17,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASANF18,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CASIN03E,building,施工標誌,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CASIN03S,building,施工標誌,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CAURB01,building,電話亭,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CAURB02,building,消防栓,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CAURB03,building,聚光燈,,-1,0,5,concrete,0,0,,1.0,0,,,,,,,,,False
+CAPOWR,building,科技電廠,,-1,0,800,concrete,0,6,,1.0,200,,,,,,,,,False
+CALA07,building,電影院,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAEGYP06,building,金字塔,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALA08,building,汽車代理商,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CAEAST02,building,尤里雕像,,-1,0,3000,steel,0,0,,1.0,-100,PrismShot,,120.0,45.0,1.0,8.0,PrismWarhead,266.6666666666667,False
+CABARR01,building,拒馬,,-1,0,1000,concrete,0,0,,1.0,0,,,,,,,,,False
+CABARR02,building,拒馬,,-1,0,1000,concrete,0,0,,1.0,0,,,,,,,,,False
+CAMORR04,building,建築物,,-1,0,1000,wood,0,10,,1.0,0,,,,,,,,,False
+CAMORR05,building,建築物,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALA09,building,便利商店,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAEGYP04,building,金字塔,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAEGYP05,building,金字塔,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALA06,building,洛杉磯塔台,,-1,0,1000,wood,0,8,,1.0,0,,,,,,,,,False
+CAMORR06,building,理克酒館,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAMORR07,building,建築物,,-1,0,1000,wood,0,10,,1.0,0,,,,,,,,,False
+CAMORR08,building,建築物,,-1,0,1000,wood,0,10,,1.0,0,,,,,,,,,False
+CAMORR09,building,建築物,,-1,0,1000,wood,0,10,,1.0,0,,,,,,,,,False
+CAMORR10,building,建築物,,-1,0,1000,wood,0,10,,1.0,0,,,,,,,,,False
+CATIME01,building,時間機器,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CATIME02,building,時間機器,,-1,0,1000,steel,0,6,,1.0,0,,,,,,,,,False
+CALA10,building,看板,,-1,0,200,wood,0,5,,1.0,0,,,,,,,,,False
+CALA11,building,好萊塢劇場,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALA12,building,好萊塢劇場,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CALA13,building,好萊塢標誌,,-1,0,1000,wood,0,6,,1.0,0,,,,,,,,,False
+CAPARK04,building,公園長椅,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CAPARK05,building,公園長椅,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CAPARK06,building,公園長椅,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CALA14,building,小型購物中心,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CALA15,building,小型購物中心,,-1,0,1000,concrete,0,6,,1.0,0,,,,,,,,,False
+CABUNK03,building,燃料庫,,-1,0,2000,steel,0,6,,1.0,0,,,,,,,,,False
+CABUNK04,building,燃料庫,,-1,0,2000,steel,0,6,,1.0,0,,,,,,,,,False
+CALUNR01,building,登月小艇,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False
+CALUNR02,building,美國國旗,,-1,0,1,wood,0,6,,1.0,0,,,,,,,,,False

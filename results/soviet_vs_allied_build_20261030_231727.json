@@ -1,0 +1,344 @@
+{
+  "targets": {
+    "HTNK": 8
+  },
+  "sequence": [
+    "NAPOWR",
+    "NAREFN",
+    "NAHAND",
+    "NAWEAP",
+    "HTNK",
+    "HTNK",
+    "HTNK",
+    "NAWEAP",
+    "HTNK",
+    "HTNK",
+    "HTNK",
+    "HTNK",
+    "HTNK"
+  ],
+  "feasible": true,
+  "violations": {},
+  "finish_frame": 8385,
+  "spent": 14299.99999999994,
+  "events": [
+    [
+      75,
+      "start",
+      "NAPOWR"
+    ],
+    [
+      465,
+      "done",
+      "NAPOWR"
+    ],
+    [
+      480,
+      "start",
+      "NAREFN"
+    ],
+    [
+      1740,
+      "done",
+      "NAREFN"
+    ],
+    [
+      1755,
+      "start",
+      "NAHAND"
+    ],
+    [
+      2070,
+      "done",
+      "NAHAND"
+    ],
+    [
+      2085,
+      "start",
+      "NAWEAP"
+    ],
+    [
+      3345,
+      "done",
+      "NAWEAP"
+    ],
+    [
+      3345,
+      "start",
+      "HTNK"
+    ],
+    [
+      3360,
+      "start",
+      "NAWEAP"
+    ],
+    [
+      4080,
+      "done",
+      "HTNK"
+    ],
+    [
+      4095,
+      "start",
+      "HTNK"
+    ],
+    [
+      4620,
+      "done",
+      "NAWEAP"
+    ],
+    [
+      4785,
+      "done",
+      "HTNK"
+    ],
+    [
+      4800,
+      "start",
+      "HTNK"
+    ],
+    [
+      5385,
+      "done",
+      "HTNK"
+    ],
+    [
+      5400,
+      "start",
+      "HTNK"
+    ],
+    [
+      5985,
+      "done",
+      "HTNK"
+    ],
+    [
+      6000,
+      "start",
+      "HTNK"
+    ],
+    [
+      6585,
+      "done",
+      "HTNK"
+    ],
+    [
+      6600,
+      "start",
+      "HTNK"
+    ],
+    [
+      7185,
+      "done",
+      "HTNK"
+    ],
+    [
+      7200,
+      "start",
+      "HTNK"
+    ],
+    [
+      7785,
+      "done",
+      "HTNK"
+    ],
+    [
+      7800,
+      "start",
+      "HTNK"
+    ],
+    [
+      8385,
+      "done",
+      "HTNK"
+    ]
+  ],
+  "history": [
+    {
+      "generation": 0,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.15
+    },
+    {
+      "generation": 1,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.375
+    },
+    {
+      "generation": 2,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.425
+    },
+    {
+      "generation": 3,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.325
+    },
+    {
+      "generation": 4,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.45
+    },
+    {
+      "generation": 5,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.475
+    },
+    {
+      "generation": 6,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.25
+    },
+    {
+      "generation": 7,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.375
+    },
+    {
+      "generation": 8,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.375
+    },
+    {
+      "generation": 9,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.5
+    },
+    {
+      "generation": 10,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.45
+    },
+    {
+      "generation": 11,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.35
+    },
+    {
+      "generation": 12,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.3
+    },
+    {
+      "generation": 13,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.475
+    },
+    {
+      "generation": 14,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.425
+    },
+    {
+      "generation": 15,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.55
+    },
+    {
+      "generation": 16,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.4
+    },
+    {
+      "generation": 17,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.525
+    },
+    {
+      "generation": 18,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.525
+    },
+    {
+      "generation": 19,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.5
+    },
+    {
+      "generation": 20,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.55
+    },
+    {
+      "generation": 21,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.425
+    },
+    {
+      "generation": 22,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.45
+    },
+    {
+      "generation": 23,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.525
+    },
+    {
+      "generation": 24,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.575
+    },
+    {
+      "generation": 25,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.575
+    },
+    {
+      "generation": 26,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.525
+    },
+    {
+      "generation": 27,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.65
+    },
+    {
+      "generation": 28,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.575
+    },
+    {
+      "generation": 29,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.55
+    },
+    {
+      "generation": 30,
+      "best_objective": 8399.3,
+      "best_violation": 0,
+      "feasible_share": 0.55
+    }
+  ]
+}

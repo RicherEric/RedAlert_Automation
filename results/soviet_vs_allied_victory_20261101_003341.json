@@ -1,0 +1,3417 @@
+{
+  "opponents": [
+    "easy_americans_firestorm",
+    "medium_americans_firestorm",
+    "hard_americans_firestorm"
+  ],
+  "preference": {
+    "victory": 1.0,
+    "spent": 0.3,
+    "survive": 0.3
+  },
+  "front": [
+    {
+      "army": {
+        "E2": 4,
+        "SHK": 10
+      },
+      "victory": {
+        "easy_americans_firestorm": 7296.465578649883,
+        "medium_americans_firestorm": 7651.465578649883,
+        "hard_americans_firestorm": 9296.465578649884
+      },
+      "spent": 8499.999999999996,
+      "survive": 0.31925925646270875,
+      "ready": 3134,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 2,
+          "GAWEAP": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 6,
+          "GAWEAP": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SHK": 12
+      },
+      "victory": {
+        "easy_americans_firestorm": 7511.465578649883,
+        "medium_americans_firestorm": 7691.465578649883,
+        "hard_americans_firestorm": 9181.465578649884
+      },
+      "spent": 9100.000000000002,
+      "survive": 0.3363619758902137,
+      "ready": 3269,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 2,
+          "GAWEAP": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 6,
+          "GAWEAP": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 1,
+        "SHK": 12
+      },
+      "victory": {
+        "easy_americans_firestorm": 7476.465578649883,
+        "medium_americans_firestorm": 7846.465578649883,
+        "hard_americans_firestorm": 9151.465578649884
+      },
+      "spent": 9200.000000000004,
+      "survive": 0.334920147142963,
+      "ready": 3299,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 2,
+          "GAWEAP": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 6,
+          "GAWEAP": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 4,
+        "SHK": 9
+      },
+      "victory": {
+        "easy_americans_firestorm": 7416.465578649883,
+        "medium_americans_firestorm": 7871.465578649883,
+        "hard_americans_firestorm": 8846.465578649884
+      },
+      "spent": 7999.999999999994,
+      "survive": 0.32680016041532073,
+      "ready": 3014,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 2,
+          "GAWEAP": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 5,
+          "GAWEAP": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 1,
+        "SHK": 11
+      },
+      "victory": {
+        "easy_americans_firestorm": 7426.465578649883,
+        "medium_americans_firestorm": 7906.465578649883,
+        "hard_americans_firestorm": 8941.465578649884
+      },
+      "spent": 8699.999999999998,
+      "survive": 0.35617731362285027,
+      "ready": 3179,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 2,
+          "GAWEAP": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 6,
+          "GAWEAP": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 3,
+        "SHK": 9
+      },
+      "victory": {
+        "easy_americans_firestorm": 8281.465578649884,
+        "medium_americans_firestorm": 8216.465578649884,
+        "hard_americans_firestorm": null
+      },
+      "spent": 7899.999999999994,
+      "survive": 0.1742258750391966,
+      "ready": 2969,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 2,
+          "GAWEAP": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 5,
+          "GAWEAP": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 1,
+        "SHK": 9
+      },
+      "victory": {
+        "easy_americans_firestorm": 8746.465578649884,
+        "medium_americans_firestorm": 8591.465578649884,
+        "hard_americans_firestorm": 8941.465578649884
+      },
+      "spent": 7699.999999999993,
+      "survive": 0.23887221019435612,
+      "ready": 2939,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 2,
+          "GAWEAP": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 5,
+          "GAWEAP": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "HTK": 1,
+        "SCHP": 3,
+        "ZEP": 1
+      },
+      "victory": {
+        "easy_americans_firestorm": 14686.465578649884,
+        "medium_americans_firestorm": 15146.465578649884,
+        "hard_americans_firestorm": 16171.465578649884
+      },
+      "spent": 17300.000000000106,
+      "survive": 0.4270440251572327,
+      "ready": 10604,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 9,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "FLAKT": 2,
+        "SCHP": 1,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 14396.465578649884,
+        "medium_americans_firestorm": 15196.465578649884,
+        "hard_americans_firestorm": 15561.465578649884
+      },
+      "spent": 15800.000000000146,
+      "survive": 0.4175125114754477,
+      "ready": 10694,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 9,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 3,
+        "ZEP": 1
+      },
+      "victory": {
+        "easy_americans_firestorm": 14656.465578649884,
+        "medium_americans_firestorm": 15306.465578649884,
+        "hard_americans_firestorm": 15151.465578649884
+      },
+      "spent": 15400.000000000151,
+      "survive": 0.44290429042904295,
+      "ready": 10454,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 9,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 13,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 7,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "FLAKT": 1,
+        "SCHP": 1,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 14376.465578649884,
+        "medium_americans_firestorm": 15411.465578649884,
+        "hard_americans_firestorm": 15386.465578649884
+      },
+      "spent": 15500.00000000015,
+      "survive": 0.3996844752192905,
+      "ready": 10514,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 9,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 13,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 7,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 2,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 14591.465578649884,
+        "medium_americans_firestorm": 15416.465578649884,
+        "hard_americans_firestorm": 15461.465578649884
+      },
+      "spent": 17700.00000000014,
+      "survive": 0.4785854957501258,
+      "ready": 10874,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 9,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 4,
+        "ZEP": 1
+      },
+      "victory": {
+        "easy_americans_firestorm": 14911.465578649884,
+        "medium_americans_firestorm": 15436.465578649884,
+        "hard_americans_firestorm": 15641.465578649884
+      },
+      "spent": 17900.000000000142,
+      "survive": 0.506547619047619,
+      "ready": 10994,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 9,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 1,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 14171.465578649884,
+        "medium_americans_firestorm": 15661.465578649884,
+        "hard_americans_firestorm": 15666.465578649884
+      },
+      "spent": 15200.000000000151,
+      "survive": 0.4496418205277226,
+      "ready": 10334,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 11,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 13,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 7,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "HTK": 1,
+        "SCHP": 1,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 14151.465578649884,
+        "medium_americans_firestorm": 15886.465578649884,
+        "hard_americans_firestorm": 15821.465578649884
+      },
+      "spent": 17100.00000000011,
+      "survive": 0.4439102564102564,
+      "ready": 10484,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 9,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 13,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 7,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 3,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 15201.465578649884,
+        "medium_americans_firestorm": 15966.465578649884,
+        "hard_americans_firestorm": 16141.465578649884
+      },
+      "spent": 18800.00000000016,
+      "survive": 0.5563015450958962,
+      "ready": 11534,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 11,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 7,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 4,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 1,
+        "ZEP": 3
+      },
+      "victory": {
+        "easy_americans_firestorm": 15181.465578649884,
+        "medium_americans_firestorm": 16416.465578649884,
+        "hard_americans_firestorm": 16346.465578649884
+      },
+      "spent": 18600.000000000156,
+      "survive": 0.5142689514506144,
+      "ready": 11459,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 4,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "FLAKT": 1,
+        "SCHP": 1,
+        "ZEP": 3
+      },
+      "victory": {
+        "easy_americans_firestorm": 15221.465578649884,
+        "medium_americans_firestorm": 16536.465578649884,
+        "hard_americans_firestorm": 16571.465578649884
+      },
+      "spent": 18900.00000000015,
+      "survive": 0.5757099249529913,
+      "ready": 11639,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 11,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 7,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 4,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "FLAKT": 1,
+        "HTK": 1,
+        "SCHP": 1,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 14346.465578649884,
+        "medium_americans_firestorm": 16886.465578649884,
+        "hard_americans_firestorm": 15571.465578649884
+      },
+      "spent": 17400.0000000001,
+      "survive": 0.4093697204618649,
+      "ready": 10664,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 9,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 3,
+        "SCHP": 6,
+        "ZEP": 1
+      },
+      "victory": {
+        "easy_americans_firestorm": 16606.465578649884,
+        "medium_americans_firestorm": 17206.465578649884,
+        "hard_americans_firestorm": 17596.465578649884
+      },
+      "spent": 20400.000000000175,
+      "survive": 0.582603406326034,
+      "ready": 12704,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "E1": 14,
+          "GGI": 5,
+          "ORCA": 2,
+          "PDPLANE": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 7,
+          "FV": 2,
+          "E1": 13,
+          "GGI": 6,
+          "ORCA": 3,
+          "PDPLANE": 1,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 4,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 4,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 15961.465578649884,
+        "medium_americans_firestorm": 17251.465578649884,
+        "hard_americans_firestorm": 17071.465578649884
+      },
+      "spent": 19900.00000000018,
+      "survive": 0.588175347803103,
+      "ready": 12404,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "E1": 16,
+          "GGI": 6,
+          "ORCA": 2,
+          "PDPLANE": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 7,
+          "FV": 2,
+          "E1": 15,
+          "GGI": 6,
+          "ORCA": 3,
+          "PDPLANE": 1,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 4,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 6,
+        "ZEP": 1
+      },
+      "victory": {
+        "easy_americans_firestorm": 16316.465578649884,
+        "medium_americans_firestorm": 17296.465578649884,
+        "hard_americans_firestorm": 17556.465578649884
+      },
+      "spent": 20100.000000000182,
+      "survive": 0.5927446102819237,
+      "ready": 12524,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "E1": 14,
+          "GGI": 5,
+          "ORCA": 2,
+          "PDPLANE": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 7,
+          "FV": 2,
+          "E1": 13,
+          "GGI": 6,
+          "ORCA": 3,
+          "PDPLANE": 1,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 4,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 3,
+        "ZEP": 3
+      },
+      "victory": {
+        "easy_americans_firestorm": 16416.465578649884,
+        "medium_americans_firestorm": 17751.465578649884,
+        "hard_americans_firestorm": 17411.465578649884
+      },
+      "spent": 20800.0000000002,
+      "survive": 0.6419114180411095,
+      "ready": 12944,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "E1": 20,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 8,
+          "FV": 2,
+          "E1": 10,
+          "GGI": 6,
+          "ORCA": 3,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 4,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 4,
+        "SCHP": 5,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 16936.465578649884,
+        "medium_americans_firestorm": 18076.465578649884,
+        "hard_americans_firestorm": 17761.465578649884
+      },
+      "spent": 21400.00000000019,
+      "survive": 0.6544417847641425,
+      "ready": 13319,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 1,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 8,
+          "FV": 2,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 4,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 4,
+        "ZEP": 3
+      },
+      "victory": {
+        "easy_americans_firestorm": 17086.465578649884,
+        "medium_americans_firestorm": 18296.465578649884,
+        "hard_americans_firestorm": 17771.465578649884
+      },
+      "spent": 21900.000000000222,
+      "survive": 0.6721443811565736,
+      "ready": 13619,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 1,
+          "E1": 10,
+          "GGI": 3,
+          "ORCA": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 9,
+          "FV": 2,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 5,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 6,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 17516.465578649884,
+        "medium_americans_firestorm": 19061.465578649884,
+        "hard_americans_firestorm": 18181.465578649884
+      },
+      "spent": 22100.00000000023,
+      "survive": 0.6884994305427342,
+      "ready": 13934,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 1,
+          "E1": 6,
+          "GGI": 3,
+          "ORCA": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 7,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 5,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 7,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 18216.465578649884,
+        "medium_americans_firestorm": 19306.465578649884,
+        "hard_americans_firestorm": 18621.465578649884
+      },
+      "spent": 23200.00000000025,
+      "survive": 0.697779348786709,
+      "ready": 14594,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 2,
+          "E1": 4,
+          "GGI": 3,
+          "ORCA": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 6,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 5,
+        "ZEP": 3
+      },
+      "victory": {
+        "easy_americans_firestorm": 17966.465578649884,
+        "medium_americans_firestorm": 19596.465578649884,
+        "hard_americans_firestorm": 18541.465578649884
+      },
+      "spent": 23000.000000000255,
+      "survive": 0.7151884863460801,
+      "ready": 14474,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 2,
+          "E1": 4,
+          "GGI": 3,
+          "ORCA": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 6,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 3,
+        "SCHP": 6,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 17726.465578649884,
+        "medium_americans_firestorm": 19641.465578649884,
+        "hard_americans_firestorm": 18466.465578649884
+      },
+      "spent": 22400.000000000215,
+      "survive": 0.6890450998550062,
+      "ready": 14114,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 1,
+          "E1": 4,
+          "GGI": 3,
+          "ORCA": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 5,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 3,
+        "ZEP": 4
+      },
+      "victory": {
+        "easy_americans_firestorm": 17801.465578649884,
+        "medium_americans_firestorm": 20336.465578649884,
+        "hard_americans_firestorm": 18576.465578649884
+      },
+      "spent": 22800.000000000247,
+      "survive": 0.721418273059086,
+      "ready": 14354,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 1,
+          "E1": 4,
+          "GGI": 3,
+          "ORCA": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 5,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 5,
+        "ZEP": 4
+      },
+      "victory": {
+        "easy_americans_firestorm": 19241.465578649884,
+        "medium_americans_firestorm": 20481.465578649884,
+        "hard_americans_firestorm": 19816.465578649884
+      },
+      "spent": 25000.000000000295,
+      "survive": 0.7387901244534669,
+      "ready": 15719,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 4,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "SREF": 1,
+          "MGTK": 1,
+          "E1": 14,
+          "GGI": 6,
+          "ORCA": 4,
+          "PDPLANE": 1,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 9,
+        "ZEP": 2
+      },
+      "victory": {
+        "easy_americans_firestorm": 19651.465578649884,
+        "medium_americans_firestorm": 20806.465578649884,
+        "hard_americans_firestorm": 20406.465578649884
+      },
+      "spent": 25400.0000000003,
+      "survive": 0.7528583286663565,
+      "ready": 16124,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 10,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "SREF": 1,
+          "MGTK": 1,
+          "E1": 15,
+          "GGI": 6,
+          "ORCA": 4,
+          "PDPLANE": 1,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 3,
+        "ZEP": 5
+      },
+      "victory": {
+        "easy_americans_firestorm": 18951.465578649884,
+        "medium_americans_firestorm": 20866.465578649884,
+        "hard_americans_firestorm": 20041.465578649884
+      },
+      "spent": 24800.000000000295,
+      "survive": 0.7278280205040887,
+      "ready": 15554,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 4,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "SREF": 1,
+          "MGTK": 1,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "PDPLANE": 1,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 6,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 3,
+        "SCHP": 6,
+        "ZEP": 4
+      },
+      "victory": {
+        "easy_americans_firestorm": 20206.465578649884,
+        "medium_americans_firestorm": 21036.465578649884,
+        "hard_americans_firestorm": 20741.465578649884
+      },
+      "spent": 26400.000000000302,
+      "survive": 0.7652949500990595,
+      "ready": 16724,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 18,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "SREF": 2,
+          "MGTK": 1,
+          "E1": 8,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 7,
+        "ZEP": 3
+      },
+      "victory": {
+        "easy_americans_firestorm": 19461.465578649884,
+        "medium_americans_firestorm": 21096.465578649884,
+        "hard_americans_firestorm": 20321.465578649884
+      },
+      "spent": 25200.000000000302,
+      "survive": 0.7428925046769369,
+      "ready": 16004,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 10,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "SREF": 1,
+          "MGTK": 1,
+          "E1": 15,
+          "GGI": 6,
+          "ORCA": 4,
+          "PDPLANE": 1,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 9,
+        "ZEP": 3
+      },
+      "victory": {
+        "easy_americans_firestorm": 20831.465578649884,
+        "medium_americans_firestorm": 21606.465578649884,
+        "hard_americans_firestorm": 21276.465578649884
+      },
+      "spent": 27400.000000000346,
+      "survive": 0.7843219804852035,
+      "ready": 17339,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 3,
+        "ZEP": 6
+      },
+      "victory": {
+        "easy_americans_firestorm": 20351.465578649884,
+        "medium_americans_firestorm": 21766.465578649884,
+        "hard_americans_firestorm": 21141.465578649884
+      },
+      "spent": 26800.000000000335,
+      "survive": 0.7674742897765953,
+      "ready": 16964,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 6,
+        "ZEP": 4
+      },
+      "victory": {
+        "easy_americans_firestorm": 19991.465578649884,
+        "medium_americans_firestorm": 22086.465578649884,
+        "hard_americans_firestorm": 20586.465578649884
+      },
+      "spent": 26100.00000000032,
+      "survive": 0.7626936369697574,
+      "ready": 16544,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 10,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "SREF": 2,
+          "MGTK": 1,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 5,
+        "ZEP": 5
+      },
+      "victory": {
+        "easy_americans_firestorm": 20496.465578649884,
+        "medium_americans_firestorm": 22326.465578649884,
+        "hard_americans_firestorm": 21176.465578649884
+      },
+      "spent": 27000.000000000342,
+      "survive": 0.7805964992843563,
+      "ready": 17114,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 4,
+        "ZEP": 5
+      },
+      "victory": {
+        "easy_americans_firestorm": 19791.465578649884,
+        "medium_americans_firestorm": 22416.465578649884,
+        "hard_americans_firestorm": 20556.465578649884
+      },
+      "spent": 25900.000000000313,
+      "survive": 0.7640176459568332,
+      "ready": 16424,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 10,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 2,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 4,
+          "SREF": 2,
+          "MGTK": 1,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 5,
+        "ZEP": 6
+      },
+      "victory": {
+        "easy_americans_firestorm": 21861.465578649884,
+        "medium_americans_firestorm": 23276.465578649884,
+        "hard_americans_firestorm": 22516.465578649884
+      },
+      "spent": 29000.000000000386,
+      "survive": 0.7979331426584991,
+      "ready": 18494,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 9,
+        "ZEP": 4
+      },
+      "victory": {
+        "easy_americans_firestorm": 22151.465578649884,
+        "medium_americans_firestorm": 23461.465578649884,
+        "hard_americans_firestorm": 22651.465578649884
+      },
+      "spent": 29400.000000000393,
+      "survive": 0.8091516459172775,
+      "ready": 18734,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 4,
+        "SCHP": 5,
+        "ZEP": 6
+      },
+      "victory": {
+        "easy_americans_firestorm": 22161.465578649884,
+        "medium_americans_firestorm": 23496.465578649884,
+        "hard_americans_firestorm": 22746.465578649884
+      },
+      "spent": 29400.000000000375,
+      "survive": 0.8012390261153923,
+      "ready": 18734,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "E2": 3,
+        "SCHP": 6,
+        "ZEP": 5
+      },
+      "victory": {
+        "easy_americans_firestorm": 21576.465578649884,
+        "medium_americans_firestorm": 23706.465578649884,
+        "hard_americans_firestorm": 22126.465578649884
+      },
+      "spent": 28400.00000000035,
+      "survive": 0.7968080418433255,
+      "ready": 18134,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 4,
+        "ZEP": 6
+      },
+      "victory": {
+        "easy_americans_firestorm": 21011.465578649884,
+        "medium_americans_firestorm": 23711.465578649884,
+        "hard_americans_firestorm": 21746.465578649884
+      },
+      "spent": 27900.000000000357,
+      "survive": 0.7855115363623529,
+      "ready": 17639,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 5,
+        "ZEP": 7
+      },
+      "victory": {
+        "easy_americans_firestorm": 23086.465578649884,
+        "medium_americans_firestorm": 24526.465578649884,
+        "hard_americans_firestorm": 23806.465578649884
+      },
+      "spent": 31000.00000000043,
+      "survive": 0.8142392373367251,
+      "ready": 19739,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 3,
+        "ZEP": 8
+      },
+      "victory": {
+        "easy_americans_firestorm": 22866.465578649884,
+        "medium_americans_firestorm": 25666.465578649884,
+        "hard_americans_firestorm": 23791.465578649884
+      },
+      "spent": 30800.000000000422,
+      "survive": 0.8185466965965653,
+      "ready": 19574,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "SCHP": 9,
+        "ZEP": 5
+      },
+      "victory": {
+        "easy_americans_firestorm": 23511.465578649884,
+        "medium_americans_firestorm": 25701.465578649884,
+        "hard_americans_firestorm": 24056.465578649884
+      },
+      "spent": 31400.000000000426,
+      "survive": 0.8317915031407521,
+      "ready": 20144,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "ROBO": 3,
+          "E1": 14,
+          "GGI": 3,
+          "ORCA": 2,
+          "PDPLANE": 1,
+          "CATEXS06": 1,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 5,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1,
+          "GAROBO": 1,
+          "GACSPH": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 3,
+          "SREF": 3,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 4,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 6,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 9,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 7,
+          "GATECH": 1,
+          "GAROBO": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "FLAKT": 1,
+        "SHK": 1,
+        "ZEP": 3
+      },
+      "victory": {
+        "easy_americans_firestorm": 14871.465578649884,
+        "medium_americans_firestorm": null,
+        "hard_americans_firestorm": null
+      },
+      "spent": 18300.00000000011,
+      "survive": 0.5303104380945095,
+      "ready": 11294,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 7,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 4,
+          "GATECH": 1
+        }
+      }
+    },
+    {
+      "army": {
+        "ZEP": 3
+      },
+      "victory": {
+        "easy_americans_firestorm": 14396.465578649884,
+        "medium_americans_firestorm": null,
+        "hard_americans_firestorm": null
+      },
+      "spent": 17500.000000000135,
+      "survive": 0.5213993392904955,
+      "ready": 10799,
+      "feasible": true,
+      "enemy": {
+        "easy_americans_firestorm": {
+          "MTNK": 2,
+          "E1": 9,
+          "GGI": 5,
+          "GACNST": 1,
+          "GAPOWR": 4,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 3,
+          "GAROBO": 1
+        },
+        "medium_americans_firestorm": {
+          "MTNK": 6,
+          "E1": 12,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAAIRP": 1,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "GATECH": 1,
+          "ATESLA": 1
+        },
+        "hard_americans_firestorm": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 6,
+          "ORCA": 2,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 3,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1,
+          "ATESLA": 3,
+          "GATECH": 1
+        }
+      }
+    }
+  ],
+  "chosen": 4,
+  "history": [
+    {
+      "generation": 0,
+      "front_size": 5,
+      "feasible_share": 0.3829787234042553
+    },
+    {
+      "generation": 1,
+      "front_size": 8,
+      "feasible_share": 0.8
+    },
+    {
+      "generation": 2,
+      "front_size": 11,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 3,
+      "front_size": 18,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 4,
+      "front_size": 20,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 5,
+      "front_size": 15,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 6,
+      "front_size": 16,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 7,
+      "front_size": 21,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 8,
+      "front_size": 19,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 9,
+      "front_size": 25,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 10,
+      "front_size": 29,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 11,
+      "front_size": 31,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 12,
+      "front_size": 32,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 13,
+      "front_size": 33,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 14,
+      "front_size": 36,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 15,
+      "front_size": 39,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 16,
+      "front_size": 41,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 17,
+      "front_size": 44,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 18,
+      "front_size": 45,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 19,
+      "front_size": 47,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 20,
+      "front_size": 50,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 21,
+      "front_size": 48,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 22,
+      "front_size": 50,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 23,
+      "front_size": 50,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 24,
+      "front_size": 50,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 25,
+      "front_size": 50,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 26,
+      "front_size": 50,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 27,
+      "front_size": 50,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 28,
+      "front_size": 50,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 29,
+      "front_size": 50,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 30,
+      "front_size": 50,
+      "feasible_share": 1.0
+    }
+  ]
+}

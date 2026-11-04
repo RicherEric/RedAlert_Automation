@@ -1,0 +1,11 @@
+pycryptodome>=3.20
+pandas>=2.0
+numpy>=1.26
+matplotlib>=3.8
+pytest>=8
+pynput>=1.7
+pymem>=1.13
+pillow>=10
+capstone>=5
+lightgbm>=4
+scikit-learn>=1.4

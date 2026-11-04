@@ -1,7 +1,18 @@
-# For now only the thesis folder is versioned; everything else at the root stays local.
-/*
-!/.gitignore
-!/thesis/
+# Local-only: virtualenv, caches, big logs and generated training artefacts.
+/.venv/
+/logs/
+/models/
+/datasets/
+__pycache__/
+*.pyc
+
+# Game data extracted from Red Alert 2: Yuri's Revenge is copyrighted; keep it local.
+/data/*.ini
+/data/*.csf
+
+# Third-party repos and build outputs are fetched/built locally (see tools/build_spawner.bat, tools/ra2bridge/build.bat).
+/tools/third_party/
+/tools/ra2bridge/out/
 
 # The IEEE paper is licensed to the university and must not be redistributed.
 /thesis/A_Data-driven_Approach_to_Solve_a_Production_Constrained_Build-order_Optimization_Problem.pdf

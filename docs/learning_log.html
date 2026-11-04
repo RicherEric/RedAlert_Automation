@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RA2 學習紀錄</title>
+<style>
+:root {
+  --bg: #f7f6f2; --card: #ffffff; --text: #1f2328; --muted: #646a73; --line: #e2e0d8;
+  --accent: #b4442f; --win: #2f7d4f; --lose: #b4442f; --warn: #a66a00; --code: #f0eee8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16181c; --card: #1f2227; --text: #e6e6e3; --muted: #9aa0a8; --line: #33373e;
+    --accent: #e0775f; --win: #5fbf86; --lose: #e0775f; --warn: #e0a84a; --code: #2a2e34;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16181c; --card: #1f2227; --text: #e6e6e3; --muted: #9aa0a8; --line: #33373e;
+  --accent: #e0775f; --win: #5fbf86; --lose: #e0775f; --warn: #e0a84a; --code: #2a2e34;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.7 "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif; }
+main { max-width: 960px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 28px; margin: 0 0 4px; }
+h2 { font-size: 20px; margin: 40px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+h3 { font-size: 16px; margin: 20px 0 6px; }
+p.sub { color: var(--muted); margin: 0 0 24px; }
+nav { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; margin-bottom: 8px; }
+nav a { color: var(--accent); text-decoration: none; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+.stage { border-left: 4px solid var(--accent); }
+.tag { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; margin-left: 6px; vertical-align: 2px; }
+.win { color: var(--win); } .lose { color: var(--lose); } .warn { color: var(--warn); }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+ul { padding-left: 22px; margin: 6px 0; }
+li { margin: 3px 0; }
+.lesson { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .lesson { grid-template-columns: 1fr; } }
+.lesson h4 { margin: 0 0 4px; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<h1>RA2 尤里的復仇：策略最佳化學習紀錄</h1>
+<p class="sub">從模擬器、模仿學習到實機對戰的每一步：做了什麼、量到什麼、錯在哪裡、怎麼修。最後更新 2026-11-01。</p>
+<nav>
+  <a href="#overview">總覽</a><a href="#infra">實機介面</a><a href="#learning">學習階段</a>
+  <a href="#victory">破關模型</a><a href="#live">實機戰績</a><a href="#lessons">教訓與修正</a>
+  <a href="#search">搜尋結果</a><a href="#next">下一步</a><a href="#files">檔案索引</a>
+</nav>
+
+<h2 id="overview">總覽</h2>
+<div class="card">
+  <p>目標：用 Python 找出《紅色警戒 2：尤里的復仇》的最佳兵種組合與建造順序，並且能在<strong>實機遭遇戰</strong>裡即時執行、打贏 AI（破關）。</p>
+  <p>路線：經濟模擬 → GA 老師 → 模仿學習（LightGBM）→ DAgger → 多目標 Pareto（NSGA-II）→ 破關模型 → 實機驗證，接下來是 ② 建築進駐、③ 戰術模型、④ 實機迴圈。</p>
+  <p>這不是強化學習（RL），而是<strong>模仿學習</strong>：搜尋演算法當老師，模型學老師的決定，再用 DAgger 修正模型自己會走到的狀態。之後的長時間攻擊決策可以再考慮用 RL 微調。</p>
+</div>
+
+<h2 id="infra">實機介面</h2>
+<div class="card stage">
+  <h3>A. 讀記憶體（唯讀）</h3>
+  <ul>
+    <li>Python 用 pymem 讀 <code>gamemd.exe</code>，位址在 <code>ra2tools/yr_layout.py</code>，2026-10-31 對 Steam 版驗證：玩家、國家、金錢、所有物件、位置、生產進度都正確。</li>
+    <li>生產進度分 54 步，每步是整數幀；12 個項目誤差都在 ±2% 以內。</li>
+    <li>遊戲速度設定 3 = 每秒 20 幀（引擎表 0→60、1→45、2→30、3→20…）。</li>
+    <li>引擎把規則裡的浮點數存成 float32（BuildSpeed 0.7 → 0.69999998），所以造價 600 的東西是 6 步不是 7 步，模擬已照做。</li>
+  </ul>
+  <h3>B. 注入 DLL 下指令</h3>
+  <ul>
+    <li><code>tools/ra2bridge/</code>：在主迴圈 0x55D360 掛 5 bytes 跳轉，指令轉成遊戲內事件，只聽 127.0.0.1:47800，遇到網路對戰會拒絕。</li>
+    <li>指令：PING / PRODUCE / ABANDON / PLACE / DEPLOY / MOVE / ATTACK。</li>
+  </ul>
+  <h3>C. 自動開局</h3>
+  <ul>
+    <li><code>autostart.py start --ai easy|medium|hard</code>：備份 RA2MD.INI → 套固定測試設定 → 視窗模式啟動 → 比對選單畫面點進遭遇戰 → 讀記憶體確認難度。<code>stop</code> 關遊戲並還原設定。</li>
+    <li>測試設定：地圖「火線衝突」，我方蘇聯、出生點 2，AI 美國。難度代碼：簡單 6、中等 5、困難 4（記憶體 AIDifficulty 0 = 困難）。</li>
+    <li>舊方式：選單要用真實游標點擊（PostMessage 沒用），所以開局的約 15 秒不能動滑鼠（現在要用加 <code>--menu</code>）。</li>
+    <li><strong>新方式（2026-11-01）：</strong>從原始碼編譯 CnCNet spawner（GPL-3）和 Syringe（LGPL-3），以 <code>Syringe.exe "gamemd.exe" -SPAWN -WIN</code> 啟動，讀 <code>SPAWN.INI</code> 直接進遭遇戰，完全不用滑鼠。地圖要從 multi.mix 抽成散檔 <code>spawnmap.ini</code>，不然會出現「無法讀取劇情場景」。AI 難度代碼：簡單 2、中等 1、困難 0。實測：基地車位置、速度、難度都和舊方式相同，DLL 在 Syringe 底下照樣注入，視窗不在前景也維持每秒 20 幀。</li>
+  </ul>
+  <h3>D. 校正</h3>
+  <ul>
+    <li>原本的經濟參數高估收入約 3 倍。實測：採礦距離 10.5 格（依地圖與出生點而變）、每包礦 28.8 幀、卸礦 285 幀。</li>
+    <li>機器人放置延遲 5 幀、基地車展開 27 幀（人類反應時間是 199 / 209 幀）。在錢夠的期間，模擬和實機誤差 ±2 幀。</li>
+  </ul>
+</div>
+
+<h2 id="learning">學習階段</h2>
+<div class="table-wrap"><table>
+<tr><th>階段</th><th>內容</th><th>結果</th></tr>
+<tr><td>1 環境</td><td><code>ra2tools/env.py</code> BuildEnv：經濟模擬拆成可逐步推進的狀態</td><td>輸出和舊版完全一致，可從任何中間狀態接續</td></tr>
+<tr><td>2 GA 老師</td><td><code>teacher.py</code>、<code>datagen.py</code> 平行產生資料</td><td>以「幀數 + 花費」加權的建造順序</td></tr>
+<tr><td>3 模仿學習</td><td><code>train.py</code> + LightGBM 策略</td><td>第一版只訓練 1 輪就停（某類只有 9 筆，驗證損失爆掉）。加了正則化才正常</td></tr>
+<tr><td>4 DAgger</td><td>學生自己玩、老師標註、β 每輪減半</td><td>特徵 v1：100 題全部完成，91 題和老師相同，平均差距 +0.6%</td></tr>
+<tr><td>特徵 v2</td><td>加入建造路徑資訊</td><td>平均差距 +0.2%，最差 +6.3%（v1 是 +14.1%）</td></tr>
+<tr><td>特徵 v3</td><td>拿掉「絕對幀數」與「已花費」，改用剩餘路徑成本與缺額</td><td>修好實機順序跑掉的問題，實機和模擬順序完全一致，完成時間 +2.3%</td></tr>
+<tr><td>5 Pareto</td><td>NSGA-II + Tchebycheff，目標：勝率、完成幀、花費</td><td>策略規劃比傳統解法快 7–42%，每個計畫約 100 ms</td></tr>
+<tr><td>6 破關</td><td>VictoryProblem：行軍 + 戰鬥模擬，對手用實錄時間軸</td><td>見下一節</td></tr>
+</table></div>
+
+<div class="card">
+  <h3>特徵 v3 的由來（第一個實機教訓）</h3>
+  <p>第一次實機跑策略時，模型在兵營之後蓋了第二座精煉廠，模擬裡卻是蓋戰車工廠。原因：訓練資料每局開頭都一樣，模型學會看「現在第幾幀」；實機放建築比模擬快約 40 幀，模型就判斷錯了。改成只看與時間無關的特徵後，實機順序和模擬完全相同。</p>
+</div>
+
+<h2 id="victory">破關模型（VictoryProblem）</h2>
+<div class="card">
+  <ul>
+    <li><strong>對手時間軸：</strong>從實錄抽出 AI 每個時間點的部隊與建築（<code>opponent.py extract</code>），簡單 / 中等 / 困難各一份，存在 <code>calibration/opponents/</code>。</li>
+    <li><strong>多難度目標：</strong>每個難度一個「獲勝幀數」目標，輸了就記成很大的數字。</li>
+    <li><strong>短局規則：</strong>建築全毀就算輸。</li>
+  </ul>
+  <h3>每次實機輸掉之後加進模型的東西</h3>
+  <ul>
+    <li><strong>增援：</strong>戰鬥中 AI 會照時間軸生產新兵，前提是對應的工廠還在。</li>
+    <li><strong>重建：</strong>建造場還在時，被拆的建築會一棟一棟重蓋。實機看到困難 AI 的碉堡從 4 座變成 10 座。</li>
+    <li><strong>反攻波次：</strong>記錄 AI 進到我方基地 35 格內的部隊（困難約在第 10208 / 14932 / 18082 幀，中等 11155 / 18084，簡單 7915 / 12516）。部隊要先打完反攻才能出發。</li>
+    <li><strong>AI 應變：</strong>困難 AI 在我們第一艘基洛夫出廠約 1550 幀後開始蓋愛國者飛彈，之後每 1100 幀加一座。以實機對照，第 11236 幀算出 3 座，與實際一致。</li>
+  </ul>
+</div>
+
+<h2 id="live">實機戰績</h2>
+<div class="table-wrap"><table>
+<tr><th>#</th><th>對手</th><th>方案</th><th>結果</th><th>重點</th></tr>
+<tr><td>1</td><td>簡單</td><td>動員兵 ×20 + 磁爆步兵 ×2</td><td><span class="tag win">勝</span></td><td>建造 2000 幀（預測 2067），第 6063 幀獲勝（預測 6119，誤差 −0.9%），38 個單位剩 30 個</td></tr>
+<tr><td>2</td><td>困難</td><td>動員兵 ×1 + 磁爆步兵 ×11</td><td><span class="tag lose">敗</span></td><td>建造準確（2134 vs 2202）。模擬預測第 7774 幀贏，實際 28 個單位全滅，一棟建築都沒拆到</td></tr>
+<tr><td>3</td><td>困難</td><td>同上（有錄影）</td><td><span class="tag lose">敗</span></td><td>坦克比步兵早到約 1000 幀，單獨送死。步兵殺光了 AI 部隊，最後死在不斷重建的碉堡前（28 個陣亡有 26 個在碉堡旁）</td></tr>
+<tr><td>4</td><td>困難</td><td>空軍：動員兵 ×1 + 武裝直升機 ×1 + 基洛夫 ×2</td><td><span class="tag lose">敗</span></td><td>建造誤差 −83 到 +122 幀。還沒出發，第 10001 幀 AI 第一波反攻（4 灰熊 + 光稜坦克）打進基地，部隊沒有防守邏輯，第 11143 幀建築全毀。AI 同時開始蓋愛國者飛彈</td></tr>
+<tr><td>5</td><td>中等</td><td>動員兵 ×3 + 磁爆步兵 ×10</td><td><span class="tag lose">敗</span></td><td>建造 2334（預測 2172）。集結有效，抵達時間差只剩約 400 幀。AI 狀態和時間軸完全相符，但只打掉 14 個單位，0 棟建築，第 5644 幀全滅</td></tr>
+<tr><td>6</td><td>中等</td><td>同上，新的選目標規則，第一次用 spawner 開局</td><td><span class="tag lose">敗</span></td><td>建造 2101（預測 2172，−3.3%）。擊殺從 14 個增加到 38 個（灰熊 ×7、重裝大兵 ×8、美國大兵 ×7、多棟建築），但犀牛坦克仍比步兵早到約 150 幀、最先陣亡，第 5358 幀全滅；之後 AI 反攻拆光基地。程式把結束後的空白紀錄誤判成勝利，已修正</td></tr>
+</table></div>
+
+<h2 id="lessons">教訓與修正</h2>
+<div class="card"><div class="lesson">
+  <div><h4>問題</h4>戰鬥模擬對困難 AI 太樂觀（第 2 場）</div>
+  <div><h4>修正</h4>寫了 <code>battle_report.py</code> 分析錄影，找出部隊零星抵達、碉堡重建、AI 增援三個原因，都加進模型。修正後，模型對第 1 場和第 2 場的預測都和實際結果相符</div>
+</div></div>
+<div class="card"><div class="lesson">
+  <div><h4>問題</h4>快的單位先到、單獨送死（第 3 場）</div>
+  <div><h4>修正</h4>進攻控制器先在 AI 基地前 22 格集結，到齊 90%（或等了 2000 幀、或已經交火）才進攻；進攻時優先打建造場，讓 AI 無法重建</div>
+</div></div>
+<div class="card"><div class="lesson">
+  <div><h4>問題</h4>部隊在家發呆，基地被反攻拆光（第 4 場）</div>
+  <div><h4>修正</h4>新增防守控制器：建造期間，AI 武裝單位進入基地 25 格內就全軍迎戰。另外修了模擬的 bug：部隊要等反攻打完才能出發</div>
+</div></div>
+<div class="card"><div class="lesson">
+  <div><h4>問題</h4>AI 會針對我們的兵種應變（第 4 場）</div>
+  <div><h4>修正</h4>對手檔加入應變規則（出飛機 → 蓋愛國者飛彈），搜尋時會考慮進去</div>
+</div></div>
+<div class="card"><div class="lesson">
+  <div><h4>問題</h4>集火目標選錯（第 5 場）：規則是「打血最少的」，但用的是絕對血量，全軍都在打美國大兵，灰熊坦克沒人管，在旁邊輾壓步兵</div>
+  <div><h4>修正</h4>改成依武器對裝甲的實際傷害，挑「每幀能打掉最多敵方價值」的目標（造價 × 每幀傷害 ÷ 剩餘血量）。犀牛坦克會先打灰熊坦克，步兵先打重裝大兵。第 6 場驗證：擊殺數從 14 增加到 38，有效，但還不夠贏</div>
+</div></div>
+<div class="card"><div class="lesson">
+  <div><h4>問題</h4>背景執行時日誌一片空白；查行程也查不到</div>
+  <div><h4>修正</h4>stdout 改成逐行輸出；.venv 的 python.exe 會再啟動一個系統 Python，要用 Win32_Process 的命令列查</div>
+</div></div>
+
+<h2 id="search">三難度搜尋結果（v4，最新）</h2>
+<div class="table-wrap"><table>
+<tr><th>方案</th><th>花費</th><th>簡單</th><th>中等</th><th>困難</th></tr>
+<tr><td>動員兵 ×3 + 磁爆步兵 ×10</td><td>$8,400</td><td>8106</td><td>8536</td><td>輸</td></tr>
+<tr><td>動員兵 ×2 + 磁爆步兵 ×11</td><td>$8,800</td><td>8116</td><td>8701</td><td>輸</td></tr>
+<tr><td>動員兵 ×1 + 武裝直升機 ×2 + 基洛夫 ×6</td><td>$25,800</td><td>–</td><td>–</td><td>21603</td></tr>
+<tr><td>依偏好挑選：犀牛 ×1 + 武裝直升機 ×6 + 基洛夫 ×1</td><td>$20,600</td><td>16386</td><td>17747</td><td>25613</td></tr>
+</table></div>
+<p>數字是預測的獲勝幀數（每秒 20 幀）。結論：簡單和中等用步兵快攻約 7 分鐘可以贏。困難 AI 會反攻、重建、針對兵種應變，單靠「選對部隊、蓋完一次衝」需要 $25k 以上的空軍，而且要先撐過兩波反攻。這正是要做建築進駐和戰術模型的原因。</p>
+
+<h2 id="paused">暫停時的狀態（2026-11-01）</h2>
+<div class="card">
+  <ul>
+    <li><strong>戰鬥模擬校正：</strong>AI 被攻擊時會補兵（每 2000 幀約 $1,200–2,700），模型加入「工廠補兵＋花費速度上限」，三種實機結果都對得上。</li>
+    <li><strong>第 7 場（防空步兵 ×4 + 基洛夫 ×2 打中等）：</strong>輸。集結只算人數，地面部隊丟下基洛夫先走；AI 用科技機場傘兵和反攻拆了空基地；AI 大兵進駐飯店形成火網。已改成依價值集結、留守部隊、模型檢查出征期間的反攻。</li>
+    <li><strong>戰術知識（攻略＋AI 腳本 aimd.ini）：</strong>中等/困難 AI 會派工程師佔科技機場取得傘兵；只有困難會在建造場被毀後重派基地車；攻擊目標順序改為 威脅 → 建造場 → 電廠（有光稜塔/愛國者時）→ 工廠與科技機場 → 武裝建築。</li>
+    <li><strong>未解決：</strong>用 spawner 開局時，遊戲視窗一失去焦點就暫停（第 7、8 場的「死機」都是這個）。加 <code>Video.Windowed=yes</code> 沒有用。下次可改回 <code>--menu</code> 開局，或找出 spawner 的暫停判斷。</li>
+    <li><strong>下一個要測的方案：</strong>天啟坦克 ×3 + 基洛夫 ×3 打中等（模擬第 17911 幀獲勝，剩 51%）。</li>
+  </ul>
+</div>
+
+<h2 id="next">下一步</h2>
+<div class="card">
+  <ol>
+    <li>用新的選目標規則再打一次中等 AI，驗證進攻與防守控制器。</li>
+    <li>如果還是輸，拿第 3 場和第 5 場的錄影校正戰鬥模擬（集火方式、輾壓、基地內的地形）。</li>
+    <li>② 建築進駐：DLL 加「進入建築」指令。只有動員兵、美國大兵、心靈突擊隊能進駐，地圖上有 38 棟可進駐的建築。</li>
+    <li>③ 空間戰術模擬 + 戰術策略：集結、攻擊某類目標、撤退、進駐、等增援。用搜尋老師 → 模仿學習 → DAgger 訓練。</li>
+    <li>④ 實機驗證迴圈：每場實機錄影都回頭校正模型。</li>
+  </ol>
+</div>
+
+<h2 id="files">檔案索引</h2>
+<div class="table-wrap"><table>
+<tr><th>用途</th><th>檔案</th></tr>
+<tr><td>實機執行（建造 + 防守 + 進攻）</td><td><code>execute.py --attack</code>、<code>ra2tools/assault.py</code>、<code>ra2tools/live_policy.py</code></td></tr>
+<tr><td>戰鬥模擬</td><td><code>ra2tools/combat.py</code></td></tr>
+<tr><td>破關問題與對手</td><td><code>ra2tools/problems.py</code>、<code>ra2tools/opponent.py</code>、<code>calibration/opponents/*.json</code></td></tr>
+<tr><td>錄影分析</td><td><code>battle_report.py</code></td></tr>
+<tr><td>實機紀錄</td><td><code>logs/victory_live1.*</code>、<code>logs/live_hard_attack.txt</code>、<code>logs/battle_hard*</code>、<code>logs/battle_hard_air*</code>、<code>logs/battle_medium_rush*</code></td></tr>
+<tr><td>搜尋結果</td><td><code>logs/victory_3diff_v2/v3/v4.txt</code></td></tr>
+<tr><td>學習流程紀錄</td><td><code>logs/dagger*.txt</code>、<code>logs/eval100_v*.txt</code></td></tr>
+</table></div>
+</main>
+</body>
+</html>

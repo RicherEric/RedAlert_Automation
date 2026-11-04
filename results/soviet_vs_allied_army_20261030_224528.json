@@ -1,0 +1,208 @@
+{
+  "army": {
+    "SCHP": 2,
+    "ZEP": 1
+  },
+  "feasible": true,
+  "violations": {},
+  "info": {
+    "scores": {
+      "灰熊海": 1.0,
+      "灰熊+IFV+大兵": 0.95,
+      "入侵者空襲": 1.0,
+      "IFV防空網": 0.9
+    },
+    "cost": 4200,
+    "units": 3,
+    "anti_air": 2,
+    "finish_frame": 8325
+  },
+  "history": [
+    {
+      "generation": 0,
+      "best_objective": -0.39388670830560096,
+      "best_violation": 0,
+      "feasible_share": 0.05
+    },
+    {
+      "generation": 1,
+      "best_objective": -0.4118872549019608,
+      "best_violation": 0,
+      "feasible_share": 0.15
+    },
+    {
+      "generation": 2,
+      "best_objective": -0.45289898989898986,
+      "best_violation": 0,
+      "feasible_share": 0.15
+    },
+    {
+      "generation": 3,
+      "best_objective": -0.6316183574879226,
+      "best_violation": 0,
+      "feasible_share": 0.225
+    },
+    {
+      "generation": 4,
+      "best_objective": -0.734380341880342,
+      "best_violation": 0,
+      "feasible_share": 0.325
+    },
+    {
+      "generation": 5,
+      "best_objective": -0.734380341880342,
+      "best_violation": 0,
+      "feasible_share": 0.45
+    },
+    {
+      "generation": 6,
+      "best_objective": -0.734380341880342,
+      "best_violation": 0,
+      "feasible_share": 0.525
+    },
+    {
+      "generation": 7,
+      "best_objective": -0.8138888888888889,
+      "best_violation": 0,
+      "feasible_share": 0.575
+    },
+    {
+      "generation": 8,
+      "best_objective": -0.8138888888888889,
+      "best_violation": 0,
+      "feasible_share": 0.6
+    },
+    {
+      "generation": 9,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.625
+    },
+    {
+      "generation": 10,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.725
+    },
+    {
+      "generation": 11,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.825
+    },
+    {
+      "generation": 12,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.775
+    },
+    {
+      "generation": 13,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.75
+    },
+    {
+      "generation": 14,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.825
+    },
+    {
+      "generation": 15,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.825
+    },
+    {
+      "generation": 16,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.75
+    },
+    {
+      "generation": 17,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.675
+    },
+    {
+      "generation": 18,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.775
+    },
+    {
+      "generation": 19,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.575
+    },
+    {
+      "generation": 20,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.475
+    },
+    {
+      "generation": 21,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.675
+    },
+    {
+      "generation": 22,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.725
+    },
+    {
+      "generation": 23,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.725
+    },
+    {
+      "generation": 24,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.6
+    },
+    {
+      "generation": 25,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.6
+    },
+    {
+      "generation": 26,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.7
+    },
+    {
+      "generation": 27,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.55
+    },
+    {
+      "generation": 28,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.725
+    },
+    {
+      "generation": 29,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.575
+    },
+    {
+      "generation": 30,
+      "best_objective": -0.9466666666666668,
+      "best_violation": 0,
+      "feasible_share": 0.75
+    }
+  ]
+}

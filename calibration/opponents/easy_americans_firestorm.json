@@ -1,0 +1,738 @@
+{
+ "name": "easy_americans_firestorm",
+ "country": "Americans",
+ "player_country": "Russians",
+ "frames": [
+  255,
+  560,
+  867,
+  1173,
+  1479,
+  1785,
+  2092,
+  2398,
+  2704,
+  3010,
+  3317,
+  3623,
+  3930,
+  4236,
+  4543,
+  4850,
+  5156,
+  5463,
+  5769,
+  6076,
+  6383,
+  6689,
+  6995,
+  7302,
+  7608,
+  7915,
+  8222,
+  8528,
+  8835,
+  9142,
+  9449,
+  9755,
+  10062,
+  10369,
+  10675,
+  10982,
+  11288,
+  11595,
+  11902,
+  12209,
+  12516,
+  12823,
+  13130,
+  13437,
+  13744,
+  14051,
+  14358,
+  14665
+ ],
+ "units": [
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 2
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 4,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 15,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 13,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 10,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 8,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 4
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 4
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 4
+  },
+  {
+   "MTNK": 2,
+   "E1": 14,
+   "GGI": 5
+  },
+  {
+   "MTNK": 2,
+   "E1": 11,
+   "GGI": 5
+  },
+  {
+   "MTNK": 2,
+   "E1": 9,
+   "GGI": 5
+  },
+  {
+   "MTNK": 2,
+   "E1": 9,
+   "GGI": 5
+  },
+  {
+   "MTNK": 2,
+   "E1": 9,
+   "GGI": 5
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 5
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 5
+  },
+  {
+   "MTNK": 2,
+   "E1": 7,
+   "GGI": 5
+  }
+ ],
+ "buildings": [
+  {
+   "GACNST": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 2,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 2,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 2,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 2,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 2,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 2,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 3,
+   "GAROBO": 1
+  }
+ ],
+ "base_distance": 78.08969202141856,
+ "player_start_army": {
+  "HTNK": 4,
+  "E2": 12
+ },
+ "source": "D:\\RedAlert_Automation\\logs\\game3_soviet.jsonl",
+ "difficulty": "easy",
+ "attacks": [
+  {
+   "frame": 7915,
+   "units": {
+    "MTNK": 3,
+    "E1": 8
+   }
+  },
+  {
+   "frame": 12516,
+   "units": {
+    "E1": 7
+   }
+  }
+ ],
+ "replace_rate": 0.6,
+ "notes": {
+  "replace_rate": "not measured; set to the low end of the medium/hard measurements"
+ }
+}

@@ -1,0 +1,93 @@
+# 情境：蘇俄 對抗 盟軍常見開局部隊
+# 時間單位一律是「遊戲幀」；換算秒數 = 幀 / calibration.fps
+country = "Russians"   # Americans Alliance French Germans British Russians Confederation Africans Arabs YuriCountry
+
+# 校準參數：預設讀 calibration/calibration.toml（calibrate.py fit 產生），這裡寫的值會覆寫它
+[calibration]
+start_credits = 10000
+
+[combat]
+distance = 12      # 兩軍初始距離 (格)
+dt = 5             # 模擬步長 (幀)
+max_frames = 5400
+crush = true       # 坦克輾壓步兵
+kite = true        # 快速且射程較遠的單位會邊退邊打（模擬玩家操作）
+spacing = 1.5      # 陣型間距 (格)，越大越不怕濺射
+
+# ---------------------------------------------------------------- 兵種組合最佳化
+[army]
+budget = 9000          # 約束：總價上限
+max_units = 20         # 約束：單位數上限
+min_aa_units = 2       # 約束：至少 2 個能打飛機的單位
+min_score = 0.0        # 約束：每一種敵情都不能輸
+deadline_frames = 9000 # 約束：整支部隊要在此幀數內蓋好（用經濟模擬估計）
+max_per_unit = { ZEP = 1 }
+exclude = []
+aggregate = "mean"     # mean = 加權平均；worst = 只看最難打的敵情
+cost_weight = 0.05     # 戰力相近時偏好便宜的組合
+
+[[army.enemy]]
+name = "灰熊海"
+weight = 2
+units = { MTNK = 9 }
+
+[[army.enemy]]
+name = "灰熊+IFV+大兵"
+weight = 1
+units = { MTNK = 6, FV = 3, E1 = 6 }
+
+[[army.enemy]]
+name = "入侵者空襲"
+weight = 1
+units = { ORCA = 4, MTNK = 3 }
+
+# 對手看到空軍會補防空 —— 少了這種敵情，最佳化器會鑽漏洞選全空軍
+[[army.enemy]]
+name = "IFV防空網"
+weight = 1
+units = { MTNK = 4, FV = 6 }
+
+# ---------------------------------------------------------------- 建造順序最佳化
+[build]
+targets = { HTNK = 8 }       # plan 模式會改用 army 的結果
+extras = ["NAPOWR", "NAREFN", "NAWEAP", "HARV"]  # 可以額外插入的項目
+max_extras = 6
+auto_power = true            # 自動補電廠避免低電力
+deadline_frames = 9000       # 約束：目標要在此之前完成
+max_count = { NAWEAP = 2 }   # 約束：最多 2 座戰車工廠
+milestones = { NAWEAP = 4000 }  # 約束：第一座戰車工廠在 4000 幀前完成
+
+[ga]
+pop_size = 40
+generations = 30
+seed = 1
+workers = 4
+
+# ---------------------------------------------------------------- 多目標（ra2opt.py pareto）
+# 同時看三個目標：勝差（對上面每一種敵情）、整支部隊完成的幀數、總花費。
+# 沿用 [army] 的敵情和約束（這裡寫的鍵會覆寫 [army]），建造順序由訓練好的模型規劃。
+[pareto]
+preference = { win = 1.0, frames = 1.0, spent = 0.5 }  # 從前緣挑一個（Tchebycheff）
+ignore = ["budget", "deadline_frames"]  # [army] 裡這兩個在這裡是目標，不當約束
+pop_size = 60
+generations = 30
+workers = 4
+
+# ---------------------------------------------------------------- 破關（ra2opt.py victory）
+# 對手隨時間的部隊和建築是從實機量來的（opponent.py extract）。部隊一蓋好就連同開局部隊出發，
+# 抵達時和 AI 當下的部隊加整個基地交戰（ShortGame：拆光建築就贏）。
+# 目標：最早獲勝、花費最少、剩下最多。打不贏算違反約束。
+[victory]
+# 每個對手（難度）各自是一個「獲勝幀」目標；偏好用難度名稱，例如 { hard = 1, spent = 0.3 }，
+# victory = 1 代表每個難度一樣重要。
+opponents = [
+  "calibration/opponents/easy_americans_firestorm.json",
+  "calibration/opponents/medium_americans_firestorm.json",
+  "calibration/opponents/hard_americans_firestorm.json",
+]
+preference = { victory = 1.0, spent = 0.3, survive = 0.3 }
+max_units = 25
+travel_factor = 1.3   # 地面部隊實際路徑 / 直線距離
+pop_size = 50
+generations = 30
+workers = 6

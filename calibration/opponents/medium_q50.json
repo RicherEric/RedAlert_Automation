@@ -1,0 +1,1159 @@
+{
+ "name": "medium_q50",
+ "country": "Americans",
+ "player_country": "Russians",
+ "frames": [
+  0,
+  300,
+  600,
+  900,
+  1200,
+  1500,
+  1800,
+  2100,
+  2400,
+  2700,
+  3000,
+  3300,
+  3600,
+  3900,
+  4200,
+  4500,
+  4800,
+  5100,
+  5400,
+  5700,
+  6000,
+  6300,
+  6600,
+  6900,
+  7200,
+  7500,
+  7800,
+  8100,
+  8400,
+  8700,
+  9000,
+  9300,
+  9600,
+  9900,
+  10200,
+  10500,
+  10800,
+  11100,
+  11400,
+  11700,
+  12000,
+  12300,
+  12600,
+  12900,
+  13200,
+  13500,
+  13800,
+  14100,
+  14400,
+  14700,
+  15000,
+  15300,
+  15600,
+  15900,
+  16200,
+  16500,
+  16800,
+  17100,
+  17400,
+  17700,
+  18000,
+  18300,
+  18600,
+  18900,
+  19200,
+  19500
+ ],
+ "units": [
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 2
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 3,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 4,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 7,
+   "GGI": 5,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 11,
+   "GGI": 5,
+   "ORCA": 1
+  },
+  {
+   "MTNK": 5,
+   "E1": 13,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 5,
+   "E1": 21,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 5,
+   "E1": 17,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 5,
+   "E1": 15,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 5,
+   "E1": 13,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 5,
+   "E1": 13,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 6,
+   "E1": 12,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 6,
+   "E1": 12,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 6,
+   "E1": 12,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 6,
+   "E1": 11,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "MTNK": 6,
+   "E1": 10,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "E1": 16,
+   "GGI": 6,
+   "ORCA": 2
+  },
+  {
+   "E1": 14,
+   "GGI": 5,
+   "ORCA": 2
+  },
+  {
+   "E1": 20,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 1,
+   "E1": 14,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 1,
+   "E1": 10,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 1,
+   "E1": 10,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 1,
+   "E1": 6,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 1,
+   "E1": 4,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 2,
+   "E1": 4,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 2,
+   "E1": 4,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 3,
+   "E1": 4,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 3,
+   "E1": 4,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 3,
+   "E1": 4,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 3,
+   "E1": 10,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 3,
+   "E1": 10,
+   "GGI": 3,
+   "ORCA": 2
+  },
+  {
+   "ROBO": 3,
+   "E1": 18,
+   "GGI": 3,
+   "ORCA": 2
+  }
+ ],
+ "buildings": [
+  {
+   "GACNST": 1
+  },
+  {
+   "GACNST": 1
+  },
+  {
+   "GACNST": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 2
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 2
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 2
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 2
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 2,
+   "GAWEAP": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 2,
+   "GAWEAP": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 2,
+   "GAWEAP": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 4,
+   "GAWEAP": 1
+  },
+  {
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 5,
+   "GAWEAP": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 1,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 6,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 7,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 7,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 7,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 7,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 7,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 7,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 7,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 7,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 2,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 3,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 4,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 5,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 5,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 5,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 5,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 5,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  },
+  {
+   "CATEXS06": 1,
+   "CAAIRP": 1,
+   "GACNST": 1,
+   "GAPOWR": 5,
+   "GAPILE": 1,
+   "GAREFN": 1,
+   "GAPILL": 8,
+   "GAWEAP": 1,
+   "AMRADR": 1,
+   "GATECH": 1,
+   "ATESLA": 1,
+   "GAROBO": 1,
+   "GACSPH": 1
+  }
+ ],
+ "base_distance": 78.08969202141856,
+ "player_start_army": {
+  "HTNK": 4,
+  "E2": 12
+ },
+ "source": "logs\\ai_medium.jsonl, logs\\battle_medium_air.jsonl, logs\\battle_medium_apoc.jsonl, logs\\battle_medium_rush.jsonl, logs\\battle_medium_rush2.jsonl",
+ "difficulty": "medium",
+ "attacks": [
+  {
+   "frame": 8515,
+   "units": {
+    "E1": 3,
+    "GGI": 3
+   }
+  },
+  {
+   "frame": 18084,
+   "units": {
+    "ORCA": 2,
+    "E1": 14
+   }
+  }
+ ],
+ "responses": {},
+ "replace_rate": 1.0,
+ "notes": {
+  "replace_rate": "battle_medium_rush{,2}.jsonl: $1300 and $2700 of units replaced in 2000 frames",
+  "quantile": {
+   "p": 0.5,
+   "games": 5,
+   "slots": [
+    {
+     "slot": 0,
+     "game": "logs\\battle_medium_air.jsonl",
+     "of": 5,
+     "threat": 4967
+    },
+    {
+     "slot": 1,
+     "game": "logs\\ai_medium.jsonl",
+     "of": 2,
+     "threat": 7183
+    },
+    {
+     "slot": 2,
+     "game": "logs\\ai_medium.jsonl",
+     "of": 2,
+     "threat": 9800
+    },
+    {
+     "slot": 3,
+     "game": "logs\\ai_medium.jsonl",
+     "of": 1,
+     "threat": 14925
+    },
+    {
+     "slot": 4,
+     "game": "logs\\ai_medium.jsonl",
+     "of": 1,
+     "threat": 12667
+    },
+    {
+     "slot": 5,
+     "game": "logs\\ai_medium.jsonl",
+     "of": 1,
+     "threat": 12567
+    }
+   ]
+  }
+ }
+}

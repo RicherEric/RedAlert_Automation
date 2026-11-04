@@ -1,0 +1,15 @@
+# 由 calibrate.py fit / auto 產生；ra2opt.py 會自動載入（情境檔的 [calibration] 可再覆寫）
+# 產生時間 2026-10-31 08:27:23
+
+fps = 20.83  # 1 筆樣本
+speed_to_cells = 0.009154  # 6 筆樣本
+ore_distance = 10.47  # 12 筆樣本
+harvest_frames_per_bale = 28.8  # 12 筆樣本
+unload_frames = 285  # 9 筆樣本
+chrono_return_frames = 0
+mcv_deploy_frames = 209
+place_delay_frames = 199
+
+# 遊戲速度設定 -> 實測 fps（monitor.py 讀到的 GameSpeed）；情境檔可用 game_speed = N 指定
+[fps_by_speed]
+"3" = 20.83

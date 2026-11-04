@@ -1,0 +1,145 @@
+"""Execute an optimised build order in a live game: memory snapshots in, bridge commands out.
+
+The executor mirrors the economy simulator: one queue per production category (building /
+vehicle / infantry / aircraft), each running one item at a time in sequence order. Buildings are
+placed as soon as they finish. An item counts as done when one more of it is on the map than
+when its production was ordered, which is also what the simulator's "done" event means
+(buildings include the placement delay).
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Protocol
+
+from .bridge import BridgeError
+from .gamedata import GameData
+from .memory import Snapshot
+
+CATEGORIES = ("building", "vehicle", "infantry", "aircraft")
+MCVS = ("AMCV", "SMCV", "PCV")
+
+
+class Commander(Protocol):
+    def produce(self, type_id: str) -> str: ...
+    def place(self, type_id: str, cell: tuple[int, int] | None = None) -> tuple[int, int]: ...
+    def deploy(self, unit: int | str) -> str: ...
+
+
+@dataclass
+class _Job:
+    type_id: str
+    started: int
+    baseline: int
+    placed: bool = False
+    seen: bool = False  # the factory has been seen producing it
+
+
+@dataclass
+class BuildExecutor:
+    db: GameData
+    sequence: list[str]
+    commander: Commander
+    events: list[tuple[int, str, str]] = field(default_factory=list)  # (frame, kind, type)
+    deploy_frame: int | None = None
+    _heads: dict[str, int] = field(default_factory=lambda: {c: 0 for c in CATEGORIES})
+    _jobs: dict[str, _Job | None] = field(default_factory=lambda: {c: None for c in CATEGORIES})
+
+    def __post_init__(self) -> None:
+        self._queues = {c: [t for t in self.sequence if self.category(t) == c] for c in CATEGORIES}
+
+    def category(self, type_id: str) -> str:
+        kind = self.db.technos[type_id].kind
+        return kind if kind in CATEGORIES else "vehicle"
+
+    @property
+    def done(self) -> bool:
+        return all(self._jobs[c] is None and self._heads[c] >= len(self._queues[c]) for c in CATEGORIES)
+
+    @staticmethod
+    def owned(snap: Snapshot) -> dict[str, int]:
+        """On-map counts only: objects still being built exist off the map."""
+        out: dict[str, int] = {}
+        for o in snap.objects:
+            if o.owner == snap.player_index and o.health > 0 and o.on_map:
+                out[o.type_id] = out.get(o.type_id, 0) + 1
+        return out
+
+    def tick(self, snap: Snapshot) -> None:
+        owned = self.owned(snap)
+        if self.deploy_frame is None:
+            self._deploy_mcv(snap, owned)
+            return
+        factories = {f.category: f for f in snap.factories}
+        for cat in CATEGORIES:
+            job = self._jobs[cat]
+            if job is None:
+                self._start_next(cat, snap.frame, owned)
+                continue
+            f = factories.get(cat)
+            # Units also need their factory to have moved on, so a refinery's free harvester
+            # does not count as the harvester we ordered.
+            busy = cat != "building" and f is not None and f.type_id == job.type_id
+            job.seen |= busy
+            # A unit whose factory moved on is done even if the count did not grow: in a fight
+            # another of the same type may die meanwhile (and a hero can vanish on exit).
+            if (owned.get(job.type_id, 0) > job.baseline or job.seen) and not busy:
+                self.events.append((snap.frame, "done", job.type_id))
+                self._jobs[cat] = None
+                self._start_next(cat, snap.frame, owned)
+            elif cat == "building" and not job.placed:
+                f = factories.get("building")
+                if f and f.type_id == job.type_id and f.progress >= 1.0:
+                    self.commander.place(job.type_id)
+                    job.placed = True
+
+    def _deploy_mcv(self, snap: Snapshot, owned: dict[str, int]) -> None:
+        cnst = {"NACNST", "GACNST", "YACNST"}
+        if any(owned.get(c) for c in cnst):
+            self.deploy_frame = snap.frame
+            return
+        mcv = next((o for o in snap.objects if o.owner == snap.player_index and o.on_map
+                    and o.type_id in MCVS), None)
+        if mcv is None:
+            raise BridgeError("沒有建造廠也沒有基地車")
+        self.commander.deploy(mcv.address)
+        self.deploy_frame = snap.frame
+        self.events.append((snap.frame, "deploy", mcv.type_id))
+
+    def _start_next(self, cat: str, frame: int, owned: dict[str, int]) -> None:
+        if self._heads[cat] >= len(self._queues[cat]):
+            return
+        type_id = self._queues[cat][self._heads[cat]]
+        try:
+            self.commander.produce(type_id)
+        except BridgeError as e:
+            if "cannot build" in str(e):
+                return  # prerequisite or factory not there yet; retry next tick
+            raise
+        self._heads[cat] += 1
+        self._jobs[cat] = _Job(type_id, frame, owned.get(type_id, 0))
+        self.events.append((frame, "start", type_id))
+
+
+def compare(predicted: list[tuple[int, str, str]], actual: list[tuple[int, str, str]],
+            offset: int = 0) -> list[dict]:
+    """Pair the n-th start/done of each type in prediction and game; game frames minus offset."""
+    def index(events):
+        out: dict[tuple[str, str], list[int]] = {}
+        for frame, kind, tid in events:
+            if kind in ("start", "done"):
+                out.setdefault((tid, kind), []).append(frame)
+        return out
+
+    p, a = index(predicted), index([(f - offset, k, t) for f, k, t in actual])
+    rows, seen = [], {}
+    for frame, kind, tid in predicted:
+        if kind != "done":
+            continue
+        n = seen[tid] = seen.get(tid, -1) + 1
+        row = {"type": tid, "n": n + 1, "pred_start": p[(tid, "start")][n], "pred_done": frame}
+        starts, dones = a.get((tid, "start"), []), a.get((tid, "done"), [])
+        row["start"] = starts[n] if n < len(starts) else None
+        row["done"] = dones[n] if n < len(dones) else None
+        row["diff"] = None if row["done"] is None else row["done"] - frame
+        rows.append(row)
+    return rows

@@ -1,0 +1,816 @@
+{
+  "opponent": "easy_americans_firestorm",
+  "preference": {
+    "victory": 1.0,
+    "spent": 0.3,
+    "survive": 0.3
+  },
+  "front": [
+    {
+      "army": {
+        "E2": 20,
+        "SHK": 2
+      },
+      "victory": 6826.465578649883,
+      "spent": 5600.000000000002,
+      "survive": 0.5364960518363058,
+      "ready": 2699,
+      "arrive": 5471.465578649883,
+      "enemy": {
+        "MTNK": 5,
+        "E1": 7,
+        "GGI": 3,
+        "GACNST": 1,
+        "GAPOWR": 2,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "E2": 20
+      },
+      "victory": 7241.465578649883,
+      "spent": 3100.0000000000027,
+      "survive": 0.4162969161388059,
+      "ready": 2399,
+      "arrive": 5171.465578649883,
+      "enemy": {
+        "MTNK": 5,
+        "E1": 7,
+        "GGI": 3,
+        "GACNST": 1,
+        "GAPOWR": 2,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "E2": 19,
+        "FLAKT": 1,
+        "SHK": 3
+      },
+      "victory": 7756.465578649883,
+      "spent": 7799.999999999983,
+      "survive": 0.6241530113315528,
+      "ready": 3629,
+      "arrive": 6401.465578649883,
+      "enemy": {
+        "MTNK": 5,
+        "E1": 7,
+        "GGI": 3,
+        "GACNST": 1,
+        "GAPOWR": 2,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "E2": 20,
+        "FLAKT": 1,
+        "SHK": 2
+      },
+      "victory": 7771.465578649883,
+      "spent": 7399.999999999989,
+      "survive": 0.608546130992797,
+      "ready": 3629,
+      "arrive": 6401.465578649883,
+      "enemy": {
+        "MTNK": 5,
+        "E1": 7,
+        "GGI": 3,
+        "GACNST": 1,
+        "GAPOWR": 2,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "E2": 19,
+        "FLAKT": 1,
+        "SHK": 2
+      },
+      "victory": 7786.465578649883,
+      "spent": 7299.99999999999,
+      "survive": 0.5615657790021203,
+      "ready": 3629,
+      "arrive": 6401.465578649883,
+      "enemy": {
+        "MTNK": 5,
+        "E1": 7,
+        "GGI": 3,
+        "GACNST": 1,
+        "GAPOWR": 2,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "E2": 20,
+        "FLAKT": 1
+      },
+      "victory": 7901.465578649883,
+      "spent": 6400.000000000001,
+      "survive": 0.5986418371786055,
+      "ready": 3629,
+      "arrive": 6401.465578649883,
+      "enemy": {
+        "MTNK": 5,
+        "E1": 7,
+        "GGI": 3,
+        "GACNST": 1,
+        "GAPOWR": 2,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "E2": 20,
+        "FLAKT": 1,
+        "ZEP": 1
+      },
+      "victory": 12726.465578649884,
+      "spent": 13000.000000000055,
+      "survive": 0.6289813829709059,
+      "ready": 8834,
+      "arrive": 11606.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 4,
+        "GACNST": 1,
+        "GAPOWR": 3,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 2,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "ZEP": 3
+      },
+      "victory": 14396.465578649884,
+      "spent": 17500.000000000135,
+      "survive": 0.6614091006067699,
+      "ready": 10799,
+      "arrive": 13571.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 9,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "SCHP": 1,
+        "SHK": 2,
+        "ZEP": 2
+      },
+      "victory": 14736.465578649884,
+      "spent": 16200.000000000126,
+      "survive": 0.6504750738777589,
+      "ready": 11129,
+      "arrive": 13901.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 9,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "FLAKT": 1,
+        "SHK": 1,
+        "ZEP": 3
+      },
+      "victory": 14871.465578649884,
+      "spent": 18300.00000000011,
+      "survive": 0.7792431544650097,
+      "ready": 11294,
+      "arrive": 14066.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "APOC": 1,
+        "HTNK": 1,
+        "ZEP": 2
+      },
+      "victory": 14921.465578649884,
+      "spent": 18150.000000000047,
+      "survive": 0.6698144104803494,
+      "ready": 11249,
+      "arrive": 14021.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 9,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "SCHP": 2,
+        "ZEP": 3
+      },
+      "victory": 15736.465578649884,
+      "spent": 19700.00000000018,
+      "survive": 0.7816346153846154,
+      "ready": 12284,
+      "arrive": 15056.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "BORIS": 1,
+        "FLAKT": 2,
+        "ZEP": 3
+      },
+      "victory": 15741.465578649884,
+      "spent": 19600.00000000009,
+      "survive": 0.815813953488372,
+      "ready": 12239,
+      "arrive": 15011.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "HTK": 1,
+        "ZEP": 4
+      },
+      "victory": 15861.465578649884,
+      "spent": 20000.000000000175,
+      "survive": 0.8183607715784209,
+      "ready": 12449,
+      "arrive": 15221.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "BORIS": 1,
+        "SCHP": 3,
+        "ZEP": 2
+      },
+      "victory": 16206.465578649884,
+      "spent": 20300.00000000013,
+      "survive": 0.819485294117647,
+      "ready": 12644,
+      "arrive": 15416.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "BORIS": 1,
+        "FLAKT": 1,
+        "ZEP": 3
+      },
+      "victory": 16211.465578649884,
+      "spent": 19300.00000000004,
+      "survive": 0.8372992814810647,
+      "ready": 12614,
+      "arrive": 15386.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "BORIS": 1,
+        "FLAKT": 1,
+        "SCHP": 1,
+        "ZEP": 3
+      },
+      "victory": 16216.465578649884,
+      "spent": 20400.00000000012,
+      "survive": 0.8527372262773723,
+      "ready": 12719,
+      "arrive": 15491.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "APOC": 1,
+        "ZEP": 4
+      },
+      "victory": 16726.465578649884,
+      "spent": 21250.000000000124,
+      "survive": 0.8540378334016822,
+      "ready": 13274,
+      "arrive": 16046.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "ZEP": 5
+      },
+      "victory": 16771.465578649884,
+      "spent": 21500.000000000226,
+      "survive": 0.8589605335952893,
+      "ready": 13424,
+      "arrive": 16196.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "BORIS": 1,
+        "SCHP": 1,
+        "ZEP": 4
+      },
+      "victory": 17356.465578649884,
+      "spent": 22100.00000000017,
+      "survive": 0.8842725395679386,
+      "ready": 13934,
+      "arrive": 16706.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "BORIS": 1,
+        "SCHP": 2,
+        "ZEP": 4
+      },
+      "victory": 18001.465578649884,
+      "spent": 23200.000000000193,
+      "survive": 0.8926515151515152,
+      "ready": 14594,
+      "arrive": 17366.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "FLAKT": 1,
+        "ZEP": 6
+      },
+      "victory": 18366.465578649884,
+      "spent": 23800.00000000026,
+      "survive": 0.896728237804785,
+      "ready": 14999,
+      "arrive": 17771.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "BORIS": 1,
+        "ZEP": 6
+      },
+      "victory": 19146.465578649884,
+      "spent": 25000.000000000236,
+      "survive": 0.8991841497542149,
+      "ready": 15749,
+      "arrive": 18521.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "FLAKT": 1,
+        "ZEP": 7
+      },
+      "victory": 19736.465578649884,
+      "spent": 25800.000000000302,
+      "survive": 0.9139717154638812,
+      "ready": 16394,
+      "arrive": 19166.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    },
+    {
+      "army": {
+        "BORIS": 1,
+        "SCHP": 3,
+        "ZEP": 6
+      },
+      "victory": 21421.465578649884,
+      "spent": 28300.000000000302,
+      "survive": 0.9214813365004842,
+      "ready": 18074,
+      "arrive": 20846.465578649884,
+      "enemy": {
+        "MTNK": 2,
+        "E1": 7,
+        "GGI": 5,
+        "GACNST": 1,
+        "GAPOWR": 4,
+        "GAPILE": 1,
+        "GAREFN": 1,
+        "GAWEAP": 1,
+        "AMRADR": 1,
+        "GATECH": 1,
+        "ATESLA": 3,
+        "GAROBO": 1
+      },
+      "feasible": true
+    }
+  ],
+  "chosen": 2,
+  "history": [
+    {
+      "generation": 0,
+      "front_size": 5,
+      "feasible_share": 0.3617021276595745
+    },
+    {
+      "generation": 1,
+      "front_size": 9,
+      "feasible_share": 0.88
+    },
+    {
+      "generation": 2,
+      "front_size": 6,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 3,
+      "front_size": 8,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 4,
+      "front_size": 13,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 5,
+      "front_size": 15,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 6,
+      "front_size": 19,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 7,
+      "front_size": 16,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 8,
+      "front_size": 17,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 9,
+      "front_size": 20,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 10,
+      "front_size": 20,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 11,
+      "front_size": 18,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 12,
+      "front_size": 20,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 13,
+      "front_size": 18,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 14,
+      "front_size": 18,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 15,
+      "front_size": 19,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 16,
+      "front_size": 19,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 17,
+      "front_size": 20,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 18,
+      "front_size": 22,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 19,
+      "front_size": 23,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 20,
+      "front_size": 24,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 21,
+      "front_size": 24,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 22,
+      "front_size": 24,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 23,
+      "front_size": 24,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 24,
+      "front_size": 24,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 25,
+      "front_size": 24,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 26,
+      "front_size": 23,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 27,
+      "front_size": 24,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 28,
+      "front_size": 25,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 29,
+      "front_size": 25,
+      "feasible_share": 1.0
+    },
+    {
+      "generation": 30,
+      "front_size": 25,
+      "feasible_share": 1.0
+    }
+  ]
+}

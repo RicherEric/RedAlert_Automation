@@ -1,0 +1,53 @@
+{
+  "opponents": [
+    "hard_q50",
+    "hard_q80"
+  ],
+  "front": [
+    {
+      "army": {
+        "E2": 19
+      },
+      "early": {
+        "HTNK": 4,
+        "FLAKT": 1
+      },
+      "victory": {
+        "hard_q50": null,
+        "hard_q80": null
+      },
+      "spent": 11900.000000000015,
+      "survive": 0.0,
+      "ready": 6929,
+      "feasible": false,
+      "enemy": {
+        "hard_q50": {
+          "MTNK": 5,
+          "SHAD": 1,
+          "E1": 5,
+          "GGI": 3,
+          "GACNST": 1,
+          "GAPOWR": 2,
+          "GAPILE": 1,
+          "GAREFN": 2,
+          "GAPILL": 8,
+          "GAWEAP": 1,
+          "AMRADR": 1
+        },
+        "hard_q80": {
+          "MTNK": 5,
+          "E1": 7,
+          "GGI": 3,
+          "CAOILD": 1,
+          "GACNST": 1,
+          "GAPOWR": 1,
+          "GAPILE": 1,
+          "GAREFN": 1,
+          "GAPILL": 12,
+          "GAWEAP": 1,
+          "AMRADR": 1
+        }
+      }
+    }
+  ]
+}
