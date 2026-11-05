@@ -7,7 +7,7 @@ from collections import Counter
 from dataclasses import dataclass, field
 
 from .combat import Battle
-from .economy import EconomySim, EconomyState
+from .economy import HORIZON, EconomySim, EconomyState
 from .gamedata import GameData
 from .optimize import Evaluation
 from .params import Calibration
@@ -179,7 +179,7 @@ class MissionProblem(ArmyProblem):
             self.last_events = getattr(self.planner, "last_events", None)
             return out
         res = EconomySim(self.db, self.country, self.cal).run(self.economy_prefix, army,
-                                                              max_frames=27000)
+                                                              max_frames=HORIZON)
         self.last_events = list(res.events)
         return res.finish_frame, res.spent
 
@@ -193,7 +193,7 @@ class MissionProblem(ArmyProblem):
         finish, spent = self.plan(army) if army else (0.0, 0.0)
         if finish is None:
             ev.violations["unfinished"] = 1.0
-            finish = 27000
+            finish = HORIZON
         elif deadline is not None and finish > deadline:
             ev.violations["deadline"] = (finish - deadline) / deadline
         margin = ev.objective + self.cost_weight * ev.info["cost"] / (self.budget or 10000)  # = -agg
@@ -238,7 +238,7 @@ class VictoryProblem(MissionProblem):
     # from different games do not make an opponent that beats 80% of them.
     robust: bool = False
 
-    LOSS_FRAMES = 40000.0
+    LOSS_FRAMES = 60000.0  # above any win: builds may run to HORIZON, then march and fight
 
     def __post_init__(self):
         super().__post_init__()
@@ -265,6 +265,13 @@ class VictoryProblem(MissionProblem):
         early = early or {}
         return self._clamp([int(army.get(c, 0)) for c in self.candidates]
                            + [int(early.get(c, 0)) for c in self.early])
+
+    def economy(self, tid: str) -> bool:
+        """Harvesters and refineries in `early`: built first for income (the home ore runs out
+        around frame 13000), neither marching with the army nor guarding the base."""
+        t = self.db.technos[tid]
+        free = self.db.technos.get(t.free_unit) if t.free_unit else None
+        return (t.harvester and t.kind != "building") or (t.kind == "building" and free is not None and free.harvester)
 
     def early_of(self, genome: tuple) -> dict[str, int]:
         return {c: n for c, n in zip(self.early, genome[self.n_main:]) if n > 0}
@@ -451,8 +458,9 @@ class VictoryProblem(MissionProblem):
     def evaluate(self, genome: tuple) -> Evaluation:
         built = self.army(genome)
         early = self.early_of(genome)
-        early_units = {t: n for t, n in early.items() if self.db.technos[t].kind != "building"}
-        towers = {t: n for t, n in early.items() if self.db.technos[t].kind == "building"}
+        fighting = {t: n for t, n in early.items() if not self.economy(t)}
+        early_units = {t: n for t, n in fighting.items() if self.db.technos[t].kind != "building"}
+        towers = {t: n for t, n in fighting.items() if self.db.technos[t].kind == "building"}
         built = dict(Counter(built) + Counter(early_units))
         guard = dict(Counter(self.home_guard(built)) + Counter(towers))
         army = dict(Counter(built) + Counter(self.opponent.player_start_army) - Counter(self.home_guard(built)))
@@ -461,7 +469,7 @@ class VictoryProblem(MissionProblem):
         v: dict[str, float] = {}
         if finish is None:
             v["unfinished"] = 1.0
-            finish = 27000.0
+            finish = float(HORIZON)
         units = sum(built.values())
         if self.max_units is not None and units > self.max_units:
             v["max_units"] = float(units - self.max_units)
@@ -476,6 +484,7 @@ class VictoryProblem(MissionProblem):
                 if best is None or score(alt) < score(best[0]):
                     best = (alt, f_, s_, ev_)
             fights, finish, spent, self.last_events = best
+            v.pop("unfinished", None)  # only the plain plan ran out of time; this one finished
         else:
             fights = [self.fight(army, finish, o, guard, events) for o in self.opponents]
         first = fights[0]

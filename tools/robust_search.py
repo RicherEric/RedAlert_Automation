@@ -19,7 +19,8 @@ from ra2opt import label, load_calibration, load_db  # noqa: E402
 from ra2tools.mission import choose_victory, pareto, victory_problem, victory_seeds  # noqa: E402
 from ra2tools.opponent import Opponent, games_from_logs  # noqa: E402
 
-LOGS = ["logs/ai_hard.jsonl", "logs/battle_hard*.jsonl", "logs/observe_hard_[0-9].jsonl", "logs/challenge_hard_q.jsonl"]
+LOGS = ["logs/ai_hard.jsonl", "logs/battle_hard*.jsonl", "logs/observe_hard_[0-9].jsonl", "logs/challenge_hard_q.jsonl",
+        "logs/challenge_hard_robust*.jsonl"]
 PREFER = {"win_rate": 1.0, "frames": 0.4, "spent": 0.2, "survive": 0.2}
 
 
@@ -43,8 +44,9 @@ def main() -> None:
     patterns = v.get("seed_results", [])
     for pattern in [patterns] if isinstance(patterns, str) else patterns + ["results/soviet_vs_hard_robust_*.json"]:
         for path in sorted(glob.glob(str(ROOT / pattern))):
+            front = json.loads(Path(path).read_text(encoding="utf-8")).get("front", [])  # not the _cv_ results
             known += [{**r["army"], **({"early": r["early"]} if r.get("early") else {})}
-                      for r in json.loads(Path(path).read_text(encoding="utf-8"))["front"] if r.get("feasible")]
+                      for r in front if r.get("feasible")]
     pop = v.get("pop_size", 60)
     seeds = victory_seeds(problem, known, v.get("top_k", pop // 4))
     print(f"初始族群：{len(known)} 個已知方案中挑最好的 {len(seeds)} 個，其餘隨機")

@@ -16,6 +16,14 @@ class Calibration:
     harvest_frames_per_bale: float = 3.0
     unload_frames: float = 60.0
     chrono_return_frames: float = 45.0  # chrono miner teleport back
+    # Ore depletion: once refinery harvesters have brought in this many credits the home field is
+    # empty and they drive to a field ore_far_distance cells out (0 = never runs out). Measured
+    # 2026-11-05 from two live games vs hard: 3 HARV switched at ~13100 after ~$15k, cycle 1900 -> 2900.
+    ore_home_credits: float = 0.0
+    # Share of a full load a refinery harvester brings back per trip on average (partial loads,
+    # harassment). Live hard games 2026-11-05: about 0.8 of the cycle-time estimate.
+    harvest_efficiency: float = 1.0
+    ore_far_distance: float = 0.0
     slave_cycle_frames: float = 300.0   # one slave miner worker round trip
     place_delay_frames: float = 15.0    # time for the player to place a finished building
     mcv_deploy_frames: float = 75.0

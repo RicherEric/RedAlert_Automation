@@ -77,3 +77,35 @@ def test_build_frames_match_game(db):
                 "NAPOWR": 324, "GAROBO": 324}
     for tid, frames in measured.items():
         assert db.build_frames(db.technos[tid]) == frames
+
+
+def test_home_ore_runs_out(db):
+    cal = Calibration(ore_distance=10, harvest_frames_per_bale=28.8, unload_frames=285, speed_to_cells=0.009)
+    sim = EconomySim(db, "Russians", cal)
+    order = ["NAPOWR", "NAREFN", "HARV", "HARV"]
+    full = sim.run(order, {"APOC": 50}, max_frames=30000)
+    gone = EconomySim(db, "Russians", Calibration(**{**cal.__dict__, "ore_home_credits": 8000,
+                                                     "ore_far_distance": 40})).run(order, {"APOC": 50}, max_frames=30000)
+    assert gone.income < full.income
+    half = EconomySim(db, "Russians", Calibration(**{**cal.__dict__, "harvest_efficiency": 0.5}))
+    assert half.run(order, {"APOC": 50}, max_frames=6000).income < sim.run(order, {"APOC": 50}, max_frames=6000).income
+
+
+def test_short_game_continues_as_the_longest():
+    from ra2tools.opponent import Opponent, extend_with
+    mk = lambda name, frames, n: Opponent(name, "Americans", "Russians", frames, [{"MTNK": n}] * len(frames),
+                                          [{}] * len(frames), 70.0, attacks=[{"frame": f, "units": {}} for f in frames])
+    short, long = mk("short", [0, 1000], 2), mk("long", [0, 1000, 2000, 3000], 9)
+    g = extend_with(short, long)
+    assert g.at(500)[0] == {"MTNK": 2} and g.at(2500)[0] == {"MTNK": 9}
+    assert [a["frame"] for a in g.attacks] == [0, 1000, 2000, 3000]
+
+
+def test_hardened_waves_are_bigger_and_sooner():
+    from ra2tools.opponent import Opponent, harden
+    g = Opponent("g", "Americans", "Russians", [0, 1000], [{}, {}], [{}, {}], 70.0,
+                 attacks=[{"frame": 5000, "units": {"MTNK": 4, "E1": 1}}], raids=[{"frame": 800, "units": {"TANY": 1}}])
+    h = harden(g, 1.2, 1000)
+    assert h.attacks == [{"frame": 4000, "units": {"MTNK": 5, "E1": 1}}]
+    assert h.raids == [{"frame": 0, "units": {"TANY": 1}}]
+    assert g.attacks[0]["frame"] == 5000 and harden(g) is g

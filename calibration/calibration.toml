@@ -7,6 +7,10 @@ ore_distance = 10.47  # 12 筆樣本
 harvest_frames_per_bale = 28.8  # 12 筆樣本
 unload_frames = 285  # 9 筆樣本
 chrono_return_frames = 0
+# 礦區耗盡與實際載量（2026-11-05 依困難 AI 兩場實機的收入擬合；家礦約第 13100 幀採完，遠礦一趟約 2900 幀）
+ore_home_credits = 12000
+ore_far_distance = 33
+harvest_efficiency = 0.8
 mcv_deploy_frames = 209
 place_delay_frames = 199
 

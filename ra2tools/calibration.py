@@ -75,7 +75,7 @@ TESTS: dict[str, dict] = {
 }
 
 FIT_ORDER = ["fps", "speed_to_cells", "ore_distance", "harvest_frames_per_bale", "unload_frames",
-             "chrono_return_frames", "mcv_deploy_frames", "place_delay_frames",
+             "chrono_return_frames", "ore_home_credits", "ore_far_distance", "harvest_efficiency", "mcv_deploy_frames", "place_delay_frames",
              "bot_mcv_deploy_frames", "bot_place_delay_frames",
              "aircraft_reload_frames", "slave_cycle_frames"]
 

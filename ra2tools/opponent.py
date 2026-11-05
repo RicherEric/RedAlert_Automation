@@ -232,11 +232,42 @@ def quantile(db: GameData, games: list[Opponent], p: float, name: str, template:
         {**template.notes, "quantile": {"p": p, "games": len(games), "slots": picked}}, raids=raids)
 
 
-def games_from_logs(db: GameData, paths: list[str], template: Opponent, min_frames: int = 16000) -> list[Opponent]:
+def extend_with(g: Opponent, tail: Opponent) -> Opponent:
+    """`g` continued past its last sample by `tail`'s later samples, attacks and raids, instead of
+    at() holding g's last sample for the rest of the match (an AI frozen in time)."""
+    from dataclasses import replace
+    end = g.frames[-1]
+    k = bisect.bisect_right(tail.frames, end)
+    if k >= len(tail.frames):
+        return g
+    later = lambda events: [e for e in events if e["frame"] > end]
+    return replace(g, frames=g.frames + tail.frames[k:], units=g.units + tail.units[k:],
+                   buildings=g.buildings + tail.buildings[k:], attacks=g.attacks + later(tail.attacks),
+                   raids=g.raids + later(tail.raids),
+                   notes={**g.notes, "extended": f"after frame {end} from {tail.name}"})
+
+
+def harden(g: Opponent, scale: float = 1.0, earlier: float = 0.0) -> Opponent:
+    """`g` with every attack wave and raid `scale` times as big (rounded half up, never smaller)
+    and `earlier` frames sooner: a safety margin, since the hard AI's waves differ from game to
+    game and plans that just held the recorded ones lost the games they had not seen."""
+    from dataclasses import replace
+    if scale == 1.0 and not earlier:
+        return g
+    grow = lambda u: {t: max(n, math.floor(n * scale + 0.5)) for t, n in u.items()}
+    move = lambda events: [{**e, "frame": max(0, int(e["frame"] - earlier)), "units": grow(e["units"])}
+                           for e in events]
+    return replace(g, attacks=move(g.attacks), raids=move(g.raids),
+                   notes={**g.notes, "hardened": {"scale": scale, "earlier": earlier}})
+
+
+def games_from_logs(db: GameData, paths: list[str], template: Opponent, min_frames: int = 16000,
+                    extend: bool = True) -> list[Opponent]:
     """Each recorded game as its own opponent (VictoryProblem robust mode, per-game checks), with
     what a single record cannot show from `template` (responses, replace rate, start army, base
     distance) and the response buildings left out, as in quantile(). Games recorded for less than
-    `min_frames` are skipped: at() would hold their last sample for the rest of the match."""
+    `min_frames` are skipped. With `extend` the shorter games go on as the longest one does
+    (extend_with): a $30k army is only ready around frame 30000, when most records have ended."""
     from dataclasses import replace
     answers = {t for r in template.responses.values() for t in r.get("add", {})}
     out = []
@@ -248,5 +279,8 @@ def games_from_logs(db: GameData, paths: list[str], template: Opponent, min_fram
                            base_distance=template.base_distance, player_start_army=dict(template.player_start_army),
                            responses=dict(template.responses), replace_rate=template.replace_rate,
                            difficulty=template.difficulty))
+    if extend and out:
+        longest = max(out, key=lambda g: g.frames[-1])
+        out = [extend_with(g, longest) for g in out]
     return out
 

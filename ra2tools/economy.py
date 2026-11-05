@@ -3,8 +3,9 @@
 Modelled: per-category production queues (building/infantry/vehicle/aircraft) running in
 parallel, gradual payment (production stalls when broke), BuildSpeed and BuildTimeMultiplier,
 MultipleFactory speed-up, low-power slowdown, building placement delay, prerequisites,
-refinery free harvesters with dock contention, chrono-miner teleport, Yuri slave miners.
-Not modelled: ore depletion, base layout/travel distance changes, losing units, selling.
+refinery free harvesters with dock contention, chrono-miner teleport, Yuri slave miners,
+the home ore field running out (Calibration.ore_home_credits).
+Not modelled: ore regrowth, base layout/travel distance changes, losing units, selling.
 """
 from __future__ import annotations
 
@@ -15,6 +16,9 @@ from .gamedata import GameData, Techno
 from .params import Calibration
 
 CATEGORIES = ("building", "vehicle", "infantry", "aircraft")
+# How far mission planning simulates a build. Was 27000; with ore depletion modelled a $30k army
+# finishes around 30000 (live 2026-11-03: the 6th APOC at 30888).
+HORIZON = 36000
 
 # Generic prerequisite token -> key in SIDE_BASICS used when auto-inserting prerequisites.
 TOKEN_TO_BASIC = {"POWER": "power", "PROC": "proc", "RADAR": "radar", "TECH": "tech",
@@ -58,7 +62,8 @@ class EconomyState:
     money: float
     spent: float = 0.0
     income: float = 0.0
-    harvesters: list[list] = field(default_factory=list)  # [next_income_frame, amount, cycle, uses_dock]
+    mined: float = 0.0      # credits brought in from the home ore field by refinery harvesters
+    harvesters: list[list] = field(default_factory=list)  # [next_income_frame, amount, cycle, uses_dock, far_extra]
     dock_free: list[float] = field(default_factory=list)  # when each refinery dock frees up
     jobs: dict[str, _Job | None] = field(default_factory=lambda: {c: None for c in CATEGORIES})
     events: list[tuple[int, str, str]] = field(default_factory=list)
@@ -152,14 +157,17 @@ class EconomySim:
         return out
 
     # ----------------------------------------------------------------- running
-    def _harvest_cycle(self, t: Techno) -> tuple[float, float]:
+    def _harvest_cycle(self, t: Techno, distance: float | None = None) -> tuple[float, float]:
         """(frames before reaching the refinery dock, credits per load)."""
         cal = self.cal
         speed = max(t.speed * cal.speed_to_cells, 1e-6)
-        travel = cal.ore_distance / speed
+        travel = (cal.ore_distance if distance is None else distance) / speed
         load = t.storage * cal.harvest_frames_per_bale
         back = cal.chrono_return_frames if t.teleporter else travel
-        return travel + load + back, t.storage * self.db.ore_value
+        return travel + load + back, t.storage * self.db.ore_value * cal.harvest_efficiency
+
+    def depleted(self, state: EconomyState) -> bool:
+        return 0 < self.cal.ore_home_credits <= state.mined
 
     def initial_state(self) -> EconomyState:
         """Construction yard just deployed, starting credits, nothing else."""
@@ -180,7 +188,7 @@ class EconomySim:
         return out, drain
 
     def _schedule(self, state: EconomyState, h: list, now: float) -> None:
-        arrival = now + h[2]
+        arrival = now + h[2] + (h[4] if self.depleted(state) else 0.0)
         if h[3] and state.dock_free:
             k = min(range(len(state.dock_free)), key=state.dock_free.__getitem__)
             start = max(arrival, state.dock_free[k])
@@ -194,10 +202,11 @@ class EconomySim:
         if t.enslaves and t.slaves_number:
             slave = db.technos.get(t.enslaves)
             amount = t.slaves_number * (slave.storage if slave else 4) * db.ore_value
-            h = [0.0, amount, cal.slave_cycle_frames, False]
+            h = [0.0, amount, cal.slave_cycle_frames, False, 0.0]
         elif t.harvester and t.kind != "building":
             cycle, amount = self._harvest_cycle(t)
-            h = [0.0, amount, cycle, True]
+            far = self._harvest_cycle(t, max(cal.ore_far_distance, cal.ore_distance))[0]
+            h = [0.0, amount, cycle, True, far - cycle]
         else:
             return
         self._schedule(state, h, now)
@@ -240,6 +249,8 @@ class EconomySim:
             while h[0] <= frame:
                 state.money += h[1]
                 state.income += h[1]
+                if h[3]:
+                    state.mined += h[1]
                 self._schedule(state, h, h[0])
 
         power_out, drain = self.power(state.owned)

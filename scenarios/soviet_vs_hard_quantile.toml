@@ -94,12 +94,14 @@ seeds = [
   { APOC = 3, ZEP = 3 },         # 搜尋 v6：中等 AI 的空軍方案
   { E2 = 1, ZEP = 2 },           # 第 3 場困難 AI 的空軍方案（不含 SCHP）
   { APOC = 5, HTK = 6, ZEP = 3, early = { HTK = 8 } },   # 手動試出：先蓋 8 台防空履帶車擋第 8 分鐘那波
+  { APOC = 8, BORIS = 1, E2 = 1, FLAKT = 1, HTK = 5, ZEP = 6, early = { E2 = 1, NAREFN = 2, HARV = 5 } },  # 經濟路線（2026-11-05）
 ]
 seed_results = ["results/soviet_vs_allied_victory_*.json", "results/soviet_vs_hard_quantile_victory_*.json"]
 max_units = 25
 # 早期防守（2026-11-02）：困難 AI 最兇的 20% 對局在第 8 分鐘就來一波（含入侵者戰機），先蓋科技的方案
 # 那時家裡只有開局部隊。這些基因先蓋、再蓋主力：單位會跟著出發，防禦建築留在家守。
-early = ["HTNK", "E2", "HTK", "FLAKT", "TESLA", "NALASR", "NAFLAK"]
+# 經濟路線（2026-11-05）：家裡的礦約第 13000 幀採完，HARV（礦車總數）、NAREFN（多蓋幾座礦場）也放進來先蓋。
+early = ["HTNK", "E2", "HTK", "FLAKT", "TESLA", "NALASR", "NAFLAK", "HARV", "NAREFN"]
 max_early = 8
 exclude = ["SCHP", "DESO"]   # deploy-to-fire: the live controller cannot deploy yet
 travel_factor = 1.3

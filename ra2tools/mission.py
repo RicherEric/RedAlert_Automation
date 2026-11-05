@@ -51,17 +51,17 @@ class PolicyPlanner:
         """The fastest plan for army + `early`. With `early` (VictoryProblem.early) the plans that
         build it first are kept too, in `self.options` [(finish, spent, events)]: building the
         defence first costs time, and only the fights can tell whether it is worth it."""
-        from .economy import EconomySim
+        from .economy import HORIZON, EconomySim
         from .live_policy import simulate
 
         self.calls += 1
         weights = self.weights or {"frames": 1.0, "spent": 0.0}
         total = dict(Counter(army) + Counter(early or {}))
         options = []
-        res = EconomySim(self.db, self.country, self.cal).run([], total, max_frames=27000)
+        res = EconomySim(self.db, self.country, self.cal).run([], total, max_frames=HORIZON)
         options.append((res.finish_frame, res.spent, list(res.events)))
         if self._policy is not None:
-            env = BuildEnv(self.db, self.country, total, self.cal, vocab=self._policy.vocab)
+            env = BuildEnv(self.db, self.country, total, self.cal, vocab=self._policy.vocab, max_frames=HORIZON)
             events, frame, spent, done = simulate(env, self._policy, weights)
             if done:
                 options.append((frame, spent, events))
@@ -71,7 +71,7 @@ class PolicyPlanner:
         options = options[:1] if options[0][0] is not None else options[1:] or options[:1]
         if early:
             first = [t for t, n in early.items() for _ in range(n)]
-            res = EconomySim(self.db, self.country, self.cal).run(first, total, max_frames=27000)
+            res = EconomySim(self.db, self.country, self.cal).run(first, total, max_frames=HORIZON)
             if res.finish_frame is not None:
                 options.append((res.finish_frame, res.spent, list(res.events)))
             if self._policy is not None:  # the policy on the early block (+ harvesters), then the rest
@@ -87,8 +87,9 @@ class PolicyPlanner:
         return options[0][0], options[0][1]
 
     def _run(self, targets: dict[str, int], weights: dict, state=None):
+        from .economy import HORIZON
         """The build policy from `state` (default: the start) until `targets` are owned or time is up."""
-        env = BuildEnv(self.db, self.country, targets, self.cal, vocab=self._policy.vocab)
+        env = BuildEnv(self.db, self.country, targets, self.cal, vocab=self._policy.vocab, max_frames=HORIZON)
         obs = env.reset(state)
         while obs is not None:
             obs = env.step(self._policy.act(env, obs, weights))

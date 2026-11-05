@@ -19,7 +19,8 @@ from ra2opt import load_calibration, load_db  # noqa: E402
 from ra2tools.mission import victory_problem  # noqa: E402
 from ra2tools.opponent import Opponent, games_from_logs  # noqa: E402
 
-LOGS = ["logs/ai_hard.jsonl", "logs/battle_hard*.jsonl", "logs/observe_hard_[0-9].jsonl", "logs/challenge_hard_q.jsonl"]
+LOGS = ["logs/ai_hard.jsonl", "logs/battle_hard*.jsonl", "logs/observe_hard_[0-9].jsonl", "logs/challenge_hard_q.jsonl",
+        "logs/challenge_hard_robust*.jsonl"]
 
 
 def parse(items):

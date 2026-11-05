@@ -1,0 +1,485 @@
+{
+ "games": [
+  "ai_hard",
+  "observe_hard_1",
+  "observe_hard_2",
+  "observe_hard_3",
+  "observe_hard_4",
+  "observe_hard_5",
+  "observe_hard_6",
+  "observe_hard_7",
+  "observe_hard_8",
+  "challenge_hard_q",
+  "challenge_hard_robust",
+  "challenge_hard_robust_2"
+ ],
+ "preference": {
+  "win_rate": 1.0,
+  "frames": 0.4,
+  "spent": 0.2,
+  "survive": 0.2
+ },
+ "generations": 40,
+ "summary": {
+  "最高勝率": {
+   "train_rate": 0.5681818181818182,
+   "held_out_wins": 2,
+   "folds": 12
+  },
+  "偏好": {
+   "train_rate": 0.5151515151515151,
+   "held_out_wins": 2,
+   "folds": 12
+  }
+ },
+ "folds": [
+  {
+   "held_out": "ai_hard",
+   "seconds": 729.2844760417938,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "APOC": 7,
+      "BORIS": 1,
+      "E2": 2,
+      "HTK": 6,
+      "ZEP": 6
+     },
+     "early": {
+      "HTK": 3,
+      "HARV": 4
+     },
+     "train_rate": 0.8181818181818182,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.75,
+     "spent": 43349.99999999981
+    },
+    "偏好": {
+     "army": {
+      "APOC": 6,
+      "BORIS": 1,
+      "HTK": 6,
+      "ZEP": 6
+     },
+     "early": {
+      "HTK": 3,
+      "HARV": 4
+     },
+     "train_rate": 0.7272727272727273,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.6666666666666666,
+     "spent": 41399.999999999854
+    }
+   }
+  },
+  {
+   "held_out": "observe_hard_1",
+   "seconds": 772.4347865581512,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "E2": 25
+     },
+     "early": {},
+     "train_rate": 0.2727272727272727,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.25,
+     "spent": 3600.0000000000027
+    },
+    "偏好": {
+     "army": {
+      "E2": 25
+     },
+     "early": {},
+     "train_rate": 0.2727272727272727,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.25,
+     "spent": 3600.0000000000027
+    }
+   }
+  },
+  {
+   "held_out": "observe_hard_2",
+   "seconds": 796.2399158477783,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "APOC": 7,
+      "BORIS": 1,
+      "HTK": 5,
+      "TTNK": 1,
+      "ZEP": 6
+     },
+     "early": {
+      "E2": 1,
+      "HTK": 4,
+      "HARV": 5
+     },
+     "train_rate": 0.7272727272727273,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.6666666666666666,
+     "spent": 45849.999999999665
+    },
+    "偏好": {
+     "army": {
+      "APOC": 3,
+      "BORIS": 1,
+      "HTK": 5,
+      "ZEP": 7
+     },
+     "early": {
+      "HTNK": 1,
+      "E2": 1,
+      "HTK": 7,
+      "HARV": 6
+     },
+     "train_rate": 0.6363636363636364,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.5833333333333334,
+     "spent": 43450.00000000006
+    }
+   }
+  },
+  {
+   "held_out": "observe_hard_3",
+   "seconds": 606.1054975986481,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "APOC": 9,
+      "FLAKT": 5,
+      "ZEP": 6
+     },
+     "early": {
+      "E2": 1,
+      "NAFLAK": 1,
+      "HARV": 1
+     },
+     "train_rate": 0.5454545454545454,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.5,
+     "spent": 43249.99999999969
+    },
+    "偏好": {
+     "army": {
+      "APOC": 8,
+      "FLAKT": 3,
+      "ZEP": 6
+     },
+     "early": {
+      "E2": 1,
+      "NAFLAK": 1
+     },
+     "train_rate": 0.5454545454545454,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.5,
+     "spent": 40899.999999999745
+    }
+   }
+  },
+  {
+   "held_out": "observe_hard_4",
+   "seconds": 799.2997715473175,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "APOC": 6,
+      "HTK": 1,
+      "TTNK": 1,
+      "ZEP": 7
+     },
+     "early": {
+      "HTNK": 1,
+      "E2": 1,
+      "HTK": 8,
+      "HARV": 5
+     },
+     "train_rate": 0.7272727272727273,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.6666666666666666,
+     "spent": 45499.99999999986
+    },
+    "偏好": {
+     "army": {
+      "APOC": 5,
+      "HTK": 1,
+      "HTNK": 1,
+      "ZEP": 6
+     },
+     "early": {
+      "E2": 1,
+      "HTK": 8,
+      "HARV": 4,
+      "NAREFN": 1
+     },
+     "train_rate": 0.6363636363636364,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.5833333333333334,
+     "spent": 39149.999999999854
+    }
+   }
+  },
+  {
+   "held_out": "observe_hard_5",
+   "seconds": 736.4378530979156,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "E2": 25
+     },
+     "early": {},
+     "train_rate": 0.2727272727272727,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.25,
+     "spent": 3600.0000000000027
+    },
+    "偏好": {
+     "army": {
+      "E2": 25
+     },
+     "early": {},
+     "train_rate": 0.2727272727272727,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.25,
+     "spent": 3600.0000000000027
+    }
+   }
+  },
+  {
+   "held_out": "observe_hard_6",
+   "seconds": 790.3514523506165,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "E2": 25
+     },
+     "early": {},
+     "train_rate": 0.2727272727272727,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.25,
+     "spent": 3600.0000000000027
+    },
+    "偏好": {
+     "army": {
+      "E2": 25
+     },
+     "early": {},
+     "train_rate": 0.2727272727272727,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.25,
+     "spent": 3600.0000000000027
+    }
+   }
+  },
+  {
+   "held_out": "observe_hard_7",
+   "seconds": 736.0767638683319,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "APOC": 8,
+      "FLAKT": 1,
+      "ZEP": 7
+     },
+     "early": {
+      "HTK": 8,
+      "HARV": 5,
+      "NAREFN": 1
+     },
+     "train_rate": 0.7272727272727273,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.6666666666666666,
+     "spent": 46599.99999999964
+    },
+    "偏好": {
+     "army": {
+      "APOC": 7,
+      "BORIS": 1,
+      "ZEP": 6
+     },
+     "early": {
+      "HTK": 7,
+      "FLAKT": 1,
+      "HARV": 4
+     },
+     "train_rate": 0.6363636363636364,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.5833333333333334,
+     "spent": 42449.99999999984
+    }
+   }
+  },
+  {
+   "held_out": "observe_hard_8",
+   "seconds": 743.7663412094116,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "E2": 25
+     },
+     "early": {},
+     "train_rate": 0.2727272727272727,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.25,
+     "spent": 3600.0000000000027
+    },
+    "偏好": {
+     "army": {
+      "E2": 25
+     },
+     "early": {},
+     "train_rate": 0.2727272727272727,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.25,
+     "spent": 3600.0000000000027
+    }
+   }
+  },
+  {
+   "held_out": "challenge_hard_q",
+   "seconds": 783.0205957889557,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "APOC": 7,
+      "BORIS": 1,
+      "FLAKT": 1,
+      "HTK": 5,
+      "ZEP": 6
+     },
+     "early": {
+      "E2": 1,
+      "HTK": 4,
+      "HARV": 4
+     },
+     "train_rate": 0.8181818181818182,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.75,
+     "spent": 43549.99999999979
+    },
+    "偏好": {
+     "army": {
+      "APOC": 7,
+      "BORIS": 1,
+      "FLAKT": 1,
+      "HTK": 5,
+      "ZEP": 6
+     },
+     "early": {
+      "E2": 2,
+      "HTK": 1,
+      "HARV": 4
+     },
+     "train_rate": 0.7272727272727273,
+     "held_out_won": false,
+     "held_out_frame": null,
+     "all_rate": 0.6666666666666666,
+     "spent": 42149.99999999985
+    }
+   }
+  },
+  {
+   "held_out": "challenge_hard_robust",
+   "seconds": 703.9043066501617,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "APOC": 9,
+      "FLAKT": 1,
+      "ZEP": 6
+     },
+     "early": {
+      "HTK": 8,
+      "FLAKT": 1,
+      "HARV": 5
+     },
+     "train_rate": 0.7272727272727273,
+     "held_out_won": true,
+     "held_out_frame": 41776.465578649884,
+     "all_rate": 0.75,
+     "spent": 46649.9999999996
+    },
+    "偏好": {
+     "army": {
+      "APOC": 8,
+      "FLAKT": 1,
+      "ZEP": 6
+     },
+     "early": {
+      "E2": 2,
+      "HTK": 7,
+      "HARV": 5
+     },
+     "train_rate": 0.6363636363636364,
+     "held_out_won": true,
+     "held_out_frame": 41961.465578649884,
+     "all_rate": 0.6666666666666666,
+     "spent": 44299.99999999961
+    }
+   }
+  },
+  {
+   "held_out": "challenge_hard_robust_2",
+   "seconds": 841.3079948425293,
+   "picks": {
+    "最高勝率": {
+     "army": {
+      "APOC": 6,
+      "BORIS": 1,
+      "HTK": 3,
+      "ZEP": 6
+     },
+     "early": {
+      "HTNK": 1,
+      "E2": 1,
+      "HTK": 7,
+      "NAFLAK": 1,
+      "HARV": 5
+     },
+     "train_rate": 0.6363636363636364,
+     "held_out_won": true,
+     "held_out_frame": 41651.465578649884,
+     "all_rate": 0.6666666666666666,
+     "spent": 45299.99999999988
+    },
+    "偏好": {
+     "army": {
+      "APOC": 6,
+      "BORIS": 1,
+      "ZEP": 5
+     },
+     "early": {
+      "HTNK": 1,
+      "E2": 3,
+      "HTK": 8,
+      "HARV": 4
+     },
+     "train_rate": 0.5454545454545454,
+     "held_out_won": true,
+     "held_out_frame": 41696.465578649884,
+     "all_rate": 0.5833333333333334,
+     "spent": 40099.999999999825
+    }
+   }
+  }
+ ]
+}
