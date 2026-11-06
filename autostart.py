@@ -190,11 +190,15 @@ def setup_skirmish() -> None:
     print("  skirmish → 出生位置 2")
 
 
-def wait_for_screen(name: str, timeout: float) -> None:
+def wait_for_screen(name: str, timeout: float, hwnd: int | None = None) -> None:
+    """With `hwnd`, keep bringing the game to the front: launched while another window (a busy
+    terminal) has the focus, it stayed behind it and the menu never showed (2026-11-07, 05:04)."""
     end = time.monotonic() + timeout
     while time.monotonic() < end:
         if which_screen()[0] == name:
             return
+        if hwnd is not None:
+            L.focus(hwnd)
         time.sleep(0.5)
     screen, diff = which_screen()
     raise RuntimeError(f"等不到「{name}」畫面（目前像是 {screen}，差異 {diff:.1f}）")
@@ -230,7 +234,7 @@ def start(args) -> None:
         return
     hwnd = L.launch(args.game_dir)
     print("遊戲已啟動，等待主選單...")
-    wait_for_screen("main", timeout=90)
+    wait_for_screen("main", timeout=90, hwnd=hwnd)
     for screen, (gx, gy), expect in STEPS:
         wait_for_screen(screen, timeout=15)
         if screen == getattr(args, "stop_at", None):

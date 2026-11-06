@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 import time
 import tomllib
@@ -86,7 +87,8 @@ def predict_victory(args, db, country, cal, targets, policy, early: dict | None 
     cands = list(targets)
     early = early or {}
     p = VictoryProblem(db, country, [], cands, cal, CombatSettings(**args.cfg.get("combat", {})),
-                       planner=PolicyPlanner(db, country, cal, args.model), opponent=opp, early=list(early))
+                       planner=PolicyPlanner(db, country, cal, args.model), opponent=opp, early=list(early),
+                       garrison=args.cfg.get("victory", {}).get("garrison", 0))
     ev = p.evaluate(p.genome_of(targets, early))
     i = ev.info
     out = {"ready": i["finish_frame"], "depart": i.get("depart_frame"), "arrive": i["arrive_frame"],
@@ -103,6 +105,9 @@ def predict_victory(args, db, country, cal, targets, policy, early: dict | None 
 
 
 _camera_at = {"frame": -10**9}
+RECALL_SHARE = 0.25  # an AI wave worth this share of our army calls it back while gathering
+ADAPT_EVERY = 3000  # frames between counter checks while building
+ADAPT_UNITS = ["FLAKT", "HTK", "HTNK", "E2", "TTNK", "APOC", "V3", "DRON"]  # always weighed as counters
 
 
 def follow_camera(bridge, a, snap, every: int = 15) -> None:
@@ -120,7 +125,8 @@ def follow_camera(bridge, a, snap, every: int = 15) -> None:
     _camera_at["frame"] = snap.frame
 
 
-def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = frozenset()) -> dict:
+def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = frozenset(),
+               steward=None, reinforcer=None) -> dict:
     """After the build: every combat unit (the free starting ones too) attacks until the AI is out.
 
     Like VictoryProblem.fight, the army first stays home for `hold` frames when an AI wave is due
@@ -133,7 +139,9 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
                  and h.country not in ("Neutral", "Special") and not h.defeated)
     a = Assault(db, bridge, enemy, exclude=guard)
     defence = Defence(db, bridge, enemy)  # everyone defends until the attack starts
-    home = Defence(db, bridge, enemy, only=guard)  # then the guard alone
+    home = Defence(db, bridge, enemy, only=guard)  # then the guard alone (and the reinforcements)
+    claimed = lambda: steward.claimed if steward else set()
+    kept = lambda: reinforcer.units if reinforcer else set()
     hold_until = snap.frame + hold
     if guard:
         print(f"\n留守部隊：{', '.join(sorted(guard))}（開局送的步兵，方案裡沒有用到）")
@@ -155,12 +163,36 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
         if a.defeated(snap):
             log["victory"] = snap.frame
             break
-        if a.attack_started is None and (snap.frame < hold_until or defence.threats(snap)):
+        a.skip = defence.skip = claimed() | kept()
+        home.skip, home.extra = claimed(), kept()
+        if a.attack_started is not None:
+            # Raiders at home (paratroopers on the buildings) are fought by everything still near
+            # it, units on their way to the front included: live 2026-11-07 (game 8) the tanks
+            # kept home sat next to the paratroopers and Boris walked past them.
+            centre = home._home(snap)
+            if centre is not None and home.threats(snap):
+                near = {o.address for o in a.army(snap) if math.dist((o.x, o.y), centre) <= home.radius}
+                home.extra = home.extra | near
+                a.skip = a.skip | near
+        if steward:
+            steward.tick(snap)
+        if reinforcer and a.attack_started is not None:
+            reinforcer.tick(snap)
+        threats = defence.threats(snap) if a.attack_started is None else []
+        if threats and a.started is not None:
+            # Once on the way, only a real wave brings the army back; the guard and the reinforcements
+            # take raiders. Live 2026-11-06 single raiders kept recalling it, the gather timer ran
+            # out meanwhile and the ground went in without the Kirovs (games 4-7).
+            value = lambda units: sum(db.technos[o.type_id].cost or 1 for o in units)
+            threats = threats if value(threats) >= RECALL_SHARE * value(a.army(snap)) else []
+        if a.attack_started is None and (snap.frame < hold_until or threats):
             defence.tick(snap)  # also keeps the yard guard and walks strays home
+            if a.stage_started is not None:  # gathering starts over once the wave is beaten
+                a.stage_started = snap.frame
+                a._ordered_at.clear()
             time.sleep(args.interval)
             continue
-        if guard:
-            home.tick(snap)
+        home.tick(snap)  # the guard, the reinforcements kept home and whatever is near a raid
         gathering = a.attack_started is None
         a.tick(snap)
         if args.camera:
@@ -178,6 +210,7 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
     snap = gm.snapshot()
     log["survivors"] = dict(Counter(o.type_id for o in a.army(snap)))
     log["orders"] = a.orders
+    log["order_log"] = a.order_log
     return log
 
 
@@ -231,6 +264,19 @@ def run_policy(args, cfg, db) -> None:
         with Bridge.connect(pids[0]) as bridge:
             ex = PolicyExecutor(db, [], bridge, env=env, policy=policy, weights=weights,
                                 then=total if early else None)
+            from ra2tools.adapt import Reinforcer, counter_pick, enemy_army
+            from ra2tools.mapdata import load_fields
+            from ra2tools.problems import CombatSettings
+            from ra2tools.steward import Steward
+            vcfg = cfg.get("victory", {})
+            steward = Steward(db, bridge, country, fields=load_fields(),
+                              garrison=vcfg.get("garrison", 0) if args.attack or args.defend else 0)
+            combat = CombatSettings(**{**cfg.get("combat", {}), **vcfg.get("combat", {})})
+            counters = sorted({t for t in [*targets, *early, *ADAPT_UNITS] if t in policy.vocab
+                               and db.technos[t].kind != "building" and db.technos[t].combat_weapons})
+            adapted, adapt_spent, adapt_at = [], 0.0, 0
+            reinforcer = None
+            start_army = (victory or {}).get("start_army") or {}
             end = time.monotonic() + args.timeout
             reported = 0
             defence = None
@@ -239,10 +285,27 @@ def run_policy(args, cfg, db) -> None:
                 enemy = next(h.index for h in snap.houses if h.index != snap.player_index
                              and h.country not in ("Neutral", "Special"))
                 defence = Defence(db, bridge, enemy)
+                defence.skip = steward.claimed
+            ex.hidden = steward.inside  # else the build policy rebuilds the garrisoned conscripts
             under_attack = False
             while not ex.done and time.monotonic() < end:
                 snap = gm.snapshot()
                 ex.tick(snap)
+                steward.tick(snap)
+                if args.adapt and defence is not None and snap.frame - adapt_at >= ADAPT_EVERY \
+                        and adapt_spent < args.adapt:
+                    # What the AI fields now vs the army we are building: add counters while it loses.
+                    adapt_at = snap.frame
+                    seen = enemy_army(db, snap, defence.enemy)
+                    stage = ex.then if ex.then is not None else ex.env.targets
+                    planned = dict(Counter(stage) + Counter(start_army))
+                    add = counter_pick(db, cal, combat, planned, seen, counters, args.adapt - adapt_spent)
+                    if add:
+                        for t, n in add.items():
+                            stage[t] = stage.get(t, 0) + n
+                        adapt_spent += sum(db.technos[t].cost * n for t, n in add.items())
+                        adapted.append((snap.frame, seen, add))
+                        print(f"  {snap.frame:>6} 幀  看到 AI 部隊 {seen}，追加 {add}（累計 ${adapt_spent:.0f}）")
                 if defence is not None:
                     threats = defence.threats(snap)
                     if bool(threats) != under_attack:
@@ -264,9 +327,14 @@ def run_policy(args, cfg, db) -> None:
                     hold = max(0, round(victory["depart"] - victory["ready"]))
                 from ra2tools.problems import home_guard
                 guard = frozenset(home_guard(db, Counter(total), victory.get("start_army") or {}))
-                attack_log = run_attack(args, db, gm, bridge, ex, end, hold, guard)
+                if args.reinforce:
+                    reinforcer = Reinforcer(db, bridge, cal, combat, defence.enemy, counters,
+                                            home=Counter(home_guard(db, Counter(total), start_army)))
+                steward.rebuild = True  # the build is done: the production queues are free
+                attack_log = run_attack(args, db, gm, bridge, ex, end, hold, guard, steward, reinforcer)
             elif args.defend:  # observation game: stay home until the timeout, the AI plays on
                 print(f"  {snap.frame:>6} 幀  蓋完，只守家（觀察局）")
+                steward.rebuild = True
                 while time.monotonic() < end:
                     snap = gm.snapshot()
                     if snap.player and snap.player.defeated:
@@ -278,6 +346,7 @@ def run_policy(args, cfg, db) -> None:
                         print(f"  {snap.frame:>6} 幀  " + (f"AI 進攻基地（{len(threats)} 個單位），全軍防守"
                                                          if under_attack else "擊退進攻"))
                     defence.tick(snap)
+                    steward.tick(snap)
                     time.sleep(args.interval)
     except (BridgeError, GameNotFound) as e:
         sys.exit(f"失敗：{e}")
@@ -300,7 +369,9 @@ def run_policy(args, cfg, db) -> None:
                                "deploy_frame": offset, "predicted": predicted, "pred_finish": pred_finish,
                                "actual": ex.events, "decisions": ex.decisions, "rows": rows,
                                "finished": ex.done, "spent": ex.spent,
-                               "victory_predicted": victory, "attack": attack_log if args.attack and ex.done else None},
+                               "victory_predicted": victory, "attack": attack_log if args.attack and ex.done else None,
+                               "steward": steward.log, "adapted": adapted,
+                               "reinforced": reinforcer.log if reinforcer else []},
                               ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"記錄已存到 {log}")
 
@@ -318,6 +389,10 @@ def main() -> None:
     ap.add_argument("--attack", action="store_true", help="--targets：蓋完後全軍進攻，直到擊敗 AI（破關）")
     ap.add_argument("--defend", action="store_true", help="--targets：蓋完後只守家到 --timeout（觀察局，給 opponent.py quantile）")
     ap.add_argument("--camera", action="store_true", help="--attack：鏡頭跟著部隊（錄影用）")
+    ap.add_argument("--adapt", type=float, default=5000,
+                    help="--targets：依看到的 AI 部隊追加剋制兵種，最多花這麼多（0 = 不追加）")
+    ap.add_argument("--no-reinforce", dest="reinforce", action="store_false",
+                    help="--attack：出發後用多的錢蓋剋制兵種留在家守（這個選項關掉）")
     ap.add_argument("--opponent", default=str(ROOT / "calibration" / "opponents" / "easy_americans_firestorm.json"),
                     help="--attack 的預測用：AI 隨時間的部隊與建築（opponent.py extract）")
     ap.add_argument("--scenario", default=str(ROOT / "scenarios" / "soviet_vs_allied.toml"))

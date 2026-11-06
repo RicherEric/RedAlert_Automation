@@ -98,6 +98,22 @@ class Bridge:
         """Attack order on an enemy object (by memory address)."""
         return self.send(f"ATTACK {self._unit(unit)} 0x{target:08x}")
 
+    def repair(self, building: int | str) -> str:
+        """Toggle repair on one of our buildings (the game stops by itself at full health)."""
+        return self.send(f"REPAIR {self._unit(building)}")
+
+    def capture(self, unit: int | str, target: int, where: str = "d") -> str:
+        """Engineer capture (tech derrick, airport, ...); infantry garrisons a civilian building."""
+        return self.send(f"CAPTURE {self._unit(unit)} 0x{target:08x} {where}")
+
+    def enter(self, unit: int | str, target: int, where: str = "d") -> str:
+        """Mission::Enter (transports). Not for garrisons: conscripts shot the building instead."""
+        return self.send(f"ENTER {self._unit(unit)} 0x{target:08x} {where}")
+
+    def harvest(self, unit: int | str, cell: tuple[int, int] | None = None) -> str:
+        """Harvester back to work; on that ore/gem cell if given, else the game picks."""
+        return self.send(f"HARVEST {self._unit(unit)}" + (f" {round(cell[0])} {round(cell[1])}" if cell else ""))
+
     def camera(self, cell: tuple[int, int]) -> str:
         """Centre our own view on a cell (display only; for recording videos)."""
         return self.send(f"CAMERA {round(cell[0])} {round(cell[1])}")

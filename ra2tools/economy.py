@@ -4,8 +4,9 @@ Modelled: per-category production queues (building/infantry/vehicle/aircraft) ru
 parallel, gradual payment (production stalls when broke), BuildSpeed and BuildTimeMultiplier,
 MultipleFactory speed-up, low-power slowdown, building placement delay, prerequisites,
 refinery free harvesters with dock contention, chrono-miner teleport, Yuri slave miners,
-the home ore field running out (Calibration.ore_home_credits).
-Not modelled: ore regrowth, base layout/travel distance changes, losing units, selling.
+the home ore field running out (Calibration.ore_home_credits), engineers walking to tech oil
+derricks (Calibration.derricks) and their income.
+Not modelled: the AI retaking derricks, ore regrowth, base layout/travel distance changes, losing units, selling.
 """
 from __future__ import annotations
 
@@ -63,10 +64,13 @@ class EconomyState:
     spent: float = 0.0
     income: float = 0.0
     mined: float = 0.0      # credits brought in from the home ore field by refinery harvesters
-    harvesters: list[list] = field(default_factory=list)  # [next_income_frame, amount, cycle, uses_dock, far_extra]
+    # [next_income_frame, amount, cycle, uses_dock, far_extra], + "cash" for a derrick's income
+    harvesters: list[list] = field(default_factory=list)
     dock_free: list[float] = field(default_factory=list)  # when each refinery dock frees up
     jobs: dict[str, _Job | None] = field(default_factory=lambda: {c: None for c in CATEGORIES})
     events: list[tuple[int, str, str]] = field(default_factory=list)
+    captures: list[float] = field(default_factory=list)  # engineers on their way: arrival frames
+    derricks_sent: int = 0  # engineers sent so far (each to the next nearest derrick)
     min_balance: int = 0
     low_frames: int = 0
     queue_next: int = 0     # index into CATEGORIES of the next queue to tick
@@ -75,7 +79,7 @@ class EconomyState:
 
     def copy(self) -> "EconomyState":
         return replace(self, owned=Counter(self.owned), harvesters=[list(h) for h in self.harvesters],
-                       dock_free=list(self.dock_free), events=list(self.events),
+                       dock_free=list(self.dock_free), events=list(self.events), captures=list(self.captures),
                        jobs={c: (replace(j) if j else None) for c, j in self.jobs.items()})
 
 
@@ -199,7 +203,9 @@ class EconomySim:
 
     def _add_gatherer(self, state: EconomyState, t: Techno, now: float) -> None:
         db, cal = self.db, self.cal
-        if t.enslaves and t.slaves_number:
+        if t.cash_amount and t.cash_delay:  # a captured oil derrick
+            h = [0.0, float(t.cash_amount), float(t.cash_delay), False, 0.0, "cash"]  # not a harvester
+        elif t.enslaves and t.slaves_number:
             slave = db.technos.get(t.enslaves)
             amount = t.slaves_number * (slave.storage if slave else 4) * db.ore_value
             h = [0.0, amount, cal.slave_cycle_frames, False, 0.0]
@@ -222,7 +228,20 @@ class EconomySim:
             if t.free_unit and t.free_unit in db.technos:
                 state.owned[t.free_unit] += 1
                 self._add_gatherer(state, db.technos[t.free_unit], now)
+        if t.engineer and state.derricks_sent < len(self.cal.derricks):
+            walk = self.cal.derricks[state.derricks_sent] / max(t.speed * self.cal.speed_to_cells, 1e-6)
+            state.captures.append(now + walk)
+            state.derricks_sent += 1
         self._add_gatherer(state, t, now)
+
+    def _capture(self, state: EconomyState, now: float) -> None:
+        derrick = self.db.technos.get(self.cal.derrick_type)
+        if derrick is None:
+            return
+        state.owned[derrick.id] += 1
+        state.money += derrick.cash_startup
+        state.income += derrick.cash_startup
+        self._add_gatherer(state, derrick, now)
 
     def step(self, state: EconomyState, pick) -> None:
         """Simulate one tick of `dt` frames at state.frame (the caller advances the frame).
@@ -245,6 +264,10 @@ class EconomySim:
         """Income and power for this tick; returns the production speed factor (low power)."""
         db, dt = self.db, self.dt
         frame = state.frame
+        if state.captures:
+            for arrival in [a for a in state.captures if a <= frame]:
+                state.captures.remove(arrival)
+                self._capture(state, arrival)
         for h in state.harvesters:
             while h[0] <= frame:
                 state.money += h[1]

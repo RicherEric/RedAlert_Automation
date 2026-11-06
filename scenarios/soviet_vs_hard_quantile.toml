@@ -14,6 +14,10 @@ max_frames = 5400
 crush = true       # 坦克輾壓步兵
 kite = true        # 快速且射程較遠的單位會邊退邊打（模擬玩家操作）
 spacing = 1.5      # 陣型間距 (格)，越大越不怕濺射
+base_spacing = 4   # 建築物之間的距離 (格)：擠成一團時基洛夫一顆炸彈炸好幾棟，實機 2026-11-06 對過真實位置
+b_damage = 1.5     # AI 主場加成（塔後面集火、工廠邊打邊補）：2026-11-07 用 6 場實機抵達時的真實位置校正，
+                   # 1.0 時模擬判 4/6 場贏、實機全輸；1.5 判 5/6 場輸
+focus = true       # 我方集火：挑射程內「每幀打掉最多敵方價值」的目標，和實機 assault.py 一樣
 
 # ---------------------------------------------------------------- 兵種組合最佳化
 [army]
@@ -101,10 +105,14 @@ max_units = 25
 # 早期防守（2026-11-02）：困難 AI 最兇的 20% 對局在第 8 分鐘就來一波（含入侵者戰機），先蓋科技的方案
 # 那時家裡只有開局部隊。這些基因先蓋、再蓋主力：單位會跟著出發，防禦建築留在家守。
 # 經濟路線（2026-11-05）：家裡的礦約第 13000 幀採完，HARV（礦車總數）、NAREFN（多蓋幾座礦場）也放進來先蓋。
-early = ["HTNK", "E2", "HTK", "FLAKT", "TESLA", "NALASR", "NAFLAK", "HARV", "NAREFN"]
+# 油井（2026-11-06）：SENGINEER 每個去佔一座科技油井（最多 derricks 的座數）。
+early = ["HTNK", "E2", "HTK", "FLAKT", "TESLA", "NALASR", "NAFLAK", "HARV", "NAREFN", "SENGINEER"]
 max_early = 8
+# 實機 Steward 派 5 個開局動員兵進駐家礦旁的民房（守礦區和油井），模擬裡留守部隊就少這 5 個。
+garrison = 5
+storm = true       # AI 天氣控制器的閃電風暴：蓋好約 12500 幀後第一擊，之後每 9000 幀，打掉戰車工廠和礦場
 exclude = ["SCHP", "DESO"]   # deploy-to-fire: the live controller cannot deploy yet
 travel_factor = 1.3
 pop_size = 60
 generations = 40
-workers = 6
+workers = 16

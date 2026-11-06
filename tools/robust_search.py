@@ -20,7 +20,8 @@ from ra2tools.mission import choose_victory, pareto, victory_problem, victory_se
 from ra2tools.opponent import Opponent, games_from_logs  # noqa: E402
 
 LOGS = ["logs/ai_hard.jsonl", "logs/battle_hard*.jsonl", "logs/observe_hard_[0-9].jsonl", "logs/challenge_hard_q.jsonl",
-        "logs/challenge_hard_robust*.jsonl"]
+        "logs/challenge_hard_robust*.jsonl", "logs/series_hard_2*_[0-9].jsonl",
+        "logs/series_v4_2*.jsonl", "logs/series_v5_2*.jsonl"]  # games under 16000 frames (aborted 2, 3) are skipped
 PREFER = {"win_rate": 1.0, "frames": 0.4, "spent": 0.2, "survive": 0.2}
 
 
@@ -48,7 +49,7 @@ def main() -> None:
             known += [{**r["army"], **({"early": r["early"]} if r.get("early") else {})}
                       for r in front if r.get("feasible")]
     pop = v.get("pop_size", 60)
-    seeds = victory_seeds(problem, known, v.get("top_k", pop // 4))
+    seeds = victory_seeds(problem, known, v.get("top_k", pop // 4), workers=v.get("workers", 1))
     print(f"初始族群：{len(known)} 個已知方案中挑最好的 {len(seeds)} 個，其餘隨機")
     t0 = time.time()
     res = pareto(problem, pop_size=pop, generations=args.generations or v.get("generations", 40), seed=args.seed,

@@ -8,13 +8,14 @@ faster, so a policy mistake on an unfamiliar army can only cost time, never corr
 from __future__ import annotations
 
 from collections import Counter
+from concurrent.futures import ProcessPoolExecutor
 
 from dataclasses import dataclass
 from pathlib import Path
 
 from .env import BuildEnv
 from .gamedata import GameData
-from .optimize import ParetoResult, run_nsga2, tchebycheff
+from .optimize import ParetoResult, _evaluate_in_worker, _init_worker, run_nsga2, tchebycheff
 from .params import Calibration
 from .problems import CombatSettings, EnemyScenario, MissionProblem, VictoryProblem
 
@@ -141,6 +142,7 @@ def victory_problem(db: GameData, cfg: dict, cal: Calibration, opponents, model:
         travel_factor=v.get("travel_factor", 1.3), reinforce=v.get("reinforce", True),
         rebuild=v.get("rebuild", True), counterattack=v.get("counterattack", True),
         early=list(v.get("early", [])), max_early=v.get("max_early", 6), robust=v.get("robust", False),
+        storm=v.get("storm", True), garrison=v.get("garrison", 0),
     )
 
 
@@ -155,7 +157,8 @@ def victory_objectives(problem: VictoryProblem) -> list[str]:
     return names + ["spent", "survive"]
 
 
-def victory_seeds(problem: VictoryProblem, armies: list[dict[str, int]], top_k: int) -> list[tuple]:
+def victory_seeds(problem: VictoryProblem, armies: list[dict[str, int]], top_k: int,
+                  workers: int = 1) -> list[tuple]:
     """TopK starting armies, after Wang et al. (CCC 2019): known plans (live wins, earlier search
     fronts) are scored in the simulator and the best top_k seed the initial population (the paper
     suggests about a quarter of it; the rest stays random for diversity)."""
@@ -165,7 +168,11 @@ def victory_seeds(problem: VictoryProblem, armies: list[dict[str, int]], top_k: 
         g = problem.genome_of({t: n for t, n in army.items() if t != "early"}, army.get("early"))
         if any(g) and g not in genomes:
             genomes.append(g)
-    evals = [problem.evaluate(g) for g in genomes]
+    if workers > 1:
+        with ProcessPoolExecutor(workers, initializer=_init_worker, initargs=(problem,)) as pool:
+            evals = list(pool.map(_evaluate_in_worker, genomes, chunksize=4))
+    else:
+        evals = [problem.evaluate(g) for g in genomes]
     k = 2 if getattr(problem, "robust", False) else len(problem.opponents)  # victory objectives, then spent
     order = sorted(range(len(genomes)), key=lambda i: (  # feasible, then soonest wins on average, then cheapest
         not evals[i].feasible, evals[i].total_violation, sum(evals[i].objectives[:k]), evals[i].objectives[k]))

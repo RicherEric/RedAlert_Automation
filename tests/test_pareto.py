@@ -606,3 +606,23 @@ def test_early_defence_genes_are_built_first():
     done = [(f, t) for f, k, t in p.last_events if k == "done"]
     first_tank = min(f for f, t in done if t == "HTNK")
     assert all(f < first_tank for f, t in done if t == "NALASR")  # built before the army
+
+
+def test_spread_base_takes_less_kirov_splash():
+    # Every building 1.5 cells apart, one bomb hit several: live 2026-11-06 the Kirovs barely
+    # scratched a real base the sim said they razed.
+    from pathlib import Path
+
+    import pytest
+
+    data = Path(__file__).parent.parent / "data"
+    if not (data / "rulesmd.ini").exists():
+        pytest.skip("run extract.py first")
+    from ra2tools.combat import Battle
+    from ra2tools.gamedata import GameData
+
+    db = GameData.load(data)
+    base = {"GAPOWR": 6, "GAPILL": 4, "NASAM": 2, "GACNST": 1}
+    packed = Battle(db, {"ZEP": 6}, base, None, 12, 1.5).run(5, 3000)
+    spread = Battle(db, {"ZEP": 6}, base, None, 12, 1.5, base_spacing=4).run(5, 3000)
+    assert spread.score < packed.score

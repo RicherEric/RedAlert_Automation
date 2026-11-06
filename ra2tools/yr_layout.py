@@ -51,6 +51,7 @@ HOUSE_FACTORIES = {           # FactoryClass* Primary_For*
     "vehicle": 21428,
     "naval": 21432,
     "building": 21436,
+    "defense": 21452,         # Primary_ForDefenses (BuildCat=Combat: walls, guns, flak) builds alongside
 }
 HOUSE_OWNED_COUNTERS = {      # CounterClass, indexed by the type's array index
     "building": 21760,

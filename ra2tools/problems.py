@@ -29,6 +29,8 @@ class CombatSettings:
     kite: bool = True      # fast, longer-ranged units back off while reloading (player micro)
     spacing: float = 1.5   # formation spacing in cells; larger = less splash damage
     b_damage: float = 1.0  # side B (the enemy) damage multiplier, see Battle
+    focus: bool = False    # our side focus-fires like assault.py (Battle.run)
+    base_spacing: float = 0.0  # buildings this far apart behind their units (0: packed with them)
 
 
 # --------------------------------------------------------------------------- army
@@ -132,8 +134,8 @@ class ArmyProblem:
         scores = {}
         for e in self.enemies:
             c = self.combat
-            res = Battle(self.db, army, e.units, self.cal, c.distance, c.spacing).run(
-                c.dt, c.max_frames, c.crush, c.kite)
+            res = Battle(self.db, army, e.units, self.cal, c.distance, c.spacing, base_spacing=c.base_spacing).run(
+                c.dt, c.max_frames, c.crush, c.kite, c.focus)
             scores[e.name] = res.score
         if self.aggregate == "worst":
             agg = min(scores.values())
@@ -227,6 +229,10 @@ class VictoryProblem(MissionProblem):
     reinforce: bool = True         # its timeline's new units and buildings join the fight
     rebuild: bool = True           # it rebuilds lost buildings while its construction yard stands
     counterattack: bool = True     # its attack waves (Opponent.attacks) meet our army first
+    storm: bool = True             # its Lightning Storm delays our build (VictoryProblem.stormed)
+    # Starting infantry the live Steward garrisons in the civilian building next to our ore field
+    # and derrick (2026-11-06): away from the base, so not in the home guard here.
+    garrison: int = 0
     # Early defence (2026-11-02): no plan built tech-first held the q80 hard AI's first wave at
     # ~9800, when only the start army was out. These extra genes are built BEFORE the army:
     # units join it, buildings (Tesla coils, sentry guns, flak cannons) stay home as its guard.
@@ -249,7 +255,8 @@ class VictoryProblem(MissionProblem):
         for t in self.early:  # genome = main counts, then early counts
             tech = self.db.technos[t]
             self.costs.append(tech.cost)
-            self.cap.append(min(self.max_early, tech.build_limit) if tech.build_limit > 0 else self.max_early)
+            cap = min(self.max_early, tech.build_limit) if tech.build_limit > 0 else self.max_early
+            self.cap.append(min(cap, len(self.cal.derricks)) if tech.engineer else cap)
             self.floor.append(0)
             self.anti_air.append(any(w.aa for w in tech.combat_weapons))
 
@@ -267,11 +274,11 @@ class VictoryProblem(MissionProblem):
                            + [int(early.get(c, 0)) for c in self.early])
 
     def economy(self, tid: str) -> bool:
-        """Harvesters and refineries in `early`: built first for income (the home ore runs out
-        around frame 13000), neither marching with the army nor guarding the base."""
+        """Harvesters, refineries and engineers (oil derricks) in `early`: built first for income
+        (the home ore runs out around frame 13000), neither marching with the army nor guarding the base."""
         t = self.db.technos[tid]
         free = self.db.technos.get(t.free_unit) if t.free_unit else None
-        return (t.harvester and t.kind != "building") or (t.kind == "building" and free is not None and free.harvester)
+        return t.engineer or (t.harvester and t.kind != "building") or (t.kind == "building" and free is not None and free.harvester)
 
     def early_of(self, genome: tuple) -> dict[str, int]:
         return {c: n for c, n in zip(self.early, genome[self.n_main:]) if n > 0}
@@ -286,7 +293,14 @@ class VictoryProblem(MissionProblem):
     def home_guard(self, built) -> dict[str, int]:
         """The free starting infantry of types the plan does not build stays home (live:
         execute.py keeps them there with the Defence controller)."""
-        return home_guard(self.db, Counter(built), self.opponent.player_start_army)
+        g = home_guard(self.db, Counter(built), self.opponent.player_start_army)
+        left = self.garrison
+        for t in sorted(g):
+            if left > 0 and self.db.technos[t].occupier:
+                k = min(left, g[t])
+                g[t] -= k
+                left -= k
+        return {t: n for t, n in g.items() if n}
 
     def march_frames(self, army: dict[str, int], opponent=None) -> float:
         speeds = [self.db.technos[t].speed * self.cal.speed_to_cells for t in army]
@@ -329,6 +343,35 @@ class VictoryProblem(MissionProblem):
             had = now
         return out
 
+    # The AI's Lightning Storm (live vs hard 2026-11-06): its Weather Controller stood at 25627, and
+    # our refinery + war factory vanished with no enemy near at 38128, 47186 and 56265: the first
+    # strike ~12500 after it appears, then every RechargeTime (10 min = 9000 frames). Each strike
+    # before our army is out costs rebuilding the factory and refinery (STORM_KILLS).
+    STORM_FIRST = 12500
+    STORM_EVERY = 9000
+    WEATHER = ("GAWEAT",)
+    STORM_KILLS = ("factory", "proc")
+
+    def storms(self, opponent) -> list[float]:
+        """Frames of the AI's lightning strikes on our base (none if it never had the device)."""
+        built = next((f for f, b in zip(opponent.frames, opponent.buildings)
+                      if any(t in b for t in self.WEATHER)), None)
+        if built is None:
+            return []
+        return [built + self.STORM_FIRST + k * self.STORM_EVERY for k in range(8)]
+
+    def stormed(self, finish: float, opponent) -> tuple[float, int]:
+        """`finish` pushed back by the strikes that come before it, and how many came."""
+        basics = self.db.basics(self.country)
+        delay = sum(self.db.build_frames(self.db.technos[basics[k]]) for k in self.STORM_KILLS if k in basics)
+        hits = 0
+        for frame in self.storms(opponent):
+            if frame >= finish:
+                break
+            finish += delay
+            hits += 1
+        return finish, hits
+
     BASE_HOLDS = 300  # frames an undefended base lasts once a wave has beaten its guard
     # Frames from a saboteur raid's first sighting near our base to the C4 on the construction
     # yard (live vs hard 2026-11-02: Tanya seen 20 cells out at 10736, yard gone at 11009).
@@ -368,15 +411,15 @@ class VictoryProblem(MissionProblem):
         c = self.combat
         if not home:
             return False
-        res = Battle(self.db, dict(home), raid, self.cal, c.distance, c.spacing).run(
-            c.dt, self.battle_frames, c.crush, c.kite)
+        res = Battle(self.db, dict(home), raid, self.cal, c.distance, c.spacing, base_spacing=c.base_spacing).run(
+            c.dt, self.battle_frames, c.crush, c.kite, c.focus)
         if res.winner != "A":
             return False
         sab = {t: n for t, n in raid.items() if t in SABOTEURS}
         if not sab:
             return True
-        res = Battle(self.db, dict(home), sab, self.cal, c.distance, c.spacing).run(
-            c.dt, self.RAID_FUSE, c.crush, c.kite)
+        res = Battle(self.db, dict(home), sab, self.cal, c.distance, c.spacing, base_spacing=c.base_spacing).run(
+            c.dt, self.RAID_FUSE, c.crush, c.kite, c.focus)
         return res.winner == "A" and res.frames <= self.RAID_FUSE
 
     def fight(self, army: dict[str, int], finish: float, opponent, guard: dict[str, int] | None = None,
@@ -388,6 +431,7 @@ class VictoryProblem(MissionProblem):
         against the waves that come while the army is away. Under ShortGame a razed base loses
         the match, which happened live when a wave came just before the predicted victory."""
         c = self.combat
+        finish, storms = self.stormed(finish, opponent) if self.storm else (finish, 0)
         guard = Counter(guard or {})
         army = start_army = Counter(army)
         free = Counter(opponent.player_start_army)
@@ -409,8 +453,8 @@ class VictoryProblem(MissionProblem):
                             "victory_frame": None, "lost_to_raid": frame, "survivors": {}}
                 continue  # after departure: the guard alone, below
             home = self.at_home(army, guard, free, wave["frame"], finish, events)
-            res = Battle(self.db, dict(home), wave["units"], self.cal, c.distance, c.spacing).run(
-                c.dt, self.battle_frames, c.crush, c.kite)
+            res = Battle(self.db, dict(home), wave["units"], self.cal, c.distance, c.spacing, base_spacing=c.base_spacing).run(
+                c.dt, self.battle_frames, c.crush, c.kite, c.focus)
             if res.winner != "A":
                 return {"arrive_frame": arrive, "won": False, "b_left": self._home_loss(wave["frame"]),
                         "a_left": 0.0, "victory_frame": None, "lost_to_wave": wave["frame"], "survivors": {}}
@@ -425,18 +469,18 @@ class VictoryProblem(MissionProblem):
         units, buildings = opponent.at(arrive)
         air_at = self.first_air(start_army, finish)
         enemy = {**(Counter(units) - away), **(Counter(buildings) + self.answered(opponent, arrive, air_at))}
-        res = Battle(self.db, dict(army), enemy, self.cal, c.distance, c.spacing,
+        res = Battle(self.db, dict(army), enemy, self.cal, c.distance, c.spacing, base_spacing=c.base_spacing,
                      spawns=self.spawns(opponent, arrive, air_at), rebuild=self.rebuild,
                      b_damage=c.b_damage, replace_rate=getattr(opponent, "replace_rate", None)).run(
-            c.dt, self.battle_frames, c.crush, c.kite)
+            c.dt, self.battle_frames, c.crush, c.kite, c.focus)
         won = res.winner == "A"
         lost_home = None
         end = arrive + res.frames
         for wave in (opponent.attacks if self.counterattack else []):
             if not depart < wave["frame"] < end:
                 continue
-            held = Battle(self.db, dict(guard), wave["units"], self.cal, c.distance, c.spacing).run(
-                c.dt, self.battle_frames, c.crush, c.kite) if guard else None
+            held = Battle(self.db, dict(guard), wave["units"], self.cal, c.distance, c.spacing, base_spacing=c.base_spacing).run(
+                c.dt, self.battle_frames, c.crush, c.kite, c.focus) if guard else None
             if held is None or held.winner != "A":
                 lost_home = wave["frame"] + (held.frames if held else 0) + self.BASE_HOLDS
                 break
@@ -450,7 +494,7 @@ class VictoryProblem(MissionProblem):
             won = False  # the base fell before the AI did
         kept = value(army) / start  # share of the army that survived the waves
         return {"arrive_frame": arrive, "depart_frame": depart, "won": won, "enemy": enemy,
-                "battle_frames": res.frames,
+                "battle_frames": res.frames, "storms": storms, "ready_frame": finish,
                 "victory_frame": arrive + res.frames if won else None,
                 "a_left": res.a_value_left * kept, "b_left": res.b_value_left,
                 "survivors": res.a_survivors, "waves_met": sum(away.values()), "base_lost": lost_home}

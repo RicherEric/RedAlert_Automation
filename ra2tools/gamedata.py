@@ -119,6 +119,14 @@ class Techno:
     requires_stolen_tech: bool = False  # needs a spy to infiltrate an enemy barracks
     flies: bool = False  # MovementZone=Fly vehicles (Kirov, Siege Chopper) count as aircraft
     deploy_fire: bool = False  # Secondary only usable while deployed (GI, Guardian GI, Siege Chopper)
+    engineer: bool = False     # captures buildings (tech oil derricks, airports)
+    capturable: bool = False
+    occupants: int = 0         # infantry it can garrison (CanBeOccupied, MaxNumberOccupants)
+    occupier: bool = False     # infantry that can garrison
+    # Tech oil derrick: ProduceCashStartup once when captured, then ProduceCashAmount every Delay frames
+    cash_startup: int = 0
+    cash_amount: int = 0
+    cash_delay: int = 0
 
     @property
     def is_air(self) -> bool:
@@ -247,6 +255,13 @@ class GameData:
             crusher=_yes(sec.get("Crusher")),
             flies=sec.get("MovementZone", "") == "Fly" or _yes(sec.get("ConsideredAircraft")),
             deploy_fire=_yes(sec.get("DeployFire")),
+            engineer=_yes(sec.get("Engineer")),
+            capturable=_yes(sec.get("Capturable")),
+            occupants=r.get_int(tid, "MaxNumberOccupants") if _yes(sec.get("CanBeOccupied")) else 0,
+            occupier=_yes(sec.get("Occupier")),
+            cash_startup=r.get_int(tid, "ProduceCashStartup"),
+            cash_amount=r.get_int(tid, "ProduceCashAmount"),
+            cash_delay=r.get_int(tid, "ProduceCashDelay"),
             requires_stolen_tech=any(_yes(sec.get(f"RequiresStolen{x}Tech")) for x in ("Allied", "Soviet", "Third")),
         )
 

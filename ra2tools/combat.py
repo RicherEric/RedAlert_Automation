@@ -2,7 +2,8 @@
 
 Modelled: HP, armor multipliers, range/minimum range, movement, rate of fire, burst,
 splash (CellSpread/PercentAtMax), AA/AG targeting, suicide weapons, aircraft ammo + rearm trips,
-crushing infantry, deploy-to-fire weapons (GI, Guardian GI, Siege Chopper lands), optional kiting.
+crushing infantry, deploy-to-fire weapons (GI, Guardian GI, Siege Chopper lands), optional kiting,
+optional focus fire for side A (our controller, assault.py: most value killed per frame).
 Not modelled: terrain, pathfinding, collisions, veterancy, projectile flight time,
 special mechanics (mind control, chrono, terror drones, ...).
 """
@@ -56,7 +57,7 @@ class Battle:
     def __init__(self, db: GameData, army_a: dict[str, int], army_b: dict[str, int],
                  cal: Calibration | None = None, distance: float = 12.0, spacing: float = 1.0,
                  spawns: list[tuple[float, str]] | None = None, rebuild: bool = False,
-                 b_damage: float = 1.0, replace_rate: float | None = None):
+                 b_damage: float = 1.0, replace_rate: float | None = None, base_spacing: float = 0.0):
         self.cal = cal or Calibration()
         # Side B's damage multiplier: what the AI gains from fighting at home (focus fire on
         # whatever enters its base, units joining from the factories next door), fitted to
@@ -84,6 +85,10 @@ class Battle:
         self.cost = np.array([t.cost for t in technos], float)
         self.max_hp = np.array([t.strength for t in technos], float)
         self.air = np.array([t.is_air for t in technos], bool)
+        # Kirov-like bombers (air, bombs reach <= 2 cells) only hit buildings while any stand: live
+        # 2026-11-06 they never got over a moving unit (assault.Assault.bomber does the same).
+        self.bomber = self.air & np.array([bool(t.combat_weapons) and max(w.range for w in t.combat_weapons) <= 2
+                                           for t in technos], bool)
         self.speed = np.array([t.speed for t in technos], float) * self.cal.speed_to_cells
         self.ammo_max = np.array([t.ammo for t in technos])
         self.infantry = np.array([t.kind == "infantry" for t in technos], bool)
@@ -116,6 +121,15 @@ class Battle:
                 verses[i, s] = w.verses
                 can_aa[i, s] = w.aa
                 can_ag[i, s] = w.ag
+        # Prism Towers chain: the others beam into the one firing, each adding PrismSupportModifier
+        # (150%, rulesmd [General]) of its damage. N towers then fire one beam of 1 + 1.5 (N - 1)
+        # instead of N beams: live 2026-11-06 (game 14) eight one-shot our flak tracks.
+        prism = np.array([any(w.id == "PrismSupport" for w in t.combat_weapons) for t in technos], bool)
+        for side in (0, 1):
+            towers = prism & (self.side == side)
+            k = min(int(towers.sum()), 9)
+            if k > 1:
+                dmg[towers, 0] *= (1 + 1.5 * (k - 1)) / k
         self.dmg, self.rof, self.rng, self.minr = dmg, rof, rng, minr
         self.spread, self.pam, self.suicide, self.verses = spread, pam, suicide, verses
         self.armor = armor
@@ -136,6 +150,15 @@ class Battle:
             _formation(len(ids_a), 0.0, -1.0, spacing),
             _formation(len(ids_b), distance, 1.0, spacing),
         ]) if n else np.zeros((0, 2))
+        if base_spacing and n:
+            # Buildings spread over a base behind their side's units, not packed with them: with
+            # every AI building 1.5 cells apart the Kirovs' splash razed whole bases that live
+            # 2026-11-06 they barely scratched. 4 cells matched the battles replayed at the
+            # buildings' real positions (games 4-12 of series_v4_20261106).
+            for side, x0, sign in ((0, 0.0, -1.0), (1, distance, 1.0)):
+                bi = np.nonzero((self.side == side) & self.building)[0]
+                if len(bi):
+                    self.home[bi] = _formation(len(bi), x0 + sign * 2.0, sign, base_spacing)
 
     def _tables(self, deployed: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         """Best weapon slot and damage for every (attacker, target) pair given deploy states."""
@@ -146,7 +169,13 @@ class Battle:
         return eff.argmax(axis=2), eff.max(axis=2), air_now
 
     def run(self, dt: int = 5, max_frames: int = 5400, crush: bool = True,
-            kite: bool = False) -> CombatResult:
+            kite: bool = False, focus: bool = False) -> CombatResult:
+        """`focus`: side A picks targets like the live controller (assault.py) instead of the
+        nearest: the most enemy cost destroyed per frame, i.e. cost * damage rate / health left,
+        so hurt targets draw the fire of everyone that can hurt them (focus fire) and each unit
+        goes for what its weapon counters (anti-air on aircraft, anti-armour on tanks); armed
+        enemies count 4x. Only targets already in range are weighed: walking past the enemy in
+        front to reach a better one lost every test battle. Nothing in range: the nearest."""
         n = len(self.ids)
         if n == 0 or not (self.side == 0).any() or not (self.side == 1).any():
             return self._result(0, np.ones(n, bool), self.max_hp.copy())
@@ -209,8 +238,24 @@ class Battle:
                     best_slot, best_eff, air_now = self._tables(deployed)
 
             valid = (best_eff > 0) & present[:, None] & present[None, :]
+            if self.bomber.any():
+                for side in (0, 1):
+                    standing = self.building & present & (self.side != side)
+                    if standing.any():
+                        valid[np.ix_(self.bomber & (self.side == side), ~standing)] = False
             masked = np.where(valid, dist, np.inf)
             tgt = masked.argmin(axis=1)
+            if focus:
+                ours = np.nonzero(present & (self.side == 0))[0]
+                if len(ours):
+                    slots = best_slot[ours]
+                    reach = valid[ours] & (dist[ours] <= self.rng[ours[:, None], slots])                         & (dist[ours] >= self.minr[ours[:, None], slots])
+                    rate = best_eff[ours] / self.rof[ours[:, None], slots]
+                    armed = (best_eff[:, self.side == 0] > 0).any(axis=1)
+                    score = self.cost[None, :] * rate / np.maximum(hp, 1.0)[None, :] * np.where(armed, 4.0, 1.0)[None, :]
+                    pick = np.where(reach, score, -1.0).argmax(axis=1)
+                    shoot = reach.any(axis=1)  # something in range: the best of it; else walk to the nearest
+                    tgt[ours[shoot]] = pick[shoot]
             tdist = masked[ar, tgt]
             has = np.isfinite(tdist)
             if not has.any() and not (alive & (away > 0)).any():

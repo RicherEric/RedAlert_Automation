@@ -44,7 +44,13 @@ class Task:
     start_credits: int
 
 
-def sample_task(db: GameData, rng: random.Random, countries=None) -> Task:
+def engineer_of(db: GameData, sim) -> str | None:
+    return next((t.id for t in db.technos.values() if t.engineer and sim.buildable(t.id)), None)
+
+
+def sample_task(db: GameData, rng: random.Random, countries=None, cal: Calibration | None = None) -> Task:
+    """Random targets: 1-2 combat unit types, and in 40% of the tasks also what the robust plans
+    build first (2026-11-06): engineers for the oil derricks, extra harvesters, a defence building."""
     from .economy import EconomySim
     country = rng.choice(countries or list(SIDE_COUNTRY.values()))
     sim = EconomySim(db, country)
@@ -57,6 +63,18 @@ def sample_task(db: GameData, rng: random.Random, countries=None) -> Task:
         if t.build_limit > 0:  # e.g. Yuri Prime, Tanya: only one at a time
             most = min(most, t.build_limit)
         targets[t.id] = rng.randint(1, most)
+    if rng.random() < 0.4:
+        eng = engineer_of(db, sim)
+        derricks = len(cal.derricks) if cal else 0
+        if eng and derricks and rng.random() < 0.6:
+            targets[eng] = rng.randint(1, derricks)
+        if rng.random() < 0.5:
+            harv = db.basics(country)["harvester"]
+            targets[harv] = rng.randint(2, 5)
+        towers = [t for t in db.technos.values() if t.kind == "building" and t.combat_weapons and 0 < t.cost <= 1500
+                  and sim.buildable(t.id)]
+        if towers and rng.random() < 0.5:
+            targets[rng.choice(towers).id] = rng.randint(1, 3)
     wf = rng.choice([1.0, 0.75, 0.5, 0.25])
     return Task(country, targets, {"frames": wf, "spent": 1 - wf}, rng.choice([5000, 7500, 10000, 15000]))
 
@@ -74,9 +92,13 @@ class Teacher:
     def plan(self, env: BuildEnv) -> tuple[list[str], float, float]:
         """Best resolved sequence from env.state, with its finish frame and credits spent."""
         basics = self.db.basics(self.task.country)
+        extras = [basics[k] for k in ("power", "proc", "factory", "barracks", "harvester")]
+        eng = engineer_of(self.db, env.sim) if self.cal.derricks else None
+        if eng:  # an engineer on a derrick pays $1000 at once: the teacher may use it for money
+            extras.append(eng)
         problem = BuildOrderProblem(
             self.db, self.task.country, self.task.targets,
-            extras=[basics[k] for k in ("power", "proc", "factory", "barracks", "harvester")],
+            extras=extras,
             cal=self.cal, max_frames=env.max_frames, state=env.state, weights=self.task.weights, max_extras=6)
         seeds = [tuple(problem.target_items)]
         if self._genome is not None:

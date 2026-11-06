@@ -32,6 +32,7 @@ class _Job:
     baseline: int
     placed: bool = False
     seen: bool = False  # the factory has been seen producing it
+    shown: bool = False  # a building: it has been seen in the factory
 
 
 @dataclass
@@ -43,6 +44,9 @@ class BuildExecutor:
     deploy_frame: int | None = None
     _heads: dict[str, int] = field(default_factory=lambda: {c: 0 for c in CATEGORIES})
     _jobs: dict[str, _Job | None] = field(default_factory=lambda: {c: None for c in CATEGORIES})
+    lost_after: int = 150  # frames a building order may take to show up in the factory
+    # Units finished in a row that never showed up on the map, per type (see tick).
+    vanished: dict[str, int] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         self._queues = {c: [t for t in self.sequence if self.category(t) == c] for c in CATEGORIES}
@@ -84,13 +88,28 @@ class BuildExecutor:
             # another of the same type may die meanwhile (and a hero can vanish on exit).
             if (owned.get(job.type_id, 0) > job.baseline or job.seen) and not busy:
                 self.events.append((snap.frame, "done", job.type_id))
+                if cat != "building":
+                    # Live 2026-11-06 (series_v4 games 9, 10, 12) every conscript the barracks
+                    # finished was deleted before reaching the map: 70 were paid for in a row.
+                    grew = owned.get(job.type_id, 0) > job.baseline
+                    self.vanished[job.type_id] = 0 if grew else self.vanished.get(job.type_id, 0) + 1
                 self._jobs[cat] = None
                 self._start_next(cat, snap.frame, owned)
             elif cat == "building" and not job.placed:
-                f = factories.get("building")
+                # Defences (BuildCat=Combat) come out of the game's separate defence queue: live
+                # 2026-11-06 a finished flak cannon sat there unplaced, unseen in "building".
+                f = next((g for g in (factories.get("building"), factories.get("defense"))
+                          if g is not None and g.type_id == job.type_id), factories.get("building"))
+                job.shown |= f is not None and f.type_id == job.type_id
                 if f and f.type_id == job.type_id and f.progress >= 1.0:
                     self.commander.place(job.type_id)
                     job.placed = True
+                elif not job.shown and snap.frame - job.started > self.lost_after:
+                    # Accepted but never built: live 2026-11-06 a defence ordered on the frame the war
+                    # factory was placed never appeared, and the queue waited on it for 17000 frames.
+                    self.events.append((snap.frame, "lost", job.type_id))
+                    self._jobs[cat] = None
+                    self._retry(cat, job)
 
     def _deploy_mcv(self, snap: Snapshot, owned: dict[str, int]) -> None:
         cnst = {"NACNST", "GACNST", "YACNST"}
@@ -104,6 +123,9 @@ class BuildExecutor:
         self.commander.deploy(mcv.address)
         self.deploy_frame = snap.frame
         self.events.append((snap.frame, "deploy", mcv.type_id))
+
+    def _retry(self, cat: str, job: _Job) -> None:
+        self._heads[cat] -= 1  # order it again
 
     def _start_next(self, cat: str, frame: int, owned: dict[str, int]) -> None:
         if self._heads[cat] >= len(self._queues[cat]):

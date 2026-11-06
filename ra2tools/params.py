@@ -24,6 +24,11 @@ class Calibration:
     # harassment). Live hard games 2026-11-05: about 0.8 of the cycle-time estimate.
     harvest_efficiency: float = 1.0
     ore_far_distance: float = 0.0
+    # Tech oil derricks an engineer can take: walking distance in cells from our base, nearest
+    # first (the map has 3; the AI took the one on its side at 18805, live 2026-11-06). Each gives
+    # its rules' ProduceCashStartup on capture, then ProduceCashAmount every ProduceCashDelay.
+    derricks: list = field(default_factory=list)
+    derrick_type: str = "CAOILD"
     slave_cycle_frames: float = 300.0   # one slave miner worker round trip
     place_delay_frames: float = 15.0    # time for the player to place a finished building
     mcv_deploy_frames: float = 75.0

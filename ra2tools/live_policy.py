@@ -3,7 +3,7 @@
 Same job tracking, placement and MCV deploy as BuildExecutor, but instead of a fixed sequence each
 idle production queue builds an EconomyState from the memory snapshot (state_from_snapshot), masks
 the legal items with the same rules as BuildEnv and lets the policy choose. A WAIT holds that queue
-until something finishes, as in training. Frames are counted from the MCV deploy order, like the
+until something finishes, or for one step when nothing is building, as in training. Frames are counted from the MCV deploy order, like the
 simulation's frame 0. Units the skirmish starts with (tanks, infantry) are left out of the
 model's state and the target count, since every simulated game starts with just the MCV.
 """
@@ -18,6 +18,8 @@ from .env import MCVS, WAIT, BuildEnv, Observation, state_from_snapshot
 from .executor import CATEGORIES, BuildExecutor, _Job
 from .memory import Snapshot
 
+VANISHED = 3  # units of a type finished in a row without one reaching the map: stop ordering it
+
 
 @dataclass
 class PolicyExecutor(BuildExecutor):
@@ -28,7 +30,9 @@ class PolicyExecutor(BuildExecutor):
     spent: float = 0.0
     _snap: Snapshot | None = None
     _waiting: set = field(default_factory=set)
+    _woke: int = -10**9
     army: Counter = field(default_factory=Counter)  # starting units, not ours to count
+    hidden: Counter = field(default_factory=Counter)  # ours but off the map (Steward.inside)
     # Targets after the current ones (execute.py --early): the early defence first, then all.
     then: dict | None = None
 
@@ -43,6 +47,11 @@ class PolicyExecutor(BuildExecutor):
         # Count what we finished, not what still stands: units lost defending the base are not
         # rebuilt before the attack (live 2026-11-03: replacing dead HTKs held it back 10000+ frames).
         built = Counter(t for _, k, t in self.events if k == "done")
+        # A refinery's free harvester has no "done" event of its own. Live 2026-11-06 stage 1 asked
+        # for 5 harvesters, 4 were built + 1 free: the model saw 5 and never built another, the
+        # stage never ended and it rebuilt lost HTKs for 50000 frames instead of teching up.
+        built += Counter(self.db.technos[t].free_unit for t, n in list(built.items()) for _ in range(n)
+                         if self.db.technos.get(t) is not None and self.db.technos[t].free_unit)
         if all(built[t] >= n for t, n in self.targets.items()):
             if self.then is None:
                 return True
@@ -60,9 +69,19 @@ class PolicyExecutor(BuildExecutor):
         super().tick(snap)
         if sum(1 for e in self.events if e[1] == "done") != before:
             self._waiting.clear()  # something finished: prerequisites may have changed
+        elif self._waiting and not any(self._jobs.values()) and snap.frame - self._woke >= self.env.dt:
+            # Nothing is building, so nothing will finish to end the wait: as in BuildEnv, WAIT
+            # then lasts one step. Live 2026-11-06 every queue waited for money at 4962 and the
+            # game sat on $15k until the timeout.
+            self._waiting.clear()
+            self._woke = snap.frame
+
+    def _retry(self, cat: str, job) -> None:
+        self.spent -= self.db.technos[job.type_id].cost  # the policy decides again
 
     def _state(self, snap: Snapshot):
         state = state_from_snapshot(self.env.sim, snap)
+        state.owned += self.hidden  # garrisoned infantry is off the map but still ours
         state.owned -= self.army
         offset = self.deploy_frame or 0
         state.frame = float(snap.frame - offset)
@@ -76,6 +95,9 @@ class PolicyExecutor(BuildExecutor):
             return
         state = self._state(snap)
         mask = self.env.legal(state, cat)
+        for t, n in self.vanished.items():
+            if n >= VANISHED and t in self.env.vocab:
+                mask[self.env.vocab.index(t) + 1] = False  # finished again and again, never arrived
         if not mask[1:].any():
             return
         t0 = time.perf_counter()

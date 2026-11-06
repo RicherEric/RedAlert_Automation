@@ -15,6 +15,11 @@
 //   MOVE <unit> <x> <y>  -> move order to a cell
 //   ATTACK <unit> <target> -> attack an enemy object (<target> = memory address, any owner but ours)
 //   CAMERA <x> <y>       -> centre our own view on a cell (display only, sends no event)
+//   REPAIR <building>    -> toggle repair on one of our buildings (like the repair wrench)
+//   CAPTURE <unit> <target> [d|t|td] -> engineer capture (tech derrick, airport), infantry garrison
+//   ENTER <unit> <target> [d|t|td]   -> enter a transport / building (Mission::Enter)
+//       d|t|td: the object goes in the event's destination (default, as a click does), target or both
+//   HARVEST <unit> [x y] -> harvester back to work, on the ore/gem cell if given
 //   <unit> is a memory address ("0x1234abcd", as monitor.py reports) or a type ID (first owned one)
 //
 // Safety: commands are refused in Internet games; the socket only listens on localhost.
@@ -227,6 +232,20 @@ TechnoClass* FindEnemy(HouseClass* house, const std::string& ref) {
 	return nullptr;
 }
 
+// Any live object on the map by memory address, ours included (a garrison we already hold).
+TechnoClass* FindObject(const std::string& ref) {
+	if (ref.rfind("0x", 0) != 0 && ref.rfind("0X", 0) != 0) {
+		return nullptr;
+	}
+	const DWORD addr = strtoul(ref.c_str(), nullptr, 16);
+	for (auto pTechno : TechnoClass::Array) {
+		if (reinterpret_cast<DWORD>(pTechno) == addr) {
+			return pTechno->IsAlive && pTechno->IsOnMap ? pTechno : nullptr;
+		}
+	}
+	return nullptr;
+}
+
 std::string CmdAttack(HouseClass* house, TechnoClass* unit, std::istringstream& args) {
 	std::string ref;
 	if (!(args >> ref)) {
@@ -241,6 +260,53 @@ std::string CmdAttack(HouseClass* house, TechnoClass* unit, std::istringstream& 
 		return "ERR event queue full";
 	}
 	return Fmt("OK attack 0x%08x 0x%08x", reinterpret_cast<DWORD>(unit), reinterpret_cast<DWORD>(target));
+}
+
+std::string CmdRepair(HouseClass* house, TechnoClass* unit) {
+	if (unit->WhatAmI() != AbstractType::Building) {
+		return "ERR not a building";
+	}
+	EventClass ev(house->ArrayIndex, EventType::Repair);
+	ev.Repair.Whom = TargetClass(unit);
+	if (!EventClass::OutList.Add(ev)) {
+		return "ERR event queue full";
+	}
+	return Fmt("OK repair 0x%08x", reinterpret_cast<DWORD>(unit));
+}
+
+// Capture / Enter on any object, ours included: a civilian building becomes ours once the first
+// infantry is in, and the rest still have to get in. Garrisoning is Capture: live 2026-11-06
+// conscripts given Enter on a civilian building shot it down instead.
+std::string CmdEnter(HouseClass* house, TechnoClass* unit, std::istringstream& args, Mission mission, const char* name) {
+	std::string ref, where = "d";
+	if (!(args >> ref)) {
+		return Fmt("ERR usage: %s <unit> <target address> [d|t|td]", name);
+	}
+	args >> where;
+	TechnoClass* target = FindObject(ref);
+	if (!target) {
+		return "ERR no live object at " + ref;
+	}
+	const bool asTarget = where.find('t') != std::string::npos, asDest = where.find('d') != std::string::npos;
+	EventClass ev(house->ArrayIndex, TargetClass(unit), mission, asTarget ? TargetClass(target) : TargetClass(),
+		asDest ? TargetClass(target) : TargetClass(), TargetClass());
+	if (!EventClass::OutList.Add(ev)) {
+		return "ERR event queue full";
+	}
+	return Fmt("OK %s 0x%08x 0x%08x %s", name, reinterpret_cast<DWORD>(unit), reinterpret_cast<DWORD>(target), where.c_str());
+}
+
+std::string CmdHarvest(HouseClass* house, TechnoClass* unit, std::istringstream& args) {
+	int x, y;
+	TargetClass dest;
+	if (args >> x >> y) {
+		dest = TargetClass(CellStruct { static_cast<short>(x), static_cast<short>(y) });
+	}
+	EventClass ev(house->ArrayIndex, TargetClass(unit), Mission::Harvest, TargetClass(), dest, TargetClass());
+	if (!EventClass::OutList.Add(ev)) {
+		return "ERR event queue full";
+	}
+	return Fmt("OK harvest 0x%08x", reinterpret_cast<DWORD>(unit));
 }
 
 // Our own view only: no event is sent, so nothing about the match changes.
@@ -274,7 +340,7 @@ std::string Execute(const std::string& line) {
 		}
 		return CmdCamera(in);
 	}
-	static const char* const known[] = { "PRODUCE", "ABANDON", "PLACE", "DEPLOY", "MOVE", "ATTACK" };
+	static const char* const known[] = { "PRODUCE", "ABANDON", "PLACE", "DEPLOY", "MOVE", "ATTACK", "REPAIR", "CAPTURE", "ENTER", "HARVEST" };
 	if (std::none_of(std::begin(known), std::end(known), [&](const char* k) { return cmd == k; })) {
 		return "ERR unknown command " + cmd;
 	}
@@ -288,12 +354,17 @@ std::string Execute(const std::string& line) {
 	if (!(in >> id)) {
 		return "ERR usage: " + cmd + " <TypeID|unit>";
 	}
-	if (cmd == "DEPLOY" || cmd == "MOVE" || cmd == "ATTACK") {
+	if (cmd == "DEPLOY" || cmd == "MOVE" || cmd == "ATTACK" || cmd == "REPAIR" || cmd == "CAPTURE" || cmd == "ENTER"
+		|| cmd == "HARVEST") {
 		TechnoClass* unit = FindOwnUnit(house, id);
 		if (!unit) {
 			return "ERR no unit of ours matches " + id;
 		}
 		if (cmd == "ATTACK") return CmdAttack(house, unit, in);
+		if (cmd == "REPAIR") return CmdRepair(house, unit);
+		if (cmd == "CAPTURE") return CmdEnter(house, unit, in, Mission::Capture, "capture");
+		if (cmd == "ENTER") return CmdEnter(house, unit, in, Mission::Enter, "enter");
+		if (cmd == "HARVEST") return CmdHarvest(house, unit, in);
 		return cmd == "DEPLOY" ? CmdDeploy(house, unit) : CmdMove(house, unit, in);
 	}
 	TechnoTypeClass* type = TechnoTypeClass::Find(id.c_str());

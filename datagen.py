@@ -64,7 +64,7 @@ def worker(wid: int, seed: int, deadline: float, episodes: int, shard_rows: int,
         buf = {}
 
     while time.time() < deadline and (episodes <= 0 or done < episodes):
-        task = sample_task(db, rng)
+        task = sample_task(db, rng, cal=cal)
         ep = episode(db, task, cal, vocab, rng, explore=explore, actor=actor)
         n = len(ep["action"])
         if n:

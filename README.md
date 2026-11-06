@@ -154,6 +154,26 @@ tools\ra2bridge\build.bat                  # 用 VS 2022 編 32 位元 DLL 和�
 `bot_mcv_deploy_frames`），不用人手量到的值，因為人手的值包含反應時間。如果最佳化的結果要交給 bot 執行，
 就在情境檔的 `[calibration]` 加上 `controller = "bot"`。
 
+**基地管理與即時應變（2026-11-06）**：`--targets` 模式另外跑三個控制器。
+- `ra2tools/steward.py`（`Steward`）：
+  - 維修：受損建築依重要性排序，同時最多修 2 座，留 $400 給生產。
+  - 工兵：去佔最近的中立科技油井，再來是機場。
+  - 礦車：停住超過 450 幀、又不在礦場旁邊，就派去「每包價值 ÷ 距離」最高的礦區（彩色礦優先），
+    礦區用 `ra2tools/mapdata.py` 從地圖檔的 `[OverlayPack]` 解出來。
+  - 進駐：派開局動員兵進離基地最近的民房，守家礦和油井。
+  - 重蓋：蓋兵階段結束後，被打掉的電廠、礦場、工廠會重蓋。
+- `ra2tools/adapt.py`：
+  - 蓋兵時每 3000 幀，拿記憶體看到的 AI 部隊和計畫部隊做戰鬥模擬。打不贏就追加剋制兵種：
+    每一輪試每個候選兵種，挑「每花一塊錢分數進步最多」的（`--adapt`，最多 $5000）。
+  - 出發後，多的錢拿去蓋剋制兵種留在家守（`Reinforcer`）。
+  - 記憶體看得到整張地圖，只能用在打電腦。
+- `ra2tools/assault.py` 集火：每個單位在射程內的威脅中，挑「加上隊友已經打在它身上的火力後，
+  每幀打掉最多敵方價值」的目標；隊友已經 45 幀內就能打死的目標，分數打四分之一，避免過度集火。
+  戰鬥模擬（`[combat] focus = true`）用同一種選法。
+
+bridge 為此新增 `REPAIR`、`CAPTURE`（工兵佔領，也用來進駐民房）、`ENTER`、`HARVEST`。
+實測：步兵進駐民房要用 Capture 任務，用 Enter 的話，動員兵會把民房打掉。
+
 DLL 在 `MainLoop`（0x55D360）開頭掛一個 5 位元組的跳轉，每幀在遊戲主執行緒上處理指令。
 玩家動作都轉成遊戲自己的 `EventClass` 事件（跟點側邊欄一樣），由遊戲驗證和排程。
 Python 透過 `127.0.0.1:47800` 的文字協定溝通（`ra2tools/bridge.py`）。網際網路對戰模式下一律拒絕執行。
@@ -185,13 +205,20 @@ Python 透過 `127.0.0.1:47800` 的文字協定溝通（`ra2tools/bridge.py`）�
 - `ra2tools/params.py`：**校準參數**（以下說明）
 - `ra2tools/memory.py`、`yr_layout.py`：讀取 gamemd.exe 記憶體
 - `ra2tools/calibration.py`：校準擬合（碼錶量測、watch 日誌）
+- `ra2tools/mapdata.py`：地圖檔的礦區／彩色礦（`[OverlayPack]`，LCW 解壓）
+- `ra2tools/steward.py`、`adapt.py`：實機的基地管理（維修、油井、礦車、進駐、重蓋）和依敵軍追加兵種
 
 ## 模型範圍與校準
 
 時間一律以「遊戲幀」計算；`ROF`、建造時間等規則數值本來就是以幀為單位。
 
 **照規則檔計算（不需校準）**：價格、血量、護甲倍率、射程、射速、連發、濺射、
-對空/對地、建造時間公式（`BuildSpeed`、`MultipleFactory`、低電力懲罰）、前置條件、礦車容量。
+對空/對地、建造時間公式（`BuildSpeed`、`MultipleFactory`、低電力懲罰）、前置條件、礦車容量、
+科技油井收入（佔領時 `ProduceCashStartup`，之後每 `ProduceCashDelay` 幀 `ProduceCashAmount`）。
+
+**從地圖或實機量（2026-11-06）**：油井距離 `derricks`（工兵走過去的格數）；
+AI 天氣控制器的閃電風暴（`VictoryProblem.storms`：蓋好約 12500 幀後第一擊，之後每 9000 幀，
+每擊延後我方完成時間＝重蓋戰車工廠＋礦場）。維修和進駐只在實機做，模擬沒有算它們的好處。
 
 **需要用實戰校準的假設**（`[calibration]`）：`fps`（每秒幾幀，依遊戲速度而定）、
 `speed_to_cells`（`Speed=` 換算成每幀幾格）、`ore_distance`、採礦/卸礦時間、奴隸礦工循環、

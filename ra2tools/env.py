@@ -21,8 +21,8 @@ from .params import Calibration
 
 WAIT = 0
 MCVS = {"AMCV", "SMCV", "PCV"}
-FEATURE_VERSION = 3  # bump when features() changes: stored datasets and models must match
-HEAD = 5  # economy values at the start of the feature vector
+FEATURE_VERSION = 4  # bump when features() changes: stored datasets and models must match
+HEAD = 6  # economy values at the start of the feature vector
 
 
 def default_vocab(sim: EconomySim) -> list[str]:
@@ -182,10 +182,14 @@ def features(env: BuildEnv, obs: Observation, weights: dict[str, float] | None =
 
     No elapsed frame or money spent so far: the best next move depends only on the current state,
     and with every training game starting alike the trees used the frame as a stand-in for it,
-    so a live game running 40 frames ahead of the sim took a different branch (version 3)."""
+    so a live game running 40 frames ahead of the sim took a different branch (version 3).
+    Version 4 (2026-11-06): oil derricks left for an engineer, and harvesters without the derricks'
+    income streams."""
     s, db, n = obs.state, env.db, len(env.vocab)
     out, drain = env.sim.power(s.owned)
-    head = [s.money / 1000, out / 100, drain / 100, len(s.harvesters), len(s.dock_free)]
+    gatherers = sum(1 for h in s.harvesters if len(h) < 6)  # a derrick's income is not a harvester
+    derricks = len(env.sim.cal.derricks) - s.derricks_sent  # still free for an engineer (version 4)
+    head = [s.money / 1000, out / 100, drain / 100, gatherers, len(s.dock_free), derricks]
     owned = np.zeros(n)
     making = np.zeros(n)
     want = np.zeros(n)
@@ -223,8 +227,10 @@ def state_from_snapshot(sim: EconomySim, snap) -> EconomyState:
             owned[o.type_id] += 1
     state = EconomyState(frame=float(snap.frame), owned=owned,
                          money=float(snap.player.credits if snap.player else 0))
-    for f in snap.factories:
-        cat = "vehicle" if f.category == "naval" else f.category
+    for f in sorted(snap.factories, key=lambda f: f.category == "defense"):
+        cat = {"naval": "vehicle", "defense": "building"}.get(f.category, f.category)
+        if cat == "building" and state.jobs.get(cat) is not None:
+            continue  # the sim has one building queue; the game's defence queue runs alongside it
         if f.type_id in db.technos and cat in CATEGORIES:
             t = db.technos[f.type_id]
             job = _Job(t, db.build_frames(t), progress=f.progress)
@@ -238,6 +244,14 @@ def state_from_snapshot(sim: EconomySim, snap) -> EconomyState:
     for tid, n in list(owned.items()):
         for _ in range(n):
             sim._add_gatherer(state, db.technos[tid], state.frame - 0.5 * _cycle(sim, db.technos[tid]))
+    # An engineer is used up by its capture: count each derrick we hold as the engineer that took
+    # it, or a target with engineers would be rebuilt forever (as in the sim, which keeps them).
+    taken = owned.get(sim.cal.derrick_type, 0)
+    if taken:
+        state.derricks_sent = taken
+        eng = next((t.id for t in db.technos.values() if t.engineer and sim.buildable(t.id)), None)
+        if eng:
+            state.owned[eng] += taken
     return state
 
 

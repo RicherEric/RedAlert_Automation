@@ -227,7 +227,7 @@ class GameMemory:
             type_id = None
             if obj:
                 # The object under construction is a Techno; find its kind via its type pointer.
-                kind = cat if cat in L.TYPE_PTR else "vehicle"
+                kind = "building" if cat == "defense" else cat if cat in L.TYPE_PTR else "vehicle"
                 type_id = self.type_id(self.u32(obj + L.TYPE_PTR[kind]))
             value = self.i32(fptr + L.FACTORY_PROGRESS)
             out.append(FactoryState(cat, type_id, value / L.PRODUCTION_STEPS,

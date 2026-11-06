@@ -151,7 +151,7 @@ def evaluate(n_tasks: int, seed: int, workers: int = 0) -> dict:
 
     db, cal = load()
     rng = random.Random(seed)
-    tasks = [sample_task(db, rng) for _ in range(n_tasks)]
+    tasks = [sample_task(db, rng, cal=cal) for _ in range(n_tasks)]
     cache_path = DATA.parent / "teacher_eval.json"
     cache = json.loads(cache_path.read_text(encoding="utf-8")) if cache_path.exists() else {}
     cal_key = hashlib.md5(json.dumps(vars(cal), sort_keys=True, default=str).encode()).hexdigest()[:8]

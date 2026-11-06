@@ -144,6 +144,60 @@ def test_policy_executor_asks_model_per_queue(db):
     assert ex.spent == sum(db.technos[t].cost for t in produced)
 
 
+def test_policy_executor_wait_ends_when_nothing_builds(db):
+    """Live 2026-11-06: every queue chose WAIT (short of money) with nothing in production, so
+    nothing could finish to end the wait and the build stalled for 20000 frames."""
+    from ra2tools.env import WAIT, BuildEnv, needed_items
+    from ra2tools.live_policy import PolicyExecutor
+    from ra2tools.params import Calibration
+
+    class Hesitant:  # waits on its first few calls, then follows the build path
+        calls = 0
+
+        def act(self, env, obs, weights):
+            self.calls += 1
+            if self.calls <= 3:
+                return WAIT
+            need = needed_items(env, obs)
+            legal = [i for i in range(1, env.n_actions) if obs.mask[i] and env.vocab[i - 1] in need]
+            return legal[0] if legal else WAIT
+
+    game = ToyGame(db)
+    env = BuildEnv(db, "Russians", {"HTNK": 1}, Calibration().as_bot())
+    ex = PolicyExecutor(db, [], game, env=env, policy=Hesitant())
+    for _ in range(200):
+        if ex.done:
+            break
+        ex.tick(game.snapshot())
+        game.step()
+    assert ex.done
+
+
+def test_policy_executor_stage_counts_free_harvester(db):
+    """Live 2026-11-06: stage 1 asked for harvesters, the refinery's free one had no done event,
+    so the stage never ended although the model saw enough and stopped building them."""
+    from ra2tools.env import WAIT, BuildEnv, needed_items
+    from ra2tools.live_policy import PolicyExecutor
+    from ra2tools.params import Calibration
+
+    class PathPolicy:
+        def act(self, env, obs, weights):
+            need = needed_items(env, obs)
+            legal = [i for i in range(1, env.n_actions) if obs.mask[i] and env.vocab[i - 1] in need]
+            return legal[0] if legal else WAIT
+
+    game = ToyGame(db)
+    env = BuildEnv(db, "Russians", {"HARV": 2}, Calibration().as_bot())
+    ex = PolicyExecutor(db, [], game, env=env, policy=PathPolicy(), then={"HTNK": 1})
+    for _ in range(300):
+        if ex.done:
+            break
+        ex.tick(game.snapshot())
+        game.step()
+    assert ex.done
+    assert [l.split()[1] for l in game.log if l.startswith("PRODUCE")].count("HARV") == 1
+
+
 def test_policy_executor_ignores_starting_army(db):
     """Skirmish starting units are not ours: the target still needs a newly built tank, and the
     model never sees the starting tanks (simulated games start with just the MCV)."""
@@ -189,3 +243,92 @@ def test_job_done_when_factory_moves_on_despite_losses(db):
         game.step()
     assert [t for _, k, t in ex.events if k == "done"] == ["HTK", "HTK"]
     assert ex.done
+
+
+def test_building_order_the_game_dropped_is_ordered_again(db):
+    # Live 2026-11-06: PRODUCE NAPOWR was accepted, nothing ever showed in the factory, and the
+    # building queue waited on it all game.
+    game = ToyGame(db)
+    real = game.produce
+    dropped = []
+
+    def produce(tid):
+        out = real(tid)
+        if tid == "NAPOWR" and not dropped:
+            dropped.append(tid)
+            del game.factories["building"]  # accepted, then silently gone
+        return out
+    game.produce = produce
+    ex = BuildExecutor(db, ["NAPOWR", "NAREFN"], game, lost_after=50)
+    for _ in range(100):
+        if ex.done:
+            break
+        ex.tick(game.snapshot())
+        game.step()
+    assert ex.done and dropped
+    assert [k for _, k, t in ex.events if t == "NAPOWR"] == ["start", "lost", "start", "done"]
+
+
+def test_policy_executor_counts_garrisoned_infantry(db):
+    from collections import Counter
+    from ra2tools.env import BuildEnv
+    from ra2tools.live_policy import PolicyExecutor
+    from ra2tools.params import Calibration
+    env = BuildEnv(db, "Russians", {"E2": 1}, Calibration().as_bot())
+    ex = PolicyExecutor(db, [], ToyGame(db), env=env, army=Counter({"E2": 3}), hidden=Counter({"E2": 2}))
+    game = ToyGame(db)
+    game.objects = [("NACNST", True), ("NAHAND", True), ("E2", True), ("E2", False)]
+    ex.deploy_frame = 0
+    state = ex._state(game.snapshot())
+    assert state.owned["E2"] == 0  # 1 on the map + 2 inside - the 3 we started with
+
+
+def test_defence_placed_from_the_defence_queue(db):
+    # The game builds BuildCat=Combat buildings in a separate factory (Primary_ForDefenses).
+    game = ToyGame(db)
+    snapshot = game.snapshot
+
+    def snap():
+        s = snapshot()
+        s.factories = [FactoryState("defense", f.type_id, f.progress, False) if f.type_id == "NAFLAK" else f
+                       for f in s.factories]
+        return s
+    game.snapshot = snap
+    game.objects = [("NACNST", True), ("NAHAND", True)]
+    ex = BuildExecutor(db, ["NAFLAK"], game, deploy_frame=0)
+    for _ in range(30):
+        if ex.done:
+            break
+        ex.tick(game.snapshot())
+        game.step()
+    assert ex.done and "PLACE NAFLAK" in game.log
+    assert not [e for e in ex.events if e[1] == "lost"]
+
+
+def test_policy_stops_ordering_a_unit_that_never_arrives(db):
+    # Live 2026-11-06 every conscript the barracks finished was deleted before reaching the map,
+    # and the policy, still short of one, paid for 70 in a row.
+    from ra2tools.env import BuildEnv
+    from ra2tools.live_policy import VANISHED, PolicyExecutor
+    from ra2tools.params import Calibration
+
+    class Wants:
+        def act(self, env, obs, weights):
+            i = env.vocab.index("E2") + 1
+            return i if obs.mask[i] else 0
+
+    game = ToyGame(db)
+    step = game.step
+
+    def lose_conscripts():
+        step()
+        game.objects = [o for o in game.objects if o[0] != "E2"]
+    game.step = lose_conscripts
+    game.objects = [("NACNST", True), ("NAHAND", True)]
+    env = BuildEnv(db, "Russians", {"E2": 10}, Calibration().as_bot())
+    ex = PolicyExecutor(db, [], game, env=env, policy=Wants())
+    ex.deploy_frame = 0
+    for _ in range(200):
+        ex.tick(game.snapshot())
+        game.step()
+    assert game.log.count("PRODUCE E2") == VANISHED

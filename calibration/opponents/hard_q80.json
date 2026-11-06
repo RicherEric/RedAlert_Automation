@@ -1402,9 +1402,9 @@
    "source": "logs/battle_hard_air.jsonl: first ZEP 6544, Patriots at 8097 / 9017 / by 11236"
   }
  },
- "replace_rate": 1.0,
+ "replace_rate": 3.0,
  "notes": {
-  "replace_rate": "battle_hard.jsonl: $1200 in 2000 frames; kept at medium's rate, hard should not be weaker",
+  "replace_rate": "series_v5_20261107_3..6: AI units that appeared in the 2700 frames after our army gathered, 2.3-4.3 per frame (was 1.0)",
   "quantile": {
    "p": 0.8,
    "games": 12,
