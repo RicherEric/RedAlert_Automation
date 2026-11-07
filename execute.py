@@ -179,7 +179,12 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
         if reinforcer and a.attack_started is not None:
             reinforcer.tick(snap)
         threats = defence.threats(snap) if a.attack_started is None else []
-        if threats and a.started is not None:
+        # Only what the army can hurt counts, and from the first tick on: live 2026-11-07
+        # (game 13) a wave at the base as the build finished left a.started unset, so two GIs and
+        # a Harrier the Apocalypses cannot shoot then held the whole army home for 5000 frames.
+        army_now = defence.army(snap)
+        threats = [t for t in threats if any(a._dps(u, t) > 0 for u in army_now)]
+        if threats:
             # Once on the way, only a real wave brings the army back; the guard and the reinforcements
             # take raiders. Live 2026-11-06 single raiders kept recalling it, the gather timer ran
             # out meanwhile and the ground went in without the Kirovs (games 4-7).

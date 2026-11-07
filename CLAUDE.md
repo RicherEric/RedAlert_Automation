@@ -95,11 +95,15 @@ cd ..; .venv\Scripts\python.exe thesis\update_script.py   # 備忘稿改了就�
   - `tools/ra2bridge/out/`：`tools/ra2bridge/build.bat`（VS 2022，32 位元）。
   - `logs/`、`datasets/`、舊版模型：本機產物，沒有就算了。現行模型 `models/build` 有放在 git 裡。
 
-## 研究進度（2026-11-04）
+## 研究進度（2026-11-07）
 
-- 詳細用法與模型範圍見 `README.md`。核心：`ra2tools/`（經濟／戰鬥模擬、NSGA-II、記憶體讀取、bridge）、
-  `ra2opt.py`（最佳化）、`execute.py`（實機執行）、`opponent.py`（AI 時間軸、分位數對手）。
+- 詳細用法與模型範圍見 `README.md`。核心：`ra2tools/`（經濟／戰鬥模擬、NSGA-II、記憶體讀取、bridge、
+  `steward.py` 基地管理、`adapt.py` 依敵軍補兵）、`ra2opt.py`（最佳化）、`execute.py`（實機執行）、
+  `opponent.py`（AI 時間軸、分位數對手）、`tools/robust_search.py`（對真實對局搜尋）、`tools/live_series.py`（連打）。
 - 簡單 AI：實機約 5.4 分鐘自動打贏，和模擬預測差約 6%。
-- 困難 AI：還沒贏。robust 搜尋訓練勝率約 83%，leave-one-out 只剩 6/10；實機兩場都輸。
-  主因是模擬太樂觀：家裡的礦約第 14000 幀採完、礦車要繞遠路，AI 一直騷擾，後期也比預測強。
-- 期末方向：把這些補進模擬器，重新搜尋，再挑戰困難 AI（任何實機都要先問使用者）。
+- 困難 AI：**2026-11-07 第一次實機獲勝**，series_v6 共 12 場 5 勝 4 敗 3 逾時（README「困難 AI」一節）。
+  關鍵是早到（約第 16000 幀集結，AI 只有 1 座光稜塔）、部隊不脫節、模擬器校正 AI 主場加成（`b_damage = 1.5`）
+  和戰鬥中補兵（每幀 3.0）。校正前模擬太樂觀（預測 71–83%、實機全輸），校正後預測 31–38%。
+- 輸贏不是看抵達時 AI 的塔數或兵數（12 場對不起來），模擬單場戰鬥也分不出輸贏；
+  輸的場次多半是正面交戰後全滅、只拆掉幾棟。下一步看戰鬥中的操作和兵種（反步兵太少）。
+- 任何實機都要先問使用者。
