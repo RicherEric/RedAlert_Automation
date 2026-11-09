@@ -21,7 +21,8 @@ from ra2tools.opponent import Opponent, games_from_logs  # noqa: E402
 
 LOGS = ["logs/ai_hard.jsonl", "logs/battle_hard*.jsonl", "logs/observe_hard_[0-9].jsonl", "logs/challenge_hard_q.jsonl",
         "logs/challenge_hard_robust*.jsonl", "logs/series_hard_2*_[0-9].jsonl",
-        "logs/series_v4_2*.jsonl", "logs/series_v5_2*.jsonl"]  # games under 16000 frames (aborted 2, 3) are skipped
+        "logs/series_v4_2*.jsonl", "logs/series_v5_2*.jsonl", "logs/series_v6_2*.jsonl", "logs/series_v7_2*.jsonl",
+        "logs/series_v8_2*.jsonl", "logs/series_v10_2*.jsonl"]  # games under 16000 frames (aborted 2, 3) are skipped
 PREFER = {"win_rate": 1.0, "frames": 0.4, "spent": 0.2, "survive": 0.2}
 
 
@@ -32,6 +33,7 @@ def main() -> None:
     ap.add_argument("--template", default="calibration/opponents/hard_americans_firestorm.json")
     ap.add_argument("--generations", type=int)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--workers", type=int, help="override [victory] workers (fewer = less memory)")
     args = ap.parse_args()
     cfg = tomllib.loads(Path(args.scenario).read_text(encoding="utf-8"))
     v = cfg["victory"]
@@ -39,6 +41,7 @@ def main() -> None:
     paths = [p for pattern in LOGS for p in sorted(glob.glob(str(ROOT / pattern)))]
     games = games_from_logs(db, paths, Opponent.load(ROOT / args.template))
     print(f"對手：{len(games)} 場真實對局（{', '.join(g.name for g in games)}）")
+    v = {**v, **({"workers": args.workers} if args.workers else {})}
     cfg = {**cfg, "victory": {**v, "robust": True}}
     problem = victory_problem(db, cfg, load_calibration(cfg), games, model=str(ROOT / "models" / "build"))
     known = list(v.get("seeds", []))

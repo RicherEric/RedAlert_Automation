@@ -106,6 +106,15 @@ def predict_victory(args, db, country, cal, targets, policy, early: dict | None 
 
 _camera_at = {"frame": -10**9}
 RECALL_SHARE = 0.25  # an AI wave worth this share of our army calls it back while gathering
+WAVE_LOST = 0.15  # the attacking army down to this share of its value: the wave is lost, rebuild
+NEXT_WAVE = 0.7   # the next wave leaves at this share of the first one's value (or once broke at 0.3)
+REGROUP_MAX = 6000  # frames: then it leaves at 0.3 too (the plan's tech may be gone, so the rest never comes)
+# The AI's Chronosphere drops 4-6 tanks next to our base 10-15k frames after it stands (median
+# 13000, series_v4-v7): from CHRONO_ALERT after first seeing it, the reinforcements are bought to
+# beat such a drop and stay home instead of joining the next wave.
+CHRONOSPHERES = {"GACSPH"}
+CHRONO_ALERT = 7000  # seen only once the attack phase runs: it may have stood a while
+CHRONO_DROP = {"MTNK": 4, "SREF": 1, "MGTK": 1}
 ADAPT_EVERY = 3000  # frames between counter checks while building
 ADAPT_UNITS = ["FLAKT", "HTK", "HTNK", "E2", "TTNK", "APOC", "V3", "DRON"]  # always weighed as counters
 
@@ -126,12 +135,13 @@ def follow_camera(bridge, a, snap, every: int = 15) -> None:
 
 
 def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = frozenset(),
-               steward=None, reinforcer=None) -> dict:
+               steward=None, reinforcer=None, rebuilder=None) -> dict:
     """After the build: every combat unit (the free starting ones too) attacks until the AI is out.
 
     Like VictoryProblem.fight, the army first stays home for `hold` frames when an AI wave is due
     before it would arrive, and fights any wave that reaches the base before the attack starts:
-    under ShortGame an empty base razed by the wave loses the match."""
+    under ShortGame an empty base razed by the wave loses the match. With a `rebuilder`, a lost
+    wave sends the survivors home, the bank buys the plan's units again and the next wave goes."""
     from ra2tools.assault import Assault, Defence
 
     snap = gm.snapshot()
@@ -149,8 +159,12 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
         print(f"\n第 {snap.frame} 幀蓋好，預計有 AI 反攻，在家防守到第 {hold_until} 幀")
     army = Counter(o.type_id for o in a.army(snap))
     print(f"\n第 {snap.frame} 幀開始進攻：{dict(army)}")
-    log = {"start": snap.frame, "army": dict(army), "timeline": []}
+    log = {"start": snap.frame, "army": dict(army), "timeline": [], "waves": []}
     last_buildings = None
+    value = lambda units: sum(db.technos[o.type_id].cost or 1 for o in units)
+    first_value = wave_value = None  # army value as the first / the current wave attacked
+    regroup = False
+    chrono_seen = None  # frame we first saw the AI's Chronosphere
     while time.monotonic() < end:
         snap = gm.snapshot()
         if not snap.houses:  # the match is over (score screen or exit): no house data left
@@ -174,6 +188,13 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
                 near = {o.address for o in a.army(snap) if math.dist((o.x, o.y), centre) <= home.radius}
                 home.extra = home.extra | near
                 a.skip = a.skip | near
+        if chrono_seen is None and any(o.type_id in CHRONOSPHERES for o in a.enemies(snap)):
+            chrono_seen = snap.frame
+            print(f"  {snap.frame:>6} 幀  看到 AI 的超時空傳送儀，第 {snap.frame + CHRONO_ALERT} 幀起留兵守家")
+            log["chrono_seen"] = snap.frame
+        alert = chrono_seen is not None and snap.frame >= chrono_seen + CHRONO_ALERT
+        if reinforcer:
+            reinforcer.home_threat = CHRONO_DROP if alert else {}
         if steward:
             steward.tick(snap)
         if reinforcer and a.attack_started is not None:
@@ -188,9 +209,33 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
             # Once on the way, only a real wave brings the army back; the guard and the reinforcements
             # take raiders. Live 2026-11-06 single raiders kept recalling it, the gather timer ran
             # out meanwhile and the ground went in without the Kirovs (games 4-7).
-            value = lambda units: sum(db.technos[o.type_id].cost or 1 for o in units)
             threats = threats if value(threats) >= RECALL_SHARE * value(a.army(snap)) else []
-        if a.attack_started is None and (snap.frame < hold_until or threats):
+        if (rebuilder and wave_value and a.attack_started is not None
+                and value(a.army(snap)) < WAVE_LOST * wave_value):
+            # Live 2026-11-07 (series_v7 games 1-3) the army died at the AI base and the game sat
+            # out the timeout on $30-40k. A fresh Assault walks the survivors home and gathers again.
+            print(f"  {snap.frame:>6} 幀  這一波打輸了（剩 {dict(Counter(o.type_id for o in a.army(snap)))}），"
+                  f"回家用 ${snap.player.credits} 重新組軍")
+            log["waves"].append({"lost": snap.frame, "credits": snap.player.credits})
+            orders, order_log = a.orders, a.order_log
+            a = Assault(db, bridge, enemy, exclude=guard)
+            a.orders, a.order_log = orders, order_log
+            a.skip = claimed()
+            if reinforcer and not alert:
+                reinforcer.units.clear()  # what it kept home joins the next wave (unless a drop is due)
+            regroup, wave_value = True, None
+        if regroup:
+            ready = a.army(snap)
+            have = Counter(o.type_id for o in ready)
+            waited = snap.frame - log["waves"][-1]["lost"] > REGROUP_MAX
+            if value(ready) >= NEXT_WAVE * first_value or ((rebuilder.broke(snap) or waited)
+                                                           and value(ready) >= 0.3 * first_value):
+                regroup = False
+                print(f"  {snap.frame:>6} 幀  第 {len(log['waves']) + 1} 波組好：{dict(have)}，${snap.player.credits}")
+                log["waves"][-1]["ready"] = snap.frame
+            else:
+                rebuilder.tick(snap, have)
+        if a.attack_started is None and (snap.frame < hold_until or threats or regroup):
             defence.tick(snap)  # also keeps the yard guard and walks strays home
             if a.stage_started is not None:  # gathering starts over once the wave is beaten
                 a.stage_started = snap.frame
@@ -204,7 +249,9 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
             follow_camera(bridge, a, snap)
         if gathering and a.attack_started is not None:
             print(f"  {snap.frame:>6} 幀  集結完成（集結點 {a.rally}），{len(a.army(snap))} 個單位一起進攻")
-            log["gathered"] = snap.frame
+            log.setdefault("gathered", snap.frame)
+            wave_value = value(a.army(snap))
+            first_value = first_value or wave_value
         nb = sum(1 for o in a.enemies(snap) if o.kind == "building")
         if nb != last_buildings:
             mine = len(a.army(snap))
@@ -267,15 +314,17 @@ def run_policy(args, cfg, db) -> None:
         from ra2tools.live_policy import first_stage
         env = BuildEnv(db, country, first_stage(db, country, early) if early else total, cal, vocab=policy.vocab)
         with Bridge.connect(pids[0]) as bridge:
+            from ra2tools.placement import Spreader
+            spreader = Spreader(db)
             ex = PolicyExecutor(db, [], bridge, env=env, policy=policy, weights=weights,
-                                then=total if early else None)
+                                then=total if early else None, placer=spreader)
             from ra2tools.adapt import Reinforcer, counter_pick, enemy_army
             from ra2tools.mapdata import load_fields
             from ra2tools.problems import CombatSettings
             from ra2tools.steward import Steward
             vcfg = cfg.get("victory", {})
             steward = Steward(db, bridge, country, fields=load_fields(),
-                              garrison=vcfg.get("garrison", 0) if args.attack or args.defend else 0)
+                              garrison=vcfg.get("garrison", 0) if args.attack or args.defend else 0, placer=spreader)
             combat = CombatSettings(**{**cfg.get("combat", {}), **vcfg.get("combat", {})})
             counters = sorted({t for t in [*targets, *early, *ADAPT_UNITS] if t in policy.vocab
                                and db.technos[t].kind != "building" and db.technos[t].combat_weapons})
@@ -336,7 +385,10 @@ def run_policy(args, cfg, db) -> None:
                     reinforcer = Reinforcer(db, bridge, cal, combat, defence.enemy, counters,
                                             home=Counter(home_guard(db, Counter(total), start_army)))
                 steward.rebuild = True  # the build is done: the production queues are free
-                attack_log = run_attack(args, db, gm, bridge, ex, end, hold, guard, steward, reinforcer)
+                from ra2tools.adapt import Rebuilder
+                rebuilder = Rebuilder(db, bridge, targets, factory=db.basics(country).get("factory"),
+                                      placer=spreader) if args.waves else None
+                attack_log = run_attack(args, db, gm, bridge, ex, end, hold, guard, steward, reinforcer, rebuilder)
             elif args.defend:  # observation game: stay home until the timeout, the AI plays on
                 print(f"  {snap.frame:>6} 幀  蓋完，只守家（觀察局）")
                 steward.rebuild = True
@@ -398,6 +450,8 @@ def main() -> None:
                     help="--targets：依看到的 AI 部隊追加剋制兵種，最多花這麼多（0 = 不追加）")
     ap.add_argument("--no-reinforce", dest="reinforce", action="store_false",
                     help="--attack：出發後用多的錢蓋剋制兵種留在家守（這個選項關掉）")
+    ap.add_argument("--no-waves", dest="waves", action="store_false",
+                    help="--attack：這一波打輸後回家用存款照方案重新組軍、再打下一波（這個選項關掉）")
     ap.add_argument("--opponent", default=str(ROOT / "calibration" / "opponents" / "easy_americans_firestorm.json"),
                     help="--attack 的預測用：AI 隨時間的部隊與建築（opponent.py extract）")
     ap.add_argument("--scenario", default=str(ROOT / "scenarios" / "soviet_vs_allied.toml"))

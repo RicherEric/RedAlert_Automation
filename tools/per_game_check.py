@@ -39,10 +39,11 @@ def main() -> None:
     ap.add_argument("--early", nargs="*")
     ap.add_argument("--template", default="calibration/opponents/hard_americans_firestorm.json")
     ap.add_argument("--min-frames", type=int, default=16000)
+    ap.add_argument("--logs", nargs="+", help="these game logs (glob patterns) instead of LOGS")
     args = ap.parse_args()
     cfg = tomllib.loads(Path(args.scenario).read_text(encoding="utf-8"))
     db = load_db()
-    paths = [p for pattern in LOGS for p in sorted(glob.glob(str(ROOT / pattern)))]
+    paths = [p for pattern in args.logs or LOGS for p in sorted(glob.glob(str(ROOT / pattern)))]
     games = games_from_logs(db, paths, Opponent.load(ROOT / args.template), args.min_frames)
     army, early = parse(args.army), parse(args.early)
     problem = victory_problem(db, cfg, load_calibration(cfg), games, model=str(ROOT / "models" / "build"))

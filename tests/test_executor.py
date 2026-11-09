@@ -28,6 +28,8 @@ class ToyGame:
         self.objects = [("SMCV", True)]
         self.factories = {}  # category -> [type, ticks]
         self.log = []
+        self.no_room = set()  # buildings the game will not let down anywhere
+        self.taken = set()    # cells where nothing can go down
 
     def snapshot(self):
         house = HouseState(1, 0, "Russians", True, True, False, 10000, 0, 0)
@@ -69,12 +71,22 @@ class ToyGame:
         job = self.factories.get("building")
         if not job or job[0] != tid or job[1] < BUILD_TICKS:
             raise BridgeError(f"{tid} is not finished yet")
+        if cell is not None and cell in self.taken:
+            raise BridgeError(f"cannot place {tid} at {cell[0]} {cell[1]}")
+        self.log.append(f"PLACE {tid}" + (f" {cell[0]} {cell[1]}" if cell else ""))
+        if tid in self.no_room:
+            return (10, 10)  # the order is sent, the building never lands
         del self.factories["building"]
         self.objects.append((tid, True))
         if tid == "NAREFN":
             self.objects.append(("HARV", True))  # free harvester
-        self.log.append(f"PLACE {tid}")
         return (10, 10)
+
+    def abandon(self, tid):
+        if self.factories.get("building", [None])[0] == tid:
+            del self.factories["building"]
+        self.log.append(f"ABANDON {tid}")
+        return f"abandon {tid}"
 
 
 def run(db, seq, ticks=100):
@@ -332,3 +344,74 @@ def test_policy_stops_ordering_a_unit_that_never_arrives(db):
         ex.tick(game.snapshot())
         game.step()
     assert game.log.count("PRODUCE E2") == VANISHED
+
+
+def test_unplaceable_building_is_cancelled(db):
+    """Live 2026-11-08: a finished refinery never went down; the building queue sat on it and
+    every other queue's WAIT with it. Retry the placement, then cancel and build the rest."""
+    game = ToyGame(db)
+    game.no_room = {"NALASR"}
+    ex = BuildExecutor(db, ["NAPOWR", "NAREFN", "NALASR", "NAWEAP", "HTNK"], game)
+    ex.place_every = 10
+    for _ in range(200):
+        if ex.done:
+            break
+        ex.tick(game.snapshot())
+        game.step()
+    assert ex.done
+    assert game.log.count("PLACE NALASR") == ex.place_tries and "ABANDON NALASR" in game.log
+    assert ("NAWEAP", True) in game.objects and ("HTNK", True) in game.objects
+    assert [t for _, k, t in ex.events if k == "cancel"] == ["NALASR"]
+
+
+def test_policy_executor_skips_cancelled_and_extra_factories(db):
+    from ra2tools.env import BuildEnv
+    from ra2tools.live_policy import PolicyExecutor
+    from ra2tools.params import Calibration
+
+    class Greedy:  # always the first legal item: would build NAWEAP forever
+        def act(self, env, obs, weights):
+            return next(i for i in range(1, env.n_actions) if obs.mask[i])
+
+    game = ToyGame(db)
+    game.objects = [("NACNST", True), ("NAPOWR", True), ("NAREFN", True)] + [("NAWEAP", True)] * 3
+    env = BuildEnv(db, "Russians", {"HTNK": 1}, Calibration().as_bot())
+    ex = PolicyExecutor(db, [], game, env=env, policy=Greedy())
+    ex.deploy_frame = 0
+    ex.cancelled["NAPOWR"] = 0
+    snap = game.snapshot()
+    ex._snap = snap
+    ex._start_next("building", 10, ex.owned(snap))
+    choice = ex.decisions[-1]["choice"]
+    assert choice not in ("NAWEAP", "NAPOWR")
+
+
+def test_spread_placement_tries_cells_in_order(db):
+    """placement.Spreader's cells come first; a taken cell moves on to the next, and with none
+    left the bridge's nearest cell (live 2026-11-09: one storm razed five packed buildings)."""
+    game = ToyGame(db)
+    game.taken = {(1, 1)}
+    ex = BuildExecutor(db, ["NAPOWR", "NAREFN"], game,
+                       placer=lambda snap, tid: [(1, 1), (2, 2)] if tid == "NAPOWR" else [(1, 1)])
+    for _ in range(200):
+        if ex.done:
+            break
+        ex.tick(game.snapshot())
+        game.step()
+    assert ex.done
+    assert "PLACE NAPOWR 2 2" in game.log and "PLACE NAREFN" in game.log
+
+
+def test_spread_cells_keep_two_free_cells(db):
+    from ra2tools.memory import HouseState, ObjectState, Snapshot
+    from ra2tools.placement import Spreader, _gap
+
+    sp = Spreader(db)
+    assert sp.sizes["NACNST"] == (4, 4) and sp.sizes["NAPOWR"] == (3, 2)
+    b = lambda addr, tid, x, y: ObjectState(addr, "building", tid, 0, 100, x + 0.5, y + 0.5, True, False)
+    snap = Snapshot(0.0, 100, 15, 0, [HouseState(0, 0, "Russians", True, True, False, 10000, 0, 0)],
+                    [b(1, "NACNST", 64, 19), b(2, "NAPOWR", 62, 17)])
+    cells = sp(snap, "NAHAND")
+    rects = [(64, 19, 4, 4), (62, 17, 3, 2)]
+    assert cells and min(_gap((*cells[0], 2, 2), r) for r in rects) == 2
+    assert sp(snap, "NAREFN") == [] and sp(snap, "NALASR") == []  # by the ore / facing the enemy

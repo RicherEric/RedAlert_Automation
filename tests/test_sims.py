@@ -8,6 +8,7 @@ from ra2tools.economy import EconomySim
 from ra2tools.gamedata import GameData
 from ra2tools.optimize import Evaluation
 from ra2tools.params import Calibration
+from ra2tools.rules import ARMOR_TYPES
 
 DATA = Path(__file__).parent.parent / "data"
 pytestmark = pytest.mark.skipif(not (DATA / "rulesmd.ini").exists(), reason="run extract.py first")
@@ -93,11 +94,12 @@ def test_home_ore_runs_out(db):
 
 def test_short_game_continues_as_the_longest():
     from ra2tools.opponent import Opponent, extend_with
-    mk = lambda name, frames, n: Opponent(name, "Americans", "Russians", frames, [{"MTNK": n}] * len(frames),
-                                          [{}] * len(frames), 70.0, attacks=[{"frame": f, "units": {}} for f in frames])
-    short, long = mk("short", [0, 1000], 2), mk("long", [0, 1000, 2000, 3000], 9)
+    mk = lambda name, frames, ns: Opponent(name, "Americans", "Russians", frames, [{"MTNK": n} for n in ns],
+                                           [{}] * len(frames), 70.0, attacks=[{"frame": f, "units": {}} for f in frames])
+    short, long = mk("short", [0, 1000], [2, 2]), mk("long", [0, 1000, 2000, 3000], [9, 9, 12, 5])
     g = extend_with(short, long)
-    assert g.at(500)[0] == {"MTNK": 2} and g.at(2500)[0] == {"MTNK": 9}
+    # the short game keeps its own 2 tanks and gains what the long one added after frame 1000
+    assert g.at(500)[0] == {"MTNK": 2} and g.at(2500)[0] == {"MTNK": 5} and g.at(3500)[0] == {}
     assert [a["frame"] for a in g.attacks] == [0, 1000, 2000, 3000]
 
 
@@ -109,3 +111,34 @@ def test_hardened_waves_are_bigger_and_sooner():
     assert h.attacks == [{"frame": 4000, "units": {"MTNK": 5, "E1": 1}}]
     assert h.raids == [{"frame": 0, "units": {"TANY": 1}}]
     assert g.attacks[0]["frame"] == 5000 and harden(g) is g
+
+
+def test_industrial_plant_discounts_vehicles(db):
+    assert db.technos["NAINDP"].cost_bonus["vehicle"] == 0.75
+    sim = EconomySim(db, "Russians", Calibration(start_credits=100000))
+    base = {"NACNST": 1, "NAPOWR": 3, "NAREFN": 1, "NAHAND": 1, "NAWEAP": 1, "NARADR": 1, "NATECH": 1}
+
+    def build(extra):
+        st = sim.initial_state()
+        st.owned.clear()
+        st.owned.update({**base, **extra})
+        return sim.run(["HTNK"] * 4, {"HTNK": 4}, state=st, auto_power=False)
+    plain, plant = build({}), build({"NAINDP": 1})
+    assert plant.spent == pytest.approx(0.75 * plain.spent, rel=0.01)
+    # plant_speeds_build: time comes from the discounted price
+    assert plant.finish_frame - plant.events[0][0] <= 0.8 * (plain.finish_frame - plain.events[0][0])
+    assert sim.cost_mult({"NAINDP": 1}, db.technos["E2"]) == 1.0  # infantry full price
+
+
+def test_special_weapons_have_plain_stand_ins(db):
+    # Before 2026-11-08 these counted as 0 damage and the search never picked them.
+    w = lambda u: {x.approx: x for x in db.technos[u].combat_weapons if x.approx}
+    v3, drone, dog, ivan = w("V3")["V3 rocket"], w("DRON")["parasite"], w("DOG")["dog bite"], w("IVAN")["Ivan bomb"]
+    assert v3.range == 18 and v3.damage == 200 and v3.rof == 400
+    plate, light, concrete = (ARMOR_TYPES.index(a) for a in ("plate", "light", "concrete"))
+    assert drone.verses[light] > 0 and drone.verses[plate] == 0      # vehicles, not infantry
+    assert dog.verses[plate] > 0 and dog.verses[light] == 0          # infantry only
+    assert ivan.verses[concrete] > 0 and ivan.damage == 450
+    strike = w("BORIS")["airstrike"]
+    assert strike.verses[concrete] > 0 and strike.verses[plate] == 0  # the laser marks buildings
+    assert simulate(db, {"V3": 4}, {"GAPILL": 2}).winner == "A"       # outranges the pillboxes

@@ -142,7 +142,8 @@ def victory_problem(db: GameData, cfg: dict, cal: Calibration, opponents, model:
         travel_factor=v.get("travel_factor", 1.3), reinforce=v.get("reinforce", True),
         rebuild=v.get("rebuild", True), counterattack=v.get("counterattack", True),
         early=list(v.get("early", [])), max_early=v.get("max_early", 6), robust=v.get("robust", False),
-        storm=v.get("storm", True), garrison=v.get("garrison", 0),
+        storm=v.get("storm", True), chrono=v.get("chrono", True), garrison=v.get("garrison", 0),
+        deadline_frames=v.get("deadline_frames"),
     )
 
 

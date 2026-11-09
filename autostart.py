@@ -201,7 +201,10 @@ def wait_for_screen(name: str, timeout: float, hwnd: int | None = None) -> None:
             L.focus(hwnd)
         time.sleep(0.5)
     screen, diff = which_screen()
-    raise RuntimeError(f"等不到「{name}」畫面（目前像是 {screen}，差異 {diff:.1f}）")
+    shot = ROOT / "logs" / f"autostart_fail_{time.strftime('%Y%m%d_%H%M%S')}.png"
+    shot.parent.mkdir(exist_ok=True)
+    L.screenshot().save(shot)  # what was on screen instead (2026-11-08: diff 13.1, cause unknown)
+    raise RuntimeError(f"等不到「{name}」畫面（目前像是 {screen}，差異 {diff:.1f}，截圖 {shot.name}）")
 
 
 def wait_in_game(timeout: float) -> GameMemory:

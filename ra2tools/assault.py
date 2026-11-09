@@ -19,9 +19,14 @@ from .bridge import BridgeError
 from .gamedata import GameData
 from .memory import ObjectState, Snapshot
 
-NOT_ARMY = {"AMCV", "SMCV", "PCV"}
+NOT_ARMY = {"AMCV", "SMCV", "PCV", "BPLN"}  # BPLN: the MiGs Boris calls in, not ours to command
 CONSTRUCTION_YARDS = {"GACNST", "NACNST", "YACNST"}
 PARADROP = {"CAAIRP"}  # tech airport: its owner gets paratroopers
+AIRSTRIKE = {"Flare"}  # Boris's laser: on a building it calls in MiGs (damage 1 in the tables)
+# Superweapons: the Weather Controller's storm razed our tech, radar, barracks and power in 150
+# frames (series_v10 game 2) and the Chronosphere drops tanks in our base; razing them stops both.
+SUPERWEAPONS = {"GAWEAT", "GACSPH", "NAMISL", "NAIRON", "YAGNTC", "YAPPET"}
+ARTILLERY_RANGE = 14.0  # a unit outranging this (V3, 18 cells) shells buildings from beyond the Prism Towers (8)
 
 
 ENGAGED_SHARE = 0.5  # share of the army (by cost) at the rally before a fight there starts the attack
@@ -55,6 +60,10 @@ class Assault:
     # 14) the Rhinos and flak tracks drove 4-8 cells ahead of the Apocalypses into the Prism
     # Towers and died before the Apocalypses fired.
     pace_lead: float = 3.0
+    # A designator (Boris) shoots back only at enemy units this close that can hurt him; else he
+    # lasers buildings for airstrikes. Live series_v7 his rifle duelled GIs and pillboxes while
+    # the MiGs came only when nothing else was left to shoot.
+    designator_guard: float = 6.0
     order_log: list = field(default_factory=list)  # (frame, unit type, target type, x, y) per attack order
     started: int | None = None
     stage_started: int | None = None
@@ -131,6 +140,27 @@ class Assault:
         t = self.db.technos.get(type_id)
         return t is not None and t.is_air and bool(t.combat_weapons) and max(w.range for w in t.combat_weapons) <= 2
 
+    def designator(self, type_id: str) -> bool:
+        t = self.db.technos.get(type_id)
+        return t is not None and any(w.id in AIRSTRIKE for w in t.weapons)
+
+    def _airstrike(self, unit: ObjectState, enemies: list[ObjectState]) -> ObjectState | None:
+        """The building a designator should laser, or None when he must fight for himself.
+        The laser (12 cells) outranges the Prism Towers, so the defences come first: the MiGs
+        take them out ahead of the army. The game walks him into laser range, no closer."""
+        d = lambda o: math.dist((unit.x, unit.y), (o.x, o.y))
+        if any(o.kind != "building" and d(o) <= self.designator_guard and self._dps(o, unit) > 0
+               for o in enemies):
+            return None
+        buildings = [o for o in enemies if o.kind == "building"]
+        reach = max((w.range for w in self.db.technos[unit.type_id].weapons if w.id in AIRSTRIKE), default=0.0)
+        for group in ([o for o in buildings if o.type_id in SUPERWEAPONS and d(o) <= reach + 4],
+                      [o for o in buildings if self._fighter(o)],
+                      [o for o in buildings if o.type_id in CONSTRUCTION_YARDS], buildings):
+            if group:
+                return min(group, key=d)
+        return None
+
     def _choose(self, unit: ObjectState, enemies: list[ObjectState]) -> ObjectState | None:
         if not enemies:
             return None
@@ -141,6 +171,14 @@ class Assault:
             enemies = [o for o in enemies if o.kind == "building"]
             near = [o for o in enemies if d(o) <= self.threat_range + 4]
             for group in ([o for o in near if self._dps(o, unit) > 0], [o for o in near if self._armed(o)]):
+                if group:
+                    return min(group, key=d)
+        reach = self._range(unit, next((o for o in enemies if o.kind == "building"), enemies[0]))
+        if reach >= ARTILLERY_RANGE:
+            # Artillery (V3) shells a superweapon in range first, then the defences it outranges.
+            for group in ([o for o in enemies if o.type_id in SUPERWEAPONS],
+                          [o for o in enemies if o.kind == "building" and self._armed(o)]):
+                group = [o for o in group if d(o) <= reach]
                 if group:
                     return min(group, key=d)
         threats = [o for o in enemies if self._armed(o) and d(o) <= self.threat_range]
@@ -162,7 +200,8 @@ class Assault:
         powered = any(self._armed(o) and (tech(o).power or 0) < 0 for o in buildings)
         power = [o for o in buildings if (tech(o).power or 0) > 0] if powered else []
         makers = [o for o in buildings if tech(o).factory or o.type_id in PARADROP]
-        for group in ([o for o in buildings if o.type_id in CONSTRUCTION_YARDS], power, makers,
+        for group in ([o for o in buildings if o.type_id in CONSTRUCTION_YARDS],
+                      [o for o in buildings if o.type_id in SUPERWEAPONS], power, makers,
                       [o for o in buildings if self._armed(o)], buildings, enemies):
             if group:
                 return min(group, key=d)
@@ -295,6 +334,18 @@ class Assault:
         core = self._core(army, enemies)
         for unit in army:
             current = self._target.get(unit.address)
+            strike = self._airstrike(unit, enemies) if self.designator(unit.type_id) else None
+            if strike is not None:
+                if strike.address != current:  # a new order would restart the laser
+                    try:
+                        self.commander.attack(unit.address, strike.address)
+                    except BridgeError:
+                        continue
+                    self._target[unit.address] = strike.address
+                    self._ordered_at[unit.address] = snap.frame
+                    self.orders += 1
+                    self.order_log.append((snap.frame, unit.type_id, strike.type_id, round(strike.x), round(strike.y)))
+                continue
             if core is not None and not self.db.technos[unit.type_id].is_air:
                 base, d, centre = core
                 reach = self._in_reach(unit, enemies)

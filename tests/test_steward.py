@@ -291,3 +291,119 @@ def test_leading_units_do_not_chase_into_the_towers(db):
     a._engage(snap(200, []), [*apocs, flak], [obj(23, "E1", AI, 52, 77, 125, "infantry"), prism, yard])
     assert any(c[0] == "move" and c[1] == 10 for c in rec.calls)
     assert not any(c[0] == "attack" and c[1] == 10 for c in rec.calls)
+
+
+def test_rebuilder_spends_the_bank_on_the_plan_mix(db):
+    from ra2tools.adapt import Rebuilder
+    bridge = Recorder()
+    rb = Rebuilder(db, bridge, {"APOC": 8, "BORIS": 1, "E2": 2, "HTK": 4})
+    assert "BORIS" not in rb.plan  # BuildLimit: the game refuses a second one
+    rb.tick(snap(100, [], credits=10000), Counter({"HTK": 2, "E2": 1}))
+    assert ("produce", "APOC") in bridge.calls and ("produce", "E2") in bridge.calls
+    bridge.calls.clear()
+    rb.tick(snap(200, [], credits=10000, factories=[FactoryState("vehicle", "APOC", 0.5, False)]), Counter())
+    assert bridge.calls == [("produce", "E2")]
+    assert not rb.broke(snap(300, [], credits=10000))
+    assert rb.broke(snap(300, [], credits=1550))
+    assert not rb.broke(snap(300, [], credits=1550, factories=[FactoryState("vehicle", "HTK", 0.5, False)]))
+
+
+def test_boris_lasers_the_towers_for_airstrikes(db):
+    # Live series_v7 Boris duelled GIs and pillboxes with his rifle; the MiGs came only when
+    # nothing else was left to shoot.
+    from ra2tools.assault import Assault
+    rec = Recorder()
+    a = Assault(db, rec, AI)
+    assert a.designator("BORIS") and not a.designator("E2")
+    boris = obj(1, "BORIS", ME, 52, 60, 200, "infantry")
+    gi = obj(20, "E1", AI, 52, 69, 125, "infantry")       # 9 cells: not his business
+    prism = obj(21, "ATESLA", AI, 52, 74, 600, "building")
+    yard = obj(22, "GACNST", AI, 52, 70, 1000, "building")
+    a._engage(snap(100, []), [boris], [gi, prism, yard])
+    assert rec.calls == [("attack", 1, 21)]
+    a._engage(snap(200, []), [boris], [gi, prism, yard])
+    assert len(rec.calls) == 1  # same target: no new order, the laser keeps going
+    rec.calls.clear()
+    near = obj(23, "E1", AI, 52, 64, 125, "infantry")     # 4 cells: shoot back
+    a._engage(snap(300, []), [boris], [near, gi, prism, yard])
+    assert rec.calls == [("attack", 1, 23)]
+    rec.calls.clear()
+    a._engage(snap(400, []), [boris], [gi, yard])           # the tower is gone: the yard
+    assert rec.calls == [("attack", 1, 22)]
+
+
+def test_reinforcer_buys_a_guard_for_the_chrono_drop(db):
+    from ra2tools.adapt import Reinforcer
+    from ra2tools.params import Calibration
+    from ra2tools.problems import CombatSettings
+    rec = Recorder()
+    r = Reinforcer(db, rec, Calibration(speed_to_cells=0.009154), CombatSettings(focus=True), AI,
+                   ["HTNK", "APOC", "HTK"], home_threat={"MTNK": 4, "SREF": 1, "MGTK": 1})
+    r.tick(snap(1000, [], credits=6000))  # the AI fields nothing now: only the drop asks for units
+    assert any(c[0] == "produce" and c[1] in ("HTNK", "APOC") for c in rec.calls)
+
+
+def test_rebuild_moves_on_when_a_prerequisite_is_gone_too(db):
+    # Live 2026-11-09 (series_v10 game 2): radar and tech centre both lost; the tech centre's
+    # rebuild could never start and nothing else (radar, power, barracks) was rebuilt.
+    from ra2tools.bridge import BridgeError
+    from ra2tools.steward import REBUILD_START, Steward
+
+    class NoTech(Recorder):
+        def produce(self, tid):
+            if tid == "NATECH":
+                raise BridgeError("cannot build NATECH now (CanBuild=0)")
+            self.calls.append(("produce", tid))
+            return "ok"
+
+    bridge = NoTech()
+    st = Steward(db, bridge, "Russians", garrison=0, rebuild=True)
+    base = [obj(1, "NACNST", ME, 10, 10, 1000), obj(2, "NAPOWR", ME, 12, 10, 750), obj(3, "NAWEAP", ME, 14, 10),
+            obj(4, "NAREFN", ME, 16, 10)]
+    st.tick(snap(100, base + [obj(5, "NARADR", ME, 18, 10), obj(6, "NATECH", ME, 20, 10)], credits=20000))
+    for f in range(200, 200 + REBUILD_START + 200, 30):
+        st.tick(snap(f, base, credits=20000))
+    assert ("produce", "NARADR") in bridge.calls
+
+
+def test_rebuilder_falls_back_to_what_the_factory_can_make(db):
+    from ra2tools.adapt import Rebuilder
+    from ra2tools.bridge import BridgeError
+
+    class NoTech(Recorder):
+        def produce(self, tid):
+            if tid == "APOC":
+                raise BridgeError("cannot build APOC now (CanBuild=0)")
+            self.calls.append(("produce", tid))
+            return "ok"
+
+    bridge = NoTech()
+    rb = Rebuilder(db, bridge, {"APOC": 9, "HTK": 5})
+    rb.tick(snap(100, [], credits=20000), Counter({"HTK": 3}))
+    assert bridge.calls == [("produce", "HTK")]
+
+
+def test_rebuilder_stops_each_type_at_its_plan_count(db):
+    # Live 2026-11-09 (series_v10 game 4): wave 2 left with 83 conscripts and 4 Apocalypses.
+    from ra2tools.adapt import Rebuilder
+    bridge = Recorder()
+    rb = Rebuilder(db, bridge, {"APOC": 9, "E2": 2})
+    rb.tick(snap(100, [], credits=20000, factories=[FactoryState("vehicle", "APOC", 0.5, False)]),
+            Counter({"E2": 2, "APOC": 3}))
+    assert bridge.calls == []  # the barracks stay idle: two conscripts are the plan
+
+
+def test_rebuilder_adds_war_factories_with_a_full_bank(db):
+    # Live 2026-11-09 (series_v10 game 5) $22k sat unspent through every regroup.
+    from ra2tools.adapt import Rebuilder
+    yard, weap = obj(1, "NACNST", ME, 60, 20), obj(2, "NAWEAP", ME, 66, 20)
+    bridge = Recorder()
+    rb = Rebuilder(db, bridge, {"APOC": 8}, factory="NAWEAP")
+    rb.tick(snap(100, [yard, weap], credits=3000), Counter())
+    assert ("produce", "NAWEAP") not in bridge.calls  # not twice its price to spare
+    rb.tick(snap(200, [yard, weap], credits=20000), Counter())
+    assert ("produce", "NAWEAP") in bridge.calls and rb._adding is not None
+    full = Rebuilder(db, Recorder(), {"APOC": 8}, factory="NAWEAP")
+    four = [yard] + [obj(10 + i, "NAWEAP", ME, 66, 20 + 4 * i) for i in range(4)]
+    full.tick(snap(100, four, credits=20000), Counter())
+    assert ("produce", "NAWEAP") not in full.commander.calls

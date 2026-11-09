@@ -58,8 +58,32 @@ UNSUPPORTED_WARHEAD_FLAGS = ["MindControl", "IvanBomb", "Temporal", "Parasite", 
 # SabotageCursor = C4 charges (buildings / ships only).
 UNSUPPORTED_WEAPON_FLAGS = ["Spawner", "DrainWeapon", "LimboLaunch", "SabotageCursor"]
 
+# Special weapons as plain ones (damage per ROF frames, the warhead's verses), so the battle sim
+# and the search see them (2026-11-08; before, they all counted as 0 damage):
+# - Spawner (V3): one rocket per SpawnRegenRate, [General] V3RocketDamage, the rocket's V3WH.
+# - Parasite (Terror Drone, dog): rides the victim, Damage every ROF; a dog's bite kills infantry.
+# - IvanBomb: the bomb goes off IvanTimedDelay later for IvanDamage with IvanWH.
+# - AirstrikeFlare (Boris's laser): AirstrikeTeam MiGs, each Burst x Damage of its weapon, every
+#   AIRSTRIKE_EVERY frames, half of it landing (AA, misses); live series_v7: MiG pairs came every
+#   200-1900 frames while Boris lasered (5-8 MiGs a game).
+DOG_BITE = 1000.0
+INFANTRY_ARMORS = ("none", "flak", "plate")
+AIRSTRIKE_EVERY = 600
+AIRSTRIKE_LANDS = 0.5
+
 FACTORY_CATEGORY = {"BuildingType": "building", "InfantryType": "infantry",
                     "UnitType": "vehicle", "AircraftType": "aircraft"}
+# A FactoryPlant's price multiplier per production queue (DefensesCostBonus is not modelled).
+COST_BONUS = {"infantry": "InfantryCostBonus", "vehicle": "UnitsCostBonus",
+              "aircraft": "AircraftCostBonus", "building": "BuildingsCostBonus"}
+
+
+def _num(value: str | None, default: float) -> float:
+    """A number from an INI value with a trailing comment (`450 ;400`), else `default`."""
+    try:
+        return float((value or "").split(";")[0].strip())
+    except ValueError:
+        return default
 
 
 def _yes(value: str | None) -> bool:
@@ -81,6 +105,7 @@ class Weapon:
     percent_at_max: float
     suicide: bool
     unsupported: str | None  # reason the simulator can't model it, if any
+    approx: str | None = None  # a special mechanic stood in for by this plain weapon (APPROX)
 
     @property
     def usable(self) -> bool:
@@ -123,6 +148,8 @@ class Techno:
     capturable: bool = False
     occupants: int = 0         # infantry it can garrison (CanBeOccupied, MaxNumberOccupants)
     occupier: bool = False     # infantry that can garrison
+    # FactoryPlant=yes (Industrial Plant): price multiplier per queue category while owned
+    cost_bonus: dict = field(default_factory=dict)
     # Tech oil derrick: ProduceCashStartup once when captured, then ProduceCashAmount every Delay frames
     cash_startup: int = 0
     cash_amount: int = 0
@@ -207,8 +234,56 @@ class GameData:
             suicide=_yes(sec.get("Suicide")),
             unsupported=unsupported,
         )
+        w = self._approximate(w, sec, wh) or w
         self.weapons[wid] = w
         return w
+
+    def _approximate(self, w: Weapon, sec: dict, wh: dict) -> Weapon | None:
+        """The plain stand-in for a parasite or Ivan bomb weapon (see the notes at DOG_BITE)."""
+        from dataclasses import replace
+        r, g = self.rules, self.rules.section("General")
+        if w.unsupported == "Parasite":
+            dog = w.verses[ARMOR_TYPES.index("light")] == 0  # ParasiteDog: infantry armours only
+            if dog:
+                return replace(w, damage=DOG_BITE, unsupported=None, approx="dog bite")
+            # A Terror Drone only jumps vehicles: its warhead lists the infantry armours too.
+            verses = w.verses.copy()
+            verses[[ARMOR_TYPES.index(a) for a in INFANTRY_ARMORS]] = 0.0
+            return replace(w, verses=verses, unsupported=None, approx="parasite")
+        if w.unsupported == "IvanBomb":
+            return replace(w, damage=_num(g.get("IvanDamage"), 450.0),
+                           rof=max(w.rof, int(_num(g.get("IvanTimedDelay"), 450.0))),
+                           verses=self._verses("IvanWH"), cell_spread=r.get_float("IvanWH", "CellSpread"),
+                           percent_at_max=r.get_float("IvanWH", "PercentAtMax", 1.0),
+                           unsupported=None, approx="Ivan bomb")
+        return None
+
+    def _verses(self, warhead: str) -> np.ndarray:
+        v = warhead_verses(self.rules, warhead)
+        return np.array([v[a] for a in ARMOR_TYPES])
+
+    def _techno_weapons(self, sec: dict, weapons: list[Weapon]) -> list[Weapon]:
+        """Stand-ins that depend on the unit: the V3's rocket (Spawns=), Boris's airstrike."""
+        from dataclasses import replace
+        r, g = self.rules, self.rules.section("General")
+        out = []
+        for w in weapons:
+            if w.unsupported == "Spawner" and sec.get("Spawns") == "V3ROCKET":
+                w = replace(w, damage=_num(g.get("V3RocketDamage"), 200.0),
+                            rof=int(_num(sec.get("SpawnRegenRate"), w.rof)), verses=self._verses("V3WH"),
+                            cell_spread=r.get_float("V3WH", "CellSpread"),
+                            percent_at_max=r.get_float("V3WH", "PercentAtMax", 1.0),
+                            unsupported=None, approx="V3 rocket")
+            elif w.id in self.rules and r.section(w.id).get("Warhead") == "AirstrikeFlare" and sec.get("AirstrikeTeamType"):
+                plane = self.weapon(r.section(sec["AirstrikeTeamType"]).get("Primary"))
+                if plane is not None:
+                    team = int(_num(sec.get("AirstrikeTeam"), 1.0))
+                    hit = w.verses > 0  # the laser marks buildings only
+                    w = replace(w, damage=team * plane.burst * plane.damage * AIRSTRIKE_LANDS, rof=AIRSTRIKE_EVERY,
+                                verses=np.where(hit, plane.verses, 0.0), burst=1,
+                                unsupported=None, approx="airstrike")
+            out.append(w)
+        return out
 
     def _load_techno(self, tid: str, kind: str) -> Techno:
         r = self.rules
@@ -223,7 +298,7 @@ class GameData:
             wids = [sec.get(f"Weapon{max(1, n - 1)}"), sec.get(f"Weapon{n}")] if n > 1 else [sec.get("Weapon1")]
         else:
             wids = []
-        weapons = [w for w in (self.weapon(x) for x in wids) if w is not None]
+        weapons = self._techno_weapons(sec, [w for w in (self.weapon(x) for x in wids) if w is not None])
         factory = sec.get("Factory")
         return Techno(
             id=tid,
@@ -263,6 +338,8 @@ class GameData:
             cash_amount=r.get_int(tid, "ProduceCashAmount"),
             cash_delay=r.get_int(tid, "ProduceCashDelay"),
             requires_stolen_tech=any(_yes(sec.get(f"RequiresStolen{x}Tech")) for x in ("Allied", "Soviet", "Third")),
+            cost_bonus={cat: r.get_float(tid, key, 1.0) for cat, key in COST_BONUS.items()}
+            if _yes(sec.get("FactoryPlant")) else {},
         )
 
     # ------------------------------------------------------------- availability
@@ -321,8 +398,9 @@ class GameData:
             units.append(t)
         return units
 
-    def build_frames(self, t: Techno, factories: int = 1) -> float:
-        """Build time in frames at full power with `factories` factories of that kind."""
-        raw = t.cost / 1000 * self.build_speed * 900 * t.build_time_mult
+    def build_frames(self, t: Techno, factories: int = 1, cost_mult: float = 1.0) -> float:
+        """Build time in frames at full power with `factories` factories of that kind; `cost_mult`
+        scales the price the time comes from (an Industrial Plant's discount)."""
+        raw = t.cost * cost_mult / 1000 * self.build_speed * 900 * t.build_time_mult
         raw *= self.multiple_factory ** max(factories - 1, 0)
         return max(int(raw / PRODUCTION_STEPS), 1) * PRODUCTION_STEPS

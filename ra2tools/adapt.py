@@ -78,6 +78,8 @@ class Reinforcer:
     reserve: int = 1500           # credits left for repairs
     every: int = 600              # frames between decisions
     home: Counter = field(default_factory=Counter)  # what we planned to keep home
+    # A drop the units kept home must beat, bought for first (the AI's chronoshifted tanks).
+    home_threat: dict = field(default_factory=dict)
     units: set = field(default_factory=set)         # addresses of the units it made
     log: list = field(default_factory=list)
     _last: int = -10**9
@@ -104,8 +106,10 @@ class Reinforcer:
         self._last = snap.frame
         enemy = enemy_army(self.db, snap, self.enemy)
         here = Counter(mine[a].type_id for a in self.units if a in mine)
-        pick = counter_pick(self.db, self.cal, self.combat, dict(here + self.home), enemy,
-                            self.candidates, credits - self.reserve, step=1)
+        pick = counter_pick(self.db, self.cal, self.combat, dict(here + self.home), self.home_threat,
+                            self.candidates, credits - self.reserve, step=1) if self.home_threat else {}
+        pick = pick or counter_pick(self.db, self.cal, self.combat, dict(here + self.home), enemy,
+                                    self.candidates, credits - self.reserve, step=1)
         for tid in pick:
             cat = self.category(tid)
             if cat in busy or cat in self._queued:
@@ -116,3 +120,88 @@ class Reinforcer:
                 continue
             self._queued[cat] = tid
             self.log.append((snap.frame, "reinforce", tid))
+
+
+@dataclass
+class Rebuilder:
+    """After a wave is lost: spend the bank on the plan's units again, for the next wave.
+
+    Live 2026-11-07 (series_v7 games 1-3) the first wave died at the AI base, nothing else was
+    built and $30-40k piled up until the timeout while the AI grew to 50 buildings."""
+    db: GameData
+    commander: object
+    plan: dict                    # unit type -> count in the attack plan (its mix is rebuilt)
+    reserve: int = 1500           # credits left for repairs
+    log: list = field(default_factory=list)
+    # More war factories while the bank is full (each one cuts every unit's build time to 0.8x,
+    # rules MultipleFactory): live 2026-11-09 (series_v10 game 5) $22k sat unspent through every
+    # regroup while 1-2 factories made 14-18 units a wave.
+    factory: str | None = None    # our war factory type (NAWEAP); None: never add one
+    max_factories: int = 4
+    placer: object = None         # BuildExecutor.placer (placement.Spreader)
+    _adding: object = None        # the BuildExecutor placing the new factory
+
+    def __post_init__(self):
+        # BuildLimit units (Boris) are not queued again: the game refuses them while one lives.
+        self.plan = {t: n for t, n in self.plan.items() if n > 0 and not self.db.technos[t].build_limit
+                     and self.db.technos[t].kind != "building" and self.db.technos[t].combat_weapons}
+
+    def category(self, tid: str) -> str:
+        t = self.db.technos[tid]
+        return t.kind if t.kind in ("infantry", "aircraft") else "vehicle"
+
+    def broke(self, snap: Snapshot) -> bool:
+        """Nothing more to buy: too few credits for any plan unit and no factory still at it."""
+        credits = snap.player.credits if snap.player else 0
+        busy = {f.category for f in snap.factories}
+        return (not any(self.category(t) in busy for t in self.plan)
+                and all(self.db.technos[t].cost > credits - self.reserve for t in self.plan))
+
+    def tick(self, snap: Snapshot, have: Counter) -> None:
+        """Queue, in every idle factory, the plan unit furthest below its share of `have`;
+        with twice a war factory's price to spare, another war factory."""
+        credits = (snap.player.credits if snap.player else 0) - self.reserve
+        busy = {f.category for f in snap.factories}
+        self._add_factory(snap, credits, busy)
+        for cat in sorted({self.category(t) for t in self.plan} - busy):
+            # Up to the plan's count of each: live 2026-11-09 (series_v10 game 4) the barracks kept
+            # making the plan's only infantry and wave 2 left with 83 conscripts and 4 Apocalypses.
+            options = [t for t in self.plan if self.category(t) == cat and self.db.technos[t].cost <= credits
+                       and have.get(t, 0) < self.plan[t]]
+            self._queue(snap, options, have)
+
+    def _add_factory(self, snap: Snapshot, credits: int, busy: set) -> None:
+        from .executor import BuildExecutor
+        if self._adding is not None:
+            try:
+                self._adding.tick(snap)
+            except BridgeError:
+                pass
+            if self._adding.done:
+                self._adding = None
+            return
+        if self.factory is None or "building" in busy or credits < 2 * self.db.technos[self.factory].cost:
+            return
+        mine = sum(1 for o in snap.objects if o.owner == snap.player_index and o.type_id == self.factory
+                   and o.on_map and o.health > 0)
+        if not 0 < mine < self.max_factories:
+            return  # none left means no yard or tech either: the Steward rebuilds the first
+        self._adding = BuildExecutor(self.db, [self.factory], self.commander, placer=self.placer)
+        self._adding.deploy_frame = snap.frame
+        self.log.append((snap.frame, "factory", self.factory))
+        try:
+            self._adding.tick(snap)
+        except BridgeError:
+            self._adding = None
+
+    def _queue(self, snap: Snapshot, options: list[str], have: Counter) -> bool:
+        # Most needed first, but anything the factory can make: live 2026-11-09 (series_v10
+        # game 2) the tech centre was lost, only Apocalypses were tried and $43k sat unspent.
+        for tid in sorted(options, key=lambda t: have.get(t, 0) / self.plan[t]):
+            try:
+                self.commander.produce(tid)
+            except BridgeError:
+                continue
+            self.log.append((snap.frame, "rebuild", tid))
+            return True
+        return False

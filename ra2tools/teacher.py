@@ -48,9 +48,20 @@ def engineer_of(db: GameData, sim) -> str | None:
     return next((t.id for t in db.technos.values() if t.engineer and sim.buildable(t.id)), None)
 
 
+def economy_extras(db: GameData, sim) -> list[str]:
+    """Buildings the teacher may add for the economy alone: a cost-cutting plant (Industrial
+    Plant) and a big power plant (nuclear reactor). Whether they pay is the GA's call."""
+    return sorted(t.id for t in db.technos.values() if t.kind == "building" and sim.buildable(t.id)
+                  and (t.cost_bonus or t.power >= 1000))
+
+
+ARMY_TASKS = 0.35  # whole armies like the hard-AI plans (2026-11-08): 3-5 types, $15-40k
+
+
 def sample_task(db: GameData, rng: random.Random, countries=None, cal: Calibration | None = None) -> Task:
-    """Random targets: 1-2 combat unit types, and in 40% of the tasks also what the robust plans
-    build first (2026-11-06): engineers for the oil derricks, extra harvesters, a defence building."""
+    """Random targets: 1-2 combat unit types, or (ARMY_TASKS) a whole army of 3-5 types; in 40% of
+    the tasks also what the robust plans build first (2026-11-06): engineers for the oil derricks,
+    extra harvesters, a defence building."""
     from .economy import EconomySim
     country = rng.choice(countries or list(SIDE_COUNTRY.values()))
     sim = EconomySim(db, country)
@@ -58,11 +69,15 @@ def sample_task(db: GameData, rng: random.Random, countries=None, cal: Calibrati
               if t.kind in ("vehicle", "infantry", "aircraft") and not t.naval and t.cost > 0
               and t.combat_weapons and not t.harvester and sim.buildable(t.id)]
     targets: dict[str, int] = {}
-    for t in rng.sample(combat, k=min(len(combat), rng.choice([1, 1, 2]))):
-        most = max(1, min(6, 6000 // max(t.cost, 1)))
+    army = rng.random() < ARMY_TASKS
+    kinds = rng.randint(3, 5) if army else rng.choice([1, 1, 2])
+    budget = rng.randint(15000, 40000) if army else 6000
+    for t in rng.sample(combat, k=min(len(combat), kinds)):
+        share = budget * rng.uniform(0.5, 1.5) / kinds if army else budget
+        most = max(1, min(12 if army else 6, int(share) // max(t.cost, 1)))
         if t.build_limit > 0:  # e.g. Yuri Prime, Tanya: only one at a time
             most = min(most, t.build_limit)
-        targets[t.id] = rng.randint(1, most)
+        targets[t.id] = rng.randint(max(1, most // 2) if army else 1, most)
     if rng.random() < 0.4:
         eng = engineer_of(db, sim)
         derricks = len(cal.derricks) if cal else 0
@@ -75,8 +90,9 @@ def sample_task(db: GameData, rng: random.Random, countries=None, cal: Calibrati
                   and sim.buildable(t.id)]
         if towers and rng.random() < 0.5:
             targets[rng.choice(towers).id] = rng.randint(1, 3)
-    wf = rng.choice([1.0, 0.75, 0.5, 0.25])
-    return Task(country, targets, {"frames": wf, "spent": 1 - wf}, rng.choice([5000, 7500, 10000, 15000]))
+    wf = rng.choice([1.0, 0.75] if army else [1.0, 0.75, 0.5, 0.25])  # the hard AI: fastest win
+    credits = rng.choice([10000, 10000, 15000] if army else [5000, 7500, 10000, 15000])
+    return Task(country, targets, {"frames": wf, "spent": 1 - wf}, credits)
 
 
 @dataclass
@@ -96,10 +112,12 @@ class Teacher:
         eng = engineer_of(self.db, env.sim) if self.cal.derricks else None
         if eng:  # an engineer on a derrick pays $1000 at once: the teacher may use it for money
             extras.append(eng)
+        extras += economy_extras(self.db, env.sim)
         problem = BuildOrderProblem(
             self.db, self.task.country, self.task.targets,
             extras=extras,
-            cal=self.cal, max_frames=env.max_frames, state=env.state, weights=self.task.weights, max_extras=6)
+            cal=self.cal, max_frames=env.max_frames, state=env.state, weights=self.task.weights,
+            max_extras=8 if sum(self.task.targets.values()) > 12 else 6)
         seeds = [tuple(problem.target_items)]
         if self._genome is not None:
             seeds.insert(0, self._genome)

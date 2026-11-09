@@ -114,6 +114,9 @@ def test_victory_problem_rewards_early_attack():
     assert early.objectives[0] == pytest.approx(early.info["arrive_frame"] + early.info["battle_frames"])
     late = problem(Opponent("late", "Americans", "Russians", [0], [{"MTNK": 6}], [strong], 40.0)).evaluate((3,))
     assert not late.feasible and "lose" in late.violations
+    slow = problem(opp)
+    slow.deadline_frames = int(early.info["finish_frame"]) - 100
+    assert "deadline" in slow.evaluate((3,)).violations
 
 
 def test_assault_targets_threats_then_buildings():
@@ -300,14 +303,14 @@ def test_ai_base_reinforces_rebuilds_and_counterattacks():
         return VictoryProblem(db, "Russians", [], ["HTNK"], cal, planner=PolicyPlanner(db, "Russians", cal),
                               opponent=opp, **kw)
 
-    hit = problem().fight({"HTNK": 5}, 0.0, opp)
+    hit = problem().fight({"HTNK": 5}, 200.0, opp)  # the wave comes before the army is out
     assert not hit["won"] and hit["lost_to_wave"] == 100
     assert problem(counterattack=False).fight({"HTNK": 5}, 0.0, opp)["won"]
 
 
-def test_wave_fight_delays_departure_either_way():
-    """Being ready just before or just after an AI wave must not change when we can set off:
-    either way the wave has to be beaten first (a bug once let a later army skip that time)."""
+def test_wave_before_departure_delays_it_one_after_is_the_guards():
+    """A wave that comes before the army is ready is beaten first and delays it; one that comes
+    after it left is the guard's (live, the army kept going; 2026-11-09)."""
     from pathlib import Path
 
     import pytest
@@ -327,9 +330,9 @@ def test_wave_fight_delays_departure_either_way():
                    attacks=[{"frame": 1000, "units": {"E1": 6}}])
     p = VictoryProblem(db, "Russians", [], ["HTNK"], cal, planner=PolicyPlanner(db, "Russians", cal), opponent=opp)
     before, after = p.fight({"HTNK": 3}, 900.0, opp), p.fight({"HTNK": 3}, 1100.0, opp)
-    assert before["won"] and after["won"] and before["waves_met"] == after["waves_met"] == 6
-    assert before["arrive_frame"] <= after["arrive_frame"]
-    assert before["arrive_frame"] > 1000 + p.march_frames({"HTNK": 3}, opp)
+    assert before["won"] and after["won"] and before["waves_met"] == 0 and after["waves_met"] == 6
+    assert before["arrive_frame"] == 900 + p.march_frames({"HTNK": 3}, opp) < after["arrive_frame"]
+    assert after["arrive_frame"] > 1000 + p.march_frames({"HTNK": 3}, opp)
 
 
 def test_defence_fights_only_raiders_near_our_base():
@@ -531,6 +534,15 @@ def test_assault_cuts_power_under_prism_towers_then_hits_factories():
     assert a._choose(tank, [power, weap, airport, prism]).type_id == "GAPOWR"  # prism needs power
     assert a._choose(tank, [power, weap, airport]).type_id == "CAAIRP"  # no prism: nearest maker
     assert a._choose(tank, [power, weap]).type_id == "GAWEAP"
+    storm = b(5, "GAWEAT", 60)
+    assert a._choose(tank, [power, weap, storm]).type_id == "GAWEAT"  # superweapons before factories
+    gi = ObjectState(0x20, "infantry", "E1", 1, 100, 3, 0, True, False)
+    v3 = ObjectState(0x11, "vehicle", "V3", 0, 100, 45, 0, True, False)
+    assert a._choose(v3, [gi, weap, storm, prism]).type_id == "GAWEAT"  # in its 18 cells
+    far = ObjectState(0x12, "vehicle", "V3", 0, 100, 0, 0, True, False)
+    assert a._choose(far, [weap, prism]).type_id == "GAWEAP"  # nothing in range: the usual order
+    boris = ObjectState(0x13, "infantry", "BORIS", 0, 100, 48, 0, True, False)
+    assert a._airstrike(boris, [prism, storm]).type_id == "GAWEAT"
 
 
 def test_quantile_opponent_and_topk_seeds():
@@ -626,3 +638,35 @@ def test_spread_base_takes_less_kirov_splash():
     packed = Battle(db, {"ZEP": 6}, base, None, 12, 1.5).run(5, 3000)
     spread = Battle(db, {"ZEP": 6}, base, None, 12, 1.5, base_spacing=4).run(5, 3000)
     assert spread.score < packed.score
+
+
+def test_chronosphere_drops_need_a_guard():
+    # series_v4-v7: 4-6 tanks chronoshifted next to our base ~13000 frames after the AI's
+    # Chronosphere stood, in 19 of 39 games. A long fight with nobody home loses the base.
+    from pathlib import Path
+
+    import pytest
+
+    data = Path(__file__).parent.parent / "data"
+    if not (data / "rulesmd.ini").exists():
+        pytest.skip("run extract.py first")
+    from ra2tools.gamedata import GameData
+    from ra2tools.mission import PolicyPlanner
+    from ra2tools.opponent import Opponent
+    from ra2tools.params import Calibration
+    from ra2tools.problems import VictoryProblem
+
+    db = GameData.load(data)
+    cal = Calibration()
+    plain = Opponent("r", "Americans", "Russians", [0], [{}], [{"GACNST": 1}], 40.0)
+    chrono = Opponent("c", "Americans", "Russians", [0, 1000], [{}, {}], [{"GACNST": 1}, {"GACNST": 1, "GACSPH": 1}], 40.0)
+    p = VictoryProblem(db, "Russians", [], ["HTNK"], cal, planner=PolicyPlanner(db, "Russians", cal), opponent=plain)
+    assert p.chronos(plain) == []
+    drops = p.chronos(chrono)
+    assert drops[0]["frame"] == 1000 + p.CHRONO_FIRST and drops[1]["frame"] - drops[0]["frame"] == p.CHRONO_EVERY
+    # Still building at the first drop: one Rhino at home meets six tanks and the base falls.
+    f = p.fight({"HTNK": 1}, 20000, chrono, guard={})
+    assert not f["won"] and f.get("lost_to_wave") == drops[0]["frame"]
+    assert "lost_to_wave" not in p.fight({"HTNK": 1}, 20000, plain, guard={})
+    p.chrono = False
+    assert "lost_to_wave" not in p.fight({"HTNK": 1}, 20000, chrono, guard={})

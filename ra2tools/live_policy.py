@@ -19,6 +19,8 @@ from .executor import CATEGORIES, BuildExecutor, _Job
 from .memory import Snapshot
 
 VANISHED = 3  # units of a type finished in a row without one reaching the map: stop ordering it
+UNPLACEABLE = 3000  # frames a building cancelled for want of room is not ordered again
+MAX_FACTORIES = 3   # per queue: the retrained model (2026-11-08) uses 3 for a $47k army; live it built 4 for $35k
 
 
 @dataclass
@@ -35,6 +37,7 @@ class PolicyExecutor(BuildExecutor):
     hidden: Counter = field(default_factory=Counter)  # ours but off the map (Steward.inside)
     # Targets after the current ones (execute.py --early): the early defence first, then all.
     then: dict | None = None
+    cancelled: dict = field(default_factory=dict)  # building -> frame it was cancelled unplaced
 
     @property
     def targets(self) -> dict[str, int]:
@@ -79,6 +82,11 @@ class PolicyExecutor(BuildExecutor):
     def _retry(self, cat: str, job) -> None:
         self.spent -= self.db.technos[job.type_id].cost  # the policy decides again
 
+    def _unplaceable(self, cat: str, job, frame: int) -> None:
+        self._retry(cat, job)
+        self.cancelled[job.type_id] = frame
+        self._waiting.clear()  # the other queues waited on it to finish
+
     def _state(self, snap: Snapshot):
         state = state_from_snapshot(self.env.sim, snap)
         state.owned += self.hidden  # garrisoned infantry is off the map but still ours
@@ -98,6 +106,16 @@ class PolicyExecutor(BuildExecutor):
         for t, n in self.vanished.items():
             if n >= VANISHED and t in self.env.vocab:
                 mask[self.env.vocab.index(t) + 1] = False  # finished again and again, never arrived
+        for t, at in self.cancelled.items():
+            if frame - at < UNPLACEABLE and t in self.env.vocab:
+                mask[self.env.vocab.index(t) + 1] = False  # no room for it just now
+        # Live 2026-11-08 the model built 4 war factories for a V3 plan it had hardly seen.
+        made = Counter(self.db.technos[t].factory for t, n in owned.items() for _ in range(n)
+                       if self.db.technos.get(t) is not None and self.db.technos[t].factory)
+        for i, t in enumerate(self.env.vocab):
+            f = self.db.technos[t].factory
+            if f and made[f] >= MAX_FACTORIES and t not in self.targets:
+                mask[i + 1] = False
         if not mask[1:].any():
             return
         t0 = time.perf_counter()

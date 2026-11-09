@@ -102,17 +102,21 @@ seeds = [
 ]
 seed_results = ["results/soviet_vs_allied_victory_*.json", "results/soviet_vs_hard_quantile_victory_*.json"]
 max_units = 25
+# 約束（2026-11-09）：部隊要在這一幀前蓋好（模擬的幀數，比實機慢約 1000-2500 幀）。實機贏的 8 場都在約第 16000 幀集結，
+# 第 18000 幀以後才到的全輸；而且大部分紀錄在第 20000 幀前就結束，再晚的 AI 是外插的。
+deadline_frames = 17500
 # 早期防守（2026-11-02）：困難 AI 最兇的 20% 對局在第 8 分鐘就來一波（含入侵者戰機），先蓋科技的方案
 # 那時家裡只有開局部隊。這些基因先蓋、再蓋主力：單位會跟著出發，防禦建築留在家守。
 # 經濟路線（2026-11-05）：家裡的礦約第 13000 幀採完，HARV（礦車總數）、NAREFN（多蓋幾座礦場）也放進來先蓋。
 # 油井（2026-11-06）：SENGINEER 每個去佔一座科技油井（最多 derricks 的座數）。
-early = ["HTNK", "E2", "HTK", "FLAKT", "TESLA", "NALASR", "NAFLAK", "HARV", "NAREFN", "SENGINEER"]
+early = ["HTNK", "E2", "HTK", "FLAKT", "TESLA", "NALASR", "NAFLAK", "HARV", "NAREFN", "SENGINEER",
+         "NAINDP", "NANRCT", "NAWEAP"]  # 工業工廠（車輛 75 折）、核電廠、第二座戰車工廠（2026-11-08）
 max_early = 8
 # 實機 Steward 派 5 個開局動員兵進駐家礦旁的民房（守礦區和油井），模擬裡留守部隊就少這 5 個。
 garrison = 5
 storm = true       # AI 天氣控制器的閃電風暴：蓋好約 12500 幀後第一擊，之後每 9000 幀，打掉戰車工廠和礦場
 exclude = ["SCHP", "DESO"]   # deploy-to-fire: the live controller cannot deploy yet
-travel_factor = 1.3
+travel_factor = 0.6  # 2026-11-09：實機出發到集結中位數約 1200 幀（series_v6-v10 共 24 場），1.3 時模擬算 2772 幀
 pop_size = 60
 generations = 40
 workers = 16

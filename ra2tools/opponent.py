@@ -233,16 +233,27 @@ def quantile(db: GameData, games: list[Opponent], p: float, name: str, template:
 
 
 def extend_with(g: Opponent, tail: Opponent) -> Opponent:
-    """`g` continued past its last sample by `tail`'s later samples, attacks and raids, instead of
-    at() holding g's last sample for the rest of the match (an AI frozen in time)."""
+    """`g` continued past its last sample by what `tail` adds after that frame (its later
+    samples minus its own sample there), attacks and raids, instead of at() holding g's last
+    sample for the rest of the match (an AI frozen in time).
+
+    Until 2026-11-09 the later samples replaced g's outright: most records end when our army
+    reaches the AI (~15-22k), so every game turned into the one long record from then on, whose
+    AI fields only $6-10k of units, and armies arriving late looked like easy wins (series_v10:
+    predicted 51%, live 0 of 4). Adding the growth keeps each game's own strength."""
     from dataclasses import replace
     end = g.frames[-1]
     k = bisect.bisect_right(tail.frames, end)
     if k >= len(tail.frames):
         return g
+    base_u, base_b = tail.at(end)
+    grow = lambda own, now, then: {t: n for t in set(own) | set(now)
+                                   if (n := own.get(t, 0) + now.get(t, 0) - then.get(t, 0)) > 0}
+    units = [grow(g.units[-1], u, base_u) for u in tail.units[k:]]
+    buildings = [grow(g.buildings[-1], b, base_b) for b in tail.buildings[k:]]
     later = lambda events: [e for e in events if e["frame"] > end]
-    return replace(g, frames=g.frames + tail.frames[k:], units=g.units + tail.units[k:],
-                   buildings=g.buildings + tail.buildings[k:], attacks=g.attacks + later(tail.attacks),
+    return replace(g, frames=g.frames + tail.frames[k:], units=g.units + units,
+                   buildings=g.buildings + buildings, attacks=g.attacks + later(tail.attacks),
                    raids=g.raids + later(tail.raids),
                    notes={**g.notes, "extended": f"after frame {end} from {tail.name}"})
 

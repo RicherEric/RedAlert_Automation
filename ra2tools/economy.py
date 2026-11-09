@@ -303,11 +303,14 @@ class EconomySim:
                 self._complete(state, job.techno, frame)
                 state.jobs[cat] = None
             return
-        total = db.build_frames(job.techno, self._factory_count(state.owned, cat))
+        mult = self.cost_mult(state.owned, job.techno)
+        total = db.build_frames(job.techno, self._factory_count(state.owned, cat),
+                                mult if cal.plant_speeds_build else 1.0)
         inc = min(1.0 - job.progress, dt / total * power_speed)
-        cost = job.techno.cost * inc
+        price = job.techno.cost * mult
+        cost = price * inc
         if cost > state.money:
-            inc = state.money / job.techno.cost if job.techno.cost else inc
+            inc = state.money / price if price else inc
             cost = state.money
         state.money -= cost
         state.spent += cost
@@ -360,6 +363,16 @@ class EconomySim:
         return t.kind if t.kind in CATEGORIES else "vehicle"
 
     _category = category
+
+    def cost_mult(self, owned: Counter, t: Techno) -> float:
+        """Price multiplier from owned FactoryPlants (Industrial Plant: vehicles x0.75)."""
+        cat = t.kind if t.kind in CATEGORIES else "vehicle"
+        mult = 1.0
+        for b, n in owned.items():
+            bonus = self.db.technos[b].cost_bonus
+            if bonus and n > 0:
+                mult *= bonus.get(cat, 1.0) ** n
+        return mult
 
     def _factory_count(self, owned: Counter, cat: str) -> int:
         return sum(n for b, n in owned.items() if self.db.technos[b].factory == cat)

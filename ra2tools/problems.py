@@ -230,6 +230,7 @@ class VictoryProblem(MissionProblem):
     rebuild: bool = True           # it rebuilds lost buildings while its construction yard stands
     counterattack: bool = True     # its attack waves (Opponent.attacks) meet our army first
     storm: bool = True             # its Lightning Storm delays our build (VictoryProblem.stormed)
+    chrono: bool = True            # its Chronosphere drops tanks next to our base (VictoryProblem.chronos)
     # Starting infantry the live Steward garrisons in the civilian building next to our ore field
     # and derrick (2026-11-06): away from the base, so not in the home guard here.
     garrison: int = 0
@@ -243,6 +244,9 @@ class VictoryProblem(MissionProblem):
     # A plan beating the q80 composite won only 5 of the 10 games: per-slot quantiles taken
     # from different games do not make an opponent that beats 80% of them.
     robust: bool = False
+    # ArmyProblem.deadline_frames: here the army must be ready by then. Every live win vs the hard
+    # AI came from armies gathered by ~16000 (1 Prism Tower up); every later one lost (2026-11-09),
+    # and past ~20000 most recorded games have ended, so the AI there is extrapolated.
 
     LOSS_FRAMES = 60000.0  # above any win: builds may run to HORIZON, then march and fight
 
@@ -372,7 +376,34 @@ class VictoryProblem(MissionProblem):
             hits += 1
         return finish, hits
 
-    BASE_HOLDS = 300  # frames an undefended base lasts once a wave has beaten its guard
+    # The AI's Chronosphere (series_v4-v7, 2026-11-06/07): in 19 of 39 games 4-6 tanks (Grizzlies,
+    # a Prism Tank, a Mirage) appeared 1-4 cells from our buildings, first 10-15k frames after the
+    # device stood (median ~13000), then every 7-12k. Under ShortGame the guard alone must hold them.
+    CHRONO_FIRST = 13000
+    CHRONO_EVERY = 9000
+    CHRONOSPHERE = ("GACSPH",)
+    CHRONO_UNITS = {"MTNK": 4, "SREF": 1, "MGTK": 1}
+
+    def chronos(self, opponent) -> list[dict]:
+        """The AI's chronoshifted tank drops on our base, as attack waves (none without the device)."""
+        built = next((f for f, b in zip(opponent.frames, opponent.buildings)
+                      if any(t in b for t in self.CHRONOSPHERE)), None)
+        if built is None:
+            return []
+        units = {t: n for t, n in self.CHRONO_UNITS.items() if t in self.db.technos}
+        return [{"frame": built + self.CHRONO_FIRST + k * self.CHRONO_EVERY, "units": units, "chrono": True}
+                for k in range(6)]
+
+    def attacks(self, opponent) -> list[dict]:
+        """Its attack waves on our base in time order, chrono drops included."""
+        if not self.counterattack:
+            return []
+        return sorted(opponent.attacks + (self.chronos(opponent) if self.chrono else []), key=lambda w: w["frame"])
+
+    # Frames the base lasts once a wave has beaten its guard while the army is away: live, the
+    # units made meanwhile, the recall of those near home and repairs hold it. In 22 games of
+    # series_v6/v7/v10 none fell within 10000 frames of the army leaving (2026-11-09; was 300).
+    BASE_HOLDS = 6000
     # Frames from a saboteur raid's first sighting near our base to the C4 on the construction
     # yard (live vs hard 2026-11-02: Tanya seen 20 cells out at 10736, yard gone at 11009).
     RAID_FUSE = 300
@@ -437,14 +468,17 @@ class VictoryProblem(MissionProblem):
         free = Counter(opponent.player_start_army)
         value = lambda a: sum(self.db.technos[t].cost * n for t, n in a.items())
         start = value(army) or 1.0
-        away = Counter()       # AI units that died attacking us
+        away = Counter()       # AI units that died attacking us (already gone from the timeline)
         depart = finish        # we set off once built and done with any wave that came first
         arrive = depart + self.march_frames(army, opponent)
         raids = opponent.raids if self.counterattack else []
-        hits = sorted([(w["frame"], 0, w) for w in (opponent.attacks if self.counterattack else [])]
+        hits = sorted([(w["frame"], 0, w) for w in self.attacks(opponent)]
                       + [(r["frame"], 1, r) for r in raids], key=lambda h: (h[0], h[1]))
         for frame, is_raid, wave in hits:  # in time order: a raid meets who survived the waves before it
-            if not math.isfinite(arrive) or frame >= arrive:
+            # Once the army is out it keeps going and the guard alone holds home (below), as live:
+            # until 2026-11-09 a wave that came while it marched pulled it home first, which put
+            # the series_v6 plan's arrival ~5000 frames after the live one.
+            if not math.isfinite(arrive) or frame >= depart:
                 break
             if is_raid:
                 if frame < depart and not self.raid_held(
@@ -468,7 +502,10 @@ class VictoryProblem(MissionProblem):
             return {"arrive_frame": arrive, "won": False, "b_left": 1.0, "a_left": 0.0, "victory_frame": None}
         units, buildings = opponent.at(arrive)
         air_at = self.first_air(start_army, finish)
-        enemy = {**(Counter(units) - away), **(Counter(buildings) + self.answered(opponent, arrive, air_at))}
+        # The recorded timeline only holds live units, so the waves that died at our base are already
+        # gone from it: taking them off again (until 2026-11-09) halved the AI army we met late in the
+        # game (series_v10: sim $5-11k at arrival, live $12-19k) and made late arrivals look like wins.
+        enemy = {**Counter(units), **(Counter(buildings) + self.answered(opponent, arrive, air_at))}
         res = Battle(self.db, dict(army), enemy, self.cal, c.distance, c.spacing, base_spacing=c.base_spacing,
                      spawns=self.spawns(opponent, arrive, air_at), rebuild=self.rebuild,
                      b_damage=c.b_damage, replace_rate=getattr(opponent, "replace_rate", None)).run(
@@ -476,8 +513,8 @@ class VictoryProblem(MissionProblem):
         won = res.winner == "A"
         lost_home = None
         end = arrive + res.frames
-        for wave in (opponent.attacks if self.counterattack else []):
-            if not depart < wave["frame"] < end:
+        for wave in self.attacks(opponent):
+            if not depart <= wave["frame"] < end:
                 continue
             held = Battle(self.db, dict(guard), wave["units"], self.cal, c.distance, c.spacing, base_spacing=c.base_spacing).run(
                 c.dt, self.battle_frames, c.crush, c.kite, c.focus) if guard else None
@@ -531,6 +568,8 @@ class VictoryProblem(MissionProblem):
             v.pop("unfinished", None)  # only the plain plan ran out of time; this one finished
         else:
             fights = [self.fight(army, finish, o, guard, events) for o in self.opponents]
+        if self.deadline_frames is not None and finish > self.deadline_frames:
+            v["deadline"] = (finish - self.deadline_frames) / self.deadline_frames
         first = fights[0]
         info = {"cost": cost, "units": units, "finish_frame": finish, "spent": spent, "army": army,
                 "guard": guard, "early": early, "depart_frame": first.get("depart_frame"),

@@ -33,6 +33,7 @@ AIRPORTS = {"CAAIRP"}
 # repairs eat the money production needs.
 REPAIR_FIRST = ("cnst", "factory", "proc", "power", "barracks", "radar", "tech")
 REBUILD = ("power", "proc", "factory", "barracks", "radar", "tech")  # in this order
+REBUILD_START = 300  # frames a rebuild may wait to start (prerequisite lost too) before trying another
 
 
 @dataclass
@@ -50,6 +51,7 @@ class Steward:
     garrison_types: frozenset = frozenset({"E2", "E1", "INIT"})  # rules Occupier=yes
     garrison_range: float = 30.0    # cells from our base
     rebuild: bool = False
+    placer: object = None           # BuildExecutor.placer for the rebuilt buildings (placement.Spreader)
     claimed: set = field(default_factory=set)
     log: list = field(default_factory=list)  # (frame, what, detail) for the run log
     _repairing: dict = field(default_factory=dict)   # building -> (frame sent, health then)
@@ -61,6 +63,7 @@ class Steward:
     inside: Counter = field(default_factory=Counter)  # garrisoned types now off the map (updated in place)
     _peak: Counter = field(default_factory=Counter)  # most of each key building we had
     _rebuilding: BuildExecutor | None = None
+    _blocked: dict = field(default_factory=dict)     # building -> frame its rebuild could not start
 
     # ------------------------------------------------------------------ helpers
     def _mine(self, snap: Snapshot) -> list[ObjectState]:
@@ -266,14 +269,21 @@ class Steward:
                 return
             if self._rebuilding.done:
                 self._rebuilding = None
+            elif not self._rebuilding.events and snap.frame - self._rebuilding.deploy_frame > REBUILD_START:
+                # Live 2026-11-09 (series_v10 game 2) the tech centre was rebuilt before the radar it
+                # needs: the rebuild never started, nothing else was rebuilt and the base fell on $40k.
+                self._blocked[self._rebuilding.sequence[0]] = snap.frame
+                self.log.append((snap.frame, "rebuild blocked", self._rebuilding.sequence[0]))
+                self._rebuilding = None
             return
         if not any(o.type_id in ("NACNST", "GACNST", "YACNST") for o in mine):
             return  # no construction yard: nothing can be built
         credits = snap.player.credits if snap.player else 0
-        lost = next((t for t in keys if have[t] < self._peak[t]), None)
+        lost = next((t for t in keys if have[t] < self._peak[t]
+                     and snap.frame - self._blocked.get(t, -10**9) > REBUILD_START), None)
         if lost is None or credits < self.db.technos[lost].cost:
             return
-        ex = BuildExecutor(self.db, [lost], self.commander)
+        ex = BuildExecutor(self.db, [lost], self.commander, placer=self.placer)
         ex.deploy_frame = snap.frame  # the yard stands: no MCV to deploy
         self._rebuilding = ex
         self.log.append((snap.frame, "rebuild", lost))

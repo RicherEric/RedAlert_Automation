@@ -31,6 +31,9 @@ class Calibration:
     derrick_type: str = "CAOILD"
     slave_cycle_frames: float = 300.0   # one slave miner worker round trip
     place_delay_frames: float = 15.0    # time for the player to place a finished building
+    # Whether an Industrial Plant's discount also shortens build time (time comes from the price
+    # in BuildSpeed). Not yet measured live: set False if the game keeps the full time.
+    plant_speeds_build: bool = True
     mcv_deploy_frames: float = 75.0
     # The same two delays when ra2bridge places/deploys (measured 2026-10-31: ~5 and <=27 frames,
     # polling latency included). The human values above include reaction time.
