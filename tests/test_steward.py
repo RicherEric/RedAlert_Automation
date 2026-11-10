@@ -407,3 +407,61 @@ def test_rebuilder_adds_war_factories_with_a_full_bank(db):
     four = [yard] + [obj(10 + i, "NAWEAP", ME, 66, 20 + 4 * i) for i in range(4)]
     full.tick(snap(100, four, credits=20000), Counter())
     assert ("produce", "NAWEAP") not in full.commander.calls
+
+
+def test_gather_sends_a_stuck_unit_aside_and_holds_runaways(db):
+    """series_v11 game 1: vehicles sat at home for 3800 frames while the infantry ran ahead."""
+    from ra2tools.assault import STUCK_FRAMES, Assault
+    rec = Recorder()
+    a = Assault(db, rec, AI)
+    base = [obj(50, "GACNST", AI, 52, 97, 1000, "building")]
+    tanks = [obj(i, "APOC", ME, 66, 20 + i, 800, "vehicle") for i in range(1, 5)]
+    s = snap(1000, tanks + base + [obj(9, "E2", ME, 66, 26, 125, "infantry")])
+    a._gather(s, a.army(s), a.enemies(s))
+    rally = a.rally
+    assert sum(1 for c in rec.calls if c[0] == "move" and c[2] == rally) == 5
+    assert [m[4] for m in a.move_log] == ["ok"] * 5
+    # the tanks never move; the conscript walks far ahead of them
+    rec.calls.clear()
+    f = 1000 + STUCK_FRAMES + 10
+    e2 = obj(9, "E2", ME, rally[0], rally[1] - 15, 125, "infantry")
+    s = snap(f, tanks + base + [e2])
+    a._gather(s, a.army(s), a.enemies(s))
+    moves = {c[1]: c[2] for c in rec.calls if c[0] == "move"}
+    assert all(moves[i] != rally for i in range(1, 5))                # each tank sent beside itself
+    assert all(math.dist(moves[i], (66, 20 + i)) <= 4.5 for i in range(1, 5))
+    assert moves[9] == (round(e2.x), round(e2.y))                      # the conscript holds
+
+
+def test_gather_logs_bridge_errors(db):
+    from ra2tools.assault import Assault
+    from ra2tools.bridge import BridgeError
+
+    class Full(Recorder):
+        def move(self, *a):
+            raise BridgeError("event queue full")
+
+    a = Assault(db, Full(), AI)
+    base = [obj(50, "GACNST", AI, 52, 97, 1000, "building")]
+    s = snap(1000, [obj(1, "APOC", ME, 66, 20, 800, "vehicle")] + base)
+    a._gather(s, a.army(s), a.enemies(s))
+    assert [m[:5] for m in a.move_log] == [(1000, "APOC", *a.rally, "event queue full")]
+    assert 1 not in a._ordered_at  # retried on the next tick
+
+
+def test_reinforcer_does_not_claim_units_made_while_it_was_paused(db):
+    # Live 2026-11-10 (series_v12 game 2): it resumed after a regroup and took the rebuilt wave.
+    from ra2tools.adapt import Reinforcer
+    from ra2tools.params import Calibration
+    from ra2tools.problems import CombatSettings
+    r = Reinforcer(db, Recorder(), Calibration(speed_to_cells=0.009154), CombatSettings(focus=True), AI,
+                   ["APOC"], reserve=10**9)
+    tank = lambda a: obj(a, "APOC", ME, 10, 10, db=db)
+    r._queued = {"vehicle": "APOC"}
+    r.tick(snap(1000, [tank(1)], credits=0))
+    r._queued = {"vehicle": "APOC"}
+    r.tick(snap(1030, [tank(1), tank(2)], credits=0))  # came out while it watched: its own
+    assert r.units == {2}
+    r._queued = {"vehicle": "APOC"}
+    r.tick(snap(9000, [tank(1), tank(2)] + [tank(a) for a in range(3, 20)], credits=0))  # after a pause
+    assert r.units == {2}

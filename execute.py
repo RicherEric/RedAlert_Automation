@@ -217,9 +217,9 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
             print(f"  {snap.frame:>6} 幀  這一波打輸了（剩 {dict(Counter(o.type_id for o in a.army(snap)))}），"
                   f"回家用 ${snap.player.credits} 重新組軍")
             log["waves"].append({"lost": snap.frame, "credits": snap.player.credits})
-            orders, order_log = a.orders, a.order_log
+            orders, order_log, move_log = a.orders, a.order_log, a.move_log
             a = Assault(db, bridge, enemy, exclude=guard)
-            a.orders, a.order_log = orders, order_log
+            a.orders, a.order_log, a.move_log = orders, order_log, move_log
             a.skip = claimed()
             if reinforcer and not alert:
                 reinforcer.units.clear()  # what it kept home joins the next wave (unless a drop is due)
@@ -263,6 +263,16 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
     log["survivors"] = dict(Counter(o.type_id for o in a.army(snap)))
     log["orders"] = a.orders
     log["order_log"] = a.order_log
+    # Every MOVE and its bridge result (series_v11 game 1: vehicles ignored the gather for 3800
+    # frames with no trace of why); errors also summed up for a quick look.
+    # who gave the order: the assault, the all-army defence before it, or the home guard after
+    moves = sorted([(*m, "assault") for m in a.move_log] + [(*m, "defence") for m in defence.move_log]
+                   + [(*m, "home") for m in home.move_log])
+    log["move_log"] = moves
+    errors = Counter(m[4] for m in moves if m[4] != "ok")
+    log["move_errors"] = dict(errors)
+    if errors:
+        print(f"移動指令失敗：{dict(errors)}（共 {len(moves)} 次移動）")
     return log
 
 

@@ -30,6 +30,15 @@ ARTILLERY_RANGE = 14.0  # a unit outranging this (V3, 18 cells) shells buildings
 
 
 ENGAGED_SHARE = 0.5  # share of the army (by cost) at the rally before a fight there starts the attack
+# Live series_v11 game 1 (2026-11-09): after the order to gather, the 17 vehicles stayed at home
+# for 3800 frames although a MOVE went to each every 300 frames, while the infantry and Boris
+# walked ahead alone and lost 11 units before the rally. Bridge errors were dropped unlogged
+# (MOVE answers "ERR event queue full" when the game's event list is full), so now every MOVE
+# result goes to `move_log`, a unit that has not moved for STUCK_FRAMES is sent to a free cell
+# beside it first, and units more than GATHER_LEAD cells ahead of the army hold.
+STUCK_FRAMES = 600
+STUCK_MOVE = 1.0     # cells: less than this since its order counts as not moving
+GATHER_LEAD = 10.0   # cells ahead of the army's (value-weighted) median distance to the rally
 
 @dataclass
 class Assault:
@@ -65,6 +74,8 @@ class Assault:
     # the MiGs came only when nothing else was left to shoot.
     designator_guard: float = 6.0
     order_log: list = field(default_factory=list)  # (frame, unit type, target type, x, y) per attack order
+    # (frame, unit type, x, y, "ok" | bridge error, why, unit address) per MOVE; why: rally, hold, aside, defend
+    move_log: list = field(default_factory=list)
     started: int | None = None
     stage_started: int | None = None
     regrouping: bool = False
@@ -75,6 +86,8 @@ class Assault:
     _target: dict[int, int] = field(default_factory=dict)      # our unit -> target address
     _ordered_at: dict[int, int] = field(default_factory=dict)  # our unit -> frame of last order
     _commit: dict[int, float] = field(default_factory=dict)    # enemy -> damage per frame aimed at it
+    _moved_from: dict[int, tuple] = field(default_factory=dict)  # our unit -> (frame, x, y) of its gather order
+    _unstick: dict[int, int] = field(default_factory=dict)       # our unit -> times sent aside
 
     def army(self, snap: Snapshot) -> list[ObjectState]:
         out = []
@@ -267,18 +280,64 @@ class Assault:
             self.regrouping, self.rally, self.stage_started = True, nxt, snap.frame
             self._progress = (snap.frame, float("inf"))
             self._ordered_at.clear()  # and order everyone on to it below
+        lead = self._lead_limit(army, cost)
         for unit in army:
             if near(unit):
+                self._moved_from.pop(unit.address, None)
                 continue
+            pos = (unit.x, unit.y)
+            seen = self._moved_from.get(unit.address)
+            if seen is None or math.dist(pos, seen[1:]) >= STUCK_MOVE:
+                self._moved_from[unit.address] = seen = (snap.frame, *pos)
+            ahead = lead is not None and math.dist(pos, self.rally) < lead
+            if ahead:
+                self._moved_from[unit.address] = (snap.frame, *pos)  # waiting is not being stuck
             if snap.frame - self._ordered_at.get(unit.address, -10**9) < 300:
                 continue
-            try:
-                self.commander.move(unit.address, self.rally)
-            except BridgeError:
-                continue
-            self._ordered_at[unit.address] = snap.frame
-            self.orders += 1
+            if ahead:
+                cell, why = (round(unit.x), round(unit.y)), "hold"  # until the army catches up
+            elif snap.frame - seen[0] >= STUCK_FRAMES:
+                cell, why = self._aside(unit), "aside"
+                self._moved_from[unit.address] = (snap.frame, *pos)
+            else:
+                cell, why = self.rally, "rally"
+            if self._order_move(snap, unit, cell, why):
+                self._ordered_at[unit.address] = snap.frame
         return False
+
+    def _lead_limit(self, army: list[ObjectState], cost) -> float | None:
+        """Distance to the rally under which a unit is too far ahead of the army and waits: the
+        value-weighted median distance minus GATHER_LEAD (None with fewer than 2 units)."""
+        if len(army) < 2:
+            return None
+        dists = sorted((math.dist((o.x, o.y), self.rally), cost(o)) for o in army)
+        half, acc = sum(c for _, c in dists) / 2, 0.0
+        for d, c in dists:
+            acc += c
+            if acc >= half:
+                return d - GATHER_LEAD
+        return None
+
+    def _aside(self, unit: ObjectState) -> tuple[int, int]:
+        """A cell 3 to the side of a stuck unit (alternating sides) and 2 towards the rally."""
+        n = self._unstick.get(unit.address, 0)
+        self._unstick[unit.address] = n + 1
+        dx, dy = self.rally[0] - unit.x, self.rally[1] - unit.y
+        norm = math.hypot(dx, dy) or 1.0
+        dx, dy = dx / norm, dy / norm
+        side = 1 if n % 2 == 0 else -1
+        return round(unit.x - dy * 3 * side + dx * 2), round(unit.y + dx * 3 * side + dy * 2)
+
+    def _order_move(self, snap: Snapshot, unit: ObjectState, cell: tuple[int, int], why: str = "defend") -> bool:
+        """MOVE through the bridge, the result (ok or the bridge's error) kept in move_log."""
+        try:
+            self.commander.move(unit.address, cell)
+        except BridgeError as e:
+            self.move_log.append((snap.frame, unit.type_id, cell[0], cell[1], str(e), why, unit.address))
+            return False
+        self.move_log.append((snap.frame, unit.type_id, cell[0], cell[1], "ok", why, unit.address))
+        self.orders += 1
+        return True
 
     def tick(self, snap: Snapshot) -> None:
         if self.started is None:
@@ -450,13 +509,10 @@ class Defence(Assault):
     def _move(self, snap: Snapshot, unit: ObjectState, cell: tuple[float, float]) -> None:
         if snap.frame - self._ordered_at.get(unit.address, -10**9) < 300:
             return
-        try:
-            self.commander.move(unit.address, (round(cell[0]), round(cell[1])))
-        except BridgeError:
+        if not self._order_move(snap, unit, (round(cell[0]), round(cell[1]))):
             return
         self._target.pop(unit.address, None)
         self._ordered_at[unit.address] = snap.frame
-        self.orders += 1
 
     def tick(self, snap: Snapshot) -> None:
         home = self._home(snap)

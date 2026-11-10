@@ -15,7 +15,7 @@ import re
 import subprocess
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -96,7 +96,7 @@ def play(tag: str, timeout: int, targets: list[str], early: list[str]) -> dict:
 def main() -> None:
     sys.stdout.reconfigure(encoding="utf-8", line_buffering=True)
     ap = argparse.ArgumentParser()
-    ap.add_argument("--until", default="23:30", help="不再開新局的時間（今天）")
+    ap.add_argument("--until", default="23:30", help="不再開新局的時間（已經過了就算明天）")
     ap.add_argument("--max-games", type=int, default=30)
     ap.add_argument("--idle", type=float, default=120, help="使用者閒置幾秒才開局")
     ap.add_argument("--timeout", type=int, default=2800)
@@ -107,6 +107,8 @@ def main() -> None:
     args = ap.parse_args()
     day = datetime.now().strftime("%Y%m%d")
     stop_at = datetime.combine(datetime.now().date(), datetime.strptime(args.until, "%H:%M").time())
+    if stop_at <= datetime.now():  # e.g. --until 08:00 started at 22:00 means tomorrow morning
+        stop_at += timedelta(days=1)
     table = ROOT / "logs" / f"{args.name}_{day}.tsv"
     if not table.exists():
         table.write_text("\t".join(COLUMNS) + "\n", encoding="utf-8")

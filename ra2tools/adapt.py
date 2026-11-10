@@ -85,6 +85,11 @@ class Reinforcer:
     _last: int = -10**9
     _before: set = field(default_factory=set)
     _queued: dict = field(default_factory=dict)     # category -> type
+    _ticked: int | None = None                      # frame of the last tick
+    # It only ticks while a wave is out. Live 2026-11-10 (series_v12 game 2) it resumed after a
+    # 9000-frame regroup and took the whole rebuilt wave for its own (their types matched a stale
+    # queue entry), kept it home and made the wave look lost 22 frames after it gathered.
+    MAX_GAP = 120
 
     def category(self, tid: str) -> str:
         t = self.db.technos[tid]
@@ -93,7 +98,11 @@ class Reinforcer:
     def tick(self, snap: Snapshot) -> None:
         mine = {o.address: o for o in snap.objects if o.owner == snap.player_index and o.on_map and o.health > 0}
         new = set(mine) - self._before
-        if self._before:
+        gap = self._ticked is not None and snap.frame - self._ticked > self.MAX_GAP
+        self._ticked = snap.frame
+        if gap:  # what came out meanwhile was not ours, and the queue we knew of is gone
+            self._queued.clear()
+        elif self._before:
             for a in new:  # a unit of a type we queued has come out: it is ours to keep home
                 if mine[a].type_id in self._queued.values() and mine[a].kind != "building":
                     self.units.add(a)

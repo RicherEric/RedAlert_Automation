@@ -247,6 +247,12 @@ class VictoryProblem(MissionProblem):
     # ArmyProblem.deadline_frames: here the army must be ready by then. Every live win vs the hard
     # AI came from armies gathered by ~16000 (1 Prism Tower up); every later one lost (2026-11-09),
     # and past ~20000 most recorded games have ended, so the AI there is extrapolated.
+    # One wave (2026-11-10, user): a first wave that fails leaves a stronger AI with superweapons
+    # (series_v11 game 1: 32 -> 25 buildings, the 2nd wave did less). Robust mode only: a game
+    # counts as won only if our army keeps `min_left` of its value, and fewer than `min_win_rate`
+    # of the games won that way is the violation "one_wave" (the sim is optimistic, hence a margin).
+    min_win_rate: float | None = None
+    min_left: float = 0.0
 
     LOSS_FRAMES = 60000.0  # above any win: builds may run to HORIZON, then march and fight
 
@@ -589,7 +595,9 @@ class VictoryProblem(MissionProblem):
             v["lose"] = 1.0 + min(f["b_left"] for f in fights)
         if self.robust:
             n = len(fights)
-            rate = sum(f["won"] for f in fights) / n
+            rate = sum(f["won"] and f["a_left"] >= self.min_left for f in fights) / n
+            if self.min_win_rate is not None and rate < self.min_win_rate:
+                v["one_wave"] = self.min_win_rate - rate
             mean = sum(f["victory_frame"] if f["won"] else self.LOSS_FRAMES * (1 + f["b_left"]) for f in fights) / n
             info["win_rate"] = rate
             left = sum(f["a_left"] for f in fights) / n

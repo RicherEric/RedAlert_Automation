@@ -30,7 +30,9 @@ def process_ids(name: str = "gamemd.exe") -> list[int]:
 
 
 def game_window(pid: int | None = None) -> int | None:
-    """Top-level visible window of gamemd.exe."""
+    """Top-level visible window of gamemd.exe. Skips DDrawCompat's presentation window (same
+    process, often first in z-order): focusing it instead of the game's own window left the game
+    inactive on a black screen, never reaching the menu (2026-11-10, launch fails since 11-08)."""
     pids = {pid} if pid else set(process_ids())
     found: list[int] = []
 
@@ -39,7 +41,10 @@ def game_window(pid: int | None = None) -> int | None:
         owner = wintypes.DWORD()
         user32.GetWindowThreadProcessId(hwnd, ctypes.byref(owner))
         if owner.value in pids and user32.IsWindowVisible(hwnd):
-            found.append(hwnd)
+            cls = ctypes.create_unicode_buffer(64)
+            user32.GetClassNameW(hwnd, cls, 64)
+            if not cls.value.startswith("DDrawCompat"):
+                found.append(hwnd)
         return True
 
     user32.EnumWindows(cb, 0)
