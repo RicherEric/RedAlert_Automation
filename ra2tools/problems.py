@@ -406,7 +406,7 @@ class VictoryProblem(MissionProblem):
             return []
         return sorted(opponent.attacks + (self.chronos(opponent) if self.chrono else []), key=lambda w: w["frame"])
 
-    # Frames the base lasts once a wave has beaten its guard while the army is away: live, the
+    # A wave must raze our base (units and buildings) within this many frames to win: later, the
     # units made meanwhile, the recall of those near home and repairs hold it. In 22 games of
     # series_v6/v7/v10 none fell within 10000 frames of the army leaving (2026-11-09; was 300).
     BASE_HOLDS = 6000
@@ -459,6 +459,30 @@ class VictoryProblem(MissionProblem):
             c.dt, self.RAID_FUSE, c.crush, c.kite, c.focus)
         return res.winner == "A" and res.frames <= self.RAID_FUSE
 
+    def base_at(self, frame: float, events: list | None, skip=()) -> Counter:
+        """Our buildings standing at `frame`: the construction yard plus the plan's buildings done
+        by then (`events`), else the basics the army needs. `skip`: types already fighting (towers)."""
+        b = self.db.basics(self.country)
+        if events is None:
+            base = Counter(b[k] for k in ("cnst", "power", "proc", "barracks", "factory") if k in b)
+        else:
+            base = Counter({b["cnst"]: 1}) + Counter(t for f, kind, t in events if kind == "done" and f <= frame
+                                                     and self.db.technos[t].kind == "building")
+        return Counter({t: n for t, n in base.items() if t not in skip})
+
+    def defend(self, home: Counter, wave: dict[str, int], frame: float, events: list | None):
+        """A wave at our base, met by `home` with the buildings standing behind it. Returns
+        (held, units of `home` left, frames). The base is lost only if the wave razes it within
+        BASE_HOLDS: until 2026-11-10 any wave the units could not wipe out lost the match, so two
+        Harriers over a base with no anti-air, or one GI at an empty base after the army left,
+        decided 25 of 40 games against the v12 plan, while live no base fell in 25 games."""
+        c = self.combat
+        base = self.base_at(frame, events, skip=home)
+        res = Battle(self.db, dict(home + base), wave, self.cal, c.distance, c.spacing,
+                     base_spacing=c.base_spacing).run(c.dt, self.BASE_HOLDS, c.crush, c.kite, c.focus)
+        left = Counter({t: min(n, home[t]) for t, n in res.a_survivors.items() if home[t]})
+        return res.winner != "B", left, res.frames
+
     def fight(self, army: dict[str, int], finish: float, opponent, guard: dict[str, int] | None = None,
               events: list | None = None) -> dict:
         """Meet the AI's attack waves that come before we arrive, march to `opponent` with
@@ -493,16 +517,15 @@ class VictoryProblem(MissionProblem):
                             "victory_frame": None, "lost_to_raid": frame, "survivors": {}}
                 continue  # after departure: the guard alone, below
             home = self.at_home(army, guard, free, wave["frame"], finish, events)
-            res = Battle(self.db, dict(home), wave["units"], self.cal, c.distance, c.spacing, base_spacing=c.base_spacing).run(
-                c.dt, self.battle_frames, c.crush, c.kite, c.focus)
-            if res.winner != "A":
+            held, left, frames = self.defend(home, wave["units"], wave["frame"], events)
+            if not held:
                 return {"arrive_frame": arrive, "won": False, "b_left": self._home_loss(wave["frame"]),
                         "a_left": 0.0, "victory_frame": None, "lost_to_wave": wave["frame"], "survivors": {}}
-            total = army + guard - (home - Counter(res.a_survivors))  # units not yet built are safe
+            total = army + guard - (home - left)  # units not yet built are safe
             guard = Counter({t: min(n, total[t]) for t, n in guard.items() if total[t]})
             army = total - guard
             away += Counter(wave["units"])
-            depart = max(depart, wave["frame"] + res.frames)
+            depart = max(depart, wave["frame"] + frames)
             arrive = depart + self.march_frames(army, opponent)
         if not math.isfinite(arrive):
             return {"arrive_frame": arrive, "won": False, "b_left": 1.0, "a_left": 0.0, "victory_frame": None}
@@ -522,12 +545,10 @@ class VictoryProblem(MissionProblem):
         for wave in self.attacks(opponent):
             if not depart <= wave["frame"] < end:
                 continue
-            held = Battle(self.db, dict(guard), wave["units"], self.cal, c.distance, c.spacing, base_spacing=c.base_spacing).run(
-                c.dt, self.battle_frames, c.crush, c.kite, c.focus) if guard else None
-            if held is None or held.winner != "A":
-                lost_home = wave["frame"] + (held.frames if held else 0) + self.BASE_HOLDS
+            held, guard, frames = self.defend(guard, wave["units"], wave["frame"], events)
+            if not held:
+                lost_home = wave["frame"] + frames
                 break
-            guard = Counter(held.a_survivors)
         for raid in raids:  # and while it is away, the guard alone
             if depart <= raid["frame"] < end and not self.raid_held(guard, raid["units"]):
                 fell = raid["frame"] + self.RAID_FUSE

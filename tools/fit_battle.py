@@ -28,7 +28,7 @@ from ra2tools.combat import Battle  # noqa: E402
 from ra2tools.problems import CombatSettings  # noqa: E402
 
 LOGS = ["logs/series_v6_2*_[0-9]*.txt", "logs/series_v7_2*_[0-9]*.txt", "logs/series_v8_2*_[0-9]*.txt",
-        "logs/series_v10_2*_[0-9]*.txt"]
+        "logs/series_v10_2*_[0-9]*.txt", "logs/series_v11_2*_[0-9]*.txt", "logs/series_v12_2*_[0-9]*.txt"]
 GATHER = re.compile(r"(\d+) 幀\s+集結完成（集結點 \((\d+), (\d+)\)）")
 LOST = re.compile(r"(\d+) 幀\s+這一波打輸了")
 ARMY_RADIUS = 14.0  # cells around the gather point that count as the wave

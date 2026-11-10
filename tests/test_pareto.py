@@ -670,3 +670,33 @@ def test_chronosphere_drops_need_a_guard():
     assert "lost_to_wave" not in p.fight({"HTNK": 1}, 20000, plain, guard={})
     p.chrono = False
     assert "lost_to_wave" not in p.fight({"HTNK": 1}, 20000, chrono, guard={})
+
+
+def test_harassment_does_not_lose_the_base():
+    # 2026-11-10: two Harriers over a base with no anti-air, or one GI at a base the army had
+    # left, lost the match in the sim; live they only harass. A real wave still razes it.
+    from pathlib import Path
+
+    import pytest
+
+    data = Path(__file__).parent.parent / "data"
+    if not (data / "rulesmd.ini").exists():
+        pytest.skip("run extract.py first")
+    from ra2tools.gamedata import GameData
+    from ra2tools.mission import PolicyPlanner
+    from ra2tools.opponent import Opponent
+    from ra2tools.params import Calibration
+    from ra2tools.problems import VictoryProblem
+
+    db = GameData.load(data)
+    cal = Calibration()
+
+    def fight(wave_frame, units, finish):
+        opp = Opponent("w", "Americans", "Russians", [0], [{}], [{"GACNST": 1}], 40.0,
+                       attacks=[{"frame": wave_frame, "units": units}])
+        p = VictoryProblem(db, "Russians", [], ["APOC"], cal, planner=PolicyPlanner(db, "Russians", cal), opponent=opp)
+        return p.fight({"APOC": 3}, finish, opp, guard={})
+
+    assert "lost_to_wave" not in fight(1000, {"ORCA": 2}, 2000.0)  # nothing at home can shoot them
+    assert fight(3000, {"E1": 1}, 2000.0)["base_lost"] is None      # after we left, nobody home
+    assert fight(1000, {"MTNK": 30}, 2000.0).get("lost_to_wave") == 1000
