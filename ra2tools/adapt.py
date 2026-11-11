@@ -80,6 +80,12 @@ class Reinforcer:
     home: Counter = field(default_factory=Counter)  # what we planned to keep home
     # A drop the units kept home must beat, bought for first (the AI's chronoshifted tanks).
     home_threat: dict = field(default_factory=dict)
+    # AI units at our base right now, and what of ours is there to meet them: bought against
+    # first, every `raid_every` frames. Live 2026-11-11 (series_v13 game 3) a raid razed the base
+    # in 6000 frames while $11-13k sat in the bank and units came one every 600+ frames.
+    raid: dict = field(default_factory=dict)
+    defenders: dict = field(default_factory=dict)
+    raid_every: int = 60
     units: set = field(default_factory=set)         # addresses of the units it made
     log: list = field(default_factory=list)
     _last: int = -10**9
@@ -110,15 +116,24 @@ class Reinforcer:
         busy = {f.category for f in snap.factories}
         self._queued = {c: t for c, t in self._queued.items() if c in busy}
         credits = snap.player.credits if snap.player else 0
-        if snap.frame - self._last < self.every or credits < self.reserve + 500:
+        budget = credits - self.reserve
+        free = {self.category(t) for t in self.candidates} - busy - set(self._queued)
+        pace = self.raid_every if self.raid and free else self.every
+        if credits < self.reserve + 500 or snap.frame - self._last < pace:
+            return
+        # Against a raid the defenders at home must win; only then the usual picks, at their pace.
+        pick = counter_pick(self.db, self.cal, self.combat, self.defenders, self.raid,
+                            [t for t in self.candidates if self.category(t) in free], budget,
+                            step=1) if self.raid and free else {}
+        if not pick and snap.frame - self._last < self.every:
             return
         self._last = snap.frame
         enemy = enemy_army(self.db, snap, self.enemy)
         here = Counter(mine[a].type_id for a in self.units if a in mine)
-        pick = counter_pick(self.db, self.cal, self.combat, dict(here + self.home), self.home_threat,
-                            self.candidates, credits - self.reserve, step=1) if self.home_threat else {}
+        pick = pick or (counter_pick(self.db, self.cal, self.combat, dict(here + self.home), self.home_threat,
+                                     self.candidates, budget, step=1) if self.home_threat else {})
         pick = pick or counter_pick(self.db, self.cal, self.combat, dict(here + self.home), enemy,
-                                    self.candidates, credits - self.reserve, step=1)
+                                    self.candidates, budget, step=1)
         for tid in pick:
             cat = self.category(tid)
             if cat in busy or cat in self._queued:

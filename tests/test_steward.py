@@ -487,3 +487,38 @@ def test_gather_waits_for_an_opening(db):
     assert not b._gather(snap(1000, ours + base + grizzlies), ours, base + grizzlies)
     assert b._gather(snap(4000, ours + base + grizzlies), ours, base + grizzlies)
     assert b.opening["reason"] == "timeout"
+
+
+def test_defence_shoots_the_chrono_legionnaire_before_the_tanks(db):
+    # Live 2026-11-11 (series_v13 game 3): two of them erased our yard while we shot Grizzlies.
+    from ra2tools.assault import Defence
+    rec = Recorder()
+    d = Defence(db, rec, AI, yard_guard=0)
+    yard = obj(1, "NACNST", ME, 10, 10, 1000, "building")
+    rhino = obj(2, "HTNK", ME, 14, 10, 400, "vehicle")
+    grizzly = obj(30, "MTNK", AI, 15, 11, 300, "vehicle")
+    cleg = obj(31, "CLEG", AI, 11, 12, 100, "infantry")
+    d.tick(snap(100, [yard, rhino, grizzly]))
+    assert ("attack", 2, 30) in rec.calls
+    d.tick(snap(130, [yard, rhino, grizzly, cleg]))  # it drops the tank at once
+    assert rec.calls[-1] == ("attack", 2, 31)
+
+
+def test_reinforcer_answers_a_raid_quickly_and_only_while_it_wins(db):
+    # Live 2026-11-11 (series_v13 game 3): a raid razed the base while $12k sat unspent.
+    from ra2tools.adapt import Reinforcer
+    from ra2tools.params import Calibration
+    from ra2tools.problems import CombatSettings
+    rec = Recorder()
+    r = Reinforcer(db, rec, Calibration(speed_to_cells=0.009154), CombatSettings(focus=True), AI,
+                   ["HTNK", "E2"], every=600)
+    r.tick(snap(1000, [], credits=12000))  # its usual pick vs an empty AI army: nothing
+    r.raid, r.defenders = {"MTNK": 3, "E1": 6}, {"E2": 1}
+    r.tick(snap(1060, [], credits=12000))  # 60 frames on, not 600: the raid cannot wait
+    made = [c[1] for c in rec.calls if c[0] == "produce"]
+    assert made and set(made) <= {"HTNK", "E2"}
+    calls = len(rec.calls)
+    r.defenders = {"HTNK": 8, "E2": 10}  # home already wins: back to its usual pace
+    r._queued.clear()
+    r.tick(snap(1130, [], credits=12000))
+    assert len(rec.calls) == calls

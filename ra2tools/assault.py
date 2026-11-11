@@ -505,7 +505,10 @@ class Assault:
             self.order_log.append((snap.frame, unit.type_id, best.type_id, round(best.x), round(best.y)))
 
 
-SABOTEURS = {"TANY", "GHOST", "ENGINEER", "SENGINEER", "YENGINEER", "SPY"}  # C4 / capture / infiltrate
+# C4 / capture / infiltrate / erase. The Chrono Legionnaire erases a building outright: live
+# 2026-11-11 (series_v13 game 3) two of them took our construction yard (962/1000 HP) in 900
+# frames while the guards shot the Grizzlies next to them, and with it went any rebuilding.
+SABOTEURS = {"TANY", "GHOST", "ENGINEER", "SENGINEER", "YENGINEER", "SPY", "CLEG"}
 
 
 @dataclass

@@ -193,11 +193,18 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
             print(f"  {snap.frame:>6} 幀  看到 AI 的超時空傳送儀，第 {snap.frame + CHRONO_ALERT} 幀起留兵守家")
             log["chrono_seen"] = snap.frame
         alert = chrono_seen is not None and snap.frame >= chrono_seen + CHRONO_ALERT
+        raid = home.threats(snap) if a.attack_started is not None or regroup else []
         if reinforcer:
             reinforcer.home_threat = CHRONO_DROP if alert else {}
+            # Raiders at the base while the army is away or rebuilding: counters to them first,
+            # every few seconds, from whatever is home (series_v13 game 3: the base fell with $12k).
+            centre = home._home(snap)
+            reinforcer.raid = dict(Counter(t.type_id for t in raid))
+            reinforcer.defenders = dict(Counter(o.type_id for o in defence.army(snap) if centre is not None
+                                                and math.dist((o.x, o.y), centre) <= home.radius))
         if steward:
             steward.tick(snap)
-        if reinforcer and a.attack_started is not None:
+        if reinforcer and (a.attack_started is not None or (regroup and raid)):
             reinforcer.tick(snap)
         threats = defence.threats(snap) if a.attack_started is None else []
         # Only what the army can hurt counts, and from the first tick on: live 2026-11-07
@@ -233,7 +240,9 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
                 regroup = False
                 print(f"  {snap.frame:>6} 幀  第 {len(log['waves']) + 1} 波組好：{dict(have)}，${snap.player.credits}")
                 log["waves"][-1]["ready"] = snap.frame
-            else:
+            elif not (reinforcer and raid):  # the factories are the Reinforcer's while raided
+                if reinforcer and not alert:
+                    reinforcer.units.clear()  # its raid defenders join the next wave
                 rebuilder.tick(snap, have)
         if a.attack_started is None and (snap.frame < hold_until or threats or regroup):
             defence.tick(snap)  # also keeps the yard guard and walks strays home
