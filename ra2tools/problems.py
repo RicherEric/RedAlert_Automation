@@ -253,6 +253,11 @@ class VictoryProblem(MissionProblem):
     # of the games won that way is the violation "one_wave" (the sim is optimistic, hence a margin).
     min_win_rate: float | None = None
     min_left: float = 0.0
+    # Shortest time (2026-11-11, user): live, a failed first wave was almost never won back (2 of
+    # 20 games) and a failed game ran ~48000 frames (series_v4-v13). With `fail_frames` the frames
+    # objective is the expected time per win over the games, (sum of victory frames + fail_frames
+    # per loss) / wins, so a faster plan only pays when it does not lose too many more games.
+    fail_frames: float | None = None
 
     LOSS_FRAMES = 60000.0  # above any win: builds may run to HORIZON, then march and fight
 
@@ -620,6 +625,12 @@ class VictoryProblem(MissionProblem):
             if self.min_win_rate is not None and rate < self.min_win_rate:
                 v["one_wave"] = self.min_win_rate - rate
             mean = sum(f["victory_frame"] if f["won"] else self.LOSS_FRAMES * (1 + f["b_left"]) for f in fights) / n
+            if self.fail_frames is not None:
+                wins = sum(f["won"] for f in fights)
+                spent_frames = sum(f["victory_frame"] if f["won"] else self.fail_frames for f in fights)
+                # no win at all: past any plan that wins once, closer the less of the AI survives
+                mean = spent_frames / wins if wins else self.fail_frames * n * (1 + min(f["b_left"] for f in fights))
+                info["per_win"] = mean
             info["win_rate"] = rate
             left = sum(f["a_left"] for f in fights) / n
             return Evaluation(mean, v, info, objectives=(-rate, mean, float(spent), -left))

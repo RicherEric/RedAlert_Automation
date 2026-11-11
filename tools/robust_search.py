@@ -38,9 +38,12 @@ def main() -> None:
     args = ap.parse_args()
     cfg = tomllib.loads(Path(args.scenario).read_text(encoding="utf-8"))
     v = cfg["victory"]
+    prefer = v.get("robust_prefer", PREFER)  # e.g. frames first for the shortest time per win
     db = load_db()
     paths = [p for pattern in LOGS for p in sorted(glob.glob(str(ROOT / pattern)))]
-    games = games_from_logs(db, paths, Opponent.load(ROOT / args.template))
+    # min_frames (2026-11-11): at 16000 nearly every series_v6/v7 game was dropped (the record
+    # stops when we reach the AI, ~16000 there), leaving only later, stronger AIs for an early army.
+    games = games_from_logs(db, paths, Opponent.load(ROOT / args.template), min_frames=v.get("min_frames", 16000))
     print(f"對手：{len(games)} 場真實對局（{', '.join(g.name for g in games)}）")
     v = {**v, **({"workers": args.workers} if args.workers else {})}
     cfg = {**cfg, "victory": {**v, "robust": True}}
@@ -59,7 +62,10 @@ def main() -> None:
     res = pareto(problem, pop_size=pop, generations=args.generations or v.get("generations", 40), seed=args.seed,
                  workers=v.get("workers", 1), seeds=seeds,
                  on_generation=lambda g, f: print(f"  第 {g:>2} 代  前緣 {len(f)} 個  {time.time() - t0:5.0f}s"))
-    pick = choose_victory(problem, res, PREFER)
+    pick = choose_victory(problem, res, prefer)
+    if v.get("fail_frames"):  # time per win already weighs the win rate: take the shortest (the
+        # unnormalised Tchebycheff pick chose a 43% plan over an 84% one that was faster, 2026-11-12)
+        pick = min(range(len(res.front)), key=lambda i: res.evals[i].objectives[1])
     rows = []
     order = sorted(range(len(res.front)), key=lambda i: (res.evals[i].objectives[0], res.evals[i].objectives[1]))
     print(f"\n=== 前緣 {len(res.front)} 個（依勝率排序）===\n   #  勝率  平均幀    花費  剩下   蓋好  部隊")
@@ -75,13 +81,13 @@ def main() -> None:
                      "survive": left, "ready": ev.info["finish_frame"], "feasible": ev.feasible,
                      "games": {o.name: ev.info["vs"][o.name]["victory_frame"] for o in games}})
     c = rows[order.index(pick)]
-    print(f"\n偏好 {PREFER} → 第 {pick} 個：勝率 {c['win_rate']:.0%}，花費 ${c['spent']:.0f}")
+    print(f"\n偏好 {prefer} → 第 {pick} 個：勝率 {c['win_rate']:.0%}，花費 ${c['spent']:.0f}")
     for name, w in c["games"].items():
         print(f"  {name:<20} " + (f"第 {w:.0f} 幀獲勝" if w else "輸"))
     print("實機執行：execute.py --attack --targets " + " ".join(f"{t}={n}" for t, n in c["army"].items())
           + (" --early " + " ".join(f"{t}={n}" for t, n in c["early"].items()) if c["early"] else ""))
     out = ROOT / "results" / f"soviet_vs_hard_robust_{time.strftime('%Y%m%d_%H%M%S')}.json"
-    out.write_text(json.dumps({"games": [g.name for g in games], "preference": PREFER, "front": rows,
+    out.write_text(json.dumps({"games": [g.name for g in games], "preference": prefer, "front": rows,
                                "chosen": order.index(pick), "history": res.history}, ensure_ascii=False, indent=1),
                    encoding="utf-8")
     print(f"結果已存到 {out}")

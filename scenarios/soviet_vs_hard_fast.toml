@@ -1,0 +1,134 @@
+# 破關目標：打贏「困難 AI」。對手是多場實機紀錄的分位數（論文 CCC 2019 的做法，opponent.py quantile）。
+# 情境：蘇俄 對抗 盟軍常見開局部隊
+# 時間單位一律是「遊戲幀」；換算秒數 = 幀 / calibration.fps
+country = "Russians"   # Americans Alliance French Germans British Russians Confederation Africans Arabs YuriCountry
+
+# 校準參數：預設讀 calibration/calibration.toml（calibrate.py fit 產生），這裡寫的值會覆寫它
+[calibration]
+start_credits = 10000
+
+[combat]
+distance = 12      # 兩軍初始距離 (格)
+dt = 5             # 模擬步長 (幀)
+max_frames = 5400
+crush = true       # 坦克輾壓步兵
+kite = true        # 快速且射程較遠的單位會邊退邊打（模擬玩家操作）
+spacing = 1.5      # 陣型間距 (格)，越大越不怕濺射
+base_spacing = 4   # 建築物之間的距離 (格)：擠成一團時基洛夫一顆炸彈炸好幾棟，實機 2026-11-06 對過真實位置
+b_damage = 1.5     # AI 主場加成（塔後面集火、工廠邊打邊補）：2026-11-07 用 6 場實機抵達時的真實位置校正，
+                   # 1.0 時模擬判 4/6 場贏、實機全輸；1.5 判 5/6 場輸
+focus = true       # 我方集火：挑射程內「每幀打掉最多敵方價值」的目標，和實機 assault.py 一樣
+
+# ---------------------------------------------------------------- 兵種組合最佳化
+[army]
+budget = 9000          # 約束：總價上限
+max_units = 20         # 約束：單位數上限
+min_aa_units = 2       # 約束：至少 2 個能打飛機的單位
+min_score = 0.0        # 約束：每一種敵情都不能輸
+deadline_frames = 9000 # 約束：整支部隊要在此幀數內蓋好（用經濟模擬估計）
+max_per_unit = { ZEP = 1 }
+exclude = []
+aggregate = "mean"     # mean = 加權平均；worst = 只看最難打的敵情
+cost_weight = 0.05     # 戰力相近時偏好便宜的組合
+
+[[army.enemy]]
+name = "灰熊海"
+weight = 2
+units = { MTNK = 9 }
+
+[[army.enemy]]
+name = "灰熊+IFV+大兵"
+weight = 1
+units = { MTNK = 6, FV = 3, E1 = 6 }
+
+[[army.enemy]]
+name = "入侵者空襲"
+weight = 1
+units = { ORCA = 4, MTNK = 3 }
+
+# 對手看到空軍會補防空 —— 少了這種敵情，最佳化器會鑽漏洞選全空軍
+[[army.enemy]]
+name = "IFV防空網"
+weight = 1
+units = { MTNK = 4, FV = 6 }
+
+# ---------------------------------------------------------------- 建造順序最佳化
+[build]
+targets = { HTNK = 8 }       # plan 模式會改用 army 的結果
+extras = ["NAPOWR", "NAREFN", "NAWEAP", "HARV"]  # 可以額外插入的項目
+max_extras = 6
+auto_power = true            # 自動補電廠避免低電力
+deadline_frames = 9000       # 約束：目標要在此之前完成
+max_count = { NAWEAP = 2 }   # 約束：最多 2 座戰車工廠
+milestones = { NAWEAP = 4000 }  # 約束：第一座戰車工廠在 4000 幀前完成
+
+[ga]
+pop_size = 40
+generations = 30
+seed = 1
+workers = 4
+
+# ---------------------------------------------------------------- 多目標（ra2opt.py pareto）
+# 同時看三個目標：勝差（對上面每一種敵情）、整支部隊完成的幀數、總花費。
+# 沿用 [army] 的敵情和約束（這裡寫的鍵會覆寫 [army]），建造順序由訓練好的模型規劃。
+[pareto]
+preference = { win = 1.0, frames = 1.0, spent = 0.5 }  # 從前緣挑一個（Tchebycheff）
+ignore = ["budget", "deadline_frames"]  # [army] 裡這兩個在這裡是目標，不當約束
+pop_size = 60
+generations = 30
+workers = 4
+
+# ---------------------------------------------------------------- 破關（ra2opt.py victory）
+# 對手隨時間的部隊和建築是從實機量來的（opponent.py extract）。部隊一蓋好就連同開局部隊出發，
+# 抵達時和 AI 當下的部隊加整個基地交戰（ShortGame：拆光建築就贏）。
+# 目標：最早獲勝、花費最少、剩下最多。打不贏算違反約束。
+[victory]
+# 兩個對手都是困難 AI：hard_q50 = 贏過一半對局的強度，hard_q80 = 贏過 80% 對局的強度（比較保守）。
+# 多目標：對 q50 的獲勝幀、對 q80 的獲勝幀、花費、剩下多少部隊，一起放進 Pareto 前緣。
+# 打輸的懲罰 = LOSS_FRAMES ×（1 + AI 剩下的比例），像論文的懲罰函數：分得出「差一點」和「差很多」。
+opponents = [
+  "calibration/opponents/hard_q50.json",
+  "calibration/opponents/hard_q80.json",
+]
+preference = { hard_q80 = 1.0, hard_q50 = 0.5, spent = 0.3, survive = 0.3 }
+# 論文的 TopK：已知方案（實機打贏過的、之前搜尋的前緣）先在模擬器評分，最好的放進初始族群，
+# 預設最多占族群的 1/4（top_k），其餘隨機。
+seeds = [
+  { E2 = 20, SHK = 2 },          # 實機打贏簡單 AI（2026-11-01）
+  { APOC = 3, ZEP = 3 },         # 搜尋 v6：中等 AI 的空軍方案
+  { E2 = 1, ZEP = 2 },           # 第 3 場困難 AI 的空軍方案（不含 SCHP）
+  { APOC = 5, HTK = 6, ZEP = 3, early = { HTK = 8 } },   # 手動試出：先蓋 8 台防空履帶車擋第 8 分鐘那波
+  { APOC = 8, BORIS = 1, E2 = 1, FLAKT = 1, HTK = 5, ZEP = 6, early = { E2 = 1, NAREFN = 2, HARV = 5 } },  # 經濟路線（2026-11-05）
+  # 一波帶走（2026-11-10）：前期磁暴線圈＋防空砲守家、工業工廠＋第二座戰車工廠，主力加倍
+  { APOC = 12, BORIS = 1, E2 = 3, HTK = 8, V3 = 2, early = { TESLA = 3, NAFLAK = 2, HARV = 2, SENGINEER = 2, NAINDP = 1, NAWEAP = 1 } },
+  { APOC = 10, BORIS = 1, HTK = 10, V3 = 3, early = { TESLA = 2, NALASR = 2, NAFLAK = 1, HARV = 2, SENGINEER = 2, NAWEAP = 1 } },
+  # 實機最快的勝場（series_v6/v7，第 16000 幀集結、20000-24000 幀獲勝）和 v11（第 16700 幀集結）
+  { APOC = 8, BORIS = 1, E2 = 2, HTK = 4 },
+  { APOC = 6, BORIS = 1, E2 = 3, HTK = 7 },
+  { APOC = 10, E2 = 2, HTK = 10, V3 = 3, early = { FLAKT = 1, SENGINEER = 2, NANRCT = 1 } },  # v12/v13
+]
+seed_results = ["results/soviet_vs_allied_victory_*.json", "results/soviet_vs_hard_quantile_victory_*.json"]
+max_units = 40   # 一波帶走（2026-11-10）：放寬 25 → 40，讓搜尋能組更大的部隊
+# 最短時間（2026-11-11，使用者）：拿掉一波帶走的約束，改成最小化「平均每贏一場要花的幀數」。
+# 實機第一波打輸幾乎就贏不回來（20 場救回 2 場），失敗的一場平均拖到約 48000 幀（series_v4-v13 共 44 場），
+# 所以每場輸的算 48000 幀：(贏的場次獲勝幀總和 + 48000 × 輸的場次) / 贏的場數。快但常輸的方案不會被選。
+fail_frames = 48000
+# 對手對局的最短紀錄：16000 時 series_v6/v7 幾乎全被丟掉（打到 AI 就停止記錄，約 16000 幀），
+# 只剩較晚、較強的 AI，早攻方案會被低估。12000 時 76 場。
+min_frames = 12000
+robust_prefer = { frames = 1.0, win_rate = 0.0, spent = 0.05, survive = 0.05 }
+# 早期防守（2026-11-02）：困難 AI 最兇的 20% 對局在第 8 分鐘就來一波（含入侵者戰機），先蓋科技的方案
+# 那時家裡只有開局部隊。這些基因先蓋、再蓋主力：單位會跟著出發，防禦建築留在家守。
+# 經濟路線（2026-11-05）：家裡的礦約第 13000 幀採完，HARV（礦車總數）、NAREFN（多蓋幾座礦場）也放進來先蓋。
+# 油井（2026-11-06）：SENGINEER 每個去佔一座科技油井（最多 derricks 的座數）。
+early = ["HTNK", "E2", "HTK", "FLAKT", "TESLA", "NALASR", "NAFLAK", "HARV", "NAREFN", "SENGINEER",
+         "NAINDP", "NANRCT", "NAWEAP"]  # 工業工廠（車輛 75 折）、核電廠、第二座戰車工廠（2026-11-08）
+max_early = 8
+# 實機 Steward 派 5 個開局動員兵進駐家礦旁的民房（守礦區和油井），模擬裡留守部隊就少這 5 個。
+garrison = 5
+storm = true       # AI 天氣控制器的閃電風暴：蓋好約 12500 幀後第一擊，之後每 9000 幀，打掉戰車工廠和礦場
+exclude = ["SCHP", "DESO"]   # deploy-to-fire: the live controller cannot deploy yet
+travel_factor = 0.6  # 2026-11-09：實機出發到集結中位數約 1200 幀（series_v6-v10 共 24 場），1.3 時模擬算 2772 幀
+pop_size = 60
+generations = 40
+workers = 16
