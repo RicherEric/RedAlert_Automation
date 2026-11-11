@@ -39,6 +39,11 @@ ENGAGED_SHARE = 0.5  # share of the army (by cost) at the rally before a fight t
 STUCK_FRAMES = 600
 STUCK_MOVE = 1.0     # cells: less than this since its order counts as not moving
 GATHER_LEAD = 10.0   # cells ahead of the army's (value-weighted) median distance to the rally
+# Wait at the rally for an opening (2026-11-10): over 40 live first waves (series_v6-v12) the
+# battle sim could not tell the 11 won from the lost, but where the AI army stood could: our army
+# value over the AI's armed units within OPENING_RADIUS of its construction yard: under 1.65 only
+# 1 of 13 first waves won, at 2 or more 7 of 19 (under 2: 4 of 21).
+OPENING_RADIUS = 20.0
 
 @dataclass
 class Assault:
@@ -73,6 +78,12 @@ class Assault:
     # lasers buildings for airstrikes. Live series_v7 his rifle duelled GIs and pillboxes while
     # the MiGs came only when nothing else was left to shoot.
     designator_guard: float = 6.0
+    # At the first rally, wait until our army is worth opening_ratio x the AI army at home (0: go
+    # at once), at most opening_wait frames: the AI grows meanwhile (sim: each 1000 frames later wins less).
+    opening_ratio: float = 2.0
+    opening_wait: int = 3000
+    opening: dict | None = None     # how the wait ended: frame, ratio, ours, ai_home, waited, reason
+    _wait_from: int | None = None
     order_log: list = field(default_factory=list)  # (frame, unit type, target type, x, y) per attack order
     # (frame, unit type, x, y, "ok" | bridge error, why, unit address) per MOVE; why: rally, hold, aside, defend
     move_log: list = field(default_factory=list)
@@ -270,8 +281,9 @@ class Assault:
             if behind < 0.95 * self._progress[1]:
                 self.stage_started = snap.frame
             self._progress = (snap.frame, behind)
-        if (sum(cost(o) for o in army if near(o)) >= self.gather_ready * sum(map(cost, army))
-                or snap.frame - self.stage_started >= self.gather_timeout):
+        if ((sum(cost(o) for o in army if near(o)) >= self.gather_ready * sum(map(cost, army))
+                or snap.frame - self.stage_started >= self.gather_timeout)
+                and (self.regrouping or self._opening(snap, army, enemies, cost))):
             if self.regrouping or self.regroup_distance <= 0:
                 return True
             nxt = self._rally_point(army, enemies, self.regroup_distance)
@@ -304,6 +316,45 @@ class Assault:
             if self._order_move(snap, unit, cell, why):
                 self._ordered_at[unit.address] = snap.frame
         return False
+
+    def ai_home_value(self, enemies: list[ObjectState]) -> float:
+        """Cost of the AI's armed units (not buildings, not harvesters) near its construction
+        yard, else near the centre of its buildings."""
+        yard = next((o for o in enemies if o.type_id in CONSTRUCTION_YARDS), None)
+        pts = [(o.x, o.y) for o in enemies if o.kind == "building"]
+        if yard is not None:
+            home = (yard.x, yard.y)
+        elif pts:
+            home = (sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts))
+        else:
+            return 0.0
+        total = 0.0
+        for o in enemies:
+            t = self.db.technos.get(o.type_id)
+            if (o.kind != "building" and self._fighter(o) and not t.harvester
+                    and math.dist((o.x, o.y), home) <= OPENING_RADIUS):
+                total += t.cost or 0
+        return total
+
+    def _opening(self, snap: Snapshot, army: list[ObjectState], enemies: list[ObjectState], cost) -> bool:
+        """Gathered at the first rally: go now? Yes once our army is worth opening_ratio x the
+        AI army at home, or after opening_wait frames of waiting."""
+        if self.opening_ratio <= 0:
+            return True
+        if self._wait_from is None:
+            self._wait_from = snap.frame
+        ours, theirs = float(sum(map(cost, army))), self.ai_home_value(enemies)
+        ratio = ours / theirs if theirs else math.inf
+        waited = snap.frame - self._wait_from
+        if ratio >= self.opening_ratio:
+            reason = "ratio"
+        elif waited >= self.opening_wait:
+            reason = "timeout"
+        else:
+            return False
+        self.opening = {"frame": snap.frame, "ratio": round(ratio, 2), "ours": ours, "ai_home": theirs,
+                        "waited": waited, "reason": reason}
+        return True
 
     def _lead_limit(self, army: list[ObjectState], cost) -> float | None:
         """Distance to the rally under which a unit is too far ahead of the army and waits: the

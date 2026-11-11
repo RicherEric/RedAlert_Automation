@@ -465,3 +465,25 @@ def test_reinforcer_does_not_claim_units_made_while_it_was_paused(db):
     r._queued = {"vehicle": "APOC"}
     r.tick(snap(9000, [tank(1), tank(2)] + [tank(a) for a in range(3, 20)], credits=0))  # after a pause
     assert r.units == {2}
+
+
+def test_gather_waits_for_an_opening(db):
+    # 2026-11-10: first waves won only when the AI army at home was small next to ours.
+    from ra2tools.assault import Assault
+    a = Assault(db, Recorder(), AI, regroup_distance=0, opening_wait=3000)
+    base = [obj(50, "GACNST", AI, 52, 97, 1000, "building")]
+    s = snap(1000, [obj(1, "APOC", ME, 66, 20, 800, "vehicle")] + base)
+    a._gather(s, a.army(s), a.enemies(s))
+    rx, ry = a.rally
+    ours = [obj(i, "APOC", ME, rx, ry, 800, "vehicle") for i in range(1, 5)]   # 4 x $1750
+    grizzlies = [obj(20 + i, "MTNK", AI, 52, 95, 300, "vehicle") for i in range(6)]  # 6 x $700 at home
+    s = snap(1100, ours + base + grizzlies)
+    assert not a._gather(s, a.army(s), a.enemies(s)) and a.opening is None   # 7000 / 4200 < 2
+    away = [obj(20 + i, "MTNK", AI, 70, 30, 300, "vehicle") for i in range(6)]  # its army goes out
+    s = snap(1400, ours + base + grizzlies[:2] + away[2:])
+    assert a._gather(s, a.army(s), a.enemies(s))
+    assert a.opening["reason"] == "ratio" and a.opening["waited"] == 300
+    b = Assault(db, Recorder(), AI, regroup_distance=0, opening_wait=3000, rally=a.rally)
+    assert not b._gather(snap(1000, ours + base + grizzlies), ours, base + grizzlies)
+    assert b._gather(snap(4000, ours + base + grizzlies), ours, base + grizzlies)
+    assert b.opening["reason"] == "timeout"

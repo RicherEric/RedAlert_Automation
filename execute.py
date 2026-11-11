@@ -249,7 +249,13 @@ def run_attack(args, db, gm, bridge, ex, end, hold: int = 0, guard: frozenset = 
             follow_camera(bridge, a, snap)
         if gathering and a.attack_started is not None:
             print(f"  {snap.frame:>6} 幀  集結完成（集結點 {a.rally}），{len(a.army(snap))} 個單位一起進攻")
+            if a.opening:
+                o = a.opening
+                why = "兵力夠了" if o["reason"] == "ratio" else "等太久"
+                print(f"  {snap.frame:>6} 幀  出手時機：我方 ${o['ours']:.0f} / AI 留守 ${o['ai_home']:.0f}"
+                      f" = {o['ratio']}，等了 {o['waited']} 幀（{why}）")
             log.setdefault("gathered", snap.frame)
+            log.setdefault("openings", []).append(a.opening)
             wave_value = value(a.army(snap))
             first_value = first_value or wave_value
         nb = sum(1 for o in a.enemies(snap) if o.kind == "building")
